@@ -29,15 +29,13 @@ LCONV		:=	libconv/libconv.a
 
 LFS			:=	libfs/libfs.a
 
-LGRAS		:=	libgras/libgras.a
-
 LPUTS		:=	libputs/libputs.a
 
 LSTR		:=	libstr/libstr.a
 
 LWA			:=	libwa/libwa.a
 
-ALL_SUB_LIB	:=	$(LCONV) $(LFS) $(LGRAS) $(LPUTS) $(LSTR) $(LWA)
+ALL_SUB_LIB	:=	$(LCONV) $(LFS) $(LPUTS) $(LSTR) $(LWA)
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
