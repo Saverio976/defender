@@ -6,6 +6,7 @@
 */
 
 #include "my_puts.h"
+#include "my_bgs.h"
 
 int main(int ac, char **av)
 {
