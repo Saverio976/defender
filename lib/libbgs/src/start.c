@@ -21,7 +21,7 @@ int init_method(window_t *win, void *(*create)(void), void (*destroy)(void *))
     win->destroy = destroy;
 }
 
-window_t *init(sfVideoMode mode, const char *title, void *(*create)(void),
+window_t *create_window(sfVideoMode mode, const char *title, void *(*create)(void),
     void (*destroy)(void *))
 {
     window_t *win = malloc(sizeof(window_t));

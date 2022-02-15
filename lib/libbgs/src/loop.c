@@ -14,7 +14,7 @@ void window_display(scene_t *scene, window_t *win)
 
     for (int i = 0; i < scene->updates->len; i++) {
         obj = ((object_t *) elem->var);
-        obj->display(obj, scene->data, win->data);
+        obj->display(obj, scene->data, win->data, win->win);
         elem = elem->next;
     }
     sfRenderWindow_display(win->win);

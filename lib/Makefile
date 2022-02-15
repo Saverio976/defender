@@ -25,11 +25,9 @@ CURR_RULE	=	all
 
 # ----------------------------------------------------------------------------
 # SUBMODULE LIB
-LBGS		:=	libbgs/libgs.a
+LBGS		:=	libbgs/libbgs.a
 
 LCONV		:=	libconv/libconv.a
-
-LFS			:=	libfs/libfs.a
 
 LLIST		:=	liblist/liblist.a
 
@@ -39,7 +37,7 @@ LSTR		:=	libstr/libstr.a
 
 LWA			:=	libwa/libwa.a
 
-ALL_SUB_LIB	:=	$(LBGS) $(LCONV) $(LFS) $(LLIST) $(LPUTS) $(LSTR) $(LWA)
+ALL_SUB_LIB	:=	$(LBGS) $(LCONV) $(LLIST) $(LPUTS) $(LSTR) $(LWA)
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------

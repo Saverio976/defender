@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "include/list.h"
+#include "list.h"
 
 void *list_add_to_end(list_ptr_t *list_ptr, void *content)
 {

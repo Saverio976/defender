@@ -5,7 +5,8 @@
 ** get a i
 */
 
-#include "include/list.h"
+#include <stddef.h>
+#include "list.h"
 
 void *get_element_i_var(list_ptr_t *list_ptr, int x)
 {

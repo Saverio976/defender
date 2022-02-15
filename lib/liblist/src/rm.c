@@ -5,7 +5,7 @@
 ** rm
 */
 
-#include "include/list.h"
+#include "list.h"
 
 void rm_fst_elem(list_ptr_t *list_ptr)
 {

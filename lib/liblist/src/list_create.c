@@ -5,7 +5,8 @@
 ** create a list
 */
 
-#include "include/list.h"
+#include <stdlib.h>
+#include "list.h"
 
 list_ptr_t *list_create(void)
 {

@@ -24,7 +24,7 @@ static int init_list(scene_t *scene)
     return 0;
 }
 
-scene_t *init_scene(void *(*create)(void), void (*destroy)(void *))
+scene_t *create_scene(void *(*create)(void), void (*destroy)(void *))
 {
     scene_t *scene = malloc(sizeof(scene_t));
 

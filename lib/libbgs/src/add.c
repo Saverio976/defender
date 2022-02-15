@@ -15,6 +15,7 @@ int window_add_scene(window_t *win, scene_t *scene)
     if (list_add_to_end(win->scenes, scene) == NULL) {
         return 84;
     }
+    return 0;
 }
 
 int scene_add_object(scene_t *scene, object_t *object)

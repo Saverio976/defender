@@ -5,6 +5,7 @@
 ** string to array
 */
 
+#include <stdlib.h>
 #include "list.h"
 
 int my_strlen(char const *str);

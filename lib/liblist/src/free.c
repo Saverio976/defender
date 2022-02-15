@@ -5,7 +5,7 @@
 ** free
 */
 
-#include "include/list.h"
+#include "list.h"
 
 void free_list(list_ptr_t *list_ptr)
 {

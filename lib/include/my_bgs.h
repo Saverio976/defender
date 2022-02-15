@@ -40,7 +40,8 @@ struct object_s {
     void *data;
     void (*destroy)(void *);
     void (*update)(object_t *, void *scene_data, void *win_data, float);
-    void (*display)(object_t *, void *scene_data, void *win_data);
+    void (*display)(object_t *, void *scene_data, void *win_data,
+        sfRenderWindow *win);
 };
 
 struct time_s {
@@ -75,19 +76,18 @@ object_t *get_obj_from_list(list_t *list);
 int object_set_sprite(object_t *object, char const *path);
 int object_set_text(object_t *object, char const *path, char const *text);
 int object_set_cutsom(object_t *object, void *(*create)(void));
-scene_t *init_scene(void *(*create)(void), void (*destroy)(void *));
+scene_t *create_scene(void *(*create)(void), void (*destroy)(void *));
 int object_set_audio(object_t *object, char const *path, bool play_now,
     bool is_loop);
-static int init_list(scene_t *scene);
 int loop(window_t *win);
 int scene_handling(window_t *win, scene_t *scene, time_t *timer);
 time_t *init_clock(void);
 void remove_window(window_t *win);
+window_t *create_window(sfVideoMode mode, const char *title, void *(*create)(void),
+    void (*destroy)(void *));
 object_t *create_object(void *(*create)(void), void (*destroy)(void *),
     void (*update)(object_t *, void *scene_data, void *win_data, float),
-    void (*display)(object_t *, void *scene_data, void *win_data));
-window_t *init(sfVideoMode mode, const char *title, void *(*create)(void),
-    void (*destroy)(void *));
-int init_method(window_t *win, void *(*create)(void), void (*destroy)(void *));
+    void (*display)(object_t *, void *scene_data, void *win_data,
+    sfRenderWindow *win));
 
 #endif /* !BGS_H_ */

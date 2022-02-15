@@ -39,7 +39,8 @@ OBJ			:=	$(SRC:%.c=%.o)
 # LIB
 LIB_TARGET	=	lib/libmy.a
 
-LDFLAGS		=	-L$(dir $(LIB_TARGET)) -lmy
+LDFLAGS		=	-L$(dir $(LIB_TARGET)) -lmy -lcsfml-graphics -lcsfml-audio \
+				-lcsfml-system
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
