@@ -5,6 +5,7 @@
 ** create scene
 */
 
+#include <stdlib.h>
 #include "my_bgs.h"
 
 static int init_list(scene_t *scene)

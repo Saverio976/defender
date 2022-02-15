@@ -6,9 +6,10 @@
 */
 
 #include <SFML/Graphics.h>
+#include <stdlib.h>
 #include "my_bgs.h"
 
-int init_method(window_t *win, void *(*create)(void), void (*destroy)(void *))
+static int init_method(window_t *win, void *(*create)(void), void (*destroy)(void *))
 {
     if (create != NULL) {
         win->data = create();
@@ -19,6 +20,7 @@ int init_method(window_t *win, void *(*create)(void), void (*destroy)(void *))
         win->data = NULL;
     }
     win->destroy = destroy;
+    return (0);
 }
 
 window_t *create_window(sfVideoMode mode, const char *title, void *(*create)(void),

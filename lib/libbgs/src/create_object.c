@@ -5,6 +5,7 @@
 ** create object
 */
 
+#include <stdlib.h>
 #include <stdbool.h>
 #include "my_bgs.h"
 
@@ -86,9 +87,8 @@ int object_set_sprite(object_t *object, char const *path)
 }
 
 object_t *create_object(void *(*create)(void), void (*destroy)(void *),
-    void (*update)(object_t *, void *scene_data, void *win_data, float),
-    void (*display)(object_t *, void *scene_data, void *win_data,
-    sfRenderWindow *win))
+    void (*update)(object_t *, void *, void *, float),
+    void (*display)(object_t *, void *, void *, sfRenderWindow *))
 {
     object_t *object = malloc(sizeof(object_t));
 

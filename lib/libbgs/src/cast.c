@@ -11,7 +11,7 @@ scene_t *get_scene_i(list_ptr_t *list, int i)
 {
     list_t *elem = NULL;
 
-    if (list->len <= i) {
+    if (i >= list->len) {
         return (NULL);
     }
     elem = get_element_i(list, i);

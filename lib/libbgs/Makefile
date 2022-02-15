@@ -28,7 +28,14 @@ SRCDIR		=	src/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC		:=	
+SRC		:=	add.c				\
+			cast.c				\
+			create_object.c		\
+			create_scene.c		\
+			event.c				\
+			loop.c				\
+			remove.c			\
+			start.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ		=	$(SRC:%.c=%.o)

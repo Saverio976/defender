@@ -13,7 +13,7 @@
     #include <stdbool.h>
     #include "list.h"
 
-typedef struct time_s time_t;
+typedef struct time_clock_s time_clock_t;
 typedef struct object_s object_t;
 typedef struct window_s window_t;
 typedef struct scene_s scene_t;
@@ -44,7 +44,7 @@ struct object_s {
         sfRenderWindow *win);
 };
 
-struct time_s {
+struct time_clock_s {
     float seconds;
     float refresh_time;
     sfClock *clock;
@@ -67,6 +67,7 @@ struct window_s {
     void (*destroy)(void *);
 };
 
+int event_handling(sfRenderWindow *win);
 object_t *get_obj_from_list(list_t *list);
 scene_t *get_scene_i(list_ptr_t *list, int i);
 int scene_add_object(scene_t *scene, object_t *object);
@@ -80,8 +81,6 @@ scene_t *create_scene(void *(*create)(void), void (*destroy)(void *));
 int object_set_audio(object_t *object, char const *path, bool play_now,
     bool is_loop);
 int loop(window_t *win);
-int scene_handling(window_t *win, scene_t *scene, time_t *timer);
-time_t *init_clock(void);
 void remove_window(window_t *win);
 window_t *create_window(sfVideoMode mode, const char *title, void *(*create)(void),
     void (*destroy)(void *));

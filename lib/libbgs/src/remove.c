@@ -5,6 +5,7 @@
 ** remove
 */
 
+#include <stdlib.h>
 #include "my_bgs.h"
 
 void remove_scene(scene_t *scene)
