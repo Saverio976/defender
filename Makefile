@@ -85,7 +85,11 @@ $(NAME): 	init $(OBJ)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(NAME)'$(RESET)
 
 $(LIB_TARGET):
-	@$(MAKE) -s -C $(dir $(LIB_TARGET))
+	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE)
+
+debug: RULE = debug
+debug: CFLAGS += -g3
+debug: fclean $(LIB_TARGET) $(NAME)
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------

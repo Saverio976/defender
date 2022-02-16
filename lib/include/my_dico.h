@@ -8,9 +8,9 @@
 #ifndef LIB_DICO_H_
     #define LIB_DICO_H_
 
-typedef struct dico_t dico_t;
+typedef struct dico_s dico_t;
 
-struct dico_t {
+struct dico_s {
     dico_t *next;
     dico_t *last;
     char key[255];

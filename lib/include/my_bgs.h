@@ -12,6 +12,12 @@
     #include <SFML/Audio.h>
     #include <stdbool.h>
     #include "list.h"
+    #include "my_dico.h"
+
+    #define BGS_OK 0
+    #define BGS_ERR_PATH 1
+    #define BGS_ERR_MALLOC 2
+    #define BGS_ERR_INPUT 3
 
 typedef struct time_clock_s time_clock_t;
 typedef struct object_s object_t;
@@ -22,7 +28,8 @@ enum object_type {
     SPRITE,
     TEXT,
     AUDIO,
-    CUSTOM
+    CUSTOM,
+    UNSET
 };
 
 struct object_s {
@@ -35,11 +42,9 @@ struct object_s {
         sfSprite *sprite;
         sfText *text;
         sfMusic *music;
-        void *custom;
     } drawable;
-    void *data;
-    void (*destroy)(void *);
-    void (*update)(object_t *, void *scene_data, void *win_data, float);
+    dico_t *components;
+    void (*update)(object_t *, void *scene_data, window_t *win, float);
     void (*display)(object_t *, void *scene_data, void *win_data,
         sfRenderWindow *win);
 };
@@ -72,21 +77,29 @@ object_t *get_obj_from_list(list_t *list);
 scene_t *get_scene_i(list_ptr_t *list, int i);
 int scene_add_object(scene_t *scene, object_t *object);
 int window_add_scene(window_t *win, scene_t *scene);
-scene_t *get_scene_i(list_ptr_t *list, int i);
 object_t *get_obj_from_list(list_t *list);
-int object_set_sprite(object_t *object, char const *path);
-int object_set_text(object_t *object, char const *path, char const *text);
-int object_set_cutsom(object_t *object, void *(*create)(void));
-scene_t *create_scene(void *(*create)(void), void (*destroy)(void *));
+scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
+    window_t *win);
 int object_set_audio(object_t *object, char const *path, bool play_now,
     bool is_loop);
 int loop(window_t *win);
 void remove_window(window_t *win);
 window_t *create_window(sfVideoMode mode, const char *title, void *(*create)(void),
     void (*destroy)(void *));
-object_t *create_object(void *(*create)(void), void (*destroy)(void *),
-    void (*update)(object_t *, void *scene_data, void *win_data, float),
-    void (*display)(object_t *, void *scene_data, void *win_data,
-    sfRenderWindow *win));
+object_t *create_object(
+    void (*update)(object_t *, void *, window_t *win, float),
+    void (*display)(object_t *, void *, void *, sfRenderWindow *),
+    scene_t *scene);
+int object_set_custom(object_t *object, void *(*create)(void),
+    void (*destroy)(void *), char *key);
+void display_sprite(object_t *object, void *scene_data, void *win_data,
+    sfRenderWindow *win);
+void display_text(object_t *object, void *scene_data, void *win_data,
+    sfRenderWindow *win);
+int object_set_sprite(object_t *object, char const *path, scene_t *scene);
+int object_set_text(object_t *object, char const *path, char const *text,
+    scene_t *scene);
+int object_add_components(object_t *object, void *data, char *key,
+    void (*destroy)(void *));
 
 #endif /* !BGS_H_ */

@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics.h>
+#include "my_bgs.h"
 
 int event_handling(sfRenderWindow *win)
 {
@@ -16,5 +17,5 @@ int event_handling(sfRenderWindow *win)
             sfRenderWindow_close(win);
         }
     }
-    return (0);
+    return BGS_OK;
 }

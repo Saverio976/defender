@@ -8,6 +8,28 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 
+void remove_object(object_t *object)
+{
+    switch (object->type) {
+        case SPRITE:
+            sfSprite_destroy(object->drawable.sprite);
+            sfTexture_destroy(object->bigdata.texture);
+            break;
+        case TEXT:
+            sfText_destroy(object->drawable.text);
+            sfFont_destroy(object->bigdata.font);
+            break;
+        case AUDIO:
+            sfMusic_setLoop(object->drawable.music, sfFalse);
+            sfMusic_stop(object->drawable.music);
+            sfMusic_destroy(object->drawable.music);
+            break;
+        default:
+            break;
+    }
+    free(object);
+}
+
 void remove_scene(scene_t *scene)
 {
     list_t *elem = scene->objects->start;
@@ -15,9 +37,8 @@ void remove_scene(scene_t *scene)
 
     for (int i = 0; i < scene->objects->len; i++) {
         object = ((object_t *) elem->var);
-        if (object->data != NULL && object->destroy != NULL) {
-            object->destroy(object->data);
-        }
+        dico_t_destroy(object->components);
+        remove_object(object);
         elem = elem->next;
     }
     if (scene->data != NULL && scene->destroy != NULL) {
@@ -43,4 +64,6 @@ void remove_window(window_t *win)
     if (win->data != NULL && win->destroy != NULL) {
         win->destroy(win->data);
     }
+    sfRenderWindow_destroy(win->win);
+    free(win);
 }

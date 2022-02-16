@@ -10,31 +10,32 @@
 int window_add_scene(window_t *win, scene_t *scene)
 {
     if (win == NULL || scene == NULL) {
-        return 84;
+        return BGS_ERR_INPUT;
     }
     if (list_add_to_end(win->scenes, scene) == NULL) {
-        return 84;
+        return BGS_ERR_MALLOC;
     }
-    return 0;
+    return BGS_OK;
 }
 
 int scene_add_object(scene_t *scene, object_t *object)
 {
     if (scene == NULL || object == NULL) {
-        return 84;
+        return BGS_ERR_INPUT;
     }
-    if (list_add_to_end(scene->objects, object) == NULL) {
-        return 84;
+    if (object->type == UNSET && list_add_to_end(scene->objects, object) == NULL) {
+        return BGS_ERR_MALLOC;
     }
-    if (object->update != NULL) {
+    if (object->update != NULL && object->type == UNSET) {
         if (list_add_to_end(scene->updates, object) == NULL) {
-            return 84;
+            return BGS_ERR_MALLOC;
         }
     }
-    if (object->display != NULL) {
+    if (object->display != NULL || (object->type == TEXT ||
+        object->type == SPRITE)) {
         if (list_add_to_end(scene->displayables, object) == NULL) {
-            return 84;
+            return BGS_ERR_MALLOC;
         }
     }
-    return 0;
+    return BGS_OK;
 }

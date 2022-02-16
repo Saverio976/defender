@@ -5,41 +5,31 @@
 ** the main entry point for the project
 */
 
+#include <stdbool.h>
 #include "my_puts.h"
 #include "my_bgs.h"
 
-void display(object_t *object, __attribute((unused)) void *scene_data,
-        __attribute((unused)) void *win_data, sfRenderWindow *win)
+void update(object_t *object, void *scene_data, window_t *win, float seconds)
 {
-    sfRenderWindow_drawSprite(win, object->drawable.sprite, NULL);
+    //my_printf("oe\n");
 }
 
 int main(int ac, char **av)
 {
-    window_t *win = NULL;
-    sfVideoMode mode = {1920, 1080, 32};
-    scene_t *scene = NULL;
-    object_t *object = NULL;
-    int ret_code = 0;
+    window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test",
+        NULL, NULL);
+    scene_t *scene = create_scene(NULL, NULL, win);
+    object_t *music = create_object(NULL, NULL, scene);
+    object_t *text = create_object(NULL, NULL, scene);
+    object_t *sprite = create_object(&update, NULL, scene);
 
-    for (int i = 0; i < ac; i++)
-        my_printf("%s\n", av[i]);
-    win = create_window(mode, "DEFENDER", NULL, NULL);
-    if (win == NULL) {
+    if (sprite == NULL) {
         return 84;
     }
-    scene = create_scene(NULL, NULL);
-    if (window_add_scene(win, scene) == 84) {
-        return 84;
-    }
-    object = create_object(NULL, NULL, NULL, &display);
-    if (object == NULL) {
-        return (84);
-    }
-    object_set_sprite(object, "./assets/map/castle.png");
-    scene_add_object(scene, object);
-    win->scene_index = 0;
-    ret_code = loop(win);
+    object_set_audio(music, "assets/music/rickroll.ogg", true, true);
+    object_set_sprite(sprite, "assets/map/castle_with_nico.png", scene);
+    object_set_text(text, "assets/font/menlo.ttf", "OUIII", scene);
+    loop(win);
     remove_window(win);
-    return (ret_code);
+    return 0;
 }

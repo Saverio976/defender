@@ -76,7 +76,11 @@ $(NAME): init $(LIBS_DEP) $(OBJ)
 	@echo -e $(GREEN)'[finished]: $(NAME): $(CURR_RULE)'$(RESET)
 
 $(LIBS_DEP):
-	$(foreach LIB,$(LIBS_DEP),$(MAKE) -C $(dir $(LIB));)
+	$(foreach LIB,$(LIBS_DEP),$(MAKE) -C $(dir $(LIB)) $(RULE);)
+
+debug: RULE = debug
+debug: CFLAGS += -g3
+debug: fclean $(NAME)
 
 clean:	CURR_RULE = clean
 clean:	init

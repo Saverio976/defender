@@ -37,6 +37,9 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
+debug: CFLAGS += -g3
+debug: fclean $(NAME)
+
 tests_run: fclean
 	gcc -o unit_tests $(TEST_SOURCE) --coverage -lcriterion $(CFLAGS)
 	./unit_tests

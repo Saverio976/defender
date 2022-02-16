@@ -28,13 +28,16 @@ SRCDIR		=	src/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC		:=	add.c				\
-			cast.c				\
-			create_object.c		\
-			create_scene.c		\
-			event.c				\
-			loop.c				\
-			remove.c			\
+SRC		:=	add.c								\
+			cast.c								\
+			create_object.c						\
+			create_scene.c						\
+			event.c								\
+			loop.c								\
+			remove.c							\
+			object_add_components.c				\
+			object_add_set_sprite_components.c	\
+			preset_display.c					\
 			start.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 
@@ -65,7 +68,11 @@ $(NAME): init $(LIBS_DEP) $(OBJ)
 	@echo -e $(GREEN)'[finished]: $(NAME): $(CURR_RULE)'$(RESET)
 
 $(LIBS_DEP):
-	$(foreach LIB,$(LIBS_DEP),$(MAKE) -C $(dir $(LIB));)
+	$(foreach LIB,$(LIBS_DEP),$(MAKE) -C $(dir $(LIB)) $(RULE);)
+
+debug: RULE = debug
+debug: CFLAGS += -g3
+debug: fclean $(NAME)
 
 clean:	CURR_RULE = clean
 clean:	init

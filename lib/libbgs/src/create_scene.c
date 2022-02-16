@@ -12,24 +12,25 @@ static int init_list(scene_t *scene)
 {
     scene->displayables = list_create();
     if (scene->displayables == NULL) {
-        return 84;
+        return BGS_ERR_MALLOC;
     }
     scene->objects = list_create();
     if (scene->objects == NULL) {
-        return 84;
+        return BGS_ERR_MALLOC;
     }
     scene->updates = list_create();
     if (scene->updates == NULL) {
-        return 84;
+        return BGS_ERR_MALLOC;
     }
-    return 0;
+    return BGS_OK;
 }
 
-scene_t *create_scene(void *(*create)(void), void (*destroy)(void *))
+scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
+    window_t *win)
 {
     scene_t *scene = malloc(sizeof(scene_t));
 
-    if (scene == NULL) {
+    if (scene == NULL || win == NULL) {
         return NULL;
     } else if (create == NULL) {
         scene->data = NULL;
@@ -37,7 +38,8 @@ scene_t *create_scene(void *(*create)(void), void (*destroy)(void *))
         scene->data = create();
     }
     scene->destroy = destroy;
-    if (init_list(scene) == 84)
+    if (init_list(scene) != BGS_OK || window_add_scene(win, scene) != BGS_OK) {
         return NULL;
+    }
     return scene;
 }
