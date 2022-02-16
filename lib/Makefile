@@ -29,6 +29,8 @@ LBGS		:=	libbgs/libbgs.a
 
 LCONV		:=	libconv/libconv.a
 
+LDICO		:=	libdico/libdico.a
+
 LLIST		:=	liblist/liblist.a
 
 LPUTS		:=	libputs/libputs.a
@@ -37,7 +39,7 @@ LSTR		:=	libstr/libstr.a
 
 LWA			:=	libwa/libwa.a
 
-ALL_SUB_LIB	:=	$(LBGS) $(LCONV) $(LLIST) $(LPUTS) $(LSTR) $(LWA)
+ALL_SUB_LIB	:=	$(LBGS) $(LCONV) $(LDICO) $(LLIST) $(LPUTS) $(LSTR) $(LWA)
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
