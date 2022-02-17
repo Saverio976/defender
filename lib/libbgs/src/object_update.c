@@ -8,18 +8,60 @@
 #include "my_bgs_components.h"
 #include "my_bgs.h"
 
-static const char *KEY_ARR[] = {
-    ON_HOVER_KEY,
-    ON_RIGHT_KEY,
-    ON_LEFT_KEY
-};
+int check_hover(object_t *object, window_t *win)
+{
+    sfFloatRect rect;
+    sfVector2i vector;
+
+    if (object->type == SPRITE) {
+        rect = sfSprite_getGlobalBounds(object->drawable.sprite);
+    } else if (object->type == TEXT) {
+        rect = sfText_getGlobalBounds(object->drawable.text);
+    } else {
+        return 0;
+    }
+    vector = sfMouse_getPosition(win->win);
+    if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfTrue) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int check_right_click(object_t *object, window_t *win)
+{
+    if (check_hover(object, win) == 1) {
+        if (sfMouse_isButtonPressed(sfMouseRight) == sfTrue) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+int check_left_click(object_t *object, window_t *win)
+{
+    if (check_hover(object, win) == 1) {
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
 
 void object_update(object_t *object, void *scene_data, window_t *win)
 {
     void *data = NULL;
 
     data = dico_t_get_value(object->components, ON_HOVER_KEY);
-    if (data != NULL) {
+    if (data != NULL && check_hover(object, win) == 1) {
         ((on_hover_t *) data)->hover(object, scene_data, win);
+    }
+    if (data != NULL && check_right_click(object, win) == 1) {
+        ((on_right_click_t *) data)->right_click(object, scene_data, win);
+    }
+    if (data != NULL && check_left_click(object, win) == 1) {
+        ((on_left_click_t *) data)->left_click(object, scene_data, win);
     }
 }

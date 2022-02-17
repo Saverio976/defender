@@ -101,5 +101,6 @@ int object_set_text(object_t *object, char const *path, char const *text,
     scene_t *scene);
 int object_add_components(object_t *object, void *data, char *key,
     void (*destroy)(void *));
+void object_update(object_t *object, void *scene_data, window_t *win);
 
 #endif /* !BGS_H_ */

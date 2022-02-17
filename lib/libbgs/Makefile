@@ -38,6 +38,7 @@ SRC		:=	add.c								\
 			object_add_components.c				\
 			object_add_set_sprite_components.c	\
 			preset_display.c					\
+			object_update.c						\
 			start.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 

@@ -28,7 +28,7 @@ static void window_update(scene_t *scene, window_t *win, float seconds)
 
     for (int i = 0; i < scene->updates->len; i++) {
         obj = ((object_t *) elem->var);
-        object_update(obj);
+        object_update(obj, scene->data, win);
         obj->update(obj, scene->data, win, seconds);
         elem = elem->next;
     }

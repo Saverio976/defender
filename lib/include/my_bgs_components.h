@@ -8,7 +8,7 @@
 #ifndef BGS_COMPONENTS_
     #define BGS_COMPONENTS_
 
-    #include <SFML/Graphics.h>
+    #include "my_bgs.h"
 
 static const char ON_HOVER_KEY[] =  "__on_hover";
 static const char ON_RIGHT_KEY[] = "__on_right_click";
