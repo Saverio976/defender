@@ -9,12 +9,26 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 
+void window_toglle_vsync(window_t *win)
+{
+    static sfBool is_vsynced = sfFalse;
+
+    if (is_vsynced == sfFalse) {
+        sfRenderWindow_setVerticalSyncEnabled(win->win, sfTrue);
+        is_vsynced = sfTrue;
+    } else {
+        sfRenderWindow_setVerticalSyncEnabled(win->win, sfFalse);
+        is_vsynced = sfFalse;
+    }
+}
+
 void window_set_framerate_limit(window_t *win, unsigned int limit)
 {
     sfRenderWindow_setFramerateLimit(win->win, limit);
 }
 
-static int init_method(window_t *win, void *(*create)(void), void (*destroy)(void *))
+static int init_method(window_t *win, void *(*create)(void),
+        void (*destroy)(void *))
 {
     if (create != NULL) {
         win->data = create();
@@ -28,8 +42,8 @@ static int init_method(window_t *win, void *(*create)(void), void (*destroy)(voi
     return (0);
 }
 
-window_t *create_window(sfVideoMode mode, const char *title, void *(*create)(void),
-    void (*destroy)(void *))
+window_t *create_window(sfVideoMode mode, const char *title,
+        void *(*create)(void), void (*destroy)(void *))
 {
     window_t *win = malloc(sizeof(window_t));
 
