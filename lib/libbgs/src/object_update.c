@@ -1,72 +1,96 @@
 /*
 ** EPITECH PROJECT, 2022
-** defender
+** Defender
 ** File description:
 ** object update
 */
 
-#include <stdbool.h>
-#include "my_bgs_components.h"
 #include "my_bgs.h"
+#include "my_bgs_components.h"
 
-static int check_hover(object_t *object, window_t *win)
+sfFloatRect get_object_global_bounces(object_t *object)
 {
-    sfFloatRect rect;
-    sfVector2i vector;
-
+    if (object == NULL) {
+        return (sfFloatRect) {-1, -1, -1, -1};
+    }
     if (object->type == SPRITE) {
-        rect = sfSprite_getGlobalBounds(object->drawable.sprite);
+        return sfSprite_getGlobalBounds(object->drawable.sprite);
     } else if (object->type == TEXT) {
-        rect = sfText_getGlobalBounds(object->drawable.text);
+        return sfText_getGlobalBounds(object->drawable.text);
     } else {
-        return false;
-    }
-    vector = sfMouse_getPositionRenderWindow(win->win);
-    if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfTrue) {
-        return true;
-    } else {
-        return false;
+        return (sfFloatRect) {-1, -1, -1, -1};
     }
 }
 
-static int check_right_click(object_t *object, window_t *win)
+void call_collision_fct(object_t *this, object_t *other,
+    dico_t *scene_components, window_t *win)
 {
-    if (check_hover(object, win) == 1) {
-        if (sfMouse_isButtonPressed(sfMouseRight) == sfTrue) {
-            return true;
+    on_collision_t *this_col = NULL;
+    on_collision_t *other_col = NULL;
+
+    if (this == NULL || other == NULL || scene_components == NULL ||
+        win == NULL) {
+        return;
+    }
+    if (this == other) {
+        return;
+    }
+    this_col = dico_t_get_value(this->components, ON_COLLISION);
+    other_col = dico_t_get_value(other->components, ON_COLLISION);
+    if (this_col == NULL || other_col == NULL) {
+        return;
+    } else if (dico_t_get_elem(this_col->collisions_dico, other_col->key)) {
+        return;
+    }
+    dico_t_add_data(this_col->collisions_dico, other_col->key, NULL, NULL);
+    this_col->collision(this, other, scene_components, win);
+}
+
+void remove_object_this(object_t *this, object_t *other)
+{
+    on_collision_t *other_col = dico_t_get_value(other->components,
+        ON_COLLISION);
+    on_collision_t *this_col = dico_t_get_value(this->components,
+        ON_COLLISION);
+    dico_t *dict_other_col = NULL;
+    
+    if (other_col == NULL) {
+        return;
+    }
+    dict_other_col = dico_t_get_elem(this_col->collisions_dico, other_col->key);
+    if (dict_other_col != NULL) {
+        dico_t_rem(this_col->collisions_dico, other_col->key);
+    }
+}
+
+void object_update_collision_event(object_t *this, dico_t *scene_components,
+    window_t *win)
+{
+    list_ptr_t *list = dico_t_get_value(scene_components, ON_COLLISION);
+    list_t *elem = NULL;
+    object_t *other = NULL;
+    sfFloatRect this_rect;
+    sfFloatRect other_rect;
+
+    if (list == NULL || this == NULL) {
+        return;
+    }
+    this_rect = get_object_global_bounces(this);
+    elem = list->start;
+    for (int i = 0; i < list->len; i++, elem = elem->next) {
+        other = ((object_t *) elem->var);
+        other_rect = get_object_global_bounces(other);
+        if (sfFloatRect_intersects(&this_rect, &other_rect, NULL) == sfTrue) {
+            call_collision_fct(this, other, scene_components, win);
         } else {
-            return false;
+            remove_object_this(this, other);
         }
     }
-    return (false);
 }
 
-static int check_left_click(object_t *object, window_t *win)
+void object_update(object_t *object, dico_t *scene_components,
+    window_t *win)
 {
-    if (check_hover(object, win) == 1) {
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    return (false);
-}
-
-void object_update(object_t *object, void *scene_data, window_t *win)
-{
-    void *data = NULL;
-
-    data = dico_t_get_value(object->components, ON_HOVER_KEY);
-    if (data != NULL && check_hover(object, win) == 1) {
-        ((on_hover_t *) data)->hover(object, scene_data, win);
-    }
-    data = dico_t_get_value(object->components, ON_RIGHT_KEY);
-    if (data != NULL && check_right_click(object, win) == 1) {
-        ((on_right_click_t *) data)->right_click(object, scene_data, win);
-    }
-    data = dico_t_get_value(object->components, ON_LEFT_KEY);
-    if (data != NULL && check_left_click(object, win) == 1) {
-        ((on_left_click_t *) data)->left_click(object, scene_data, win);
-    }
+    object_update_mouse_event(object, scene_components, win);
+    object_update_collision_event(object, scene_components, win);
 }

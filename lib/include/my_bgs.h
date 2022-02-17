@@ -11,6 +11,7 @@
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
     #include <stdbool.h>
+    #include <stdlib.h>
     #include "list.h"
     #include "my_dico.h"
 
@@ -44,9 +45,9 @@ struct object_s {
         sfMusic *music;
     } drawable;
     dico_t *components;
-    void (*update)(object_t *, void *scene_data, window_t *win, float);
-    void (*display)(object_t *, void *scene_data, void *win_data,
-        sfRenderWindow *win);
+    void (*update)(object_t *, dico_t *scene_components, window_t *win, float);
+    void (*display)(object_t *, dico_t *scene_components,
+        dico_t *win_components, sfRenderWindow *win);
 };
 
 struct time_clock_s {
@@ -61,7 +62,7 @@ struct scene_s {
     list_ptr_t *updates;
     list_ptr_t *objects;
     list_ptr_t *displayables;
-    void *data;
+    dico_t *components;
     void (*destroy)(void *);
 };
 
@@ -69,8 +70,7 @@ struct window_s {
     sfRenderWindow *win;
     int scene_index;
     list_ptr_t *scenes;
-    void *data;
-    void (*destroy)(void *);
+    dico_t *components;
 };
 
 // ----------------------------------------------------------------------------
@@ -185,8 +185,8 @@ int object_set_sprite(object_t *object, char const *path, scene_t *scene);
  * @return object : the object is created
  */
 object_t *create_object(
-    void (*update)(object_t *, void *, window_t *win, float),
-    void (*display)(object_t *, void *, void *, sfRenderWindow *),
+    void (*update)(object_t *, dico_t *, window_t *win, float),
+    void (*display)(object_t *, dico_t *, dico_t *, sfRenderWindow *),
     scene_t *scene);
 
 // ----------------------------------------------------------------------------
@@ -285,20 +285,13 @@ void window_set_framerate_limit(window_t *win, unsigned int limit);
 /**
  * @brief create the window_t, the main struct of the lib
  *
- * You can put NULL to create and update if you dont need to add custom data
- * You can put NULL to destroy if create function dont malloc
- * CAUTION: if create segv, the program will segv
- *
  * @param mode (CSFML) (sfVideoMode) {width, height Bits pre pixel}
  * @param title the window title
- * @param create function to create a custom data attached to the window
- * @param destroy function to destroy the custom data created
  *
  * @return NULL : title is NULL
  * @return NULL : malloc failed
  * @return window : the window is created
  */
-window_t *create_window(sfVideoMode mode, const char *title,
-    void *(*create)(void), void (*destroy)(void *));
+window_t *create_window(sfVideoMode mode, const char *title);
 
 #endif /* !BGS_H_ */

@@ -84,8 +84,8 @@ int object_set_sprite(object_t *object, char const *path, scene_t *scene)
 }
 
 object_t *create_object(
-    void (*update)(object_t *, void *, window_t *win, float),
-    void (*display)(object_t *, void *, void *, sfRenderWindow *),
+    void (*update)(object_t *, dico_t *, window_t *win, float),
+    void (*display)(object_t *, dico_t *, dico_t *, sfRenderWindow *),
     scene_t *scene)
 {
     object_t *object = malloc(sizeof(object_t));

@@ -10,12 +10,12 @@
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
-void update(object_t *object, void *scene_data, window_t *win, float seconds)
+void update(object_t *object, dico_t *scene_components, window_t *win, float seconds)
 {
     //my_printf("oe\n");
 }
 
-void right_click(object_t *object, void *scene_data, window_t *win)
+void right_click(object_t *object, dico_t *scene_components, window_t *win)
 {
     sfVector2f offset = {20, 0};
 
@@ -28,7 +28,7 @@ void right_click(object_t *object, void *scene_data, window_t *win)
     }
 }
 
-void left_click(object_t *object, void *scene_data, window_t *win)
+void left_click(object_t *object, dico_t *scene_components, window_t *win)
 {
     sfVector2f offset = {0, 20};
 
@@ -43,8 +43,7 @@ void left_click(object_t *object, void *scene_data, window_t *win)
 
 int main(int ac, char **av)
 {
-    window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test",
-        NULL, NULL);
+    window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test");
     scene_t *scene = create_scene(NULL, NULL, win, sfBlack);
     object_t *music = create_object(NULL, NULL, scene);
     object_t *text = create_object(NULL, NULL, scene);

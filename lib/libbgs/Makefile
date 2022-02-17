@@ -40,7 +40,10 @@ SRC		:=	add.c								\
 			object_add_set_sprite_components.c	\
 			preset_display.c					\
 			object_update.c						\
-			start.c
+			id_generator.c						\
+			object_update_mouse_event.c			\
+			start.c								\
+			object_add_collision_components.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ		=	$(SRC:%.c=%.o)

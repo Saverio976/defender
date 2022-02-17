@@ -25,20 +25,6 @@ int object_add_chrono(object_t *object, float seconds,
     return object_add_components(object, sprite_chrono, "sprite chrono", &free);
 }
 
-int object_add_sprite_text_solid(object_t *object)
-{
-    sprite_solid_t *sprite_solid = NULL;
-
-    if (object->type != SPRITE && object->type != TEXT) {
-        return BGS_ERR_INPUT;
-    }
-    sprite_solid = malloc(sizeof(sprite_solid_t));
-    if (sprite_solid == NULL) {
-        return BGS_ERR_MALLOC;
-    }
-    return object_add_components(object, sprite_solid, "sprite solid", &free);
-}
-
 int object_add_sprite_health(object_t *object, float life, float max_life)
 {
     sprite_health_t *sprite_health = NULL;

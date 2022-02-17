@@ -30,7 +30,7 @@ void *dico_t_pop_value(dico_t *elem, char const *key);
 
 dico_t *dico_t_pop_elem(dico_t *elem, char const *key);
 
-int dico_t_rem(dico_t *elem, char const *key);
+int dico_t_rem(dico_t *dico, char const *key);
 
 int dico_t_destroy(dico_t *dico);
 

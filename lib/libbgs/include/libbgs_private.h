@@ -16,12 +16,12 @@ int event_handling(sfRenderWindow *win);
 
 scene_t *get_scene_i(list_ptr_t *list, int i);
 
-void object_update(object_t *object, void *scene_data, window_t *win);
+void object_update(object_t *object, dico_t *scene_components, window_t *win);
 
-void display_sprite(object_t *object, void *scene_data, void *win_data,
-    sfRenderWindow *win);
+void display_sprite(object_t *object, dico_t *scene_components,
+    dico_t *win_compoent, sfRenderWindow *win);
 
-void display_text(object_t *object, void *scene_data, void *win_data,
-    sfRenderWindow *win);
+void display_text(object_t *object, dico_t *scene_components,
+    dico_t *win_components, sfRenderWindow *win);
 
 #endif

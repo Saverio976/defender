@@ -8,8 +8,9 @@
 #include <stdlib.h>
 #include "my_dico.h"
 
-int list_t_rem(dico_t *elem)
+int dico_t_rem(dico_t *dico, char const *key)
 {
+    dico_t *elem = dico_t_get_elem(elem, key);
     if (elem == NULL) {
         return (0);
     }

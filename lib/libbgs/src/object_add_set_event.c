@@ -9,7 +9,7 @@
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
-int object_add_hover_event(object_t *object, void (*hover)(object_t *, void *,
+int object_add_hover_event(object_t *object, void (*hover)(object_t *, dico_t *,
     window_t *win))
 {
     on_hover_t *on_hover = NULL;
@@ -28,7 +28,7 @@ int object_add_hover_event(object_t *object, void (*hover)(object_t *, void *,
 }
 
 int object_add_right_click_event(object_t *object,
-    void (*right_click)(object_t *, void *, window_t *win))
+    void (*right_click)(object_t *, dico_t *, window_t *win))
 {
     on_right_click_t *on_right = NULL;
 
@@ -42,11 +42,12 @@ int object_add_right_click_event(object_t *object,
         return BGS_ERR_MALLOC;
     }
     on_right->right_click = right_click;
+    on_right->prev_right_click = false;
     return object_add_components(object, on_right, ON_RIGHT_KEY, &free);
 }
 
 int object_add_left_click_event(object_t *object,
-    void (*left_click)(object_t *, void *, window_t *win))
+    void (*left_click)(object_t *, dico_t *, window_t *win))
 {
     on_left_click_t *on_left = NULL;
 
@@ -59,6 +60,7 @@ int object_add_left_click_event(object_t *object,
     } else if (on_left == NULL) {
         return BGS_ERR_MALLOC;
     }
+    on_left->prev_left_click = false;
     on_left->left_click = left_click;
     return object_add_components(object, on_left, ON_LEFT_KEY, &free);
 }

@@ -49,7 +49,6 @@ dico_t *dico_t_add_data(dico_t *dico, char const *key, void *value,
     dico_t *new;
 
     if (dico_t_get_elem(dico, key) != NULL) {
-        write(2, "[libdico][error]: key already exists\n", 38);
         return (dico);
     }
     new = dico_t_create(key, value, destroy);

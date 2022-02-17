@@ -17,7 +17,7 @@ static void window_display(scene_t *scene, window_t *win)
 
     for (int i = 0; i < scene->displayables->len; i++) {
         obj = ((object_t *) elem->var);
-        obj->display(obj, scene->data, win->data, win->win);
+        obj->display(obj, scene->components, win->components, win->win);
         elem = elem->next;
     }
     sfRenderWindow_display(win->win);
@@ -30,8 +30,8 @@ static void window_update(scene_t *scene, window_t *win, float seconds)
 
     for (int i = 0; i < scene->updates->len; i++) {
         obj = ((object_t *) elem->var);
-        object_update(obj, scene->data, win);
-        obj->update(obj, scene->data, win, seconds);
+        object_update(obj, scene->components, win);
+        obj->update(obj, scene->components, win, seconds);
         elem = elem->next;
     }
 }

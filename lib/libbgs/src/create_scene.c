@@ -32,13 +32,9 @@ scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
 
     if (scene == NULL || win == NULL) {
         return NULL;
-    } else if (create == NULL) {
-        scene->data = NULL;
-    } else {
-        scene->data = create();
     }
+    scene->components = NULL;
     scene->bg_color = bg_color;
-    scene->destroy = destroy;
     if (init_list(scene) != BGS_OK || window_add_scene(win, scene) != BGS_OK) {
         return NULL;
     }

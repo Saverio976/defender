@@ -27,6 +27,7 @@ static void remove_object(object_t *object)
         default:
             break;
     }
+    dico_t_destroy(object->components);
     free(object);
 }
 
@@ -37,13 +38,10 @@ static void remove_scene(scene_t *scene)
 
     for (int i = 0; i < scene->objects->len; i++) {
         object = ((object_t *) elem->var);
-        dico_t_destroy(object->components);
         remove_object(object);
         elem = elem->next;
     }
-    if (scene->data != NULL && scene->destroy != NULL) {
-        scene->destroy(scene->data);
-    }
+    dico_t_destroy(scene->components);
     free_list(scene->displayables);
     free_list(scene->updates);
     free_list(scene->objects);
@@ -61,9 +59,7 @@ void remove_window(window_t *win)
         elem = elem->next;
     }
     free_list(win->scenes);
-    if (win->data != NULL && win->destroy != NULL) {
-        win->destroy(win->data);
-    }
+    dico_t_destroy(win->components);
     sfRenderWindow_destroy(win->win);
     free(win);
 }
