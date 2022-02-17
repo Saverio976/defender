@@ -5,6 +5,7 @@
 ** object update
 */
 
+#include <stdbool.h>
 #include "my_bgs_components.h"
 #include "my_bgs.h"
 
@@ -18,13 +19,13 @@ int check_hover(object_t *object, window_t *win)
     } else if (object->type == TEXT) {
         rect = sfText_getGlobalBounds(object->drawable.text);
     } else {
-        return 0;
+        return false;
     }
-    vector = sfMouse_getPosition(win->win);
+    vector = sfMouse_getPositionRenderWindow(win->win);
     if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfTrue) {
-        return 1;
+        return true;
     } else {
-        return 0;
+        return false;
     }
 }
 
@@ -32,22 +33,24 @@ int check_right_click(object_t *object, window_t *win)
 {
     if (check_hover(object, win) == 1) {
         if (sfMouse_isButtonPressed(sfMouseRight) == sfTrue) {
-            return 1;
+            return true;
         } else {
-            return 0;
+            return false;
         }
     }
+    return (false);
 }
 
 int check_left_click(object_t *object, window_t *win)
 {
     if (check_hover(object, win) == 1) {
         if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
-            return 1;
+            return false;
         } else {
-            return 0;
+            return false;
         }
     }
+    return (false);
 }
 
 void object_update(object_t *object, void *scene_data, window_t *win)
