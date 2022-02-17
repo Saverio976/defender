@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 
-void remove_object(object_t *object)
+static void remove_object(object_t *object)
 {
     switch (object->type) {
         case SPRITE:
@@ -30,7 +30,7 @@ void remove_object(object_t *object)
     free(object);
 }
 
-void remove_scene(scene_t *scene)
+static void remove_scene(scene_t *scene)
 {
     list_t *elem = scene->objects->start;
     object_t *object = NULL;

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 #include "my_bgs_components.h"
+#include "../include/libbgs_private.h"
 
 static void window_display(scene_t *scene, window_t *win)
 {
@@ -46,7 +47,7 @@ static time_clock_t *init_clock(void)
     return timer;
 }
 
-int scene_handling(window_t *win, scene_t **scene, time_clock_t *timer)
+static int scene_handling(window_t *win, scene_t **scene, time_clock_t *timer)
 {
     static int last_index = -1;
 

@@ -10,7 +10,7 @@
 
     #include "my_bgs.h"
 
-static const char ON_HOVER_KEY[] =  "__on_hover";
+static const char ON_HOVER_KEY[] = "__on_hover";
 static const char ON_RIGHT_KEY[] = "__on_right_click";
 static const char ON_LEFT_KEY[] = "__on_left_click";
 
