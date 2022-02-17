@@ -9,7 +9,7 @@
 #include "my_bgs_components.h"
 #include "my_bgs.h"
 
-int check_hover(object_t *object, window_t *win)
+static int check_hover(object_t *object, window_t *win)
 {
     sfFloatRect rect;
     sfVector2i vector;
@@ -29,7 +29,7 @@ int check_hover(object_t *object, window_t *win)
     }
 }
 
-int check_right_click(object_t *object, window_t *win)
+static int check_right_click(object_t *object, window_t *win)
 {
     if (check_hover(object, win) == 1) {
         if (sfMouse_isButtonPressed(sfMouseRight) == sfTrue) {
@@ -41,7 +41,7 @@ int check_right_click(object_t *object, window_t *win)
     return (false);
 }
 
-int check_left_click(object_t *object, window_t *win)
+static int check_left_click(object_t *object, window_t *win)
 {
     if (check_hover(object, win) == 1) {
         if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
@@ -61,9 +61,11 @@ void object_update(object_t *object, void *scene_data, window_t *win)
     if (data != NULL && check_hover(object, win) == 1) {
         ((on_hover_t *) data)->hover(object, scene_data, win);
     }
+    data = dico_t_get_value(object->components, ON_RIGHT_KEY);
     if (data != NULL && check_right_click(object, win) == 1) {
         ((on_right_click_t *) data)->right_click(object, scene_data, win);
     }
+    data = dico_t_get_value(object->components, ON_LEFT_KEY);
     if (data != NULL && check_left_click(object, win) == 1) {
         ((on_left_click_t *) data)->left_click(object, scene_data, win);
     }
