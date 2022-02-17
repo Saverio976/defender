@@ -26,7 +26,7 @@ static int init_list(scene_t *scene)
 }
 
 scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
-    window_t *win)
+    window_t *win, sfColor bg_color)
 {
     scene_t *scene = malloc(sizeof(scene_t));
 
@@ -37,6 +37,7 @@ scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
     } else {
         scene->data = create();
     }
+    scene->bg_color = bg_color;
     scene->destroy = destroy;
     if (init_list(scene) != BGS_OK || window_add_scene(win, scene) != BGS_OK) {
         return NULL;

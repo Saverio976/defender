@@ -57,6 +57,7 @@ struct time_clock_s {
 };
 
 struct scene_s {
+    sfColor bg_color;
     list_ptr_t *updates;
     list_ptr_t *objects;
     list_ptr_t *displayables;
@@ -79,7 +80,7 @@ int scene_add_object(scene_t *scene, object_t *object);
 int window_add_scene(window_t *win, scene_t *scene);
 object_t *get_obj_from_list(list_t *list);
 scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
-    window_t *win);
+    window_t *win, sfColor bg_color);
 int object_set_audio(object_t *object, char const *path, bool play_now,
     bool is_loop);
 int loop(window_t *win);
@@ -99,8 +100,5 @@ void display_text(object_t *object, void *scene_data, void *win_data,
 int object_set_sprite(object_t *object, char const *path, scene_t *scene);
 int object_set_text(object_t *object, char const *path, char const *text,
     scene_t *scene);
-int object_add_components(object_t *object, void *data, char *key,
-    void (*destroy)(void *));
-void object_update(object_t *object, void *scene_data, window_t *win);
 
 #endif /* !BGS_H_ */

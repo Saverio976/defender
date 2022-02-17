@@ -8,7 +8,7 @@
 #include "my_bgs.h"
 #include "my_dico.h"
 
-int object_add_components(object_t *object, void *data, char *key,
+int object_add_components(object_t *object, void *data, const char key[],
     void (*destroy)(void *))
 {
     if (object == NULL || data == NULL || key == NULL) {

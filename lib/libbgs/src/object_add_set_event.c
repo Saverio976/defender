@@ -27,8 +27,8 @@ int object_add_hover_event(object_t *object, void (*hover)(object_t *, void *,
     return object_add_components(object, on_hover, ON_HOVER_KEY, &free);
 }
 
-int object_add_right_click_event(object_t *object, void (*right_click)(object_t *,
-    void *, window_t *win))
+int object_add_right_click_event(object_t *object,
+    void (*right_click)(object_t *, void *, window_t *win))
 {
     on_right_click_t *on_right = NULL;
 
@@ -45,8 +45,8 @@ int object_add_right_click_event(object_t *object, void (*right_click)(object_t 
     return object_add_components(object, on_right, ON_RIGHT_KEY, &free);
 }
 
-int object_add_right_click_event(object_t *object, void (*left_click)(object_t *,
-    void *, window_t *win))
+int object_add_left_click_event(object_t *object,
+    void (*left_click)(object_t *, void *, window_t *win))
 {
     on_left_click_t *on_left = NULL;
 

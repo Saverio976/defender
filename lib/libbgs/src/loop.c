@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "my_bgs.h"
+#include "my_bgs_components.h"
 
 static void window_display(scene_t *scene, window_t *win)
 {
@@ -56,6 +57,7 @@ int scene_handling(window_t *win, scene_t **scene, time_clock_t *timer)
     if (*scene == NULL) {
         return BGS_ERR_INPUT;
     }
+    sfRenderWindow_clear(win->win, (*scene)->bg_color);
     timer->time = sfClock_restart(timer->clock);
     timer->seconds = sfTime_asSeconds(timer->time);
     window_update(*scene, win, timer->seconds);
