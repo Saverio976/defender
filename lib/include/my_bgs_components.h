@@ -56,4 +56,23 @@ struct on_left_click_s {
     void (*left_click)(object_t *, void *, window_t *win);
 };
 
+int object_add_components(object_t *object, void *data, char *key,
+    void (*destroy)(void *));
+int object_add_hover_event(object_t *object, void (*hover)(object_t *, void *,
+    window_t *win));
+int object_add_right_click_event(object_t *object, void (*right_click)(object_t *,
+    void *, window_t *win));
+int object_add_left_click_event(object_t *object, void (*left_click)(object_t *,
+    void *, window_t *win));
+int object_add_chrono(object_t *object, float seconds,
+    float refresh_rate);
+int object_add_sprite_text_solid(object_t *object);
+int object_add_sprite_health(object_t *object, float life, float max_life);
+int object_add_sprite_move(object_t *object, sfVector2f vect);
+int object_add_sprite_anim(object_t *object, sfIntRect rect);
+int check_hover(object_t *object, window_t *win);
+int check_right_click(object_t *object, window_t *win);
+int check_left_click(object_t *object, window_t *win);
+void object_update(object_t *object, void *scene_data, window_t *win);
+
 #endif /* !BGS_COMPONENTS_ */
