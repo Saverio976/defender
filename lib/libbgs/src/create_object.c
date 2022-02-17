@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "my_bgs.h"
+#include "../include/libbgs_private.h"
 
 int object_set_audio(object_t *object, char const *path, bool play_now,
     bool is_loop)
@@ -44,7 +45,7 @@ int object_set_custom(object_t *object, void *(*create)(void),
 int object_set_text(object_t *object, char const *path, char const *text,
     scene_t *scene)
 {
-    if (object == NULL || path == NULL || text == NULL) {
+    if (object == NULL || path == NULL || text == NULL || scene == NULL) {
         return BGS_ERR_INPUT;
     }
     object->bigdata.font = sfFont_createFromFile(path);
@@ -64,7 +65,7 @@ int object_set_text(object_t *object, char const *path, char const *text,
 
 int object_set_sprite(object_t *object, char const *path, scene_t *scene)
 {
-    if (object == NULL || path == NULL) {
+    if (object == NULL || path == NULL || scene == NULL) {
         return BGS_ERR_INPUT;
     }
     object->bigdata.texture = sfTexture_createFromFile(path, NULL);
