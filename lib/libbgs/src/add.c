@@ -23,7 +23,8 @@ int scene_add_object(scene_t *scene, object_t *object)
     if (scene == NULL || object == NULL) {
         return BGS_ERR_INPUT;
     }
-    if (object->type == UNSET && list_add_to_end(scene->objects, object) == NULL) {
+    if (object->type == UNSET &&
+            list_add_to_end(scene->objects, object) == NULL) {
         return BGS_ERR_MALLOC;
     }
     if (object->update != NULL && object->type == UNSET) {
@@ -31,8 +32,9 @@ int scene_add_object(scene_t *scene, object_t *object)
             return BGS_ERR_MALLOC;
         }
     }
-    if (object->display != NULL || (object->type == TEXT ||
-        object->type == SPRITE)) {
+//    TODO : i dont know if there will be some bug here
+    if ((object->display != NULL && object->type == UNSET) ||
+            (object->type == TEXT || object->type == SPRITE)) {
         if (list_add_to_end(scene->displayables, object) == NULL) {
             return BGS_ERR_MALLOC;
         }
