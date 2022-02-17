@@ -53,7 +53,7 @@ void remove_object_this(object_t *this, object_t *other)
     on_collision_t *this_col = dico_t_get_value(this->components,
         ON_COLLISION);
     dico_t *dict_other_col = NULL;
-    
+
     if (other_col == NULL) {
         return;
     }

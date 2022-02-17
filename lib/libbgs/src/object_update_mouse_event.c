@@ -32,7 +32,7 @@ static int check_hover(object_t *object, window_t *win)
 static int check_right_click(object_t *object, window_t *win)
 {
     on_right_click_t *right = NULL;
-    
+
     right = dico_t_get_value(object->components, ON_RIGHT_KEY);
     if (check_hover(object, win) == 0) {
         return false;

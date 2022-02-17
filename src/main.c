@@ -41,6 +41,27 @@ void left_click(object_t *object, dico_t *scene_components, window_t *win)
     }
 }
 
+
+void text_set(object_t *object, dico_t *scene_components, window_t *win)
+{
+    text_set_display(object);
+}
+
+void text_unset(object_t *object, dico_t *scene_components, window_t *win)
+{
+    text_unset_display(object);
+}
+
+void sprite_set(object_t *object, dico_t *scene_components, window_t *win)
+{
+    sprite_set_display(object);
+}
+
+void sprite_unset(object_t *object, dico_t *scene_components, window_t *win)
+{
+    sprite_unset_display(object);
+}
+
 int main(int ac, char **av)
 {
     window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test");
@@ -54,9 +75,12 @@ int main(int ac, char **av)
     }
     object_set_audio(music, "assets/music/rickroll.ogg", true, true);
     object_set_sprite(sprite, "assets/map/castle_with_nico.png", scene);
+    sfSprite_setPosition(sprite->drawable.sprite, (sfVector2f) {200, 200});
     object_set_text(text, "assets/font/menlo.ttf", "OUIII", scene);
-    object_add_right_click_event(sprite, &right_click);
-    object_add_left_click_event(sprite, &left_click);
+    object_add_right_click_event(sprite, &sprite_set);
+    object_add_left_click_event(sprite, &sprite_unset);
+    object_add_right_click_event(text, &text_set);
+    object_add_left_click_event(text, &text_unset);
     loop(win);
     remove_window(win);
     return 0;

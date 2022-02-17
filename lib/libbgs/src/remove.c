@@ -13,11 +13,11 @@ static void remove_object(object_t *object)
     switch (object->type) {
         case SPRITE:
             sfSprite_destroy(object->drawable.sprite);
-            sfTexture_destroy(object->bigdata.texture);
+            sfTexture_destroy(object->bigdata.sprite_bigdata.texture);
             break;
         case TEXT:
             sfText_destroy(object->drawable.text);
-            sfFont_destroy(object->bigdata.font);
+            sfFont_destroy(object->bigdata.text_bigdata.font);
             break;
         case AUDIO:
             sfMusic_setLoop(object->drawable.music, sfFalse);

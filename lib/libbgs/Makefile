@@ -43,6 +43,7 @@ SRC		:=	add.c								\
 			id_generator.c						\
 			object_update_mouse_event.c			\
 			start.c								\
+			set_unset_bigdata_display.c		\
 			object_add_collision_components.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 

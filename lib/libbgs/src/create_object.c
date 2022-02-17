@@ -48,15 +48,16 @@ int object_set_text(object_t *object, char const *path, char const *text,
     if (object == NULL || path == NULL || text == NULL || scene == NULL) {
         return BGS_ERR_INPUT;
     }
-    object->bigdata.font = sfFont_createFromFile(path);
-    if (object->bigdata.font == NULL) {
+    object->bigdata.text_bigdata.display = true;
+    object->bigdata.text_bigdata.font = sfFont_createFromFile(path);
+    if (object->bigdata.text_bigdata.font == NULL) {
         return BGS_ERR_PATH;
     }
     object->drawable.text = sfText_create();
     if (object->drawable.text == NULL) {
         return BGS_ERR_MALLOC;
     }
-    sfText_setFont(object->drawable.text, object->bigdata.font);
+    sfText_setFont(object->drawable.text, object->bigdata.text_bigdata.font);
     sfText_setString(object->drawable.text, text);
     object->type = TEXT;
     object->display = &display_text;
@@ -68,16 +69,18 @@ int object_set_sprite(object_t *object, char const *path, scene_t *scene)
     if (object == NULL || path == NULL || scene == NULL) {
         return BGS_ERR_INPUT;
     }
-    object->bigdata.texture = sfTexture_createFromFile(path, NULL);
-    if (object->bigdata.texture == NULL) {
+    object->bigdata.sprite_bigdata.display = true;
+    object->bigdata.sprite_bigdata.texture =
+        sfTexture_createFromFile(path, NULL);
+    if (object->bigdata.sprite_bigdata.texture == NULL) {
         return BGS_ERR_PATH;
     }
     object->drawable.sprite = sfSprite_create();
     if (object->drawable.sprite == NULL) {
         return BGS_ERR_MALLOC;
     }
-    sfSprite_setTexture(object->drawable.sprite, object->bigdata.texture,
-        sfTrue);
+    sfSprite_setTexture(object->drawable.sprite,
+        object->bigdata.sprite_bigdata.texture, sfTrue);
     object->type = SPRITE;
     object->display = &display_sprite;
     return scene_add_object(scene, object);
@@ -93,7 +96,7 @@ object_t *create_object(
     if (object == NULL || scene == NULL) {
         return NULL;
     }
-    object->bigdata.font = NULL;
+    object->bigdata.text_bigdata.font = NULL;
     object->drawable.music = NULL;
     object->components = NULL;
     object->update = update;

@@ -24,6 +24,8 @@ typedef struct time_clock_s time_clock_t;
 typedef struct object_s object_t;
 typedef struct window_s window_t;
 typedef struct scene_s scene_t;
+typedef struct sprite_bigdata_s sprite_bigdata_t;
+typedef struct text_bigdata_s text_bigdata_t;
 
 enum object_type {
     SPRITE,
@@ -33,11 +35,21 @@ enum object_type {
     UNSET
 };
 
+struct sprite_bigdata_s {
+    sfTexture *texture;
+    bool display;
+};
+
+struct text_bigdata_s {
+    sfFont *font;
+    bool display;
+};
+
 struct object_s {
     enum object_type type;
     union bigdata {
-        sfTexture *texture;
-        sfFont *font;
+        sprite_bigdata_t sprite_bigdata;
+        text_bigdata_t text_bigdata;
     } bigdata;
     union drawable {
         sfSprite *sprite;
