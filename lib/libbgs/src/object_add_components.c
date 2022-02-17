@@ -12,12 +12,12 @@ int object_add_components(object_t *object, void *data, char *key,
     void (*destroy)(void *))
 {
     if (object == NULL || data == NULL || key == NULL) {
-        return 1;
+        return BGS_ERR_INPUT;
     }
     object->components = dico_t_add_data(object->components, key, data,
         destroy);
     if (object->components == NULL || object->components->last == NULL) {
-        return 84;
+        return BGS_ERR_MALLOC;
     }
-    return 0;
+    return BGS_OK;
 }
