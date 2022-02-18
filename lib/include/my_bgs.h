@@ -37,12 +37,10 @@ enum object_type {
 
 struct sprite_bigdata_s {
     sfTexture *texture;
-    bool display;
 };
 
 struct text_bigdata_s {
     sfFont *font;
-    bool display;
 };
 
 struct object_s {
@@ -57,6 +55,7 @@ struct object_s {
         sfMusic *music;
     } drawable;
     dico_t *components;
+    bool is_visible;
     void (*update)(object_t *, dico_t *scene_components, window_t *win, float);
     void (*display)(object_t *, dico_t *scene_components,
         dico_t *win_components, sfRenderWindow *win);
@@ -130,7 +129,7 @@ int scene_add_object(scene_t *scene, object_t *object);
  * @return BGS_OK : the object is set to be audio
  */
 int object_set_audio(object_t *object, char const *path, bool play_now,
-    bool is_loop);
+    bool loop_now);
 
 /**
  * @brief add a custom type of data to object components
@@ -146,8 +145,7 @@ int object_set_audio(object_t *object, char const *path, bool play_now,
  * @return BGS_ERR_INPUT : object or create of key is NULL
  * @return BGS_OK : the custom data is added ot the object
  */
-int object_set_custom(object_t *object, void *(*create)(void),
-    void (*destroy)(void *), char *key);
+int object_set_custom(object_t *object);
 
 /**
  * @brief modify an object to be a text
@@ -162,8 +160,7 @@ int object_set_custom(object_t *object, void *(*create)(void),
  * @return BGS_ERR_MALLOC : malloc failed
  * @return BGS_OK : the object is set to text and scene is update
  */
-int object_set_text(object_t *object, char const *path, char const *text,
-    scene_t *scene);
+int object_set_text(object_t *object, char const *path, char const *text);
 
 /**
  * @brief modify an object to be a sprite
@@ -177,7 +174,7 @@ int object_set_text(object_t *object, char const *path, char const *text,
  * @return BGS_ERR_MALLoc : malloc failed
  * @return BGS_OK : the object is set to sprite and scene is update
  */
-int object_set_sprite(object_t *object, char const *path, scene_t *scene);
+int object_set_sprite(object_t *object, char const *path);
 
 /**
  * @brief create UNSET object (you need to set it with object_set_* functions)

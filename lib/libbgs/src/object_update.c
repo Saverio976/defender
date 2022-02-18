@@ -89,8 +89,14 @@ void object_update_collision_event(object_t *this, dico_t *scene_components,
 }
 
 void object_update(object_t *object, dico_t *scene_components,
-    window_t *win)
+    window_t *win, float seconds)
 {
+    if (object != NULL && object->update != NULL) {
+        object->update(object, scene_components, win, seconds);
+    }
+    if (object == NULL || object->components == NULL) {
+        return;
+    }
     object_update_mouse_event(object, scene_components, win);
     object_update_collision_event(object, scene_components, win);
 }

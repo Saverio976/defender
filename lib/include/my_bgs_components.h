@@ -77,16 +77,13 @@ int object_add_sprite_text_solid(object_t *object);
 int object_add_sprite_health(object_t *object, float life, float max_life);
 int object_add_sprite_move(object_t *object, sfVector2f vect);
 int object_add_sprite_anim(object_t *object, sfIntRect rect);
-void object_update(object_t *object, dico_t *components, window_t *win);
 void object_update_mouse_event(object_t *object, dico_t *components,
     window_t *win);
 int object_add_collision(object_t *object, scene_t *scene,
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
     window_t *win));
 char *get_id_generator(char dest[255]);
-void sprite_set_display(object_t *object);
-void sprite_unset_display(object_t *object);
-void text_set_display(object_t *object);
-void text_unset_display(object_t *object);
+void set_display(object_t *object);
+void unset_display(object_t *object);
 
 #endif /* !BGS_COMPONENTS_ */

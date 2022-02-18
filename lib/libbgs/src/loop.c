@@ -30,8 +30,9 @@ static void window_update(scene_t *scene, window_t *win, float seconds)
 
     for (int i = 0; i < scene->updates->len; i++) {
         obj = ((object_t *) elem->var);
-        object_update(obj, scene->components, win);
-        obj->update(obj, scene->components, win, seconds);
+        if (obj->components != NULL || obj->update != NULL) {
+            object_update(obj, scene->components, win, seconds);
+        }
         elem = elem->next;
     }
 }
@@ -75,6 +76,7 @@ int loop(window_t *win)
     if (timer == NULL || win->scenes->len == 0) {
         return 0;
     }
+    window_setup_scene(win);
     while (sfRenderWindow_isOpen(win->win) && ret == BGS_OK) {
         ret = scene_handling(win, &scene, timer);
         if (ret == BGS_OK) {

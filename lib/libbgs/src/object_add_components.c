@@ -8,6 +8,14 @@
 #include "my_bgs.h"
 #include "my_dico.h"
 
+void *object_get_components(object_t *object, char key[])
+{
+    if (object == NULL || key == NULL) {
+        return NULL;
+    }
+    return dico_t_get_value(object->components, key);
+}
+
 int object_add_components(object_t *object, void *data, const char key[],
     void (*destroy)(void *))
 {

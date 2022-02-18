@@ -11,7 +11,7 @@
 #include "../include/libbgs_private.h"
 
 int object_set_audio(object_t *object, char const *path, bool play_now,
-    bool is_loop)
+    bool loop_now)
 {
     if (object == NULL || path == NULL) {
         return BGS_ERR_INPUT;
@@ -23,32 +23,28 @@ int object_set_audio(object_t *object, char const *path, bool play_now,
     if (play_now == true) {
         sfMusic_play(object->drawable.music);
     }
-    if (is_loop == true) {
+    if (loop_now == true) {
         sfMusic_setLoop(object->drawable.music, sfTrue);
     }
     object->type = AUDIO;
     return BGS_OK;
 }
 
-int object_set_custom(object_t *object, void *(*create)(void),
-    void (*destroy)(void *), char *key)
+int object_set_custom(object_t *object)
 {
-    if (object == NULL || create == NULL || key == NULL) {
+    if (object == NULL) {
         return BGS_ERR_INPUT;
     }
-    object->components = dico_t_add_data(object->components, key, create(),
-        destroy);
     object->type = CUSTOM;
     return BGS_OK;
 }
 
-int object_set_text(object_t *object, char const *path, char const *text,
-    scene_t *scene)
+int object_set_text(object_t *object, char const *path, char const *text)
 {
-    if (object == NULL || path == NULL || text == NULL || scene == NULL) {
+    if (object == NULL || path == NULL || text == NULL) {
         return BGS_ERR_INPUT;
     }
-    object->bigdata.text_bigdata.display = true;
+    object->is_visible = true;
     object->bigdata.text_bigdata.font = sfFont_createFromFile(path);
     if (object->bigdata.text_bigdata.font == NULL) {
         return BGS_ERR_PATH;
@@ -60,16 +56,16 @@ int object_set_text(object_t *object, char const *path, char const *text,
     sfText_setFont(object->drawable.text, object->bigdata.text_bigdata.font);
     sfText_setString(object->drawable.text, text);
     object->type = TEXT;
-    object->display = &display_text;
-    return scene_add_object(scene, object);
+    object->display = (object->display) ? object->display : &display_text;
+    return BGS_OK;
 }
 
-int object_set_sprite(object_t *object, char const *path, scene_t *scene)
+int object_set_sprite(object_t *object, char const *path)
 {
-    if (object == NULL || path == NULL || scene == NULL) {
+    if (object == NULL || path == NULL) {
         return BGS_ERR_INPUT;
     }
-    object->bigdata.sprite_bigdata.display = true;
+    object->is_visible = true;
     object->bigdata.sprite_bigdata.texture =
         sfTexture_createFromFile(path, NULL);
     if (object->bigdata.sprite_bigdata.texture == NULL) {
@@ -82,8 +78,8 @@ int object_set_sprite(object_t *object, char const *path, scene_t *scene)
     sfSprite_setTexture(object->drawable.sprite,
         object->bigdata.sprite_bigdata.texture, sfTrue);
     object->type = SPRITE;
-    object->display = &display_sprite;
-    return scene_add_object(scene, object);
+    object->display = (object->display) ? object->display : &display_sprite;
+    return BGS_OK;
 }
 
 object_t *create_object(
@@ -101,6 +97,7 @@ object_t *create_object(
     object->components = NULL;
     object->update = update;
     object->display = display;
+    object->is_visible = (display) ? true : false;
     object->type = UNSET;
     if (scene_add_object(scene, object) != BGS_OK) {
         return NULL;
