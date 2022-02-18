@@ -26,3 +26,18 @@ char *get_id_generator(char dest[255])
     my_strcpy((char *) keys, dest);
     return (keys);
 }
+
+char *get_id_generator_cat(char dest[255])
+{
+    int size = 0;
+    char id[255];
+    int i = 0;
+
+    get_id_generator(id);
+    size = my_strlen(dest);
+    for (i = size; i < 254 && id[i - size] != '\0'; i++) {
+        dest[i] = id[i - size];
+    }
+    dest[i] = '\0';
+    return (dest);
+}

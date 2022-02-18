@@ -27,4 +27,10 @@ void display_text(object_t *object, dico_t *scene_components,
 
 int add_to_update_display_list(scene_t *scene, object_t *object);
 
+char *get_id_generator(char dest[255]);
+
+char *get_id_generator_cat(char dest[255]);
+
+int check_hover(object_t *object, window_t *win);
+
 #endif

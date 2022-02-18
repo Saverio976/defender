@@ -9,7 +9,7 @@
 #include "my_bgs_components.h"
 #include "my_bgs.h"
 
-static int check_hover(object_t *object, window_t *win)
+int check_hover(object_t *object, window_t *win)
 {
     sfFloatRect rect;
     sfVector2i vector;

@@ -14,6 +14,7 @@ static const char ON_HOVER_KEY[] = "__on_hover";
 static const char ON_RIGHT_KEY[] = "__on_right_click";
 static const char ON_LEFT_KEY[] = "__on_left_click";
 static const char ON_COLLISION[] = "__on_collision";
+static const char SET_EVENT[] = "__set_event";
 
 typedef struct sprite_anim_s sprite_anim_t;
 typedef struct sprite_move_s sprite_move_t;
@@ -23,6 +24,27 @@ typedef struct sprite_chrono_s sprite_chrono_t;
 typedef struct on_left_click_s on_left_click_t;
 typedef struct on_right_click_s on_right_click_t;
 typedef struct on_hover_s on_hover_t;
+typedef struct set_event_s set_event_t;
+typedef struct event_node_s event_node_t;
+
+struct event_node_s {
+    union event_code {
+        sfMouseButton mouse;
+        sfKeyCode key;
+    } event_code;
+    enum event_type {
+        MOUSE,
+        KEY
+    } event_type;
+};
+
+struct set_event_s {
+    list_ptr_t *list_event;
+    bool hover;
+    bool prev_call;
+    (*on)(object_t *object, dico_t *scene_components, window_t *win);
+    (*off)(object_t *object, dico_t *scene_components, window_t *win);
+};
 
 struct sprite_anim_s {
     sfIntRect rect;
@@ -63,6 +85,8 @@ struct on_left_click_s {
     void (*left_click)(object_t *, dico_t *, window_t *win);
 };
 
+
+
 int object_add_components(object_t *object, void *data, const char key[],
     void (*destroy)(void *));
 int object_add_hover_event(object_t *object, void (*hover)(object_t *, dico_t *,
@@ -82,7 +106,6 @@ void object_update_mouse_event(object_t *object, dico_t *components,
 int object_add_collision(object_t *object, scene_t *scene,
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
     window_t *win));
-char *get_id_generator(char dest[255]);
 void set_display(object_t *object);
 void unset_display(object_t *object);
 
