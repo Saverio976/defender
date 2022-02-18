@@ -26,6 +26,26 @@ static void copy_usr_event(set_event_t *event, set_event_t *usr_event)
     event->prev_call = false;
 }
 
+void destroy_event(void *data)
+{
+    set_event_t *event = data;
+    list_t *elem = NULL;
+
+    if (event == NULL) {
+        return;
+    }
+    if (event->list_event == NULL) {
+        free(event);
+        return;
+    }
+    elem = event->list_event->start;
+    for (int i = 0; i < event->list_event->len; i++, elem = elem->next) {
+        free(elem->var);
+    }
+    free_list(event->list_event);
+    free(event);
+}
+
 int object_set_event(object_t *object, set_event_t *usr_event)
 {
     set_event_t *event = NULL;
@@ -42,6 +62,6 @@ int object_set_event(object_t *object, set_event_t *usr_event)
     copy_usr_event(event, usr_event);
     get_id_generator_cat(key);
     object->components = dico_t_add_data(object->components, key, event,
-        &free);
+        &destroy_event);
     return (BGS_OK);
 }

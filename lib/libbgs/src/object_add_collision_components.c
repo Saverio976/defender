@@ -14,8 +14,7 @@ static void free_list_abstract(void *list_ptr)
     free_list((list_ptr_t *) list_ptr);
 }
 
-// TODO: ERROR here, we dont use object
-int scene_add_obj_to_solid_list(scene_t *scene, object_t *object)
+int scene_add_solid_list(scene_t *scene)
 {
     void *value = NULL;
 
@@ -45,7 +44,7 @@ int object_add_collision(object_t *object, scene_t *scene,
     }
     get_id_generator(on_collision->key);
     on_collision->collision = collision;
-    if (scene_add_obj_to_solid_list(scene, object) != BGS_OK) {
+    if (scene_add_solid_list(scene) != BGS_OK) {
         return BGS_ERR_MALLOC;
     }
     if (list_add_to_end(dico_t_get_value(scene->components, ON_COLLISION),

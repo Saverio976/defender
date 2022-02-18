@@ -29,13 +29,16 @@ static bool check_event_nodes(set_event_t *set_event, object_t *object,
 {
     bool check = true;
     event_node_t *node = NULL;
-    list_t *elem = set_event->list_event->start;
+    list_t *elem = NULL;
 
     if (set_event->hover == true) {
         check = check_hover(object, win);
     }
-    for (int i = 0; i < set_event->list_event->len && check == true;
-        i++, elem = elem->next) {
+    if (set_event->list_event != NULL) {
+        elem = set_event->list_event->start;
+    }
+    for (int i = 0; elem != NULL && i < set_event->list_event->len &&
+        check == true; i++, elem = elem->next) {
         node = ((event_node_t *) elem->var);
         check = check_node(node);
     }
@@ -47,14 +50,16 @@ static void check_event(set_event_t *set_event, object_t *object,
 {
     bool check = true;
 
-    if (set_event == NULL || set_event->list_event == NULL) {
+    if ((set_event->list_event == NULL && set_event->hover == false) ||
+        set_event == NULL) {
         return;
     }
     check = check_event_nodes(set_event, object, win);
-    if (check == true) {
+    if (check == true && set_event->on != NULL) {
         set_event->on(object, scene_components, win);
         set_event->prev_call = true;
-    } else if (set_event->prev_call == true && check == false) {
+    } else if (set_event->prev_call == true && check == false &&
+        set_event->off != NULL) {
         set_event->off(object, scene_components, win);
         set_event->prev_call = false;
     }
