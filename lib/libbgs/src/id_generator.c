@@ -23,7 +23,7 @@ unsigned char *get_id_generator(char dest[255])
         index = 1;
     }
     keys[index] += 1;
-    my_strcpy((char *) keys, dest);
+    my_strcpy(dest, (char *) keys);
     return (keys);
 }
 

@@ -42,8 +42,8 @@ struct set_event_s {
     list_ptr_t *list_event;
     bool hover;
     bool prev_call;
-    int (*on)(object_t *object, dico_t *scene_components, window_t *win);
-    int (*off)(object_t *object, dico_t *scene_components, window_t *win);
+    void (*on)(object_t *object, dico_t *scene_components, window_t *win);
+    void (*off)(object_t *object, dico_t *scene_components, window_t *win);
 };
 
 struct sprite_anim_s {
@@ -85,8 +85,6 @@ struct on_left_click_s {
     void (*left_click)(object_t *, dico_t *, window_t *win);
 };
 
-
-
 int object_add_components(object_t *object, void *data, const char key[],
     void (*destroy)(void *));
 int object_add_hover_event(object_t *object, void (*hover)(object_t *, dico_t *,
@@ -108,5 +106,6 @@ int object_add_collision(object_t *object, scene_t *scene,
     window_t *win));
 void set_display(object_t *object);
 void unset_display(object_t *object);
+int object_set_event(object_t *object, set_event_t *usr_event);
 
 #endif /* !BGS_COMPONENTS_ */

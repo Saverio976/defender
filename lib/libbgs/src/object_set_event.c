@@ -17,6 +17,15 @@ void my_memcpy(void *dest, int size, void *src)
     }
 }
 
+static void copy_usr_event(set_event_t *event, set_event_t *usr_event)
+{
+    event->hover = usr_event->hover;
+    event->list_event = usr_event->list_event;
+    event->off = usr_event->off;
+    event->on = usr_event->on;
+    event->prev_call = false;
+}
+
 int object_set_event(object_t *object, set_event_t *usr_event)
 {
     set_event_t *event = NULL;
@@ -30,8 +39,9 @@ int object_set_event(object_t *object, set_event_t *usr_event)
     if (event == NULL) {
         return BGS_ERR_MALLOC;
     }
-    my_memcpy(event, sizeof(set_event_t), usr_event);
+    copy_usr_event(event, usr_event);
     get_id_generator_cat(key);
-    dico_t_add_data(object->components, key, event, &free);
+    object->components = dico_t_add_data(object->components, key, event,
+        &free);
     return (BGS_OK);
 }

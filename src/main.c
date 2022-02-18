@@ -31,16 +31,29 @@ int main(void)
     object_t *music = create_object(NULL, NULL, scene);
     object_t *text = create_object(NULL, NULL, scene);
     object_t *sprite = create_object(NULL, NULL, scene);
+    set_event_t evt = {0};
 
     if (sprite == NULL) {
         return 84;
     }
+    evt.hover = true;
+    evt.off = &set;
+    evt.on = &unset;
+    evt.list_event = list_create();
+    event_node_t *node = malloc(sizeof(event_node_t));
+    node->event_type = KEY;
+    node->event_code.key = sfKeyA;
+    list_add_to_end(evt.list_event, node);
+
+    if (evt.list_event == NULL) {
+        return (84);
+    }
+    evt.prev_call = false;
     object_set_audio(music, "assets/music/rickroll.ogg", true, true);
     object_set_sprite(sprite, "assets/map/castle_with_nico.png");
+    object_set_event(sprite, &evt);
     sfSprite_setPosition(sprite->drawable.sprite, (sfVector2f) {200, 200});
     object_set_text(text, "assets/font/menlo.ttf", "OUIII");
-    object_add_right_click_event(sprite, &set);
-    object_add_left_click_event(sprite, &unset);
     object_add_right_click_event(text, &set);
     object_add_left_click_event(text, &unset);
     loop(win);

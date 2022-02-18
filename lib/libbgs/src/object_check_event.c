@@ -31,8 +31,8 @@ static bool check_event_nodes(set_event_t *set_event, object_t *object,
     event_node_t *node = NULL;
     list_t *elem = set_event->list_event->start;
 
-    if (set_event->hover == true && check_hover(object, win) == false) {
-        return (false);
+    if (set_event->hover == true) {
+        check = check_hover(object, win);
     }
     for (int i = 0; i < set_event->list_event->len && check == true;
         i++, elem = elem->next) {
