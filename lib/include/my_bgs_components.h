@@ -42,8 +42,8 @@ struct set_event_s {
     list_ptr_t *list_event;
     bool hover;
     bool prev_call;
-    (*on)(object_t *object, dico_t *scene_components, window_t *win);
-    (*off)(object_t *object, dico_t *scene_components, window_t *win);
+    int (*on)(object_t *object, dico_t *scene_components, window_t *win);
+    int (*off)(object_t *object, dico_t *scene_components, window_t *win);
 };
 
 struct sprite_anim_s {
