@@ -218,8 +218,7 @@ object_t *create_object(
  * @return NULL : malloc failed
  * @return scene : the scene is created
  */
-scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
-    window_t *win, sfColor bg_color);
+scene_t *create_scene(window_t *win, sfColor bg_color);
 
 // ----------------------------------------------------------------------------
 // loop.c

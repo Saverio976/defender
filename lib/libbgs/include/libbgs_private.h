@@ -11,6 +11,7 @@
     #include <SFML/Graphics.h>
     #include "list.h"
     #include "my_bgs.h"
+    #include "my_bgs_components.h"
 
 int event_handling(sfRenderWindow *win);
 
@@ -27,10 +28,17 @@ void display_text(object_t *object, dico_t *scene_components,
 
 int add_to_update_display_list(scene_t *scene, object_t *object);
 
-char *get_id_generator(char dest[255]);
+unsigned char *get_id_generator(char dest[255]);
 
 char *get_id_generator_cat(char dest[255]);
 
 int check_hover(object_t *object, window_t *win);
+
+void window_setup_scene(window_t *win);
+
+int object_set_event(object_t *object, set_event_t *usr_event);
+
+void object_check_event(object_t *object, dico_t *scene_components,
+        window_t *win);
 
 #endif

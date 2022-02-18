@@ -48,7 +48,7 @@ int object_add_sprite_move(object_t *object, sfVector2f vect)
     if (sprite_move == NULL) {
         return BGS_ERR_MALLOC;
     }
-    sprite_move->vect = (sfVector2f) vect;
+    sprite_move->vect = vect;
     return object_add_components(object, sprite_move, "sprite move", &free);
 }
 
@@ -63,6 +63,6 @@ int object_add_sprite_anim(object_t *object, sfIntRect rect)
     if (sprite_anim == NULL) {
         return BGS_ERR_MALLOC;
     }
-    sprite_anim->rect = (sfIntRect) rect;
+    sprite_anim->rect = rect;
     return object_add_components(object, sprite_anim, "sprite anim", &free);
 }

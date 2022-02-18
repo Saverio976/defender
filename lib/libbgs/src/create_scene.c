@@ -25,8 +25,7 @@ static int init_list(scene_t *scene)
     return BGS_OK;
 }
 
-scene_t *create_scene(void *(*create)(void), void (*destroy)(void *),
-    window_t *win, sfColor bg_color)
+scene_t *create_scene(window_t *win, sfColor bg_color)
 {
     scene_t *scene = malloc(sizeof(scene_t));
 

@@ -7,7 +7,7 @@
 
 #include "my_strings.h"
 
-char *get_id_generator(char dest[255])
+unsigned char *get_id_generator(char dest[255])
 {
     static unsigned char keys[255] = {0};
     static int index = 0;

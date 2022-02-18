@@ -10,20 +10,24 @@
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
-void set(object_t *object, dico_t *scene_components, window_t *win)
+void set(object_t *object,
+        __attribute__((unused)) dico_t *scene_components,
+        __attribute__((unused)) window_t *win)
 {
     set_display(object);
 }
 
-void unset(object_t *object, dico_t *scene_components, window_t *win)
+void unset(object_t *object,
+        __attribute__((unused)) dico_t *scene_components,
+        __attribute__((unused)) window_t *win)
 {
     unset_display(object);
 }
 
-int main(int ac, char **av)
+int main(void)
 {
     window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test");
-    scene_t *scene = create_scene(NULL, NULL, win, sfBlack);
+    scene_t *scene = create_scene(win, sfBlack);
     object_t *music = create_object(NULL, NULL, scene);
     object_t *text = create_object(NULL, NULL, scene);
     object_t *sprite = create_object(NULL, NULL, scene);

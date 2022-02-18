@@ -7,12 +7,14 @@
 
 #include "my_bgs.h"
 #include "my_bgs_components.h"
+#include "../include/libbgs_private.h"
 
 static void free_list_abstract(void *list_ptr)
 {
     free_list((list_ptr_t *) list_ptr);
 }
 
+// TODO: ERROR here, we dont use object
 int scene_add_obj_to_solid_list(scene_t *scene, object_t *object)
 {
     void *value = NULL;

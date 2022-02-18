@@ -5,6 +5,7 @@
 ** object set event
 */
 
+#include "my_strings.h"
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 #include "../include/libbgs_private.h"
@@ -32,4 +33,5 @@ int object_set_event(object_t *object, set_event_t *usr_event)
     my_memcpy(event, sizeof(set_event_t), usr_event);
     get_id_generator_cat(key);
     dico_t_add_data(object->components, key, event, &free);
+    return (BGS_OK);
 }
