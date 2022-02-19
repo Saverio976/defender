@@ -36,7 +36,7 @@ SRC		:=	add.c								\
 			loop.c								\
 			remove.c							\
 			object_add_set_event.c				\
-			object_add_components.c				\
+			add_components.c				\
 			object_add_set_sprite_components.c	\
 			preset_display.c					\
 			object_update.c						\

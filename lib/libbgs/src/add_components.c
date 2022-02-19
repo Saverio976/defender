@@ -8,6 +8,20 @@
 #include "my_bgs.h"
 #include "my_dico.h"
 
+int scene_add_components(scene_t *scene, void *data, const char key[],
+    void (*destroy)(void *))
+{
+    if (scene == NULL || data == NULL || key == NULL) {
+        return BGS_ERR_INPUT;
+    }
+    scene->components = dico_t_add_data(scene->components, key, data,
+        destroy);
+    if (scene->components == NULL || scene->components->last == NULL) {
+        return BGS_ERR_MALLOC;
+    }
+    return BGS_OK;
+}
+
 void *object_get_components(object_t *object, char key[])
 {
     if (object == NULL || key == NULL) {

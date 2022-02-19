@@ -24,7 +24,9 @@ int dico_t_destroy(dico_t *dico)
         free(cursor);
         cursor = tmp;
     }
-    cursor->destroy(cursor->value);
+    if (cursor->destroy != NULL && cursor->value != NULL) {
+        cursor->destroy(cursor->value);
+    }
     free(cursor);
     return (nb + 1);
 }

@@ -256,6 +256,9 @@ int loop(window_t *win);
 int object_add_components(object_t *object, void *data, const char key[],
     void (*destroy)(void *));
 
+int scene_add_components(scene_t *scene, void *data, const char key[],
+    void (*destroy)(void *));
+
 // ----------------------------------------------------------------------------
 // remove.c
 // ----------------------------------------------------------------------------

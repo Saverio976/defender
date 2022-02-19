@@ -29,6 +29,17 @@ int scene_add_solid_list(scene_t *scene)
     return BGS_OK;
 }
 
+void collision_destroy(void *data)
+{
+    on_collision_t *collision = data;
+
+    if (collision == NULL) {
+        return;
+    }
+    dico_t_destroy(collision->collisions_dico);
+    free(collision);
+}
+
 int object_add_collision(object_t *object, scene_t *scene,
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
     window_t *win))
@@ -45,12 +56,10 @@ int object_add_collision(object_t *object, scene_t *scene,
     get_id_generator(on_collision->key);
     on_collision->collision = collision;
     on_collision->collisions_dico = NULL;
-    if (scene_add_solid_list(scene) != BGS_OK) {
+    if (scene_add_solid_list(scene) != BGS_OK || list_add_to_end(
+        dico_t_get_value(scene->components, ON_COLLISION), object) == NULL) {
         return BGS_ERR_MALLOC;
     }
-    if (list_add_to_end(dico_t_get_value(scene->components, ON_COLLISION),
-        object) == NULL) {
-        return BGS_ERR_MALLOC;
-    }
-    return object_add_components(object, on_collision, ON_COLLISION, &free);
+    return object_add_components(object, on_collision, ON_COLLISION,
+        &collision_destroy);
 }

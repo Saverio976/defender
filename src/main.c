@@ -27,16 +27,12 @@ void unset(object_t *object,
 void collision(object_t *this, object_t *other,
         __attribute__((unused)) dico_t *scene_components,
         __attribute__((unused)) window_t *win) {
-    printf("collision");
-    if (this->is_visible == true) {
-        unset_display(this);
+    object_t *background = dico_t_get_value(scene_components, "BACK");
+
+    if (background->is_visible == true) {
+        unset_display(background);
     } else {
-        set_display(this);
-    }
-    if (other->is_visible == true) {
-        unset_display(other);
-    } else {
-        set_display(other);
+        set_display(background);
     }
 }
 
@@ -88,6 +84,7 @@ int main(void)
     //    return (84);
     //}
     //evt.prev_call = false;
+    scene_add_components(scene, background, "BACK", NULL);
     object_set_audio(music, "assets/music/rickroll.ogg", true, true);
     object_set_sprite(sprite, "assets/map/castle_with_nico.png");
     object_set_sprite(background, "assets/map/back.png");

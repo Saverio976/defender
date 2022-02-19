@@ -41,7 +41,9 @@ static void remove_scene(scene_t *scene)
         remove_object(object);
         elem = elem->next;
     }
-    dico_t_destroy(scene->components);
+    if (scene->components != NULL) {
+        dico_t_destroy(scene->components);
+    }
     free_list(scene->displayables);
     free_list(scene->updates);
     free_list(scene->objects);
