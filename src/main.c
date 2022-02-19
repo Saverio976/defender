@@ -70,24 +70,24 @@ int main(void)
     object_t *background = create_object(NULL, NULL, scene);
     object_t *text = create_object(NULL, NULL, scene);
     object_t *sprite = create_object(NULL, NULL, scene);
-    set_event_t evt = {0};
+    //set_event_t evt = {0};
 
     if (sprite == NULL) {
         return 84;
     }
     //faire une ptn de fct pour preset facilement set_envent_t parcque si on doit faire tout ca a chaque fois ca va pas le faire
-    evt.hover = false;
-    evt.off = &set;
-    evt.on = &unset;
-    evt.list_event = list_create();
-    event_node_t *node = malloc(sizeof(event_node_t));
-    node->event_type = KEY;
-    node->event_code.key = sfKeyA;
-    list_add_to_end(evt.list_event, node);
-    if (evt.list_event == NULL) {
-        return (84);
-    }
-    evt.prev_call = false;
+    //evt.hover = false;
+    //evt.off = &set;
+    //evt.on = &unset;
+    //evt.list_event = list_create();
+    //event_node_t *node = malloc(sizeof(event_node_t));
+    //node->event_type = KEY;
+    //node->event_code.key = sfKeyA;
+    //list_add_to_end(evt.list_event, node);
+    //if (evt.list_event == NULL) {
+    //    return (84);
+    //}
+    //evt.prev_call = false;
     object_set_audio(music, "assets/music/rickroll.ogg", true, true);
     object_set_sprite(sprite, "assets/map/castle_with_nico.png");
     object_set_sprite(background, "assets/map/back.png");
