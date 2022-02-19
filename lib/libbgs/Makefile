@@ -7,46 +7,58 @@
 
 # ----------------------------------------------------------------------------
 # TARGET
-NAME		=	libbgs.a
+NAME			=	libbgs.a
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
 # COLOUR
-CYAN		=	'\033[1;36m'
-BLUE		=	'\033[1;34m'
-GREEN 		= 	'\033[1;32m'
+CYAN			=	'\033[1;36m'
+BLUE			=	'\033[1;34m'
+GREEN	 		= 	'\033[1;32m'
 
-RESET		=	'\033[0m'
+RESET			=	'\033[0m'
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
 # IN-MAKEFILE SETTINGS
-CURR_RULE	=	all
+CURR_RULE		=	all
 # ----------------------------------------------------------------------------
 
-SRCDIR		=	src/
+SRCDIR			=	src/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC		:=	add.c								\
-			cast.c								\
-			create_object.c						\
-			create_scene.c						\
-			event.c								\
-			loop.c								\
-			remove.c							\
-			object_add_set_event.c				\
-			add_components.c				\
-			object_add_set_sprite_components.c	\
-			preset_display.c					\
-			object_update.c						\
-			id_generator.c						\
-			object_update_mouse_event.c			\
-			start.c								\
-			set_unset_bigdata_display.c			\
-			object_add_collision_components.c	\
-			object_set_event.c					\
-			object_check_event.c
+SRC_COMPONENTS	:= 	add_components.c						\
+					create_event.c						\
+					object_add_collision_components.c	\
+					object_add_set_event.c				\
+					object_add_set_sprite_components.c	\
+					object_check_event.c				\
+					object_set_event.c					\
+					object_check_health.c					\
+					object_update_mouse_event.c
+SRC_COMPONENTS	:= $(addprefix components/,$(SRC_COMPONENTS))
+
+SRC_CORE		:=	add.c				\
+					create_object.c		\
+					create_scene.c		\
+					event.c				\
+					loop.c				\
+					object_update.c		\
+					remove.c			\
+					start.c
+SRC_CORE		:=	$(addprefix core/,$(SRC_CORE))
+
+SRC_PRESET		:=	preset_display.c			\
+					set_unset_bigdata_display.c
+SRC_PRESET		:=	$(addprefix preset/,$(SRC_PRESET))
+
+SRC_UTILS		:=	cast.c			\
+					id_generator.c	\
+					set_window_style.c
+SRC_UTILS		:=	$(addprefix utils/,$(SRC_UTILS))
+
+SRC		:=	$(SRC_COMPONENTS) $(SRC_CORE) $(SRC_PRESET) $(SRC_UTILS)
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ		=	$(SRC:%.c=%.o)
@@ -54,12 +66,12 @@ OBJ		=	$(SRC:%.c=%.o)
 
 # ----------------------------------------------------------------------------
 # FLAGS
-CFLAGS		=	-I../include -Wall -Wextra -Wpedantic
+CFLAGS		=	-I../include -Iinclude/ -Wall -Wextra -Wpedantic
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
 # DEPENDANCES
-LIBS_DEP	=
+LIBS_DEP	=	../libdico/libdico.a ../libstr/libstr.a ../liblist/liblist.a
 # ----------------------------------------------------------------------------
 
 %.o:	%.c

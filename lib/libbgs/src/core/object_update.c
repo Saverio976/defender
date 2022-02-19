@@ -99,6 +99,7 @@ void object_update(object_t *object, dico_t *scene_components,
     if (object == NULL || object->components == NULL) {
         return;
     }
+    object_check_health(object, scene_components, win);
     object_check_event(object, scene_components, win);
     object_update_mouse_event(object, scene_components, win);
     object_update_collision_event(object, scene_components, win);

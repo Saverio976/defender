@@ -22,10 +22,11 @@ int object_add_chrono(object_t *object, float seconds,
     }
     sprite_chrono->seconds = seconds;
     sprite_chrono->refresh_rate = refresh_rate;
-    return object_add_components(object, sprite_chrono, "sprite chrono", &free);
+    return object_add_components(object, sprite_chrono, COMP_CHRONO, &free);
 }
 
-int object_add_sprite_health(object_t *object, float life, float max_life)
+int object_add_sprite_health(object_t *object, float life, float max_life,
+    void (*dead)(object_t *object, dico_t *scene_components, window_t *win))
 {
     sprite_health_t *sprite_health = NULL;
 
@@ -38,7 +39,13 @@ int object_add_sprite_health(object_t *object, float life, float max_life)
     }
     sprite_health->life = life;
     sprite_health->max_life = max_life;
-    return object_add_components(object, sprite_health, "sprite health", &free);
+    sprite_health->dead = dead;
+    if (life > 0) {
+        sprite_health->is_alive = true;
+    } else {
+        sprite_health->is_alive = false;
+    }
+    return object_add_components(object, sprite_health, COMP_HEALTH, &free);
 }
 
 int object_add_sprite_move(object_t *object, sfVector2f vect)
@@ -49,7 +56,7 @@ int object_add_sprite_move(object_t *object, sfVector2f vect)
         return BGS_ERR_MALLOC;
     }
     sprite_move->vect = vect;
-    return object_add_components(object, sprite_move, "sprite move", &free);
+    return object_add_components(object, sprite_move, COMP_MOVE, &free);
 }
 
 int object_add_sprite_anim(object_t *object, sfIntRect rect)
@@ -64,5 +71,5 @@ int object_add_sprite_anim(object_t *object, sfIntRect rect)
         return BGS_ERR_MALLOC;
     }
     sprite_anim->rect = rect;
-    return object_add_components(object, sprite_anim, "sprite anim", &free);
+    return object_add_components(object, sprite_anim, COMP_ANIM, &free);
 }

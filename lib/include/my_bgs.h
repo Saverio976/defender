@@ -20,6 +20,8 @@
     #define BGS_ERR_MALLOC 2
     #define BGS_ERR_INPUT 3
 
+static const char SET_ICON[] = "__set_icon";
+
 typedef struct time_clock_s time_clock_t;
 typedef struct object_s object_t;
 typedef struct window_s window_t;
@@ -36,6 +38,7 @@ enum object_type {
 };
 
 struct sprite_bigdata_s {
+    sfImage *image;
     sfTexture *texture;
 };
 
@@ -84,6 +87,8 @@ struct window_s {
     dico_t *components;
 };
 
+int window_set_icon(window_t *win, char const path[]);
+
 // ----------------------------------------------------------------------------
 // add.c
 // ----------------------------------------------------------------------------
@@ -94,9 +99,9 @@ struct window_s {
  * @param win the window in which the scene will be added
  * @param scene the scene to add
  *
- * @return BGS_ERR_INPUT : win or scene is NULL
- * @return BGS_ERR_MALLOC : malloc failed
- * @return BGS_OK : the scene has been added
+ * @return BGS_ERR_INPUT : win or scene is NULL;
+ * BGS_ERR_MALLOC : malloc failed;
+ * BGS_OK : the scene has been added;
  */
 int window_add_scene(window_t *win, scene_t *scene);
 
@@ -303,6 +308,6 @@ void window_set_framerate_limit(window_t *win, unsigned int limit);
  * @return NULL : malloc failed
  * @return window : the window is created
  */
-window_t *create_window(sfVideoMode mode, const char *title);
+window_t *create_window(sfVideoMode mode, const char *title, sfUint32 style);
 
 #endif /* !BGS_H_ */

@@ -15,6 +15,10 @@ static const char ON_RIGHT_KEY[] = "__on_right_click";
 static const char ON_LEFT_KEY[] = "__on_left_click";
 static const char ON_COLLISION[] = "__on_collision";
 static const char SET_EVENT[] = "__set_event";
+static const char COMP_CHRONO[] = "__sprite_chrono";
+static const char COMP_HEALTH[] = "__sprite_health";
+static const char COMP_MOVE[] = "__sprite_move";
+static const char COMP_ANIM[] = "__sprite_anim";
 
 typedef struct sprite_anim_s sprite_anim_t;
 typedef struct sprite_move_s sprite_move_t;
@@ -26,16 +30,25 @@ typedef struct on_right_click_s on_right_click_t;
 typedef struct on_hover_s on_hover_t;
 typedef struct set_event_s set_event_t;
 typedef struct event_node_s event_node_t;
+typedef struct node_params_s node_params_t;
+
+enum event_type {
+    MOUSE,
+    KEY
+};
+
+struct node_params_s {
+    sfMouseButton mouse;
+    sfKeyCode key;
+    enum event_type event;
+};
 
 struct event_node_s {
     union event_code {
         sfMouseButton mouse;
         sfKeyCode key;
     } event_code;
-    enum event_type {
-        MOUSE,
-        KEY
-    } event_type;
+    enum event_type event_type;
 };
 
 struct set_event_s {
@@ -57,6 +70,8 @@ struct sprite_move_s {
 struct sprite_health_s {
     float life;
     float max_life;
+    void (*dead)(object_t *object, dico_t *scene_add_components, window_t *win);
+    bool is_alive;
 };
 
 struct on_collision_s {
@@ -96,7 +111,8 @@ int object_add_left_click_event(object_t *object, void (*left_click)(object_t *,
 int object_add_chrono(object_t *object, float seconds,
     float refresh_rate);
 int object_add_sprite_text_solid(object_t *object);
-int object_add_sprite_health(object_t *object, float life, float max_life);
+int object_add_sprite_health(object_t *object, float life, float max_life,
+    void (*dead)(object_t *object, dico_t *scene_components, window_t *win));
 int object_add_sprite_move(object_t *object, sfVector2f vect);
 int object_add_sprite_anim(object_t *object, sfIntRect rect);
 void object_update_mouse_event(object_t *object, dico_t *components,
@@ -107,5 +123,13 @@ int object_add_collision(object_t *object, scene_t *scene,
 void set_display(object_t *object);
 void unset_display(object_t *object);
 int object_set_event(object_t *object, set_event_t *usr_event);
+int event_add_node(set_event_t *event, node_params_t params);
+set_event_t *create_event(void (*on)(object_t *, dico_t *, window_t *),
+    void (*off)(object_t *, dico_t *, window_t *), bool hover,
+    object_t *object);
+void object_check_health(object_t *object, dico_t *scene_components,
+    window_t *win);
+void check_event(set_event_t *set_event, object_t *object,
+    window_t *win, dico_t *scene_components);
 
 #endif /* !BGS_COMPONENTS_ */

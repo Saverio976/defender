@@ -23,10 +23,23 @@ void unset(object_t *object,
 {
     unset_display(object);
 }
+void click_die(object_t *this,
+        __attribute__((unused)) dico_t *scene_components,
+        __attribute__((unused)) window_t *win)
+{
+    sprite_health_t *health = dico_t_get_value(this->components, COMP_HEALTH);
+
+    if (health == NULL) {
+        return;
+    }
+    health->life -= 1;
+    my_putstr("click_die\n");
+}
 
 void collision(object_t *this, object_t *other,
         __attribute__((unused)) dico_t *scene_components,
-        __attribute__((unused)) window_t *win) {
+        __attribute__((unused)) window_t *win)
+{
     object_t *background = dico_t_get_value(scene_components, "BACK");
 
     if (background->is_visible == true) {
@@ -60,43 +73,25 @@ void move_right(object_t *object,
 
 int main(void)
 {
-    window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test");
+    window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test", sfResize | sfClose);
     scene_t *scene = create_scene(win, sfBlack);
     object_t *music = create_object(NULL, NULL, scene);
     object_t *background = create_object(NULL, NULL, scene);
     object_t *text = create_object(NULL, NULL, scene);
     object_t *sprite = create_object(NULL, NULL, scene);
-    //set_event_t evt = {0};
+    set_event_t *event = create_event(&click_die, NULL, true, sprite);
 
-    if (sprite == NULL) {
+    if (sprite == NULL || event == NULL) {
         return 84;
     }
-    //faire une ptn de fct pour preset facilement set_envent_t parcque si on doit faire tout ca a chaque fois ca va pas le faire
-    //evt.hover = false;
-    //evt.off = &set;
-    //evt.on = &unset;
-    //evt.list_event = list_create();
-    //event_node_t *node = malloc(sizeof(event_node_t));
-    //node->event_type = KEY;
-    //node->event_code.key = sfKeyA;
-    //list_add_to_end(evt.list_event, node);
-    //if (evt.list_event == NULL) {
-    //    return (84);
-    //}
-    //evt.prev_call = false;
-    scene_add_components(scene, background, "BACK", NULL);
+    window_set_icon(win, "assets/icon/xp_icon.jpg");
+    event_add_node(event, (node_params_t) {sfMouseRight, sfKeySpace, MOUSE});
     object_set_audio(music, "assets/music/rickroll.ogg", true, true);
     object_set_sprite(sprite, "assets/map/castle_with_nico.png");
     object_set_sprite(background, "assets/map/back.png");
-    //object_set_event(sprite, &evt);
+    object_add_sprite_health(sprite, 1, 1, &unset);
     sfSprite_setPosition(sprite->drawable.sprite, (sfVector2f) {200, 0});
     object_set_text(text, "assets/font/menlo.ttf", "OUIII");
-    object_add_right_click_event(sprite, &move_right);
-    object_add_left_click_event(sprite, &move_left);
-    object_add_right_click_event(text, &move_right);
-    object_add_left_click_event(text, &move_left);
-    object_add_collision(sprite, scene, &collision);
-    object_add_collision(text, scene, NULL);
     loop(win);
     remove_window(win);
     return 0;

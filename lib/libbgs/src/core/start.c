@@ -27,7 +27,7 @@ void window_set_framerate_limit(window_t *win, unsigned int limit)
     sfRenderWindow_setFramerateLimit(win->win, limit);
 }
 
-window_t *create_window(sfVideoMode mode, const char *title)
+window_t *create_window(sfVideoMode mode, const char *title, sfUint32 style)
 {
     window_t *win = malloc(sizeof(window_t));
 
@@ -35,7 +35,7 @@ window_t *create_window(sfVideoMode mode, const char *title)
         return NULL;
     }
     win->components = NULL;
-    win->win = sfRenderWindow_create(mode, title, sfResize | sfClose, NULL);
+    win->win = sfRenderWindow_create(mode, title, style, NULL);
     if (win->win == NULL) {
         return NULL;
     }
