@@ -54,10 +54,12 @@ int object_add_collision(object_t *object, scene_t *scene,
         return BGS_ERR_MALLOC;
     }
     get_id_generator(on_collision->key);
+    on_collision->solid_squares = list_create();
     on_collision->collision = collision;
     on_collision->collisions_dico = NULL;
     if (scene_add_solid_list(scene) != BGS_OK || list_add_to_end(
-        dico_t_get_value(scene->components, ON_COLLISION), object) == NULL) {
+        dico_t_get_value(scene->components, ON_COLLISION), object) == NULL ||
+        on_collision->solid_squares == NULL) {
         return BGS_ERR_MALLOC;
     }
     return object_add_components(object, on_collision, ON_COLLISION,

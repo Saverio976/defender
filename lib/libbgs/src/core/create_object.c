@@ -66,11 +66,12 @@ int object_set_sprite(object_t *object, char const *path)
         return BGS_ERR_INPUT;
     }
     object->is_visible = true;
-    object->bigdata.sprite_bigdata.texture =
-        sfTexture_createFromFile(path, NULL);
-    if (object->bigdata.sprite_bigdata.texture == NULL) {
+    object->bigdata.sprite_bigdata.image = sfImage_createFromFile(path);
+    if (object->bigdata.sprite_bigdata.image == NULL) {
         return BGS_ERR_PATH;
     }
+    object->bigdata.sprite_bigdata.texture =
+        sfTexture_createFromImage(object->bigdata.sprite_bigdata.image, NULL);
     object->drawable.sprite = sfSprite_create();
     if (object->drawable.sprite == NULL) {
         return BGS_ERR_MALLOC;

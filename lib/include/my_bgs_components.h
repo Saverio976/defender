@@ -79,6 +79,7 @@ struct on_collision_s {
     dico_t *collisions_dico;
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
         window_t *win);
+    list_ptr_t *solid_squares;
 };
 
 struct sprite_chrono_s {
