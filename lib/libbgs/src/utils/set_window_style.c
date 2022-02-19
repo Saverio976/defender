@@ -18,10 +18,10 @@ int window_set_icon(window_t *win, char const path[])
     sfImage *image = NULL;
     const sfUint8 *pixels = NULL;
     sfVector2u size = {0};
-    
+
     if (path == NULL || win == NULL) {
         return BGS_ERR_INPUT;
-    } 
+    }
     image = sfImage_createFromFile(path);
     if (image == NULL) {
         return BGS_ERR_PATH;
