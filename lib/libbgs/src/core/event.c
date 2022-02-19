@@ -6,13 +6,14 @@
 */
 
 #include <SFML/Graphics.h>
+#include "my_strings.h"
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
 int window_update_event(window_t *win, scene_t *scene)
 {
     dico_t *cursor = NULL;
-    
+
     if (win == NULL || win->components == NULL || scene == NULL) {
         return (BGS_ERR_INPUT);
     }
@@ -55,4 +56,5 @@ int scene_update_event(window_t *win, scene_t *scene)
         }
         cursor = cursor->next;
     } while (cursor != scene->components);
+    return (BGS_OK);
 }
