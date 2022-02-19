@@ -30,7 +30,10 @@ void call_collision_fct(object_t *this, object_t *other,
     on_collision_t *other_col = NULL;
 
     if (this == NULL || other == NULL || scene_components == NULL ||
-        win == NULL || this == other) {
+        win == NULL) {
+        return;
+    }
+    if (this == other) {
         return;
     }
     this_col = dico_t_get_value(this->components, ON_COLLISION);
@@ -40,11 +43,8 @@ void call_collision_fct(object_t *this, object_t *other,
     } else if (dico_t_get_elem(this_col->collisions_dico, other_col->key)) {
         return;
     }
-    this_col->collisions_dico = dico_t_add_data(this_col->collisions_dico,
-            other_col->key, NULL, NULL);
-    if (this_col->collision != NULL) {
-        this_col->collision(this, other, scene_components, win);
-    }
+    dico_t_add_data(this_col->collisions_dico, other_col->key, NULL, NULL);
+    this_col->collision(this, other, scene_components, win);
 }
 
 void remove_object_this(object_t *this, object_t *other)
@@ -55,7 +55,7 @@ void remove_object_this(object_t *this, object_t *other)
         ON_COLLISION);
     dico_t *dict_other_col = NULL;
 
-    if (other_col == NULL || this_col == NULL) {
+    if (other_col == NULL || other_col->key == NULL) {
         return;
     }
     dict_other_col = dico_t_get_elem(this_col->collisions_dico, other_col->key);
