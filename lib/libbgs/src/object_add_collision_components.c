@@ -44,6 +44,7 @@ int object_add_collision(object_t *object, scene_t *scene,
     }
     get_id_generator(on_collision->key);
     on_collision->collision = collision;
+    on_collision->collisions_dico = NULL;
     if (scene_add_solid_list(scene) != BGS_OK) {
         return BGS_ERR_MALLOC;
     }

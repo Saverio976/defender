@@ -24,8 +24,9 @@ void unset(object_t *object,
     unset_display(object);
 }
 
-void collision(object_t *this, object_t *other, dico_t *scene_components,
-    window_t *win) {
+void collision(object_t *this, object_t *other,
+        __attribute__((unused)) dico_t *scene_components,
+        __attribute__((unused)) window_t *win) {
     printf("collision");
     if (this->is_visible == true) {
         unset_display(this);
@@ -58,7 +59,7 @@ void move_right(object_t *object,
         sfSprite_move(object->drawable.sprite, (sfVector2f) {50, 0});
     } else if (object->type == TEXT) {
         sfText_move(object->drawable.text, (sfVector2f) {50, 0});
-    }   
+    }
 }
 
 int main(void)

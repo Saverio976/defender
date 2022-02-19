@@ -12,10 +12,10 @@ unsigned char *get_id_generator(char dest[255])
     static unsigned char keys[255] = {0};
     static int index = 0;
 
-    if (keys[index] >= 255) {
+    if (keys[index] >= 254) {
         index++;
     }
-    if (index >= 255) {
+    if (index >= 254) {
         for (int i = 1; i < index; i++) {
             keys[i] = 0;
         }
