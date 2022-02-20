@@ -6,7 +6,9 @@
 */
 
 #include <stddef.h>
+#include <stdio.h>
 #include "my_puts.h"
+#include "my_strings.h"
 
 /**
  * @brief print each char * of the 2d array with a newline after each char *
@@ -37,4 +39,22 @@ void my_wordarray_show(char *const *array)
     for (int i = 0; array[i] != NULL; i++) {
         my_putstr(array[i]);
     }
+}
+
+void my_wordarray_write(char *const *array, char const *path)
+{
+    FILE *file = NULL;
+
+    if (array == NULL) {
+        return;
+    }
+    file = fopen(path, "w");
+    if (file == NULL) {
+        return;
+    }
+    for (int i = 0; array[i] != NULL; i++) {
+        fwrite(array[i], sizeof(char), my_strlen(array[i]), file);
+        fwrite("\n", sizeof(char), 1, file);
+    }
+    fclose(file);
 }
