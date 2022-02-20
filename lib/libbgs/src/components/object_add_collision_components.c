@@ -40,13 +40,28 @@ void collision_destroy(void *data)
     free(collision);
 }
 
+list_ptr_t *create_square_list(object_t *object)
+{
+    list_ptr_t *list = list_create();
+    char **arr = NULL;
+
+    if (object->type != SPRITE) {
+        return NULL;
+    }
+    arr = check_image_pixel(object->bigdata.sprite_bigdata.image);
+    if (squares_handling(arr, list) != BGS_OK) {
+        return NULL;
+    }
+}
+
 int object_add_collision(object_t *object, scene_t *scene,
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
     window_t *win))
 {
     on_collision_t *on_collision = NULL;
 
-    if (object == NULL || scene == NULL) {
+    if (object == NULL || scene == NULL &&
+        (object->type != SPRITE && object->type)) {
         return BGS_ERR_INPUT;
     }
     on_collision = malloc(sizeof(on_collision_t));
@@ -54,12 +69,11 @@ int object_add_collision(object_t *object, scene_t *scene,
         return BGS_ERR_MALLOC;
     }
     get_id_generator(on_collision->key);
-    on_collision->solid_squares = list_create();
+    on_collision->solid_squares = create_square_list(object);
     on_collision->collision = collision;
     on_collision->collisions_dico = NULL;
     if (scene_add_solid_list(scene) != BGS_OK || list_add_to_end(
-        dico_t_get_value(scene->components, ON_COLLISION), object) == NULL ||
-        on_collision->solid_squares == NULL) {
+        dico_t_get_value(scene->components, ON_COLLISION), object) == NULL) {
         return BGS_ERR_MALLOC;
     }
     return object_add_components(object, on_collision, ON_COLLISION,

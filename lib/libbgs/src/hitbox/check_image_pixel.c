@@ -23,14 +23,14 @@ static void fill_arr(char **arr, sfUint8 *pixels, unsigned int x, unsigned int y
     }
 }
 
-char *check_image_pixel(sfImage *image, list_ptr_t *solid_squares)
+char **check_image_pixel(sfImage *image)
 {
     const sfUint8 *pixels;
     sfVector2u size;
     char **arr = NULL;
     int raw_counter = 3;
 
-    if (image == NULL || solid_squares == NULL) {
+    if (image == NULL) {
         return NULL;
     }
     pixels = sfImage_getPixelsPtr(image);

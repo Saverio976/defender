@@ -13,6 +13,14 @@
     #include "my_bgs.h"
     #include "my_bgs_components.h"
 
+typedef struct square_s square_t;
+
+struct square_s {
+    int y;
+    int x;
+    int size;
+};
+
 int event_handling(sfRenderWindow *win);
 
 scene_t *get_scene_i(list_ptr_t *list, int i);
@@ -40,5 +48,13 @@ int object_set_event(object_t *object, set_event_t *usr_event);
 
 void object_check_event(object_t *object, dico_t *scene_components,
         window_t *win);
+
+sfFloatRect find_higher_pixels_group(char **arr);
+
+char **check_image_pixel(sfImage *image);
+
+int squares_handling(char **arr, list_ptr_t *solid_squares);
+
+sfFloatRect get_right_checkbox(object_t *obj, sfFloatRect *rect);
 
 #endif
