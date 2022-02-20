@@ -60,7 +60,7 @@ TOBJ		:=	$(TSRC:%.c=%.o)
 # FLAGS
 CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
 
-TFLAGS		=	-fprofile-arcs -ftest-coverage
+TFLAGS		=	-fprofile-arcs -ftest-coverage -Ilib/libbgs/include/
 
 CR_TEST_LDFLAGS	=	-lcriterion -lgcov
 
@@ -127,7 +127,7 @@ tests_run: cr_tests_run
 cr_tests_run: LDFLAGS += $(CR_TEST_LDFLAGS)
 cr_tests_run: CFLAGS += $(TFLAGS)
 cr_tests_run: fclean $(LIB_TARGET) $(TOBJ)
-	@$(CC) $(TOBJ) -o $(TNAME) $(LDFLAGS) $(LDFLAGS) $(CFLAGS)
+	@$(CC) $(TOBJ) -o $(TNAME) $(LDFLAGS) $(CFLAGS)
 	@./$(TNAME)
 	@gcovr --exclude tests/
 	@gcovr --exclude tests/ --branch

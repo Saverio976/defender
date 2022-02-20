@@ -8,6 +8,20 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 
+int sprite_set_texture(object_t *object)
+{
+    object->drawable.sprite = sfSprite_create();
+    object->bigdata.sprite_bigdata.texture = sfTexture_createFromImage(
+        object->bigdata.sprite_bigdata.image, NULL);
+    if (object->drawable.sprite == NULL ||
+        object->bigdata.sprite_bigdata.texture == NULL) {
+        return BGS_ERR_MALLOC;
+    }
+    sfSprite_setTexture(object->drawable.sprite,
+        object->bigdata.sprite_bigdata.texture, sfTrue);
+    return BGS_OK;
+}
+
 static int init_list(scene_t *scene)
 {
     scene->displayables = list_create();

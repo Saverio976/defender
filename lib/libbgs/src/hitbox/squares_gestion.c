@@ -6,7 +6,7 @@
 */
 
 #include "my_bgs.h"
-#include "libbgs/include/libbgs_private.h"
+#include "libbgs_private.h"
 #include "my_bgs_components.h"
 #include "my_wordarray.h"
 
@@ -36,7 +36,8 @@ int squares_handling(char **arr, list_ptr_t *solid_squares)
         return BGS_ERR_INPUT;
     }
     rect = find_higher_pixels_group(arr);
-    while (rect.top != -1) {
+    while (rect.height != -1 || rect.height != 0) {
+        my_putstr("bite\n");
         add_float_rect_to_list(&rect, solid_squares);
         rect = find_higher_pixels_group(arr);
     }

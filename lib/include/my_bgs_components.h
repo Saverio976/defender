@@ -55,8 +55,10 @@ struct set_event_s {
     list_ptr_t *list_event;
     bool hover;
     bool prev_call;
-    void (*on)(object_t *object, dico_t *scene_components, window_t *win);
-    void (*off)(object_t *object, dico_t *scene_components, window_t *win);
+    void (*on)(object_t *object, dico_t *scene_components, window_t *win,
+        set_event_t *event);
+    void (*off)(object_t *object, dico_t *scene_components, window_t *win,
+        set_event_t *event);
 };
 
 struct sprite_anim_s {
@@ -76,6 +78,7 @@ struct sprite_health_s {
 
 struct on_collision_s {
     char key[255];
+    bool is_pixel;
     dico_t *collisions_dico;
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
         window_t *win);
@@ -120,14 +123,14 @@ void object_update_mouse_event(object_t *object, dico_t *components,
     window_t *win);
 int object_add_collision(object_t *object, scene_t *scene,
     void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
-    window_t *win));
+    window_t *win), bool is_pixel);
 void set_display(object_t *object);
 void unset_display(object_t *object);
 int object_set_event(object_t *object, set_event_t *usr_event);
 int event_add_node(set_event_t *event, node_params_t params);
-set_event_t *create_event(void (*on)(object_t *, dico_t *, window_t *),
-    void (*off)(object_t *, dico_t *, window_t *), bool hover,
-    object_t *object);
+set_event_t *create_event(void (*on)(object_t *, dico_t *, window_t *,
+    set_event_t *), bool hover, object_t *object,
+    void (*off)(object_t *, dico_t *, window_t *, set_event_t *));
 void object_check_health(object_t *object, dico_t *scene_components,
     window_t *win);
 void check_event(set_event_t *set_event, object_t *object,

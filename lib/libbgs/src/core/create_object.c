@@ -39,12 +39,14 @@ int object_set_custom(object_t *object)
     return BGS_OK;
 }
 
-int object_set_text(object_t *object, char const *path, char const *text)
+int object_set_text(object_t *object, char const *path, char const *text,
+    sfVector2f pos)
 {
     if (object == NULL || path == NULL || text == NULL) {
         return BGS_ERR_INPUT;
     }
     object->is_visible = true;
+    object->bigdata.text_bigdata.pos = pos;
     object->bigdata.text_bigdata.font = sfFont_createFromFile(path);
     if (object->bigdata.text_bigdata.font == NULL) {
         return BGS_ERR_PATH;
@@ -60,7 +62,8 @@ int object_set_text(object_t *object, char const *path, char const *text)
     return BGS_OK;
 }
 
-int object_set_sprite(object_t *object, char const *path)
+int object_set_sprite(object_t *object, char const *path, sfIntRect rect,
+    sfVector2f pos)
 {
     if (object == NULL || path == NULL) {
         return BGS_ERR_INPUT;
@@ -70,14 +73,11 @@ int object_set_sprite(object_t *object, char const *path)
     if (object->bigdata.sprite_bigdata.image == NULL) {
         return BGS_ERR_PATH;
     }
-    object->bigdata.sprite_bigdata.texture =
-        sfTexture_createFromImage(object->bigdata.sprite_bigdata.image, NULL);
-    object->drawable.sprite = sfSprite_create();
-    if (object->drawable.sprite == NULL) {
-        return BGS_ERR_MALLOC;
+    if (sprite_set_texture(object) != BGS_OK) {
+        return (BGS_ERR_MALLOC);
     }
-    sfSprite_setTexture(object->drawable.sprite,
-        object->bigdata.sprite_bigdata.texture, sfTrue);
+    object->bigdata.sprite_bigdata.pos = pos;
+    object->bigdata.sprite_bigdata.rect = rect;
     object->type = SPRITE;
     object->display = (object->display) ? object->display : &display_sprite;
     return BGS_OK;

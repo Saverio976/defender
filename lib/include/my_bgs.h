@@ -40,10 +40,13 @@ enum object_type {
 struct sprite_bigdata_s {
     sfImage *image;
     sfTexture *texture;
+    sfVector2f pos;
+    sfIntRect rect;
 };
 
 struct text_bigdata_s {
     sfFont *font;
+    sfVector2f pos;
 };
 
 struct object_s {
@@ -165,7 +168,8 @@ int object_set_custom(object_t *object);
  * @return BGS_ERR_MALLOC : malloc failed
  * @return BGS_OK : the object is set to text and scene is update
  */
-int object_set_text(object_t *object, char const *path, char const *text);
+int object_set_text(object_t *object, char const *path, char const *text,
+    sfVector2f pos);
 
 /**
  * @brief modify an object to be a sprite
@@ -179,7 +183,8 @@ int object_set_text(object_t *object, char const *path, char const *text);
  * @return BGS_ERR_MALLoc : malloc failed
  * @return BGS_OK : the object is set to sprite and scene is update
  */
-int object_set_sprite(object_t *object, char const *path);
+int object_set_sprite(object_t *object, char const *path, sfIntRect rect,
+    sfVector2f pos);
 
 /**
  * @brief create UNSET object (you need to set it with object_set_* functions)

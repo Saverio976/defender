@@ -38,12 +38,11 @@ int find_square(int y, int x, char **map, int sq_size)
 int browse_arr(char **arr, int i, square_t *square)
 {
     int sq_size = 0;
-    int x = 0;
 
     if (arr == NULL || square == NULL || i < 0) {
         return BGS_ERR_INPUT;
     }
-    for (int x = 0; arr[i][x] != NULL; x++) {
+    for (int x = 0; arr[i] != NULL && arr[i][x] != '\0'; x++) {
         if (arr[i][x] != '1' && arr[i][x] != '0') {
             return BGS_ERR_INPUT;
         } else if (arr[i][x] == '1') {
@@ -62,14 +61,15 @@ sfFloatRect find_higher_pixels_group(char **arr)
     sfFloatRect rect;
 
     if (arr == NULL) {
-        return (sfFloatRect) { -1, -1, -1, -1};
+        return (sfFloatRect) {-1, -1, -1, -1};
     }
-    square = (square_t) {0, 0, 0, 0};
+    square = (square_t) {0, 0, 0};
     for (int i = 0; arr[i] != NULL; i++) {
         if (browse_arr(arr, i, &square) != BGS_OK) {
-            return (sfFloatRect) { -1, -1, -1, -1};
+            return (sfFloatRect) {-1, -1, -1, -1};
         }
     }
-    rect = (sfFloatRect) {square.y, square.x, square.size, square.size};
+    rect = (sfFloatRect) {square.x, square.y, square.size, square.size};
+    remove_square_in_map(arr, square);
     return rect;
 }

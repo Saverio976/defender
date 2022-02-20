@@ -55,14 +55,18 @@ void check_event(set_event_t *set_event, object_t *object,
         return;
     }
     check = check_event_nodes(set_event, object, win);
-    if (check == true && set_event->on != NULL &&
-        set_event->prev_call == false) {
+    if (check == true && set_event->prev_call == false) {
         set_event->prev_call = true;
-        set_event->on(object, scene_components, win);
-    } else if (set_event->prev_call == true && check == false &&
-        set_event->off != NULL) {
+        if (set_event->on != NULL) {
+            set_event->on(object, scene_components, win, set_event);
+        }
+        return;
+    }
+    if (set_event->prev_call == true && check == false) {
         set_event->prev_call = false;
-        set_event->off(object, scene_components, win);
+        if (set_event->off != NULL) {
+            set_event->off(object, scene_components, win, set_event);
+        }
     }
 }
 

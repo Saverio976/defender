@@ -57,4 +57,12 @@ int squares_handling(char **arr, list_ptr_t *solid_squares);
 
 sfFloatRect get_right_checkbox(object_t *obj, sfFloatRect *rect);
 
+bool check_collision(sfFloatRect *this_rect, sfFloatRect *other_rect,
+    object_t *this, object_t *other);
+
+int sprite_set_texture(object_t *object);
+
+sfFloatRect *get_rect_arr(list_ptr_t *list, object_t *object,
+    sfFloatRect object_bounce);
+
 #endif

@@ -15,6 +15,15 @@ void display_sprite(object_t *object,
         object->is_visible == false) {
         return;
     }
+    if (object->bigdata.sprite_bigdata.pos.x > -1) {
+        sfSprite_setPosition(object->drawable.sprite,
+            object->bigdata.sprite_bigdata.pos);
+    }
+    if (object->bigdata.sprite_bigdata.rect.height > -1 &&
+            object->bigdata.sprite_bigdata.rect.width > -1) {
+        sfSprite_setTextureRect(object->drawable.sprite,
+            object->bigdata.sprite_bigdata.rect);
+    }
     sfRenderWindow_drawSprite(win, object->drawable.sprite, NULL);
 }
 
@@ -25,6 +34,10 @@ void display_text(object_t *object,
     if (object->type != TEXT ||
         object->is_visible == false) {
         return;
+    }
+    if (object->bigdata.text_bigdata.pos.x > -1) {
+        sfText_setPosition(object->drawable.text,
+            object->bigdata.text_bigdata.pos);
     }
     sfRenderWindow_drawText(win, object->drawable.text, NULL);
 }

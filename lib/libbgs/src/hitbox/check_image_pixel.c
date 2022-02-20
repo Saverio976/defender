@@ -7,19 +7,29 @@
 
 #include "my_bgs_components.h"
 #include "my_bgs.h"
+#include "my_puts.h"
 
-static void fill_arr(char **arr, sfUint8 *pixels, unsigned int x, unsigned int y)
+static void fill_arr(char **arr, const sfUint8 *pixels, unsigned int x,
+    unsigned int y)
 {
-    int cur_x = 0;
+    unsigned int cur_x = 0;
     int cur_y = 0;
 
-    for (int i = 0; i < x * y * 4; i++) {
-        if (cur_x >= x && cur_y < y) {
-            cur_y += 1;
-            arr[cur_y] = malloc(sizeof(char) * (x + 1));
-            arr[cur_y][x];
+    for (int i = 0; i < (int) y; i++) {
+        arr[i] = malloc(sizeof(char) * (x + 1));
+        if (arr[i] == NULL) {
+            return;
         }
-        arr[cur_y][cur_x++] = (pixels[i] == 0) ? '0' : '1';
+        arr[i][x] = '\0';
+    }
+    for (unsigned int i = 0; i < x * y * 4; i++) {
+        if (cur_x >= x && cur_y < (int) y) {
+            cur_y += 1;
+            cur_x = 0;
+        }
+        if (arr[cur_y]) {
+            arr[cur_y][cur_x++] = (pixels[i] == 0) ? '0' : '1';
+        }
     }
 }
 
@@ -28,7 +38,6 @@ char **check_image_pixel(sfImage *image)
     const sfUint8 *pixels;
     sfVector2u size;
     char **arr = NULL;
-    int raw_counter = 3;
 
     if (image == NULL) {
         return NULL;
@@ -36,7 +45,10 @@ char **check_image_pixel(sfImage *image)
     pixels = sfImage_getPixelsPtr(image);
     size = sfImage_getSize(image);
     arr = malloc(sizeof(char *) * (size.y + 1));
-    arr[size.y + 1] = NULL;
+    if (arr == NULL) {
+        return (NULL);
+    }
+    arr[size.y] = NULL;
     if (arr == NULL) {
         return NULL;
     }
