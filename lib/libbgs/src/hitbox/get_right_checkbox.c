@@ -14,9 +14,9 @@ sfFloatRect get_right_checkbox(object_t *obj, sfFloatRect *rect)
     sfVector2u size = {0};
     sfFloatRect bounces = {0};
     sfFloatRect new = {0};
-    
+
     if (obj == NULL || rect == NULL) {
-        return ((sfFloatRect) {-1, -1, -1, -1});;
+        return ((sfFloatRect) {-1, -1, -1, -1});
     }
     bounces = sfSprite_getGlobalBounds(obj->drawable.sprite);
     img = obj->bigdata.sprite_bigdata.image;

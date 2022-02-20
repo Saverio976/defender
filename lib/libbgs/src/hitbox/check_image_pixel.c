@@ -7,7 +7,6 @@
 
 #include "my_bgs_components.h"
 #include "my_bgs.h"
-#include "my_puts.h"
 
 static void fill_arr(char **arr, const sfUint8 *pixels, unsigned int x,
     unsigned int y)

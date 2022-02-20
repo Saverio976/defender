@@ -7,7 +7,7 @@
 
 #include "my_bgs.h"
 #include "my_bgs_components.h"
-#include "../include/libbgs_private.h"
+#include "libbgs_private.h"
 
 static void free_list_abstract(void *list_ptr)
 {
@@ -78,6 +78,5 @@ int object_add_collision(object_t *object, scene_t *scene,
         dico_t_get_value(scene->components, ON_COLLISION), object) == NULL) {
         return BGS_ERR_MALLOC;
     }
-    my_putstr("fin object_add_collison\n");
     return object_add_components(object, on_collision, ON_COLLISION, free_col);
 }

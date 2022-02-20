@@ -21,7 +21,7 @@ char **remove_square_in_map(char **map, square_t square)
 int find_obstacle(int i, int x, char **map, int sq_size)
 {
     for (int c = 0; c < sq_size; c++)
-        if (map[i][x + c] == '\0' || map[i][x + c] == 'o')
+        if (map[i][x + c] == '\0' || map[i][x + c] == '0')
             return 1;
     return 0;
 }
