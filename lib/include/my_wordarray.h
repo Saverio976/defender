@@ -67,4 +67,6 @@ void my_wordarray_showln(char *const *array);
  */
 void my_wordarray_show(char *const *array);
 
+void my_wordarray_write(char *const *array, char const *path);
+
 #endif
