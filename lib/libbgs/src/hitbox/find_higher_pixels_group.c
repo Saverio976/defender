@@ -6,6 +6,7 @@
 */
 
 #include "my_bgs.h"
+#include "my_wordarray.h"
 #include "libbgs_private.h"
 
 char **remove_square_in_map(char **map, square_t square)
