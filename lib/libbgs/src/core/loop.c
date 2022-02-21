@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 #include "my_bgs_components.h"
-#include "../include/libbgs_private.h"
+#include "libbgs_private.h"
 
 static void window_display(scene_t *scene, window_t *win)
 {
@@ -28,6 +28,8 @@ static void window_update(scene_t *scene, window_t *win, float seconds)
     object_t *obj = NULL;
     list_t *elem = scene->updates->start;
 
+    window_update_event(win, scene);
+    scene_update_event(win, scene);
     for (int i = 0; i < scene->updates->len; i++) {
         obj = ((object_t *) elem->var);
         if (obj->components != NULL || obj->update != NULL) {

@@ -65,4 +65,8 @@ int sprite_set_texture(object_t *object, sfVector2f pos, sfIntRect rect);
 sfFloatRect *get_rect_arr(list_ptr_t *list, object_t *object,
     sfFloatRect object_bounce);
 
+int window_update_event(window_t *win, scene_t *scene);
+
+int scene_update_event(window_t *win, scene_t *scene);
+
 #endif
