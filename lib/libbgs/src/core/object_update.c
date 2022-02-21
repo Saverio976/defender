@@ -55,7 +55,7 @@ void remove_object_this(object_t *this, object_t *other)
         ON_COLLISION);
     dico_t *dict_other_col = NULL;
 
-    if (other_col == NULL || other_col->key == NULL) {
+    if (other_col == NULL) {
         return;
     }
     dict_other_col = dico_t_get_elem(this_col->collisions_dico, other_col->key);
