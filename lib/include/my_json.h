@@ -38,7 +38,6 @@ struct json_s {
 };
 typedef struct json_s json_t;
 
-
 // ----------------------------------------------------------------------------
 
 any_t *any_dup(any_t *any);
@@ -46,5 +45,7 @@ any_t *any_dup(any_t *any);
 json_t *parse_json_file(char const path[]);
 
 json_t *parse_json_str(char const *str);
+
+char *rm_space(char const *str);
 
 #endif
