@@ -21,6 +21,7 @@ static list_ptr_t *check_pixels_in_rect(list_ptr_t *list,
     for (int i = 0; i < list->len; i++, elem = elem->next) {
         if (sfFloatRect_intersects(&object_bounce, elem->var, NULL) == sfTrue) {
             list_add_to_end(ret, elem->var);
+            //sa rentre pas la ca marche pas
         }
     }
     return ret;
@@ -31,19 +32,18 @@ sfFloatRect *get_rect_arr(list_ptr_t *list, object_t *object,
 {
     sfFloatRect *rect_arr = NULL;
     list_t *elem = NULL;
-    int len = 0;
     list_ptr_t *valid_list = check_pixels_in_rect(list, object_bounce);
 
     if (list == NULL || object == NULL || valid_list == NULL) {
         return NULL;
     }
     elem = valid_list->start;
-    rect_arr = malloc(sizeof(sfFloatRect) * len + 1);
+    rect_arr = malloc(sizeof(sfFloatRect) * (valid_list->len + 1));
     if (rect_arr == NULL) {
         return NULL;
     }
-    rect_arr[len] = (sfFloatRect) {-2, -2, -2, -2};
-    for (int i = 0; i < len; i++, elem = elem->next) {
+    rect_arr[valid_list->len] = (sfFloatRect) {-2, -2, -2, -2};
+    for (int i = 0; i < valid_list->len; i++, elem = elem->next) {
         rect_arr[i] = get_right_checkbox(object, elem->var);
     }
     return rect_arr;

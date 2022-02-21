@@ -83,6 +83,7 @@ void object_update_collision_event(object_t *this, dico_t *scene_components,
         other = ((object_t *) elem->var);
         other_rect = get_object_global_bounces(other);
         if (check_collision(&this_rect, &other_rect, this, other) == true) {
+            my_putstr("coll\n");
             call_collision_fct(this, other, scene_components, win);
         } else {
             remove_object_this(this, other);

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 
-int sprite_set_texture(object_t *object)
+int sprite_set_texture(object_t *object, sfVector2f pos, sfIntRect rect)
 {
     object->drawable.sprite = sfSprite_create();
     object->bigdata.sprite_bigdata.texture = sfTexture_createFromImage(
@@ -19,6 +19,12 @@ int sprite_set_texture(object_t *object)
     }
     sfSprite_setTexture(object->drawable.sprite,
         object->bigdata.sprite_bigdata.texture, sfTrue);
+    if (pos.x > -1) {
+        sfSprite_setPosition(object->drawable.sprite, pos);
+    }
+    if (rect.height > -1) {
+        sfSprite_setTextureRect(object->drawable.sprite, rect);
+    }
     return BGS_OK;
 }
 

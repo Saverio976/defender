@@ -73,7 +73,7 @@ int object_set_sprite(object_t *object, char const *path, sfIntRect rect,
     if (object->bigdata.sprite_bigdata.image == NULL) {
         return BGS_ERR_PATH;
     }
-    if (sprite_set_texture(object) != BGS_OK) {
+    if (sprite_set_texture(object, pos, rect) != BGS_OK) {
         return (BGS_ERR_MALLOC);
     }
     object->bigdata.sprite_bigdata.pos = pos;

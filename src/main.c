@@ -42,6 +42,7 @@ void collision(object_t *this, object_t *other,
 {
     object_t *background = dico_t_get_value(scene_components, "BACK");
 
+    printf("oe\n");
     if (background->is_visible == true) {
         unset_display(background);
     } else {
@@ -87,21 +88,18 @@ int main(void)
     event_add_node(event, (node_params_t) {sfMouseRight, sfKeyA, KEY});
     event = create_event(&move_right, false, other, NULL);
     event_add_node(event, (node_params_t) {sfMouseRight, sfKeyO, KEY});
-    event = create_event(&move_left, NULL, other, NULL);
+    event = create_event(&move_left, false, other, NULL);
     event_add_node(event, (node_params_t) {sfMouseRight, sfKeyI, KEY});
     if (sprite == NULL) {
         return 84;
     }
     window_set_icon(win, "assets/icon/xp_icon.jpg");
     object_set_audio(music, "assets/music/rickroll.ogg", true, true);
-    object_set_sprite(sprite, "assets/map/castle_with_nico.png", (sfIntRect) {-1, -1, -1, -1}, (sfVector2f) {200, 0});
+    object_set_sprite(sprite, "assets/map/castle_with_nico.png", (sfIntRect) {-1, -1, -1, -1}, (sfVector2f) {100, 0});
     object_set_sprite(background, "assets/map/back.png", (sfIntRect) {-1, -1, -1, -1}, (sfVector2f) {-1, -1});
-    object_set_sprite(other, "assets/ennemy/tank.png", (sfIntRect) {0, 0, 105, 105}, (sfVector2f) {400, 100});
-    my_putstr("before\n");
+    object_set_sprite(other, "assets/map/castle.png", (sfIntRect) {0, 0, 105, 205}, (sfVector2f) {600, 100});
     object_add_collision(sprite, scene, &collision, true);
-    my_putstr("while\n");
     object_add_collision(other, scene, NULL, true);
-    my_putstr("after\n");
     loop(win);
     remove_window(win);
     return 0;

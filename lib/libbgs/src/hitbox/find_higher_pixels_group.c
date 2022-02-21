@@ -72,5 +72,6 @@ sfFloatRect find_higher_pixels_group(char **arr)
     }
     rect = (sfFloatRect) {square.x, square.y, square.size, square.size};
     remove_square_in_map(arr, square);
+    my_wordarray_write(arr, "tests/res.txt");
     return rect;
 }
