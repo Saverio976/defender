@@ -50,4 +50,6 @@ char *rm_space(char const *str);
 
 dico_t *parse_json(char *file);
 
+int prety_print(any_t *any);
+
 #endif
