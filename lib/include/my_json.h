@@ -48,4 +48,6 @@ json_t *parse_json_str(char const *str);
 
 char *rm_space(char const *str);
 
+dico_t *parse_json(char *file);
+
 #endif
