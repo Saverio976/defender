@@ -39,7 +39,12 @@ LSTR		:=	libstr/libstr.a
 
 LWA			:=	libwa/libwa.a
 
-ALL_SUB_LIB	:=	$(LBGS) $(LCONV) $(LDICO) $(LLIST) $(LPUTS) $(LSTR) $(LWA)
+LJSON		:= libjson/libjson.a
+
+LFS			:= libfs/libfs.a
+
+ALL_SUB_LIB	:=	$(LBGS) $(LCONV) $(LDICO) $(LLIST) $(LPUTS) $(LSTR) $(LWA)\
+	$(LJSON) $(LFS)
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------

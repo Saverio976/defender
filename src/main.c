@@ -9,6 +9,7 @@
 #include "my_puts.h"
 #include "my_bgs.h"
 #include "my_bgs_components.h"
+#include "my_json.h"
 
 void set(object_t *object,
         __attribute__((unused)) dico_t *scene_components,
@@ -74,7 +75,7 @@ void move_right(object_t *object,
 
 int main(void)
 {
-    window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test", sfResize | sfClose);
+    /*window_t *win = create_window(((sfVideoMode) {1920, 1080, 32}), "test", sfResize | sfClose);
     scene_t *scene = create_scene(win, sfBlack);
     object_t *music = create_object(NULL, NULL, scene);
     object_t *background = create_object(NULL, NULL, scene);
@@ -101,6 +102,12 @@ int main(void)
     object_add_collision(sprite, scene, &collision, true);
     object_add_collision(other, scene, NULL, true);
     loop(win);
-    remove_window(win);
+    remove_window(win);*/
+    any_t *any = parse_json_file("tests/file.json");
+    if (any == NULL) {
+        my_putstr("NULL\n");
+    } else {
+        my_putstr("any true\n");
+    }
     return 0;
 }

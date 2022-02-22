@@ -10,15 +10,17 @@
 #include "my_bgs_components.h"
 #include "my_json.h"
 
-bool new_data(char *str, int *id)
+bool new_data(char const *str, int *id)
 {
     if (str[*id] == 34 || str[*id] == '{' || str[*id] == '[' ||
         str[(*id) - 1] == ':') {
         return true;
+    } else {
+        return false;
     }
 }
 
-any_type_t fill_data(char origin, char *end, any_t *any)
+void fill_data(char origin, char *end, any_t *any)
 {
     switch (origin) {
     case 34:
@@ -38,7 +40,7 @@ any_type_t fill_data(char origin, char *end, any_t *any)
     }
 }
 
-any_t *parse_rec(char *str, int *id, list_ptr_t *pile)
+any_t *parse_rec(char const *str, int *id)
 {
     char origin = str[*id];
     char end;
@@ -53,24 +55,33 @@ any_t *parse_rec(char *str, int *id, list_ptr_t *pile)
             any->type = FLOAT;
         }
         if (new_data(str, id) == true) {
-            list_add_to_end(pile, parse_rec(str, id, pile));
+            return parse_rec(str, id);
         }
     }
-    
+    return any;
 }
 
-dico_t *parse_json(char *file)
+any_t *parse_json_file(char const path[])
+{
+    char *str = NULL;
+
+    if (path == NULL) {
+        return NULL;
+    }
+    str = fs_get_content(path);
+    if (str == NULL) {
+        return NULL;
+    }
+    return parse_json_str(str);
+}
+
+any_t *parse_json_str(char const *str)
 {
     int id = 0;
-    char *str = fs_get_co;
-    any_t *any = NULL;
-    dico_t *dico = NULL;
-    list_ptr_t *pile = list_create();
+    str = rm_space(str);
 
-    if (pile == NULL || str == NULL) {
+    if (str == NULL) {
         return NULL;
-    }    
-    list_add_to_end(pile, parse_rec(str, id, pile));
-    dico = create_dico_from_any_t(any);
-    return;
+    }
+    return parse_rec(str, &id);
 }
