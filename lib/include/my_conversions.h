@@ -16,6 +16,7 @@
  * @return the number (0 if it not a number (my_atoi_err))
  */
 int my_atoi(char const *str);
+float my_atof(char const *str);
 
 /**
  * @brief get the number in str
@@ -26,6 +27,7 @@ int my_atoi(char const *str);
  * @return 0 if there is an error and *is_error set to 1; the number else
  */
 int my_atoi_err(char const *str, int *is_error);
+float my_atof_err(char const *str, int *is_error);
 
 /**
  * @brief int to str in base 10
