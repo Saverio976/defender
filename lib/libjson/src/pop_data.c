@@ -72,6 +72,7 @@ int fill_nb(list_ptr_t *pile, any_t *any)
     if (fill_str(pile, any) == 84) {
         return 84;
     }
+    my_putstr(any->value.str);
     if (my_strcontainc(any->value.str, '.')) {
         any->type = FLOAT;
         any->value.f = my_atof(any->value.str);
@@ -87,16 +88,18 @@ int fill_str(list_ptr_t *pile, any_t *any)
     list_t *elem = pile->start;
     any_t *cur_any = NULL;
 
-    any->value.str = malloc(sizeof(char) * pile->len + 1);
+    any->value.str = malloc(sizeof(char) * (pile->len + 1));
     if (any->value.str == NULL) {
         return 84;
     }
+    any->value.str[0] = '\0';
     for (int i = 0; i < pile->len; i++, elem = elem->next) {
         cur_any = ((any_t *) elem->var);
         if (cur_any->type != CHAR) {
             return 84;
         }
         any->value.str[i] = cur_any->value.c;
+        any->value.str[i + 1] = '\0';
     }
     return 0;
 }
