@@ -55,7 +55,7 @@ any_t *parse_rec(char const *str, int *id)
     }
     fill_data(origin, &end, &any);
     *id += 1;
-    for (; str[*id] != end; *id = *id + 1) {
+    for (; str[*id] != '\0' && str[*id] != end; *id = *id + 1) {
         if (new_data(str, id) == true) {
             list_add_to_end(pile, parse_rec(str, id));
         }
