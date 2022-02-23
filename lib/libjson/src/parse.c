@@ -54,14 +54,16 @@ any_t *parse_rec(char const *str, int *id)
         return NULL;
     }
     fill_data(origin, &end, &any);
-    *id += 1;
+    *id = (str[*id] == '\0') ? *id : *id + 1;
+    my_printf("id : %d\n", *id);
+    my_putchar(str[*id]);
     for (; str[*id] != '\0' && str[*id] != end; *id = *id + 1) {
         if (new_data(str, id) == true) {
             list_add_to_end(pile, parse_rec(str, id));
-        }
-        if (list_add_to_end(pile, create_any(str[*id])) == NULL) {
+        } else if (list_add_to_end(pile, create_any(str[*id])) == NULL) {
             return NULL;
         }
+        my_putchar(str[*id]);
     }
     pop_data(pile, &any);
     return any_dup(&any);
