@@ -5,6 +5,7 @@
 ** check collision
 */
 
+#include <stdio.h>
 #include "my_bgs_components.h"
 #include "my_bgs.h"
 #include "libbgs_private.h"

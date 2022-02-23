@@ -5,6 +5,7 @@
 ** squares gestion
 */
 
+#include <stdlib.h>
 #include "my_bgs.h"
 #include "libbgs_private.h"
 #include "my_bgs_components.h"

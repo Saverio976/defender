@@ -12,8 +12,11 @@
 
 bool new_data(char const *str, int *id)
 {
-    if (str[*id] == 34 || str[*id] == '{' || str[*id] == '[' ||
-        str[(*id) - 1] == ':') {
+    if (*id == 0) {
+        return true;
+    }
+    if (str[(*id) - 1] != '\\' && (str[*id] == 34 || str[*id] == '{' ||
+        str[*id] == '[' || str[(*id) - 1] == ':')) {
         return true;
     } else {
         return false;
@@ -44,17 +47,23 @@ any_t *parse_rec(char const *str, int *id)
 {
     char origin = str[*id];
     char end;
-    any_t any = {};
+    any_t any = {0};
+    list_ptr_t *pile = list_create();
 
+    if (pile == NULL) {
+        return NULL;
+    }
     fill_data(origin, &end, &any);
+    *id += 1;
     for (; str[*id] != end; *id = *id + 1) {
-        if (any.type == INT && str[*id] == '.') {
-            any.type = FLOAT;
-        }
         if (new_data(str, id) == true) {
-            return parse_rec(str, id);
+            list_add_to_end(pile, parse_rec(str, id));
+        }
+        if (list_add_to_end(pile, create_any(str[*id])) == NULL) {
+            return NULL;
         }
     }
+    pop_data(pile, &any);
     return any_dup(&any);
 }
 

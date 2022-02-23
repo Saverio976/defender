@@ -5,6 +5,7 @@
 ** object add solid components
 */
 
+#include <stdlib.h>
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 #include "libbgs_private.h"

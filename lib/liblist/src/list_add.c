@@ -12,7 +12,7 @@ void *list_add_to_end(list_ptr_t *list_ptr, void *content)
 {
     list_t *newelem = malloc(sizeof(list_t));
 
-    if (!newelem)
+    if (!newelem || content == NULL)
         return NULL;
     newelem->var = content;
     newelem->back = list_ptr->end;

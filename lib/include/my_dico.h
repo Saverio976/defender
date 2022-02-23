@@ -38,4 +38,6 @@ void *dico_t_get_value(dico_t *dico, char const *key);
 
 dico_t *dico_t_get_elem(dico_t *dico, char const *key);
 
+void destroy_any(void *data);
+
 #endif

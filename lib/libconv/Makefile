@@ -28,11 +28,13 @@ SRCDIR		=	src/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC		:=	my_atoi.c 		\
+SRC		:=	my_atoi.c 			\
 			my_atoi_err.c 		\
-			my_itoa.c		\
+			my_itoa.c			\
 			my_itoa_base.c		\
 			my_itoa_base_err.c	\
+			my_atof.c			\
+			my_atof_err.c		\
 			my_itoa_err.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 

@@ -5,6 +5,7 @@
 ** check image pixel
 */
 
+#include <stdlib.h>
 #include "my_bgs_components.h"
 #include "my_bgs.h"
 

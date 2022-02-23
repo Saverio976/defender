@@ -5,6 +5,7 @@
 ** set event
 */
 
+#include <stdlib.h>
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 

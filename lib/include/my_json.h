@@ -12,6 +12,7 @@
     #include "my_dico.h"
 
 enum any_type_e {
+    CHAR,
     STR,
     INT,
     FLOAT,
@@ -28,6 +29,7 @@ struct any_s {
         float f;
         list_ptr_t *array;
         dico_t *dict;
+        char c;
     } value;
 };
 typedef struct any_s any_t;
@@ -51,5 +53,9 @@ char *rm_space(char const *str);
 dico_t *parse_json(char *file);
 
 int prety_print(any_t *any);
+
+any_t *create_any(char c);
+
+int pop_data(list_ptr_t *pile, any_t *any);
 
 #endif

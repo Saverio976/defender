@@ -28,7 +28,11 @@ SRCDIR		=	src/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC		:=	any_dup.c	\
+SRC		:=	any_dup.c		\
+			destroy.c		\
+			create_any.c	\
+			pop_data.c		\
+			prety_print.c	\
 			parse.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 
