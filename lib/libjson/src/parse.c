@@ -44,21 +44,18 @@ any_t *parse_rec(char const *str, int *id)
 {
     char origin = str[*id];
     char end;
-    any_t *any = malloc(sizeof(any_t));
+    any_t any = {};
 
-    if (any == NULL) {
-        return NULL;
-    }
-    fill_data(origin, &end, any);
+    fill_data(origin, &end, &any);
     for (; str[*id] != end; *id = *id + 1) {
-        if (any->type == INT && str[*id] == '.') {
-            any->type = FLOAT;
+        if (any.type == INT && str[*id] == '.') {
+            any.type = FLOAT;
         }
         if (new_data(str, id) == true) {
             return parse_rec(str, id);
         }
     }
-    return any;
+    return any_dup(&any);
 }
 
 any_t *parse_json_file(char const path[])
