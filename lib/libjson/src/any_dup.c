@@ -11,11 +11,8 @@
 
 void check_nb(any_t *any, any_t *new)
 {
-    my_printf("check nb\n");
     if (any->type == INT) {
-        my_printf("any value %d\n", any->value.i);
         new->value.i = any->value.i;
-        my_printf("new value %d\n", new->value.i);
     } else if (any->type == FLOAT) {
         new->value.f = any->value.f;
     }

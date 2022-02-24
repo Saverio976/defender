@@ -47,13 +47,11 @@ int fill_nb(list_ptr_t *pile, any_t *any)
     if (fill_str(pile, &any_str) == 84) {
         return 84;
     }
-    printf("\n\n\n|%s|\n\n\n\n", any_str.value.str);
     if (my_strcontainc(any_str.value.str, '.')) {
         any->type = FLOAT;
         any->value.f = my_atof(any_str.value.str);
     } else {
         any->value.i = my_atoi(any_str.value.str);
-        printf("\n\n\n|%d|\n\n\n\n", any->value.i);
     }
     return 0;
 }
@@ -71,10 +69,6 @@ int fill_str(list_ptr_t *pile, any_t *any)
     for (int i = 0; i < pile->len; i++, elem = elem->next) {
         cur_any = ((any_t *) elem->var);
         if (cur_any->type != CHAR) {
-            if (cur_any->type == STR) {
-                printf("|%s|\n", cur_any->value.str);
-            }
-            my_putstr("\n\n\npop data:73 error\n\n");
             return 84;
         }
         any->value.str[i] = cur_any->value.c;

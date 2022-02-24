@@ -17,21 +17,27 @@ static int do_print_dico(any_t *any, int indent)
 {
     int nb = 0;
     dico_t *elem = any->value.dict;
-    int i = 0;
 
     nb += my_putstr("{\n");
     do {
-        if (i % 2 == 0) {
-            nb += prety_print_rec(elem->value, indent + 4, 1);
-            nb += my_putstr(": ");
-        } else {
-            nb += prety_print_rec(elem->value, indent + 4, 0);
-            nb += my_putstr(",\n");
+        for (int i = 0; i < indent; i++) {
+            nb += my_putchar(' ');
         }
-        i++;
+        my_putchar(34);
+        my_putstr(elem->key);
+        my_putchar(34);
+        nb += my_putstr(": ");
+        nb += prety_print_rec(elem->value, indent + 4, 1);
+        if (elem->next != any->value.dict) {
+            nb += my_putchar(',');
+        }
+        nb += my_putchar('\n');
         elem = elem->next;
     } while (elem != any->value.dict);
-    nb += my_putstr("}\n");
+    for (int i = 0; i < indent - 4; i++) {
+        nb += my_putchar(' ');
+    }
+    nb += my_putstr("}");
     return (nb);
 }
 
@@ -68,9 +74,6 @@ static int prety_print_rec(any_t *any, int indent, int need_indent)
 {
     int nb = 0;
 
-    for (int i = 0; need_indent && i < indent; i++) {
-        nb += my_putchar(' ');
-    }
     switch (any->type) {
         case DICT:
             nb += do_print_dico(any, indent);
@@ -95,8 +98,12 @@ static int prety_print_rec(any_t *any, int indent, int need_indent)
 
 int prety_print(any_t *any)
 {
+    int ret = 0;
+
     if (any == NULL) {
         return (0);
     }
-    return (prety_print_rec(any, 0, 1));
+    ret = prety_print_rec(any, 4, 1);
+    my_putchar(10);
+    return ret;
 }
