@@ -31,13 +31,16 @@ void destroy_any(void *data)
         return;
     }
     switch (any->type) {
-    case STR:
-        free(any->value.str);
-    case DICT:
-        dico_t_destroy(any->value.dict);
-    case ARRAY:
-        array_destroy(any->value.array);
-    default:
-        break;
+        case STR:
+            free(any->value.str);
+            break;
+        case DICT:
+            dico_t_destroy(any->value.dict);
+            break;
+        case ARRAY:
+            array_destroy(any->value.array);
+            break;
+        default:
+            break;
     }
 }

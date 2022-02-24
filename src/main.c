@@ -104,10 +104,12 @@ int main(void)
     loop(win);
     remove_window(win);*/
     any_t *any = parse_json_file("tests/file.json");
-    if (any == NULL) {
-        my_putstr("NULL\n");
-    } else {
-        my_putstr("any true\n");
-    }
+    dico_t *dico = any->value.dict;
+    dico_t *elem = any->value.dict;
+    prety_print(any);
+    do {
+        printf("%s\n", elem->key);
+        elem = elem->next;
+    } while (dico != elem);
     return 0;
 }

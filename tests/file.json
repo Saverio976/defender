@@ -1,7 +1,4 @@
 {
-    "fstkey": 4,
-    "scdkey": {
-        "bg": "c réel"
-    },
-    "trdkey": "trdvalue"
+    "fst key": 4,
+    "trd key": "trd value"
 }

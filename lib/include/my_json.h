@@ -58,4 +58,6 @@ any_t *create_any(char c);
 
 int pop_data(list_ptr_t *pile, any_t *any);
 
+char *rm_space(char const *str);
+
 #endif

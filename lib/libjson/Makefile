@@ -33,6 +33,8 @@ SRC		:=	any_dup.c		\
 			create_any.c	\
 			pop_data.c		\
 			prety_print.c	\
+			fill_dico.c		\
+			remove_space.c	\
 			parse.c
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 

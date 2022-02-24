@@ -74,14 +74,19 @@ static int prety_print_rec(any_t *any, int indent, int need_indent)
     switch (any->type) {
         case DICT:
             nb += do_print_dico(any, indent);
+            break;
         case ARRAY:
             nb += do_print_array(any, indent);
+            break;
         case STR:
             nb += my_printf("\"%s\"", any->value.str);
+            break;
         case INT:
             nb += my_putnbr(any->value.i);
+            break;
         case FLOAT:
             nb += my_putfloat(any->value.f);
+            break;
         default:
             break;
     }

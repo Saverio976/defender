@@ -21,32 +21,6 @@ static const any_type_t TYPE[] = {STR, INT, ARRAY, DICT};
 static int (*FILL_FCT[])(list_ptr_t *, any_t *) = {&fill_str, &fill_nb,
     &fill_array, &fill_dico};
 
-int fill_dico(list_ptr_t *pile, any_t *any)
-{
-    list_t *elem = pile->start;
-    any_t *cur_any = NULL;
-    any_t *key = NULL;
-    any_t *value = NULL;
-
-    any->type = DICT;
-    for (int i = 0; i < pile->len; i++, elem = elem->next) {
-        cur_any = ((any_t *) elem->var);
-        if (cur_any->type != CHAR && key == NULL) {
-            key = cur_any;
-        } else if (cur_any->type != CHAR && key != NULL) {
-            if (key->type != STR) {
-                printf("\n\n??\n\n");
-            }
-            value = cur_any;
-        }
-        if (key != NULL && value != NULL) {
-            dico_t_add_data(any->value.dict,
-                key->value.str, value, &destroy_any);
-        }
-    }
-    return 0;
-}
-
 int fill_array(list_ptr_t *pile, any_t *any)
 {
     list_t *elem = pile->start;
@@ -56,7 +30,6 @@ int fill_array(list_ptr_t *pile, any_t *any)
     if (any->value.array == NULL) {
         return 84;
     }
-    any->type = ARRAY;
     for (int i = 0; i < pile->len; i++, elem = elem->next) {
         cur_any = ((any_t *) elem->var);
         if (cur_any->type != CHAR && list_add_to_end(any->value.array,
@@ -69,16 +42,18 @@ int fill_array(list_ptr_t *pile, any_t *any)
 
 int fill_nb(list_ptr_t *pile, any_t *any)
 {
-    if (fill_str(pile, any) == 84) {
+    any_t any_str = {0};
+
+    if (fill_str(pile, &any_str) == 84) {
         return 84;
     }
-    my_putstr(any->value.str);
-    if (my_strcontainc(any->value.str, '.')) {
+    printf("\n\n\n|%s|\n\n\n\n", any_str.value.str);
+    if (my_strcontainc(any_str.value.str, '.')) {
         any->type = FLOAT;
-        any->value.f = my_atof(any->value.str);
+        any->value.f = my_atof(any_str.value.str);
     } else {
-        any->type = INT;
-        any->value.i = my_atoi(any->value.str);
+        any->value.i = my_atoi(any_str.value.str);
+        printf("\n\n\n|%d|\n\n\n\n", any->value.i);
     }
     return 0;
 }
@@ -92,14 +67,17 @@ int fill_str(list_ptr_t *pile, any_t *any)
     if (any->value.str == NULL) {
         return 84;
     }
-    any->value.str[0] = '\0';
+    any->value.str[pile->len] = '\0';
     for (int i = 0; i < pile->len; i++, elem = elem->next) {
         cur_any = ((any_t *) elem->var);
         if (cur_any->type != CHAR) {
+            if (cur_any->type == STR) {
+                printf("|%s|\n", cur_any->value.str);
+            }
+            my_putstr("\n\n\npop data:73 error\n\n");
             return 84;
         }
         any->value.str[i] = cur_any->value.c;
-        any->value.str[i + 1] = '\0';
     }
     return 0;
 }
