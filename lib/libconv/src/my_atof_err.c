@@ -64,7 +64,8 @@ static float get_absol_neg_result(char const *str, int i)
     for (j = i + 1; str[j] != '\0' && my_strcontainc("0123456789", str[j]);
             j++);
     for (j = j - 1; str[j] != '.'; j--) {
-        f_part += 0.1 * f_part + (str[j] - '0');
+        f_part *= 0.1;
+        f_part -= (str[j] - '0') * 0.1;
     }
     return (result + f_part);
 }
