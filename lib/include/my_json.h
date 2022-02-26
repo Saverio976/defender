@@ -11,6 +11,11 @@
     #include "list.h"
     #include "my_dico.h"
 
+    #define RET_OK 0
+    #define RET_ERR_PATH 1
+    #define RET_ERR_MALLOC 2
+    #define RET_ERR_INPUT 3
+
 enum any_type_e {
     CHAR,
     STR,
@@ -59,5 +64,13 @@ any_t *create_any(char c);
 int pop_data(list_ptr_t *pile, any_t *any);
 
 char *rm_space(char const *str);
+
+int write_json(any_t *any, char const *path);
+
+void destroy_any(void *data);
+
+void destroy_pile(list_ptr_t *pile);
+
+void fill_data(char origin, char *end, any_t *any);
 
 #endif

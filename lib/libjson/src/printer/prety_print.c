@@ -11,35 +11,8 @@
 #include "my_json.h"
 #include "list.h"
 
-static int prety_print_rec(any_t *any, int indent, int need_indent);
-
-static int do_print_dico(any_t *any, int indent)
-{
-    int nb = 0;
-    dico_t *elem = any->value.dict;
-
-    nb += my_putstr("{\n");
-    do {
-        for (int i = 0; i < indent; i++) {
-            nb += my_putchar(' ');
-        }
-        my_putchar(34);
-        my_putstr(elem->key);
-        my_putchar(34);
-        nb += my_putstr(": ");
-        nb += prety_print_rec(elem->value, indent + 4, 1);
-        if (elem->next != any->value.dict) {
-            nb += my_putchar(',');
-        }
-        nb += my_putchar('\n');
-        elem = elem->next;
-    } while (elem != any->value.dict);
-    for (int i = 0; i < indent - 4; i++) {
-        nb += my_putchar(' ');
-    }
-    nb += my_putstr("}");
-    return (nb);
-}
+int prety_print_rec(any_t *any, int indent);
+int do_print_dico(any_t *any, int indent);
 
 static int do_print_array(any_t *any, int indent)
 {
@@ -48,8 +21,8 @@ static int do_print_array(any_t *any, int indent)
 
     nb += my_putchar('[');
     elem = any->value.array->start;
-    for (int i = 0; i < any->value.array->len; i++) {
-        nb += prety_print_rec(elem->var, indent, 0);
+    for (int i = 0; i < any->value.array->len; i++, elem = elem->next) {
+        nb += prety_print_rec(elem->var, indent);
         if (i != any->value.array->len - 1) {
             nb += my_putstr(", ");
         }
@@ -62,7 +35,7 @@ int my_putfloat(float val)
 {
     int entire_parts = (int) val;
     int nb = 0;
-    int float_parts = (((int) val) - entire_parts) * 1000000;
+    int float_parts = (val - entire_parts) * 100;
 
     nb += my_putnbr(entire_parts);
     nb += my_putchar('.');
@@ -70,7 +43,7 @@ int my_putfloat(float val)
     return (nb);
 }
 
-static int prety_print_rec(any_t *any, int indent, int need_indent)
+int prety_print_rec(any_t *any, int indent)
 {
     int nb = 0;
 
@@ -90,8 +63,6 @@ static int prety_print_rec(any_t *any, int indent, int need_indent)
         case FLOAT:
             nb += my_putfloat(any->value.f);
             break;
-        default:
-            break;
     }
     return (nb);
 }
@@ -103,7 +74,7 @@ int prety_print(any_t *any)
     if (any == NULL) {
         return (0);
     }
-    ret = prety_print_rec(any, 4, 1);
+    ret = prety_print_rec(any, 4);
     my_putchar(10);
     return ret;
 }

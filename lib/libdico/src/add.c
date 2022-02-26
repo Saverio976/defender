@@ -9,34 +9,16 @@
 #include <unistd.h>
 #include "my_dico.h"
 
-static int my_coppy(char dest[255], char const *src)
-{
-    int i = 0;
-
-    if (src == NULL) {
-        return (0);
-    }
-    for (; i < 254 && src[i] != '\0'; i++) {
-        dest[i] = src[i];
-    }
-    dest[i] = '\0';
-    return (1);
-}
-
 dico_t *dico_t_create(char const *key, void *value, void (*destroy)(void *data))
 {
     dico_t *new;
 
     new = malloc(sizeof(dico_t));
-    if (new == NULL) {
+    if (new == NULL || key == NULL) {
         return (NULL);
     }
     new->destroy = destroy;
-    if (my_coppy(new->key, key) == 0) {
-        write(2, "[libdico][error]: cannot create entry\n", 38);
-        free(new);
-        return (NULL);
-    }
+    new->key = ((char *) key);
     new->value = value;
     new->last = new;
     new->next = new;

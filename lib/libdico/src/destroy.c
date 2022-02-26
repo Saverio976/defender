@@ -8,10 +8,21 @@
 #include <stdlib.h>
 #include "my_dico.h"
 
+void check_last(dico_t *cursor)
+{
+    if (cursor != NULL) {
+        free(cursor->key);
+        if (cursor->destroy != NULL) {
+            cursor->destroy(cursor->value);
+        }
+        free(cursor);
+    }
+}
+
 int dico_t_destroy(dico_t *dico)
 {
-    dico_t *tmp;
-    dico_t *cursor;
+    dico_t *tmp = NULL;
+    dico_t *cursor = NULL;
     int nb = 0;
 
     if (dico == NULL) {
@@ -20,13 +31,13 @@ int dico_t_destroy(dico_t *dico)
     cursor = dico->next;
     for (; cursor != NULL && cursor != dico; nb++) {
         tmp = cursor->next;
-        cursor->destroy(cursor->value);
+        free(cursor->key);
+        if (cursor->destroy != NULL) {
+            cursor->destroy(cursor->value);
+        }
         free(cursor);
         cursor = tmp;
     }
-    if (cursor->destroy != NULL && cursor->value != NULL) {
-        cursor->destroy(cursor->value);
-    }
-    free(cursor);
+    check_last(cursor);
     return (nb + 1);
 }

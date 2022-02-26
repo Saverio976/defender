@@ -14,10 +14,11 @@ int create_dico(any_t **any, any_t **key, any_t **data)
 {
     if (*key != NULL && *data != NULL) {
         (*any)->value.dict = dico_t_add_data((*any)->value.dict,
-            my_strdup((*key)->value.str), any_dup(*data), &destroy_any);
+            my_strdup((*key)->value.str), *data, &destroy_any);
         if ((*any)->value.dict == NULL) {
             return 84;
         }
+        destroy_any(*key);
         *key = NULL;
         *data = NULL;
     }

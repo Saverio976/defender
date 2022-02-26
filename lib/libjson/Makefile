@@ -25,17 +25,30 @@ CURR_RULE	=	all
 # ----------------------------------------------------------------------------
 
 SRCDIR		=	src/
+PARSERDIR = parser/
+WRITERDIR = writer/
+PRINTERDIR = printer/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC		:=	any_dup.c		\
-			destroy.c		\
-			create_any.c	\
-			pop_data.c		\
-			prety_print.c	\
-			fill_dico.c		\
-			remove_space.c	\
-			parse.c
+SRC_PARSER		:=	any_dup.c		\
+					destroy.c		\
+					create_any.c	\
+					pop_data.c		\
+					fill_dico.c		\
+					remove_space.c	\
+					fill_data.c		\
+					parse.c
+SRC_PARSER		:=	$(addprefix $(PARSERDIR),$(SRC_PARSER))
+
+SRC_PRINTER		:= 	prety_print.c	\
+					print_dico.c
+SRC_PRINTER		:=	$(addprefix $(PRINTERDIR),$(SRC_PRINTER))
+
+SRC_WRITER		:= write_json.c
+SRC_WRITER		:=	$(addprefix $(WRITERDIR),$(SRC_WRITER))
+
+SRC		:=	$(SRC_PARSER) $(SRC_WRITER) $(SRC_PRINTER)
 SRC		:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ		=	$(SRC:%.c=%.o)

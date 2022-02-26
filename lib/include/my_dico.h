@@ -13,13 +13,13 @@ typedef struct dico_s dico_t;
 struct dico_s {
     dico_t *next;
     dico_t *last;
-    char key[255];
+    char *key;
     void *value;
     void (*destroy)(void *data);
 };
 
-dico_t *dico_t_create(char const *key,
-        void *value, void (*destroy)(void *value));
+dico_t *dico_t_create(char const *key, void *value,
+    void (*destroy)(void *data));
 
 dico_t *dico_t_add_data(dico_t *dico, char const *key,
         void *value, void (*destroy)(void *value));
@@ -37,7 +37,5 @@ int dico_t_destroy(dico_t *dico);
 void *dico_t_get_value(dico_t *dico, char const *key);
 
 dico_t *dico_t_get_elem(dico_t *dico, char const *key);
-
-void destroy_any(void *data);
 
 #endif

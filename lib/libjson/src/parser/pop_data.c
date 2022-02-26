@@ -33,7 +33,7 @@ int fill_array(list_ptr_t *pile, any_t *any)
     for (int i = 0; i < pile->len; i++, elem = elem->next) {
         cur_any = ((any_t *) elem->var);
         if (cur_any->type != CHAR && list_add_to_end(any->value.array,
-            cur_any) == NULL) {
+            any_dup(cur_any)) == NULL) {
             return 84;
         }
     }
@@ -53,6 +53,7 @@ int fill_nb(list_ptr_t *pile, any_t *any)
     } else {
         any->value.i = my_atoi(any_str.value.str);
     }
+    free(any_str.value.str);
     return 0;
 }
 
