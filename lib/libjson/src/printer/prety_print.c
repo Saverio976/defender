@@ -35,7 +35,7 @@ int my_putfloat(float val)
 {
     int entire_parts = (int) val;
     int nb = 0;
-    int float_parts = (val - entire_parts) * 100;
+    int float_parts = (val - entire_parts) * 1000000;
 
     nb += my_putnbr(entire_parts);
     nb += my_putchar('.');
