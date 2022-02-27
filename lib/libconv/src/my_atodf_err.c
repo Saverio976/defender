@@ -47,7 +47,7 @@ static int get_out_of_sign(char const *str, int i, int *is_error)
     return (i);
 }
 
-static float get_absol_neg_result(char const *str, int i)
+static double get_absol_neg_result(char const *str, int i)
 {
     int result = 0;
     int j = 0;
@@ -78,11 +78,11 @@ static float get_absol_neg_result(char const *str, int i)
  *
  * @return 0 if there is an error and *is_error set to 1; the number else
  */
-float my_atof_err(char const *str, int *is_error)
+double my_atoef_err(char const *str, int *is_error)
 {
     int i = 0;
     int nb_minus = 0;
-    float result = 0;
+    double result = 0;
 
     i = get_out_of_noise(str, is_error);
     if (*is_error) {

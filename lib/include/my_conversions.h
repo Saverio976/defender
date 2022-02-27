@@ -17,6 +17,7 @@
  */
 int my_atoi(char const *str);
 float my_atof(char const *str);
+double my_atodf(char const *str);
 
 /**
  * @brief get the number in str
@@ -28,6 +29,7 @@ float my_atof(char const *str);
  */
 int my_atoi_err(char const *str, int *is_error);
 float my_atof_err(char const *str, int *is_error);
+double my_atodf_err(char const *str, int *is_error);
 
 /**
  * @brief int to str in base 10
