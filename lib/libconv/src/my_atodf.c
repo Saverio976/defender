@@ -7,7 +7,7 @@
 
 #include "my_conversions.h"
 
-float my_atof(char const *str)
+double my_atodf(char const *str)
 {
     int is_error = 0;
 

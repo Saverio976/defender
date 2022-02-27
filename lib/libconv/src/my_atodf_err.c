@@ -78,7 +78,7 @@ static double get_absol_neg_result(char const *str, int i)
  *
  * @return 0 if there is an error and *is_error set to 1; the number else
  */
-double my_atoef_err(char const *str, int *is_error)
+double my_atodf_err(char const *str, int *is_error)
 {
     int i = 0;
     int nb_minus = 0;
