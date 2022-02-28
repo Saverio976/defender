@@ -12,9 +12,7 @@
 
 bool check_this_x_other_col(sfFloatRect this_pixel, sfFloatRect *other)
 {
-    printf("check %f\n", other[0].height);
     for (int i = 0; other[i].height != -2; i++, other += 1) {
-        printf("this_top: %f; other_top: %f; this_left: %f; other_left: %f", this_pixel.top, other->top, this_pixel.left, other->left);
         if (sfFloatRect_intersects(&this_pixel, other, NULL) == sfTrue) {
             return true;
         }
@@ -34,7 +32,6 @@ bool check_rect(on_collision_t *this_col, on_collision_t *other_col,
     if (other_rect_arr == NULL || this_rect_arr == NULL) {
         return false;
     }
-    printf("%f\n", this_rect_arr[0].height);
     for (int i = 0; this_rect_arr[i].height != -2 && is_collide == false; i++) {
         is_collide = check_this_x_other_col(this_rect_arr[i], other_rect_arr);
     }
@@ -50,14 +47,13 @@ bool check_collision(sfFloatRect *this_rect, sfFloatRect *other_rect,
         ON_COLLISION);
 
     if (this_col == NULL || other_col == NULL || this == NULL || other == NULL
-        || this == other || 
+        || this == other ||
         sfFloatRect_intersects(this_rect, other_rect, NULL) == false) {
         return false;
     }
     if (other->type == TEXT || this->type == TEXT ||
         this_col->is_pixel == false || other_col->is_pixel == false ||
         check_rect(this_col, other_col, this, other) == true) {
-        printf("collision\n");
         return true;
     }
     return false;

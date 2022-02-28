@@ -12,16 +12,16 @@
 #include "my_strings.h"
 #include "my_conversions.h"
 
-int fill_str(list_ptr_t *pile, any_t *any);
+static int fill_str(list_ptr_t *pile, any_t *any);
 int fill_dico(list_ptr_t *pile, any_t *any);
-int fill_array(list_ptr_t *pile, any_t *any);
-int fill_nb(list_ptr_t *pile, any_t *any);
+static int fill_array(list_ptr_t *pile, any_t *any);
+static int fill_nb(list_ptr_t *pile, any_t *any);
 
 static const any_type_t TYPE[] = {STR, INT, ARRAY, DICT};
 static int (*FILL_FCT[])(list_ptr_t *, any_t *) = {&fill_str, &fill_nb,
     &fill_array, &fill_dico};
 
-int fill_array(list_ptr_t *pile, any_t *any)
+static int fill_array(list_ptr_t *pile, any_t *any)
 {
     list_t *elem = pile->start;
     any_t *cur_any = NULL;
@@ -40,7 +40,7 @@ int fill_array(list_ptr_t *pile, any_t *any)
     return 0;
 }
 
-int fill_nb(list_ptr_t *pile, any_t *any)
+static int fill_nb(list_ptr_t *pile, any_t *any)
 {
     any_t any_str = {0};
 
@@ -57,7 +57,7 @@ int fill_nb(list_ptr_t *pile, any_t *any)
     return 0;
 }
 
-int fill_str(list_ptr_t *pile, any_t *any)
+static int fill_str(list_ptr_t *pile, any_t *any)
 {
     list_t *elem = pile->start;
     any_t *cur_any = NULL;

@@ -18,7 +18,7 @@ static bool new_data(char const *str, int *id)
     if (*id == 0) {
         return true;
     }
-    if (str[(*id) - 1] != '\\' && (str[*id] == 34 || str[*id] == '{' ||
+    if (str[*id - 1] != '\\' && (str[*id] == 34 || str[*id] == '{' ||
         str[*id] == 21 || str[*id] == '[')) {
         return true;
     } else {
@@ -59,7 +59,7 @@ static any_t *parse_rec(char const *str, int *id, int strlen)
     fill_data(origin, &end, &any);
     *id = (str[*id] == '\0' || str[*id] == ']' || str[*id] == '}') ? *id :
         *id + 1;
-    for (;*id < strlen && str[*id] != end; *id = *id + 1) {
+    for (; *id < strlen && str[*id] != end; *id = *id + 1) {
         if (new_data(str, id) == true &&
             list_add_to_end(pile, parse_rec(str, id, strlen)) == NULL) {
             return NULL;

@@ -7,7 +7,6 @@
 
 #include "my_bgs.h"
 #include "my_bgs_components.h"
-#include "my_puts.h"//to remove after debug
 #include "../include/libbgs_private.h"
 
 sfFloatRect get_object_global_bounces(object_t *object)

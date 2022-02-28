@@ -5,7 +5,6 @@
 ** get right
 */
 
-#include <stdio.h>
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
@@ -20,7 +19,6 @@ sfFloatRect get_right_checkbox(object_t *obj, sfFloatRect *rect)
         return ((sfFloatRect) {-1, -1, -1, -1});
     }
     bounces = sfSprite_getGlobalBounds(obj->drawable.sprite);
-    printf("spriterect left: %f\n", bounces.left);
     img = obj->bigdata.sprite_bigdata.image;
     size = sfImage_getSize(img);
     new.width = (bounces.width * rect->width) / size.x;
