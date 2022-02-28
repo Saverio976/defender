@@ -8,8 +8,6 @@
 #ifndef LIB_DICO_H_
     #define LIB_DICO_H_
 
-#include "my_json.h"
-
 typedef struct dico_s dico_t;
 
 struct dico_s {
@@ -22,8 +20,6 @@ struct dico_s {
 
 dico_t *dico_t_create(char const *key, void *value,
     void (*destroy)(void *data));
-
-any_t *dico_t_get_any(dico_t *dico, char const *key);
 
 dico_t *dico_t_add_data(dico_t *dico, char const *key,
         void *value, void (*destroy)(void *value));

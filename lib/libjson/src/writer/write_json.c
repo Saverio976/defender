@@ -14,8 +14,8 @@ int write_json(any_t *any, char const *path)
     //char str[] = "json\nwrite_test";
 
     if (any->type != DICT || fd < 0) {
-        return RET_ERR_INPUT;
+        return JS_ERR_INPUT;
     }
     //write(fd, str, 9);
-    return RET_OK;
+    return JS_OK;
 }

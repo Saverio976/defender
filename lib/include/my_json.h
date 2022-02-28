@@ -8,13 +8,14 @@
 #ifndef LIBJSON_H_
     #define LIBJSON_H_
 
+    #include <stdarg.h>
     #include "list.h"
     #include "my_dico.h"
 
-    #define RET_OK 0
-    #define RET_ERR_PATH 1
-    #define RET_ERR_MALLOC 2
-    #define RET_ERR_INPUT 3
+    #define JS_OK 0
+    #define JS_ERR_PATH 1
+    #define JS_ERR_MALLOC 2
+    #define JS_ERR_INPUT 3
 
 enum any_type_e {
     CHAR,
@@ -58,6 +59,10 @@ char *rm_space(char const *str);
 dico_t *parse_json(char *file);
 
 int prety_print(any_t *any);
+
+any_t *get_from_any(any_t *any, char const *format, ...);
+
+any_t *dico_t_get_any(dico_t *dico, char const *key);
 
 any_t *create_any(char c);
 

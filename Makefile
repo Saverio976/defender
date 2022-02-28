@@ -27,9 +27,14 @@ CURR_RULE	=	all
 
 # ----------------------------------------------------------------------------
 # SRC
-SRCDIR		:=	src/
+SRCINITDIR		:=  init/
+SRCDIR			:=	src/
 
-SRC			:=	main.c
+SRC_INIT		:= 	init_defender.c		\
+					init_menu.c
+SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
+
+SRC			:=	main.c $(SRC_INIT)
 SRC			:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ			:=	$(SRC:%.c=%.o)

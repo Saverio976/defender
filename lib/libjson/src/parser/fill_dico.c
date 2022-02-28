@@ -16,13 +16,13 @@ int create_dico(any_t **any, any_t **key, any_t **data)
         (*any)->value.dict = dico_t_add_data((*any)->value.dict,
             my_strdup((*key)->value.str), *data, &destroy_any);
         if ((*any)->value.dict == NULL) {
-            return 84;
+            return JS_ERR_MALLOC;
         }
         destroy_any(*key);
         *key = NULL;
         *data = NULL;
     }
-    return 0;
+    return JS_OK;
 }
 
 int fill_dico(list_ptr_t *pile, any_t *any)
@@ -39,9 +39,9 @@ int fill_dico(list_ptr_t *pile, any_t *any)
         } else if (cur_any->type != CHAR && key != NULL && data == NULL) {
             data = any_dup(cur_any);
         }
-        if (create_dico(&any, &key, &data) == 84) {
-            return 84;
+        if (create_dico(&any, &key, &data) != JS_OK) {
+            return JS_ERR_MALLOC;
         }
     }
-    return 0;
+    return JS_OK;
 }

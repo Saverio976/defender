@@ -40,8 +40,3 @@ void *dico_t_get_value(dico_t *dico, char const *key)
     }
     return (elem->value);
 }
-
-any_t *dico_t_get_any(dico_t *dico, char const *key)
-{
-    return dico_t_get_value(dico, key);
-}
