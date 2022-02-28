@@ -5,7 +5,8 @@
 ** the main entry point for the project
 */
 
-int main(void)
+int main(int ac, char **av)
 {
+    init_defender(ac, av);
     return 0;
 }
