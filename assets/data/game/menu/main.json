@@ -1,0 +1,21 @@
+{
+    "sprite_path": "./assets/image/menu/main/circle.png",
+    "font_path": "assets/font/menlo.ttf",
+    "buttons": [
+        {
+            "text": "play",
+            "text_pos": [40, 70],
+            "pos": [32, 65]
+        },
+        {
+            "text": "settings",
+            "text_pos": [80, 140],
+            "pos": [64, 130]
+        },
+        {
+            "text": "quit",
+            "text_pos": [160, 280],
+            "pos": [128, 260]
+        }
+    ]
+}
