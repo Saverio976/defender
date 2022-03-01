@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "my_dico.h"
 #include "my_bgs.h"
+#include "my_bgs_components.h"
 #include "defender.h"
 #include "my_json.h"
 
@@ -27,6 +28,7 @@ int create_button(sfVector2f text_pos, sfVector2f pos, scene_t *scene,
         != BGS_OK) {
         return RET_ERR_MALLOC;
     }
+    create_event(on_hover_menu_but, true, object, off_hover_menu_but);
     return RET_OK;
 }
 
