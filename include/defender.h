@@ -21,7 +21,7 @@
 static const char MAIN_MENU[] = "./assets/data/game/menu/main.json";
 static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 static const char LEVEL_DATA[] = "./assets/data/game/level/level_";
-static const char EXTENSION[] = ".json";
+static const char EXTENSION[] = ".json\0";
 
 window_t *init_defender(int ac, char **av);
 
@@ -29,7 +29,7 @@ int init_main_menu(window_t *win);
 
 int create_button(scene_t *scene, char const path[]);
 
-int launch_game(object_t *obj, dico_t *dico, window_t *win,
+int launch_game(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 void on_hover_menu_but(object_t *obj, dico_t *dico, window_t *win,

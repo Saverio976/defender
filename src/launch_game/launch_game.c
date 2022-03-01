@@ -11,37 +11,32 @@
 #include "my_json.h"
 #include "defender.h"
 
-char *cat_path
-
-char *get_file(any_t *any)
+char *cat_path(char *number)
 {
-    char *number = my_itoa(any->value.i);
-    int number_len = 0;
-    char *path = NULL;
-    int len = 0;
+    int number_len = my_strlen(number);
+    int len = number_len + LEVEL_DATA_lEN + EXTENSION_LEN;
+    char *path = malloc(sizeof(char) * len + 1);
 
-    if (number == NULL) {
-        return NULL;
-    }
-    number_len = my_strlen(number);
-    len = number_len + LEVEL_DATA_lEN + EXTENSION_LEN + 1;
-    path = malloc(sizeof(char) * len);
     if (path == NULL) {
         return NULL;
-    }
+    }    
     for (int i = 0; i < len; i++) {
         if (i < LEVEL_DATA_lEN) {
             path[i] = LEVEL_DATA[i];
+        } else if (i < LEVEL_DATA_lEN + number_len) {
+            path[i] = number[i - LEVEL_DATA_lEN];
         } else {
-            path[i] = (i < LEVEL_DATA_lEN + number_len) ? number_len[i - LEVEL_DATA_lEN] : ;
+            path[i] = EXTENSION[i - (LEVEL_DATA_lEN + number_len)];
         }
     }
+    return path;
 }
 
 any_t *get_level_json(object_t *obj)
 {
     any_t *level = NULL;
     char *file = NULL;
+    char *number = NULL;
 
     if (obj == NULL) {
         return NULL;
@@ -50,18 +45,21 @@ any_t *get_level_json(object_t *obj)
     if (level == NULL || level->type != INT) {
         return NULL;
     }
-    file = get_file(level);
-    if (file == NULL) {
+    number = my_itoa(level->value.str);
+    if (number == NULL) {
         return NULL;
     }
+    return parse_json_file(cat_path(number));
 }
 
-int launch_game(object_t *obj, dico_t *dico, window_t *win,
+int launch_game(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt)
 {
-    any_t *any = get_level_json(obj);
+    any_t *level_data = get_level_json(obj);
 
-    if (obj == NULL || dico == NULL || win == NULL || evt == NULL) {
+    if (obj == NULL || scene == NULL || win == NULL || evt == NULL ||
+        level_data == NULL) {
         return RET_INVALID_INPUT;
     }
+    create_game_from_level_data(level_data, obj, scene, win);
 }

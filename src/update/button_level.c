@@ -13,5 +13,5 @@
 void click_level_button(object_t *obj, dico_t *dico, window_t *win,
     set_event_t *evt)
 {
-    launch_game(obj, dico, win, evt);
+    launch_game(obj, scene, win, evt);
 }
