@@ -9,9 +9,7 @@
 
 /**
 ** @brief get lentgh of null terminated str
-**
 ** @param str
-**
 ** @return -1 if str is null; else the length
 **/
 int my_strlen(char const *str)

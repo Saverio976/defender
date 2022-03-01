@@ -11,10 +11,8 @@
 
 /**
 ** @brief write nb on base base in stdout if base is not null
-**
 ** @param nb
 ** @param base
-**
 ** @return number of char wrote
 **/
 int my_putnbr_base(int nb, char const *base)

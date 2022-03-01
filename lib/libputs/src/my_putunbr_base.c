@@ -30,10 +30,8 @@ static char *dup_and_cat(char *dest, char c, int *cap)
 
 /**
 ** @brief write the unsigned nb on stdout if base is not null
-**
 ** @param nb
 ** @param base
-**
 ** @return the number of char wrote
 **/
 int my_putunbr_base(unsigned int nb, char const *base)

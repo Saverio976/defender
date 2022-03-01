@@ -10,9 +10,7 @@
 
 /**
 ** @brief reverse str inplace
-**
 ** @param str
-**
 ** @return null if str is null; otherwise str
 **/
 char *my_revstr(char *str)

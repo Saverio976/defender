@@ -9,9 +9,7 @@
 
 /**
 ** @brief int to str in base 10
-**
 ** @param nb
-**
 ** @return null if there is error; the str else
 **/
 char *my_itoa(int nb)

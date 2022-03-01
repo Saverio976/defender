@@ -10,10 +10,8 @@
 
 /**
 ** @brief check if substr is in str
-**
 ** @param str
 ** @param substr
-**
 ** @return 1 if substr is in str; 0 otherwise
 **/
 int my_strcontains(char const *str, char const *substr)

@@ -9,9 +9,7 @@
 
 /**
 ** @brief malloc n block and fill it with \0
-**
 ** @param n
-**
 ** @return null if cannot malloc; the new char * otherwise
 **/
 char *my_calloc(int n)

@@ -9,7 +9,6 @@
 
 /**
 ** @brief free a word array null terminated
-**
 ** @param arr
 **/
 void my_wordarray_free(char **arr)

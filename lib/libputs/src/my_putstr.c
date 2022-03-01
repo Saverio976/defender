@@ -10,9 +10,7 @@
 
 /**
 ** @brief write the \0 terminated str if str is not null
-**
 ** @param str
-**
 ** @return the number of char wrote
 **/
 int my_putstr(char const *str)

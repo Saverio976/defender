@@ -9,9 +9,7 @@
 
 /**
 ** @brief write nb on stdout
-**
 ** @param nb
-**
 ** @return number of char wrote
 **/
 int my_putnbr(int nb)

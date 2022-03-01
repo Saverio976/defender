@@ -9,9 +9,7 @@
 
 /**
 ** @brief get the number in str
-**
 ** @param str
-**
 ** @return the number (0 if it not a number (my_atoi_err))
 **/
 int my_atoi(char const *str)

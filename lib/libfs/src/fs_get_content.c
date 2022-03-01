@@ -44,9 +44,7 @@ static char *fill_buffer(int fd, char *buffer, int size)
 
 /**
 ** @brief get the entire content of file path (if readable)
-**
 ** @param path
-**
 ** @return null if path is not readable; otherwise the content
 **/
 char *fs_get_content(char const *path)

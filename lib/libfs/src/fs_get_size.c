@@ -9,9 +9,7 @@
 
 /**
 ** @brief get size of the content of filepath (if stat can)
-**
 ** @param path
-**
 ** @return -1 if stat cant get size; the size else
 **/
 int fs_get_size(char const *path)

@@ -12,7 +12,6 @@
 
 /**
 ** @brief print each char * of the 2d array with a newline after each char *
-**
 ** @param array
 **/
 void my_wordarray_showln(char *const *array)
@@ -28,7 +27,6 @@ void my_wordarray_showln(char *const *array)
 
 /**
 ** @brief print each char * of the 2d array
-**
 ** @param array
 **/
 void my_wordarray_show(char *const *array)

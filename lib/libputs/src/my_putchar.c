@@ -9,9 +9,7 @@
 
 /**
 ** @brief write c on stdout
-**
 ** @param c
-**
 ** @return number of char wrote
 **/
 int my_putchar(char c)

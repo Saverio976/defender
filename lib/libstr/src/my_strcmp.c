@@ -10,10 +10,8 @@
 
 /**
 ** @brief compare s1 and s2 char per char
-**
 ** @param s1
 ** @param s2
-**
 ** @return 0 if s1 equal s2; otherwise the difference between s1[x] and s2[x]
 **/
 int my_strcmp(char const *s1, char const *s2)

@@ -10,9 +10,7 @@
 
 /**
 ** @brief duplicate str (with malloc) and add a \0 at the end
-**
 ** @param str
-**
 ** @return NULL if str equal null or cannot malloc; else the duplicated str
 **/
 char *my_strdup(char const *str)

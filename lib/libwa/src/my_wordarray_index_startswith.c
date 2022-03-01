@@ -10,10 +10,8 @@
 
 /**
 ** @brief search the first occurence of str in the 2d array and get its index
-**
 ** @param arr
 ** @param str
-**
 ** @return -1 if arr is null or there is no occurence; otherwise the index
 **/
 int my_wordarray_get_index_startswith(char *const *arr, char const *str)
