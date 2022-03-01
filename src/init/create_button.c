@@ -13,9 +13,13 @@
 #include "defender.h"
 #include "my_json.h"
 
-static void (*button_event[4])(object_t *obj, dico_t *dico, window_t *win,
-    set_event_t *evt) = {click_play_button, click_settings_button,
-    click_quit_button, click_level_button};
+static void (*button_event[4])(object_t *obj,
+        dico_t *dico, window_t *win, set_event_t *evt) = {
+    click_play_button,
+    click_settings_button,
+    click_quit_button,
+    click_level_button
+};
 
 void init_button_event(object_t *object, any_t *any, scene_t *scene)
 {
@@ -28,7 +32,7 @@ void init_button_event(object_t *object, any_t *any, scene_t *scene)
             NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     }
     if (level != NULL && level->type == INT) {
-        dico_t_add_data(scene->components, "level", any_dup(level), 
+        dico_t_add_data(scene->components, "level", any_dup(level),
             destroy_any);
     }
 }
