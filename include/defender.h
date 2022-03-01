@@ -16,14 +16,32 @@
     #define RET_ERR_MALLOC 2
 
 static const char MAIN_MENU[] = "./assets/data/game/menu/main.json";
+static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 
 window_t *init_defender(int ac, char **av);
-int init_menu(window_t *win);
+
+int init_main_menu(window_t *win);
+
+int create_button(scene_t *scene, char const path[]);
 
 void on_hover_menu_but(object_t *obj, dico_t *dico, window_t *win,
     set_event_t *evt);
 
 void off_hover_menu_but(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt);
+
+void click_play_button(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt);
+
+void click_settings_button(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt);
+
+void click_quit_button(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt);
+
+int init_level_menu(window_t *win);
+
+void click_level_button(object_t *obj, dico_t *dico, window_t *win,
     set_event_t *evt);
 
 #endif

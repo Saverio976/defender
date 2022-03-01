@@ -8,6 +8,25 @@
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
+void click_play_button(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt)
+{
+    printf("play\n");
+    win->scene_index = 1;
+}
+
+void click_settings_button(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt)
+{
+    printf("settings\n");
+}
+
+void click_quit_button(object_t *obj, dico_t *dico, window_t *win,
+    set_event_t *evt)
+{
+    sfRenderWindow_close(win->win);
+}
+
 void on_hover_menu_but(object_t *obj, dico_t *dico, window_t *win,
     set_event_t *evt)
 {

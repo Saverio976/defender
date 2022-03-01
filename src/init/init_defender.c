@@ -18,7 +18,8 @@ window_t *init_defender(int ac, char **av)
     sfUint32 style = sfClose | sfResize;
     window_t *win = create_window(mode, title, style);
 
-    if (win == NULL || init_menu(win) != RET_OK) {
+    if (win == NULL || init_main_menu(win) != RET_OK ||
+        init_level_menu(win) != RET_OK) {
         return NULL;
     }
     return win;

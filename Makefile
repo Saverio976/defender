@@ -32,10 +32,12 @@ SRCUPDATEDIR	:=  update/
 SRCDIR			:=	src/
 
 SRC_INIT		:= 	init_defender.c		\
+					create_button.c		\
 					init_menu.c
 SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
 
-SRC_UPDATE		:=	button_menu.c
+SRC_UPDATE		:=	button_menu.c	\
+					button_level.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 
 SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE)
