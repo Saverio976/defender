@@ -6,13 +6,13 @@
 */
 
 /**
- * @brief check if str contain c
- *
- * @param str
- * @param c
- *
- * @return 1 if c is in str; 0 otherwise
- */
+** @brief check if str contain c
+**
+** @param str
+** @param c
+**
+** @return 1 if c is in str; 0 otherwise
+**/
 int my_strcontainc(char const *str, char const c)
 {
     int is_found = 0;

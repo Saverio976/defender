@@ -60,13 +60,13 @@ static int get_absol_neg_result(char const *str, int i)
 }
 
 /**
- * @brief get the number in str
- *
- * @param str
- * @param is_error
- *
- * @return 0 if there is an error and *is_error set to 1; the number else
- */
+** @brief get the number in str
+**
+** @param str
+** @param is_error
+**
+** @return 0 if there is an error and *is_error set to 1; the number else
+**/
 int my_atoi_err(char const *str, int *is_error)
 {
     int i = 0;

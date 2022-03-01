@@ -8,13 +8,13 @@
 #include <stddef.h>
 
 /**
- * @brief add chars of src at the \0 of dest
- *
- * @param dest
- * @param src
- *
- * @return null if dest is null; otherwise dest
- */
+** @brief add chars of src at the \0 of dest
+**
+** @param dest
+** @param src
+**
+** @return null if dest is null; otherwise dest
+**/
 char *my_strcat(char *dest, char const *src)
 {
     int i = 0;

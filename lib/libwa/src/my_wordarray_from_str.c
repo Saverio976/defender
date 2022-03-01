@@ -68,13 +68,13 @@ static char **fill_word_array(const char *str, int array_size, char **array,
 }
 
 /**
- * @brief put each "word" defining by delimiters in a 2d array
- *
- * @param str
- * @param delim
- *
- * @return null if any error occurs; else the 2d array
- */
+** @brief put each "word" defining by delimiters in a 2d array
+**
+** @param str
+** @param delim
+**
+** @return null if any error occurs; else the 2d array
+**/
 char **my_wordarray_from_str(const char *str, char delim)
 {
     char **array;

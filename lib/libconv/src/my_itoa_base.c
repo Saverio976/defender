@@ -9,13 +9,13 @@
 #include "my_conversions.h"
 
 /**
- * @brief int to str base base if base not null
- *
- * @param nb
- * @param base
- *
- * @return null if error; else the str
- */
+** @brief int to str base base if base not null
+**
+** @param nb
+** @param base
+**
+** @return null if error; else the str
+**/
 char *my_itoa_base(int nb, char const *base)
 {
     int is_error = 0;

@@ -40,13 +40,13 @@ static int print_specifier(va_list ap, char const *c)
 }
 
 /**
- * @brief reproduce the _printf
- *
- * @param format
- * @param ...
- *
- * @return number of char wrote
- */
+** @brief reproduce the _printf
+**
+** @param format
+** @param ...
+**
+** @return number of char wrote
+**/
 int my_printf(char const *format, ...)
 {
     va_list ap;

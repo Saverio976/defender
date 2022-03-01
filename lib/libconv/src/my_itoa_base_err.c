@@ -36,14 +36,14 @@ static void do_zero_special_case(int nb, char *result)
 }
 
 /**
- * @brief int to str in base base if base is not null
- *
- * @param nb
- * @param base
- * @param is_error
- *
- * @return *is_error set to 1 if error; otherwise the str
- */
+** @brief int to str in base base if base is not null
+**
+** @param nb
+** @param base
+** @param is_error
+**
+** @return *is_error set to 1 if error; otherwise the str
+**/
 char *my_itoa_base_err(int nb, char const *base, int *is_error)
 {
     int i = 0;

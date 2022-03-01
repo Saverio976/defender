@@ -8,13 +8,13 @@
 #include <stddef.h>
 
 /**
- * @brief copy str in dest and add \0 at the end
- *
- * @param dest
- * @param src
- *
- * @return null if src is null; otherwise dest
- */
+** @brief copy str in dest and add \0 at the end
+**
+** @param dest
+** @param src
+**
+** @return null if src is null; otherwise dest
+**/
 char *my_strcpy(char *dest, char const *src)
 {
     int i = 0;

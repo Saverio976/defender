@@ -8,12 +8,12 @@
 #include <unistd.h>
 
 /**
- * @brief write c on stdout
- *
- * @param c
- *
- * @return number of char wrote
- */
+** @brief write c on stdout
+**
+** @param c
+**
+** @return number of char wrote
+**/
 int my_putchar(char c)
 {
     return (write(1, &c, 1));

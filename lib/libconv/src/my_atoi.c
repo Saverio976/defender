@@ -8,12 +8,12 @@
 #include "my_conversions.h"
 
 /**
- * @brief get the number in str
- *
- * @param str
- *
- * @return the number (0 if it not a number (my_atoi_err))
- */
+** @brief get the number in str
+**
+** @param str
+**
+** @return the number (0 if it not a number (my_atoi_err))
+**/
 int my_atoi(char const *str)
 {
     int is_error = 0;

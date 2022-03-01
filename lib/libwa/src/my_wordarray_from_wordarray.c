@@ -10,12 +10,12 @@
 #include "my_wordarray.h"
 
 /**
- * @brief copy a null terminated 2d array null terminated 1d array
- *
- * @param env[]
- *
- * @return null if lenght of env is 0 or cant malloc; else the new 2d array
- */
+** @brief copy a null terminated 2d array null terminated 1d array
+**
+** @param env[]
+**
+** @return null if lenght of env is 0 or cant malloc; else the new 2d array
+**/
 char **my_wordarray_from_wordarray(char *const env[])
 {
     int len = my_wordarray_len(env);

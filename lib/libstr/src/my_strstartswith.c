@@ -8,13 +8,13 @@
 #include "my_strings.h"
 
 /**
- * @brief check if str start with substr
- *
- * @param str
- * @param substr
- *
- * @return 1 if str start with substr; 0 otherwise
- */
+** @brief check if str start with substr
+**
+** @param str
+** @param substr
+**
+** @return 1 if str start with substr; 0 otherwise
+**/
 int my_strstartswith(char const *str, char const *substr)
 {
     int i = 0;

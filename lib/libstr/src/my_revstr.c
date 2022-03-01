@@ -9,12 +9,12 @@
 #include "my_strings.h"
 
 /**
- * @brief reverse str inplace
- *
- * @param str
- *
- * @return null if str is null; otherwise str
- */
+** @brief reverse str inplace
+**
+** @param str
+**
+** @return null if str is null; otherwise str
+**/
 char *my_revstr(char *str)
 {
     char c = '\0';

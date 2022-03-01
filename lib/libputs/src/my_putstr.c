@@ -9,12 +9,12 @@
 #include "my_strings.h"
 
 /**
- * @brief write the \0 terminated str if str is not null
- *
- * @param str
- *
- * @return the number of char wrote
- */
+** @brief write the \0 terminated str if str is not null
+**
+** @param str
+**
+** @return the number of char wrote
+**/
 int my_putstr(char const *str)
 {
     int size = my_strlen(str);

@@ -71,13 +71,13 @@ static double get_absol_neg_result(char const *str, int i)
 }
 
 /**
- * @brief get the float number in str
- *
- * @param str
- * @param is_error
- *
- * @return 0 if there is an error and *is_error set to 1; the number else
- */
+** @brief get the float number in str
+**
+** @param str
+** @param is_error
+**
+** @return 0 if there is an error and *is_error set to 1; the number else
+**/
 double my_atodf_err(char const *str, int *is_error)
 {
     int i = 0;
