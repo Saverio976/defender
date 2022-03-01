@@ -31,6 +31,8 @@ void object_update(object_t *object, dico_t *scene_components,
 void display_sprite(object_t *object, dico_t *scene_components,
     dico_t *win_compoent, sfRenderWindow *win);
 
+void object_set_origin(object_t *object);
+
 void display_text(object_t *object, dico_t *scene_components,
     dico_t *win_components, sfRenderWindow *win);
 

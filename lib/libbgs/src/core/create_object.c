@@ -59,6 +59,7 @@ int object_set_text(object_t *object, char const *path, char const *text,
     sfText_setString(object->drawable.text, text);
     object->type = TEXT;
     object->display = (object->display) ? object->display : &display_text;
+    object_set_origin(object);
     return BGS_OK;
 }
 
@@ -80,6 +81,7 @@ int object_set_sprite(object_t *object, char const *path, sfIntRect rect,
     object->bigdata.sprite_bigdata.rect = rect;
     object->type = SPRITE;
     object->display = (object->display) ? object->display : &display_sprite;
+    object_set_origin(object);
     return BGS_OK;
 }
 

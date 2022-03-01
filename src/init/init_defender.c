@@ -3,7 +3,6 @@
 ** defender
 ** File description:
 ** init defender
-** defender
 */
 
 #include <SFML/Graphics.h>

@@ -19,16 +19,16 @@ int create_button(sfVector2f text_pos, sfVector2f pos, scene_t *scene,
     object_t *object = NULL;
 
     object = create_object(NULL, NULL, scene);
-    if (object_set_text(object, path[0], path[2], text_pos)
-        != BGS_OK) {
-        return RET_ERR_MALLOC;
-    }
-    object = create_object(NULL, NULL, scene);
     if (object_set_sprite(object, path[1], (sfIntRect) {-1, -1, -1, -1}, pos)
         != BGS_OK) {
         return RET_ERR_MALLOC;
     }
     create_event(on_hover_menu_but, true, object, off_hover_menu_but);
+    object = create_object(NULL, NULL, scene);
+    if (object_set_text(object, path[0], path[2], text_pos)
+        != BGS_OK) {
+        return RET_ERR_MALLOC;
+    }
     return RET_OK;
 }
 
@@ -45,8 +45,8 @@ int init_button(scene_t *scene, any_t *any, int i, char *path[3])
         return RET_ERR_MALLOC;
     }
     path[2] = text->value.str;
-    if (create_button((sfVector2f) {text_pos_y->value.i, text_pos_x->value.i},
-        (sfVector2f) {pos_y->value.i, pos_x->value.i}, scene,
+    if (create_button((sfVector2f) {text_pos_x->value.f, text_pos_y->value.f},
+        (sfVector2f) {pos_x->value.f, pos_y->value.f}, scene,
         path) != RET_OK) {
         return RET_ERR_MALLOC;
     }

@@ -13,7 +13,7 @@ typedef struct dico_s dico_t;
 struct dico_s {
     dico_t *next;
     dico_t *last;
-    char *key;
+    char key[255];
     void *value;
     void (*destroy)(void *data);
 };

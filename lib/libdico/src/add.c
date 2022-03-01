@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "my_strings.h"
 #include "my_dico.h"
 
 dico_t *dico_t_create(char const *key, void *value, void (*destroy)(void *data))
@@ -14,11 +15,11 @@ dico_t *dico_t_create(char const *key, void *value, void (*destroy)(void *data))
     dico_t *new;
 
     new = malloc(sizeof(dico_t));
-    if (new == NULL || key == NULL) {
+    if (new == NULL || key == NULL || my_strlen(key) >= 254) {
         return (NULL);
     }
     new->destroy = destroy;
-    new->key = ((char *) key);
+    my_strcpy(new->key, key);
     new->value = value;
     new->last = new;
     new->next = new;

@@ -28,14 +28,14 @@ SRCDIR			=	src/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC_COMPONENTS	:= 	add_components.c						\
+SRC_COMPONENTS	:= 	add_components.c					\
 					create_event.c						\
 					object_add_collision_components.c	\
 					object_add_set_event.c				\
 					object_add_set_sprite_components.c	\
 					object_check_event.c				\
 					object_set_event.c					\
-					object_check_health.c					\
+					object_check_health.c				\
 					object_update_mouse_event.c
 SRC_COMPONENTS	:= $(addprefix components/,$(SRC_COMPONENTS))
 
@@ -43,6 +43,7 @@ SRC_CORE		:=	add.c				\
 					create_object.c		\
 					create_scene.c		\
 					event.c				\
+					object_set_origin.c	\
 					loop.c				\
 					object_update.c		\
 					remove.c			\

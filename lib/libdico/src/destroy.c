@@ -11,7 +11,6 @@
 void check_last(dico_t *cursor)
 {
     if (cursor != NULL) {
-        free(cursor->key);
         if (cursor->destroy != NULL) {
             cursor->destroy(cursor->value);
         }
@@ -31,7 +30,6 @@ int dico_t_destroy(dico_t *dico)
     cursor = dico->next;
     for (; cursor != NULL && cursor != dico; nb++) {
         tmp = cursor->next;
-        free(cursor->key);
         if (cursor->destroy != NULL) {
             cursor->destroy(cursor->value);
         }

@@ -33,7 +33,7 @@ void destroy_event(void *data)
 
 int object_set_event(object_t *object, set_event_t *event)
 {
-    char key[255];
+    char key[255] = {0};
 
     my_strcpy(key, SET_EVENT);
     if (object == NULL || event == NULL) {
