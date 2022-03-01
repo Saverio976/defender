@@ -12,14 +12,13 @@
 void click_play_button(object_t *obj, dico_t *dico, window_t *win,
     set_event_t *evt)
 {
-    my_putstr("play\n");
     win->scene_index = 1;
 }
 
 void click_settings_button(object_t *obj, dico_t *dico, window_t *win,
     set_event_t *evt)
 {
-    my_putstr("settings\n");
+    win->scene_index = 2;
 }
 
 void click_quit_button(object_t *obj, dico_t *dico, window_t *win,

@@ -32,7 +32,7 @@ void init_button_event(object_t *object, any_t *any, scene_t *scene)
             NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     }
     if (level != NULL && level->type == INT) {
-        dico_t_add_data(scene->components, "level", any_dup(level),
+        dico_t_add_data(object->components, "level", any_dup(level),
             destroy_any);
     }
 }
