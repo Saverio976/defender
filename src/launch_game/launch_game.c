@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "my_puts.h"
 #include "my_conversions.h"
 #include "my_strings.h"
 #include "my_json.h"
@@ -55,8 +56,18 @@ any_t *get_level_json(object_t *obj)
 int launch_game(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt)
 {
-    any_t *level_data = get_level_json(obj);
+    any_t *level_data = NULL;
+    any_t *level_str = NULL;
+    char *nb = NULL;
 
+    //get_level_json(obj);
+    level_str = dico_t_get_any(obj->components, "level");
+    if (level_str == NULL) {
+        return (RET_ERR_MALLOC);
+    }
+    nb = my_itoa(level_str->value.i);
+    my_printf("level : %s\n", nb);
+    free(nb);
     if (obj == NULL || scene == NULL || win == NULL || evt == NULL ||
         level_data == NULL) {
         return RET_INVALID_INPUT;
