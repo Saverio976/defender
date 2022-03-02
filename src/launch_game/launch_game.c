@@ -12,66 +12,30 @@
 #include "my_json.h"
 #include "defender.h"
 
-char *cat_path(char *number)
+static int create_game_from_level_data(any_t *level_data, object_t *obj,
+    scene_t *scene, window_t *win)
 {
-    int number_len = my_strlen(number);
-    int len = number_len + LEVEL_DATA_lEN + EXTENSION_LEN;
-    char *path = malloc(sizeof(char) * len + 1);
+    char *str = dico_t_get_value(obj->components, "level path");
 
-    if (path == NULL) {
-        return NULL;
-    }
-    for (int i = 0; i < len; i++) {
-        if (i < LEVEL_DATA_lEN) {
-            path[i] = LEVEL_DATA[i];
-        } else if (i < LEVEL_DATA_lEN + number_len) {
-            path[i] = number[i - LEVEL_DATA_lEN];
-        } else {
-            path[i] = EXTENSION[i - (LEVEL_DATA_lEN + number_len)];
-        }
-    }
-    return path;
+    return RET_OK;
 }
 
-any_t *get_level_json(object_t *obj)
-{
-    any_t *level = NULL;
-    //char *file = NULL;
-    char *number = NULL;
-
-    if (obj == NULL) {
-        return NULL;
-    }
-    level = dico_t_get_any(obj->components, "level");
-    if (level == NULL || level->type != INT) {
-        return NULL;
-    }
-    number = my_itoa(level->value.i);
-    if (number == NULL) {
-        return NULL;
-    }
-    return parse_json_file(cat_path(number));
-}
-
-int launch_game(object_t *obj, scene_t *scene, window_t *win,
-    set_event_t *evt)
+int launch_game(object_t *obj, scene_t *scene,
+    __attribute__((unused)) window_t *win, set_event_t *evt)
 {
     any_t *level_data = NULL;
-    any_t *level_str = NULL;
-    char *nb = NULL;
+    char *level_path = NULL;
 
-    //get_level_json(obj);
-    level_str = dico_t_get_any(obj->components, "level");
-    if (level_str == NULL) {
-        return (RET_ERR_MALLOC);
-    }
-    nb = my_itoa(level_str->value.i);
-    my_printf("level : %s\n", nb);
-    free(nb);
-    if (obj == NULL || scene == NULL || win == NULL || evt == NULL ||
-        level_data == NULL) {
+    if (obj == NULL || scene == NULL || win == NULL || evt == NULL) {
         return RET_INVALID_INPUT;
     }
-    //create_game_from_level_data(level_data, obj, scene, win);
-    return (0);
+    level_path = dico_t_get_value(obj->components, "level path");
+    if (level_path == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    level_data = parse_json_file(level_path);
+    if (level_data == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    return create_game_from_level_data(level_data, obj, scene, win);
 }

@@ -11,6 +11,7 @@
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 #include "defender.h"
+#include "my_strings.h"
 #include "my_json.h"
 
 static void (*button_event[4])(object_t *obj,
@@ -18,23 +19,23 @@ static void (*button_event[4])(object_t *obj,
     click_play_button,
     click_settings_button,
     click_quit_button,
-    click_level_button
 };
 
 void init_button_event(object_t *object, any_t *any,
-        __attribute((unused)) scene_t *scene)
+    __attribute((unused)) scene_t *scene)
 {
     any_t *id = dico_t_get_any(any->value.dict, "id");
-    any_t *level = dico_t_get_any(any->value.dict, "level");
+    any_t *level_path = dico_t_get_any(any->value.dict, "level path");
 
     create_event(on_hover_menu_but, true, object, off_hover_menu_but);
-    if (id != NULL) {
+    if (id != NULL && id->type == INT) {
         event_add_node(create_event(button_event[id->value.i], true, object,
             NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
-    }
-    if (level != NULL && level->type == INT) {
-        dico_t_add_data(object->components, "level", any_dup(level),
-            destroy_any);
+    } else if (level_path != NULL && level_path->type == STR) {
+        dico_t_add_data(object->components, "level path",
+            my_strdup(level_path->value.str), free);
+        event_add_node(create_event(click_level_button, true,
+            object, NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     }
 }
 

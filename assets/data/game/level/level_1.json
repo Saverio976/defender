@@ -1,0 +1,9 @@
+{
+    "map path": "./assets/data/game/level/map/map_1.txt",
+    "life": 150,
+    "wave": [
+        {"tortue": 5, "kamikze":2, "fly": 4, "tortue": 1},
+        {"tortue": 1, "kamikze":9, "fly": 4, "tortue": 1}
+    ],
+    "cadence": 4
+}
