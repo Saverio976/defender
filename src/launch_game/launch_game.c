@@ -19,7 +19,7 @@ char *cat_path(char *number)
 
     if (path == NULL) {
         return NULL;
-    }    
+    }
     for (int i = 0; i < len; i++) {
         if (i < LEVEL_DATA_lEN) {
             path[i] = LEVEL_DATA[i];
@@ -35,7 +35,7 @@ char *cat_path(char *number)
 any_t *get_level_json(object_t *obj)
 {
     any_t *level = NULL;
-    char *file = NULL;
+    //char *file = NULL;
     char *number = NULL;
 
     if (obj == NULL) {
@@ -45,7 +45,7 @@ any_t *get_level_json(object_t *obj)
     if (level == NULL || level->type != INT) {
         return NULL;
     }
-    number = my_itoa(level->value.str);
+    number = my_itoa(level->value.i);
     if (number == NULL) {
         return NULL;
     }
@@ -61,5 +61,6 @@ int launch_game(object_t *obj, scene_t *scene, window_t *win,
         level_data == NULL) {
         return RET_INVALID_INPUT;
     }
-    create_game_from_level_data(level_data, obj, scene, win);
+    //create_game_from_level_data(level_data, obj, scene, win);
+    return (0);
 }
