@@ -1,0 +1,10 @@
+{
+    "xp": 1,
+    "com": 10,
+    "life": 3,
+    "speed": 9.0,
+    "is_fly": "false",
+    "load_time": 1,
+    "path": "./assets/image/ennemy/kamikaze.png",
+    "int_rect": [0, 0, 100, 100]
+}
