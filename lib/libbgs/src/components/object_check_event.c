@@ -47,7 +47,7 @@ static bool check_event_nodes(set_event_t *set_event, object_t *object,
 }
 
 void check_event(set_event_t *set_event, object_t *object,
-    window_t *win, dico_t *scene_components)
+    window_t *win, scene_t *scene)
 {
     bool check = true;
 
@@ -59,19 +59,19 @@ void check_event(set_event_t *set_event, object_t *object,
     if (check == true && set_event->prev_call == false) {
         set_event->prev_call = true;
         if (set_event->on != NULL) {
-            set_event->on(object, scene_components, win, set_event);
+            set_event->on(object, scene, win, set_event);
         }
         return;
     }
     if (set_event->prev_call == true && check == false) {
         set_event->prev_call = false;
         if (set_event->off != NULL) {
-            set_event->off(object, scene_components, win, set_event);
+            set_event->off(object, scene, win, set_event);
         }
     }
 }
 
-void object_check_event(object_t *object, dico_t *scene_components,
+void object_check_event(object_t *object, scene_t *scene,
     window_t *win)
 {
     dico_t *cursor = object->components;
@@ -81,7 +81,7 @@ void object_check_event(object_t *object, dico_t *scene_components,
     }
     do {
         if (my_strstartswith(cursor->key, SET_EVENT) == 1) {
-            check_event(cursor->value, object, win, scene_components);
+            check_event(cursor->value, object, win, scene);
         }
         cursor = cursor->next;
     } while (cursor != object->components);

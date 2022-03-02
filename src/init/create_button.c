@@ -14,14 +14,15 @@
 #include "my_json.h"
 
 static void (*button_event[4])(object_t *obj,
-        dico_t *dico, window_t *win, set_event_t *evt) = {
+        scene_t *scene, window_t *win, set_event_t *evt) = {
     click_play_button,
     click_settings_button,
     click_quit_button,
     click_level_button
 };
 
-void init_button_event(object_t *object, any_t *any, scene_t *scene)
+void init_button_event(object_t *object, any_t *any,
+        __attribute((unused)) scene_t *scene)
 {
     any_t *id = dico_t_get_any(any->value.dict, "id");
     any_t *level = dico_t_get_any(any->value.dict, "level");

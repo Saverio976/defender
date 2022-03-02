@@ -32,24 +32,24 @@ int create_button(scene_t *scene, char const path[]);
 int launch_game(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
-void on_hover_menu_but(object_t *obj, dico_t *dico, window_t *win,
+void on_hover_menu_but(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
-void off_hover_menu_but(object_t *obj, dico_t *dico, window_t *win,
+void off_hover_menu_but(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
-void click_play_button(object_t *obj, dico_t *dico, window_t *win,
+void click_play_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
-void click_settings_button(object_t *obj, dico_t *dico, window_t *win,
+void click_settings_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
-void click_quit_button(object_t *obj, dico_t *dico, window_t *win,
+void click_quit_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 int init_level_menu(window_t *win);
 
-void click_level_button(object_t *obj, dico_t *dico, window_t *win,
+void click_level_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 #endif

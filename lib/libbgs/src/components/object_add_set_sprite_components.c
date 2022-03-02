@@ -26,7 +26,7 @@ int object_add_chrono(object_t *object, float seconds,
 }
 
 int object_add_sprite_health(object_t *object, float life, float max_life,
-    void (*dead)(object_t *object, dico_t *scene_components, window_t *win))
+    void (*dead)(object_t *object, scene_t *scene, window_t *win))
 {
     sprite_health_t *sprite_health = NULL;
 

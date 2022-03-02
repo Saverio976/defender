@@ -24,12 +24,12 @@ sfFloatRect get_object_global_bounces(object_t *object)
 }
 
 void call_collision_fct(object_t *this, object_t *other,
-    dico_t *scene_components, window_t *win)
+    scene_t *scene, window_t *win)
 {
     on_collision_t *this_col = NULL;
     on_collision_t *other_col = NULL;
 
-    if (this == NULL || other == NULL || scene_components == NULL ||
+    if (this == NULL || other == NULL || scene == NULL ||
         win == NULL) {
         return;
     }
@@ -44,7 +44,7 @@ void call_collision_fct(object_t *this, object_t *other,
         return;
     }
     dico_t_add_data(this_col->collisions_dico, other_col->key, NULL, NULL);
-    this_col->collision(this, other, scene_components, win);
+    this_col->collision(this, other, scene, win);
 }
 
 void remove_object_this(object_t *this, object_t *other)
@@ -65,10 +65,10 @@ void remove_object_this(object_t *this, object_t *other)
     }
 }
 
-void object_update_collision_event(object_t *this, dico_t *scene_components,
+void object_update_collision_event(object_t *this, scene_t *scene,
     window_t *win)
 {
-    list_ptr_t *list = dico_t_get_value(scene_components, ON_COLLISION);
+    list_ptr_t *list = dico_t_get_value(scene->components, ON_COLLISION);
     list_t *elem = NULL;
     object_t *other = NULL;
     sfFloatRect this_rect;
@@ -83,24 +83,24 @@ void object_update_collision_event(object_t *this, dico_t *scene_components,
         other = ((object_t *) elem->var);
         other_rect = get_object_global_bounces(other);
         if (check_collision(&this_rect, &other_rect, this, other) == true) {
-            call_collision_fct(this, other, scene_components, win);
+            call_collision_fct(this, other, scene, win);
         } else {
             remove_object_this(this, other);
         }
     }
 }
 
-void object_update(object_t *object, dico_t *scene_components,
+void object_update(object_t *object, scene_t *scene,
     window_t *win, float seconds)
 {
     if (object != NULL && object->update != NULL) {
-        object->update(object, scene_components, win, seconds);
+        object->update(object, scene, win, seconds);
     }
     if (object == NULL || object->components == NULL) {
         return;
     }
-    object_check_health(object, scene_components, win);
-    object_check_event(object, scene_components, win);
-    object_update_mouse_event(object, scene_components, win);
-    object_update_collision_event(object, scene_components, win);
+    object_check_health(object, scene, win);
+    object_check_event(object, scene, win);
+    object_update_mouse_event(object, scene, win);
+    object_update_collision_event(object, scene, win);
 }

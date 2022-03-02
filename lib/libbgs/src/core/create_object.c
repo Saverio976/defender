@@ -86,7 +86,7 @@ int object_set_sprite(object_t *object, char const *path, sfIntRect rect,
 }
 
 object_t *create_object(
-    void (*update)(object_t *, dico_t *, window_t *win, float),
+    void (*update)(object_t *, scene_t *, window_t *win, float),
     void (*display)(object_t *, dico_t *, dico_t *, sfRenderWindow *),
     scene_t *scene)
 {

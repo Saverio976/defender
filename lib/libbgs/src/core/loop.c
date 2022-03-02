@@ -33,7 +33,7 @@ static void window_update(scene_t *scene, window_t *win, float seconds)
     for (int i = 0; i < scene->updates->len; i++) {
         obj = ((object_t *) elem->var);
         if (obj->components != NULL || obj->update != NULL) {
-            object_update(obj, scene->components, win, seconds);
+            object_update(obj, scene, win, seconds);
         }
         elem = elem->next;
     }

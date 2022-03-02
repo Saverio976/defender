@@ -30,9 +30,9 @@ int event_add_node(set_event_t *event, node_params_t params)
     return BGS_OK;
 }
 
-set_event_t *create_event(void (*on)(object_t *, dico_t *, window_t *,
+set_event_t *create_event(void (*on)(object_t *, scene_t *, window_t *,
     set_event_t *), bool hover, object_t *object,
-    void (*off)(object_t *, dico_t *, window_t *, set_event_t *))
+    void (*off)(object_t *, scene_t *, window_t *, set_event_t *))
 {
     set_event_t *event = malloc(sizeof(set_event_t));
 

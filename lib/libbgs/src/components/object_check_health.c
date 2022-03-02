@@ -8,7 +8,7 @@
 #include "my_bgs.h"
 #include "my_bgs_components.h"
 
-void object_check_health(object_t *object, dico_t *scene_components,
+void object_check_health(object_t *object, scene_t *scene,
     window_t *win)
 {
     sprite_health_t *health = NULL;
@@ -22,6 +22,6 @@ void object_check_health(object_t *object, dico_t *scene_components,
     }
     if (health->life <= 0 && health->is_alive == true) {
         health->is_alive = false;
-        health->dead(object, scene_components, win);
+        health->dead(object, scene, win);
     }
 }

@@ -59,21 +59,21 @@ static int check_left_click(object_t *object, window_t *win)
     return (false);
 }
 
-void object_update_mouse_event(object_t *object, dico_t *components,
+void object_update_mouse_event(object_t *object, scene_t *scene,
     window_t *win)
 {
     void *data = NULL;
 
     data = dico_t_get_value(object->components, ON_HOVER_KEY);
     if (data != NULL && check_hover(object, win) == 1) {
-        ((on_hover_t *) data)->hover(object, components, win);
+        ((on_hover_t *) data)->hover(object, scene, win);
     }
     data = dico_t_get_value(object->components, ON_RIGHT_KEY);
     if (data != NULL && check_right_click(object, win) == 1) {
-        ((on_right_click_t *) data)->right_click(object, components, win);
+        ((on_right_click_t *) data)->right_click(object, scene, win);
     }
     data = dico_t_get_value(object->components, ON_LEFT_KEY);
     if (data != NULL && check_left_click(object, win) == 1) {
-        ((on_left_click_t *) data)->left_click(object, components, win);
+        ((on_left_click_t *) data)->left_click(object, scene, win);
     }
 }

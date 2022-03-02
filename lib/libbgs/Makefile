@@ -31,7 +31,6 @@ SRCDIR			=	src/
 SRC_COMPONENTS	:= 	add_components.c					\
 					create_event.c						\
 					object_add_collision_components.c	\
-					object_add_set_event.c				\
 					object_add_set_sprite_components.c	\
 					object_check_event.c				\
 					object_set_event.c					\

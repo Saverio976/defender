@@ -57,7 +57,7 @@ list_ptr_t *create_square_list(object_t *object)
 }
 
 int object_add_collision(object_t *object, scene_t *scene,
-    void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
+    void (*collision)(object_t *this, object_t *other, scene_t *scene,
     window_t *win), bool is_pixel)
 {
     on_collision_t *on_collision = NULL;

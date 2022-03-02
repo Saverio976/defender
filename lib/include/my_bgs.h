@@ -61,7 +61,7 @@ struct object_s {
     } drawable;
     dico_t *components;
     bool is_visible;
-    void (*update)(object_t *, dico_t *scene_components, window_t *win, float);
+    void (*update)(object_t *, scene_t *scene, window_t *win, float);
     void (*display)(object_t *, dico_t *scene_components,
         dico_t *win_components, sfRenderWindow *win);
 };
@@ -187,7 +187,7 @@ int object_set_sprite(object_t *object, char const *path, sfIntRect rect,
 ** @return object : the object is created
 **/
 object_t *create_object(
-    void (*update)(object_t *, dico_t *, window_t *win, float),
+    void (*update)(object_t *, scene_t *, window_t *win, float),
     void (*display)(object_t *, dico_t *, dico_t *, sfRenderWindow *),
     scene_t *scene);
 

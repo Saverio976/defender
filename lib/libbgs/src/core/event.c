@@ -23,7 +23,7 @@ int window_update_event(window_t *win, scene_t *scene)
     }
     do {
         if (my_strstartswith(cursor->key, SET_EVENT) == 1) {
-            check_event(cursor->value, NULL, win, scene->components);
+            check_event(cursor->value, NULL, win, scene);
         }
         cursor = cursor->next;
     } while (cursor != win->components);
@@ -52,7 +52,7 @@ int scene_update_event(window_t *win, scene_t *scene)
     cursor = scene->components;
     do {
         if (my_strstartswith(cursor->key, SET_EVENT) == 1) {
-            check_event(cursor->value, NULL, win, scene->components);
+            check_event(cursor->value, NULL, win, scene);
         }
         cursor = cursor->next;
     } while (cursor != scene->components);

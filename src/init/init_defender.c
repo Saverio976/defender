@@ -11,7 +11,8 @@
 #include "my_bgs.h"
 #include "my_json.h"
 
-window_t *init_defender(int ac, char **av)
+window_t *init_defender(__attribute__((unused)) int ac,
+        __attribute__((unused)) char **av)
 {
     sfVideoMode mode = {1920, 1080, 32};
     char const title[] = "DEFENDER";

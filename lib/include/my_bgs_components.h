@@ -55,9 +55,9 @@ struct set_event_s {
     list_ptr_t *list_event;
     bool hover;
     bool prev_call;
-    void (*on)(object_t *object, dico_t *scene_components, window_t *win,
+    void (*on)(object_t *object, scene_t *scene, window_t *win,
         set_event_t *event);
-    void (*off)(object_t *object, dico_t *scene_components, window_t *win,
+    void (*off)(object_t *object, scene_t *scene, window_t *win,
         set_event_t *event);
 };
 
@@ -72,7 +72,7 @@ struct sprite_move_s {
 struct sprite_health_s {
     float life;
     float max_life;
-    void (*dead)(object_t *object, dico_t *scene_add_components, window_t *win);
+    void (*dead)(object_t *object, scene_t *scene, window_t *win);
     bool is_alive;
 };
 
@@ -80,7 +80,7 @@ struct on_collision_s {
     char key[255];
     bool is_pixel;
     dico_t *collisions_dico;
-    void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
+    void (*collision)(object_t *this, object_t *other, scene_t *scene,
         window_t *win);
     list_ptr_t *solid_squares;
 };
@@ -91,49 +91,66 @@ struct sprite_chrono_s {
 };
 
 struct on_hover_s {
-    void (*hover)(object_t *, dico_t *, window_t *win);
+    void (*hover)(object_t *, scene_t *, window_t *win);
 };
 
 struct on_right_click_s {
     bool prev_right_click;
-    void (*right_click)(object_t *, dico_t *, window_t *win);
+    void (*right_click)(object_t *, scene_t *, window_t *win);
 };
 
 struct on_left_click_s {
     bool prev_left_click;
-    void (*left_click)(object_t *, dico_t *, window_t *win);
+    void (*left_click)(object_t *, scene_t *, window_t *win);
 };
 
 int object_add_components(object_t *object, void *data, const char key[],
     void (*destroy)(void *));
+
 int object_add_hover_event(object_t *object, void (*hover)(object_t *, dico_t *,
     window_t *win));
+
 int object_add_right_click_event(object_t *object,
     void (*right_click)(object_t *, dico_t *, window_t *win));
+
 int object_add_left_click_event(object_t *object, void (*left_click)(object_t *,
     dico_t *, window_t *win));
+
 int object_add_chrono(object_t *object, float seconds,
     float refresh_rate);
+
 int object_add_sprite_text_solid(object_t *object);
+
 int object_add_sprite_health(object_t *object, float life, float max_life,
-    void (*dead)(object_t *object, dico_t *scene_components, window_t *win));
+    void (*dead)(object_t *object, scene_t *scene, window_t *win));
+
 int object_add_sprite_move(object_t *object, sfVector2f vect);
+
 int object_add_sprite_anim(object_t *object, sfIntRect rect);
-void object_update_mouse_event(object_t *object, dico_t *components,
+
+void object_update_mouse_event(object_t *object, scene_t *scene,
     window_t *win);
+
 int object_add_collision(object_t *object, scene_t *scene,
-    void (*collision)(object_t *this, object_t *other, dico_t *scene_components,
+    void (*collision)(object_t *this, object_t *other, scene_t *scene,
     window_t *win), bool is_pixel);
+
 void set_display(object_t *object);
+
 void unset_display(object_t *object);
+
 int object_set_event(object_t *object, set_event_t *usr_event);
+
 int event_add_node(set_event_t *event, node_params_t params);
-set_event_t *create_event(void (*on)(object_t *, dico_t *, window_t *,
+
+set_event_t *create_event(void (*on)(object_t *, scene_t *, window_t *,
     set_event_t *), bool hover, object_t *object,
-    void (*off)(object_t *, dico_t *, window_t *, set_event_t *));
-void object_check_health(object_t *object, dico_t *scene_components,
+    void (*off)(object_t *, scene_t *, window_t *, set_event_t *));
+
+void object_check_health(object_t *object, scene_t *scene,
     window_t *win);
+
 void check_event(set_event_t *set_event, object_t *object,
-    window_t *win, dico_t *scene_components);
+    window_t *win, scene_t *scene_components);
 
 #endif /* !BGS_COMPONENTS_ */
