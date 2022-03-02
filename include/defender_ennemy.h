@@ -31,4 +31,6 @@ typedef struct ennemy_s ennemy_t;
 
 void update_ennemy(object_t *obj, scene_t *scene, window_t *win, float dtime);
 
+int create_ennemy(scene_t *scene, char const *path_json, sfVector2f pos);
+
 #endif
