@@ -10,6 +10,7 @@
 #include "my_wordarray.h"
 #include "my_json.h"
 #include "my_strings.h"
+#include "defender_ennemy.h"
 #include "my_bgs.h"
 
 static int detect_square_type(char c, scene_t *scene, sfVector2f current_pos,
@@ -65,6 +66,8 @@ int create_map(scene_t *scene, char const *path, any_t *squares_path)
         return RET_ERR_MALLOC;
     }
     free(str);
+    dico_t_add_data(scene->components, SCENE_COMP_MAP,
+        my_wordarray_from_wordarray(map), my_wordarray_free);
     ret = create_square_from_map(map, scene, squares_path->value.dict);
     my_wordarray_free(map);
     return ret;
