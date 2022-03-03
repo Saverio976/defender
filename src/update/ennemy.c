@@ -16,24 +16,20 @@ static sfVector2f move_ennemy(char **map, sfVector2i pos, ennemy_t *enn)
     int len = my_wordarray_len(map);
     sfVector2f new = {pos.x, pos.y};
 
-    if (pos.y + 1 < len && pos.x < my_strlen(map[pos.y + 1]) &&
-            pos.y + 1 != enn->last_pos.y &&
-            map[pos.y + 1][pos.x] == MAP_ROAD_CHAR) {
+    if (pos.y + 1 < len && pos.x < my_strlen(map[pos.y + 1]) && pos.y + 1 !=
+            enn->last_pos.y && map[pos.y + 1][pos.x] == MAP_ROAD_CHAR) {
         new = (sfVector2f) {pos.y + 1, pos.x};
     }
-    if (pos.y - 1 >= 0 && pos.x < my_strlen(map[pos.y - 1]) &&
-            pos.y - 1 != enn->last_pos.y &&
-            map[pos.y - 1][pos.x] == MAP_ROAD_CHAR) {
+    if (pos.y - 1 >= 0 && pos.x < my_strlen(map[pos.y - 1]) && pos.y - 1 !=
+            enn->last_pos.y && map[pos.y - 1][pos.x] == MAP_ROAD_CHAR) {
         new = (sfVector2f) {pos.y - 1, pos.x};
     }
-    if (pos.y < len && pos.x - 1 < my_strlen(map[pos.y]) &&
-            pos.x - 1 != enn->last_pos.x &&
-            map[pos.y][pos.x - 1] == MAP_ROAD_CHAR) {
+    if (pos.y < len && pos.x - 1 < my_strlen(map[pos.y]) && pos.x - 1 !=
+            enn->last_pos.x && map[pos.y][pos.x - 1] == MAP_ROAD_CHAR) {
         new = (sfVector2f) {pos.y, pos.x - 1};
     }
-    if (pos.y < len && pos.x + 1 < my_strlen(map[pos.y]) &&
-            pos.x + 1 != enn->last_pos.x &&
-            map[pos.y][pos.x + 1] == MAP_ROAD_CHAR) {
+    if (pos.y < len && pos.x + 1 < my_strlen(map[pos.y]) && pos.x + 1 !=
+            enn->last_pos.x && map[pos.y][pos.x + 1] == MAP_ROAD_CHAR) {
         new = (sfVector2f) {pos.y, pos.x + 1};
     }
     return (new);
@@ -54,9 +50,10 @@ void update_ennemy(object_t *obj, scene_t *scene, window_t *win, float dtime)
     if (ennemy_me == NULL) {
         return;
     }
-    pos_f = sfSprite_getPosition(obj->drawable.sprite);
+    pos_f = obj->bigdata.sprite_bigdata.pos;
     pos_i.x = pos_f.x / MAP_SIZE_SQUARE_X;
     pos_i.y = pos_f.y / MAP_SIZE_SQUARE_Y;
-    //TODO
-    move_ennemy(map, pos_i, ennemy_me);
+    pos_f = move_ennemy(map, pos_i, ennemy_me);
+    obj->bigdata.sprite_bigdata.pos.x = pos_f.x * MAP_SIZE_SQUARE_X;
+    obj->bigdata.sprite_bigdata.pos.y = pos_f.y * MAP_SIZE_SQUARE_Y;
 }
