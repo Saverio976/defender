@@ -5,6 +5,7 @@
 ** get map from path
 */
 
+#include <stdlib.h>
 #include "defender.h"
 #include "my_fs.h"
 #include "my_wordarray.h"
@@ -50,6 +51,11 @@ static int create_square_from_map(char **map, scene_t *scene,
     return ret;
 }
 
+static void free_word_array_void(void *data)
+{
+    my_wordarray_free(data);
+}
+
 int create_map(scene_t *scene, char const *path, any_t *squares_path)
 {
     char **map = NULL;
@@ -67,7 +73,7 @@ int create_map(scene_t *scene, char const *path, any_t *squares_path)
     }
     free(str);
     dico_t_add_data(scene->components, SCENE_COMP_MAP,
-        my_wordarray_from_wordarray(map), my_wordarray_free);
+        my_wordarray_from_wordarray(map), free_word_array_void);
     ret = create_square_from_map(map, scene, squares_path->value.dict);
     my_wordarray_free(map);
     return ret;
