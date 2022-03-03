@@ -15,18 +15,8 @@ enum trap_type {
     POISON_TYPE
 };
 
-typedef struct ennemy_s ennemy_t;
 typedef struct tower_s tower_t;
 typedef struct trap_s trap_t;
-
-struct ennemy_s {
-    int xp;
-    int com;
-    int life;
-    float speed;
-    bool is_fly;
-    float load_time;
-};
 
 struct tower_s {
     int size;
@@ -44,44 +34,6 @@ struct trap_s {
     float dammage;
     int scope;
     float build_couldown;
-};
-
-//-----------------------------------------------------------------------------
-
-static const ennemy_t MINION = {
-    1,
-    2,
-    2,
-    2,
-    false,
-    0.25
-};
-
-static const ennemy_t FLY = {
-    3,
-    4,
-    3,
-    3,
-    true,
-    3
-};
-
-static const ennemy_t TANK = {
-    9,
-    11,
-    20,
-    0.5,
-    false,
-    10
-};
-
-static const ennemy_t KAMIKAZE = {
-    1,
-    10,
-    3,
-    9,
-    false,
-    1
 };
 
 //-----------------------------------------------------------------------------
