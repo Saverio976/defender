@@ -27,6 +27,11 @@ static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 static const char LEVEL_DATA[] = "./assets/data/game/level/level_";
 static const char EXTENSION[] = ".json\0";
 
+struct ennemy_s {
+    char *ennemy_file;
+    float time;
+};
+
 window_t *init_defender(int ac, char **av);
 
 int create_map(scene_t *scene, char const *path, any_t *squares_path);

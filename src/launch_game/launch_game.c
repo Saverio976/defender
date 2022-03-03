@@ -13,14 +13,23 @@
 #include "my_json.h"
 #include "defender.h"
 
+static void update_wave_launcher(object_t *object, scene_t *scene,
+    window_t *win, float time)
+{
+    
+}
+
 static int create_game_from_level_data(any_t *level_data, object_t *obj,
     scene_t *scene, window_t *win)
 {
     any_t *path = dico_t_get_any(level_data->value.dict, "map path");
+    object_t *wave_launcher = create_object(update_wave_launcher, NULL, scene);
 
-    if (path == NULL) {
+    if (path == NULL || wave_launcher == NULL ||
+        list_add_to_end(scene->updates, wave_launcher) == NULL) {
         return RET_INVALID_INPUT;
     }
+    object_set_custom(wave_launcher);
     create_map(scene, path->value.str, dico_t_get_any(level_data->value.dict,
         "squares path"));
     destroy_any(level_data);

@@ -8,9 +8,11 @@
 #ifndef DEFENDER_ENNEMY_H_
     #define DEFENDER_ENNEMY_H_
 
-    #define MAP_SIZE_SQUARE_X 48
-    #define MAP_SIZE_SQUARE_Y 48
-    #define MAP_ROAD_CHAR 'r'
+    #include "defender.h"
+
+    #define MAP_SIZE_SQUARE_X SQUARE_POS_INCREMENTATION
+    #define MAP_SIZE_SQUARE_Y SQUARE_POS_INCREMENTATION
+    #define MAP_ROAD_CHAR '#'
 
     #include <stdbool.h>
     #include "my_bgs.h"
