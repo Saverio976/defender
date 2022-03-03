@@ -25,12 +25,14 @@
 static const char MAIN_MENU[] = "./assets/data/game/menu/main.json";
 static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 static const char LEVEL_DATA[] = "./assets/data/game/level/level_";
-static const char EXTENSION[] = ".json\0";
+static const char EXTENSION[] = ".json";
 
-struct ennemy_s {
+struct ennemy_load_s {
     char *ennemy_file;
     float time;
+    int spawn;
 };
+typedef struct ennemy_load_s ennemy_load_t;
 
 window_t *init_defender(int ac, char **av);
 
