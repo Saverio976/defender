@@ -28,6 +28,7 @@ CURR_RULE	=	all
 # ----------------------------------------------------------------------------
 # SRC
 SRCINITDIR		:=  init/
+SRCMAP			:=	map/
 SRCUPDATEDIR	:=  update/
 SRCLAUNCHDIR	:=	launch_game/
 SRCDIR			:=	src/
@@ -37,6 +38,9 @@ SRC_INIT		:= 	init_defender.c		\
 					init_menu.c
 SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
 
+SRC_MAP			:= 	create_map.c
+SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
+
 SRC_UPDATE		:=	button_menu.c	\
 					button_level.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
@@ -44,7 +48,7 @@ SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 SRC_LAUNC		:=	launch_game.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
-SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC)
+SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)
 SRC			:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ			:=	$(SRC:%.c=%.o)

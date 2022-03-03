@@ -9,6 +9,7 @@
     #define defender_H_
 
     #include "my_bgs.h"
+    #include "my_json.h"
     #include "my_bgs_components.h"
 
     #define RET_OK 0
@@ -24,6 +25,8 @@ static const char LEVEL_DATA[] = "./assets/data/game/level/level_";
 static const char EXTENSION[] = ".json\0";
 
 window_t *init_defender(int ac, char **av);
+
+int create_map(scene_t *scene, char const *path, any_t *squares_path);
 
 int init_main_menu(window_t *win);
 

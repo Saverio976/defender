@@ -81,6 +81,7 @@ int loop(window_t *win)
     window_setup_scene(win);
     while (sfRenderWindow_isOpen(win->win) && ret == BGS_OK) {
         ret = scene_handling(win, &scene, timer);
+        printf("scene: obj len: %d; display: %d\n", scene->objects->len, scene->displayables->len);
         if (ret == BGS_OK) {
             ret = event_handling(win->win);
         }
