@@ -51,8 +51,7 @@ int init_button(sfVector2f *pos, scene_t *scene, char *path[3], any_t *dico)
     }
     init_button_event(object, dico, scene);
     object = create_object(NULL, NULL, scene);
-    if (object_set_text(object, path[0], path[2], pos[1])
-        != BGS_OK) {
+    if (object_set_text(object, path[0], path[2], pos[1]) != BGS_OK) {
         return RET_ERR_MALLOC;
     }
     if (size != NULL) {

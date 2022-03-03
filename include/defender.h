@@ -19,6 +19,9 @@
     #define LEVEL_DATA_lEN 31
     #define EXTENSION_LEN 5
 
+    #define SQUARE_START_POS 20
+    #define SQUARE_POS_INCREMENTATION 40
+
 static const char MAIN_MENU[] = "./assets/data/game/menu/main.json";
 static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 static const char LEVEL_DATA[] = "./assets/data/game/level/level_";

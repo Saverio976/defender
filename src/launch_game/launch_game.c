@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "my_puts.h"
 #include "my_conversions.h"
+#include "my_wordarray.h"
 #include "my_strings.h"
 #include "my_json.h"
 #include "defender.h"
@@ -22,6 +23,7 @@ static int create_game_from_level_data(any_t *level_data, object_t *obj,
     }
     create_map(scene, path->value.str, dico_t_get_any(level_data->value.dict,
         "squares path"));
+    destroy_any(level_data);
     return RET_OK;
 }
 
@@ -46,7 +48,6 @@ int launch_game(object_t *obj, scene_t *scene,
         != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    printf("win scene len: %d\n", win->scenes->len);
     win->scene_index = 2;
     return RET_OK;
 }
