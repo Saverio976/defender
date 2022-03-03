@@ -1,0 +1,10 @@
+{
+    "xp": 1,
+    "com": 2,
+    "life": 2,
+    "speed": 2.0,
+    "is_fly": "false",
+    "load_time": 0.25,
+    "path": "./assets/image/ennemy/minion.png",
+    "int_rect": [0, 0, 100, 100]
+}

@@ -1,0 +1,10 @@
+{
+    "xp": 9,
+    "com": 11,
+    "life": 20,
+    "speed": 0.5,
+    "is_fly": "false",
+    "load_time": 10.0,
+    "path": "./assets/image/ennemy/tank.png",
+    "int_rect": [0, 0, 100, 100]
+}
