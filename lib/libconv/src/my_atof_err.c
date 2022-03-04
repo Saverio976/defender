@@ -33,6 +33,16 @@ static int get_after_decimal(char const *str)
     return (i);
 }
 
+static int compute_power(int nb, int power)
+{
+    int result = 1;
+
+    for (int i = 0; i < power; i++) {
+        result *= nb;
+    }
+    return (result);
+}
+
 /*
 ** @brief get the float number in str
 ** @param str
@@ -58,6 +68,6 @@ float my_atof_err(char const *str, int *is_error)
     if (*is_error) {
         return (0.0);
     }
-    result = ((float_part * 1.0) / (10 * (get_int_len(float_part) * 1.0)));
+    result = ((float_part * 1.0) / compute_power(10, get_int_len(float_part)));
     return (nb_part + result);
 }
