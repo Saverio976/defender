@@ -33,7 +33,6 @@ static int create_game(dico_t *level_data, __attribute__((unused))
         dico_t_get_any(level_data, "squares path")) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    destroy_any(level_data);
     return RET_OK;
 }
 
@@ -57,7 +56,7 @@ int launch_game(object_t *obj, scene_t *scene,
         new_scene, win) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    //destroy_any(level_data);
+    destroy_any(level_data);
     win->scene_index = 2;
     return RET_OK;
 }
