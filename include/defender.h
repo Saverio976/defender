@@ -69,4 +69,7 @@ void click_level_button(object_t *obj, scene_t *scene, window_t *win,
 
 void destroy_load_list(void *data);
 
+void update_wave_launcher(object_t *obj, scene_t *scene,
+    window_t *win, float dtime);
+
 #endif

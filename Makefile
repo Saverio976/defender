@@ -42,8 +42,9 @@ SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
 SRC_MAP			:= 	create_map.c
 SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
-SRC_UPDATE		:=	button_menu.c	\
-					ennemy.c		\
+SRC_UPDATE		:=	button_menu.c			\
+					ennemy.c				\
+					update_wave_launcher.c	\
 					button_level.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 

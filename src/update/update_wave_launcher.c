@@ -15,7 +15,7 @@ void update_wave_launcher(object_t *obj, scene_t *scene,
 {
     static float time = 0.0;
     list_ptr_t *list_enemy = NULL;
-    ennemy_load_t *enn = NULL;
+    load_t *enn = NULL;
 
     time += dtime;
     if (scene == NULL || obj == NULL) {

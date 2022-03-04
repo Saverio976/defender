@@ -13,12 +13,6 @@
 #include "my_json.h"
 #include "defender.h"
 
-void update_wave_launcher(object_t *object, scene_t *scene, window_t *win,
-    float time)
-{
-
-}
-
 static int create_game(dico_t *level_data, __attribute__((unused))
     object_t *obj, scene_t *scene, __attribute__((unused)) window_t *win)
 {
