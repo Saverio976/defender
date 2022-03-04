@@ -73,7 +73,7 @@ int launch_game(object_t *obj, scene_t *scene,
         new_scene, win) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    destroy_any(level_data);
+    //destroy_any(level_data);
     win->scene_index = 2;
     return RET_OK;
 }

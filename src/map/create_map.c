@@ -72,7 +72,7 @@ int create_map(scene_t *scene, char const *path, any_t *squares_path)
         return RET_ERR_MALLOC;
     }
     free(str);
-    dico_t_add_data(scene->components, SCENE_COMP_MAP,
+    scene->components = dico_t_add_data(scene->components, SCENE_COMP_MAP,
         my_wordarray_from_wordarray(map), free_word_array_void);
     ret = create_square_from_map(map, scene, squares_path->value.dict);
     my_wordarray_free(map);
