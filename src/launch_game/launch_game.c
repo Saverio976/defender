@@ -16,21 +16,11 @@
 void update_wave_launcher(object_t *object, scene_t *scene, window_t *win,
     float time)
 {
-    list_ptr_t *load_list = dico_t_get_value(object->components, "load list");
-    list_t *elem = NULL;
-    load_t *load = NULL;
 
-    if (load_list == NULL) {
-        return;
-    }
-    elem = load_list->start;
-    for (int i = 0; i < load_list->len; i++, elem = elem->next) {
-        load = ((load_t *) elem->var);
-    }
 }
 
-static int create_game(dico_t *level_data, object_t *obj,
-    scene_t *scene, window_t *win)
+static int create_game(dico_t *level_data, __attribute__((unused))
+    object_t *obj, scene_t *scene, __attribute__((unused)) window_t *win)
 {
     any_t *map_path = dico_t_get_any(level_data, "map path");
     object_t *wave_launcher = create_object(update_wave_launcher, NULL, scene);
