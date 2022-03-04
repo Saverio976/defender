@@ -47,7 +47,9 @@ SRC_UPDATE		:=	button_menu.c	\
 					button_level.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 
-SRC_LAUNC		:=	launch_game.c
+SRC_LAUNC		:=	launch_game.c		\
+					destroy_load_list.c	\
+					load_gestion.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
 SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)

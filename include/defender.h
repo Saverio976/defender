@@ -25,12 +25,14 @@
 static const char MAIN_MENU[] = "./assets/data/game/menu/main.json";
 static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 static const char LEVEL_DATA[] = "./assets/data/game/level/level_";
-static const char EXTENSION[] = ".json\0";
+static const char EXTENSION[] = ".json";
 
-struct ennemy_s {
+struct load_s {
     char *ennemy_file;
     float time;
+    int spawn;
 };
+typedef struct load_s load_t;
 
 window_t *init_defender(int ac, char **av);
 
@@ -45,6 +47,8 @@ int launch_game(object_t *obj, scene_t *scene, window_t *win,
 
 void on_hover_menu_but(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
+
+list_ptr_t *create_load_list(any_t *wave, any_t *ennemy_file);
 
 void off_hover_menu_but(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
@@ -62,5 +66,7 @@ int init_level_menu(window_t *win);
 
 void click_level_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
+
+void destroy_load_list(void *data);
 
 #endif

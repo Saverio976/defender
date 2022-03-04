@@ -13,25 +13,44 @@
 #include "my_json.h"
 #include "defender.h"
 
-static void update_wave_launcher(object_t *object, scene_t *scene,
-    window_t *win, float time)
+void update_wave_launcher(object_t *object, scene_t *scene, window_t *win,
+    float time)
 {
-    
+    list_ptr_t *load_list = dico_t_get_any(object->components, "load list");
+    list_t *elem = NULL;
+    load_t *load = NULL;
+
+    if (load_list == NULL) {
+        return;
+    }
+    elem = load_list->start;
+    for (int i = 0; i < load_list->len; i++, elem = elem->next) {
+        load = ((load_t *) elem->var);
+        //printf("file: %s; time: %f; spawn: %d\n", load->ennemy_file, load->time, load->spawn);
+    }
 }
 
-static int create_game_from_level_data(any_t *level_data, object_t *obj,
+static int create_game_from_level_data(dico_t *level_data, object_t *obj,
     scene_t *scene, window_t *win)
 {
-    any_t *path = dico_t_get_any(level_data->value.dict, "map path");
+    any_t *map_path = dico_t_get_any(level_data, "map path");
     object_t *wave_launcher = create_object(update_wave_launcher, NULL, scene);
+    list_ptr_t *load_list = create_load_list(dico_t_get_any(level_data, "wave"),
+        dico_t_get_any(level_data, "ennemy file"));
 
-    if (path == NULL || wave_launcher == NULL ||
-        list_add_to_end(scene->updates, wave_launcher) == NULL) {
+    if (map_path == NULL || wave_launcher == NULL ||
+        list_add_to_end(scene->updates, wave_launcher) == NULL ||
+        load_list == NULL) {
         return RET_INVALID_INPUT;
     }
     object_set_custom(wave_launcher);
-    create_map(scene, path->value.str, dico_t_get_any(level_data->value.dict,
-        "squares path"));
+    wave_launcher->components = dico_t_add_data(wave_launcher->components,
+        "load list", load_list, destroy_load_list);
+    if (wave_launcher == NULL || create_map(scene, map_path->value.str,
+        dico_t_get_any(level_data, "squares path")) != RET_OK) {
+        return RET_ERR_MALLOC;
+    }
+    printf("%p %s\n", wave_launcher->components, ((load_t *) ((list_ptr_t *) wave_launcher->components->value)->start->var)->ennemy_file);
     destroy_any(level_data);
     return RET_OK;
 }
@@ -53,7 +72,7 @@ int launch_game(object_t *obj, scene_t *scene,
     }
     level_data = parse_json_file(level_path);
     if (level_data == NULL ||
-        create_game_from_level_data(level_data, obj, new_scene, win)
+        create_game_from_level_data(level_data->value.dict, obj, new_scene, win)
         != RET_OK) {
         return RET_ERR_MALLOC;
     }
