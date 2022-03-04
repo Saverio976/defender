@@ -28,12 +28,27 @@ static int add_wave(list_ptr_t *load_list)
     return RET_OK;
 }
 
+static int fill_load_elem(list_ptr_t *load_list, char *ennemy_path,
+    any_t *load_time, any_t *spawn)
+{
+    load_t *load = NULL;
+
+    load = malloc(sizeof(load_t));
+    if (load == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    load->ennemy_file = my_strdup(ennemy_path);
+    load->time = load_time->value.f;
+    load->spawn = spawn->value.i;
+    list_add_to_end(load_list, load);
+    return RET_OK;
+}
+
 static int fill_load_list(char *ennemy_path, any_t *number, any_t *spawn,
     list_ptr_t *load_list)
 {
     any_t *ennemy = parse_json_file(ennemy_path);
     any_t *load_time = NULL;
-    load_t *load = NULL;
 
     if (ennemy == NULL || ennemy->type != DICT || number == NULL ||
         number->type != INT || spawn == NULL || spawn->type != INT) {
@@ -41,19 +56,12 @@ static int fill_load_list(char *ennemy_path, any_t *number, any_t *spawn,
     }
     load_time = dico_t_get_any(ennemy->value.dict, "load_time");
     for (int i = 0; i < number->value.i && load_time != NULL; i++) {
-        load = malloc(sizeof(load_t));
-        if (load == NULL) {
+        if (fill_load_elem(load_list, ennemy_path, load_time, spawn)
+            != RET_OK) {
             return RET_ERR_MALLOC;
         }
-        load->ennemy_file = ennemy_path;
-        printf("load time: %f\n", load_time->value.f);
-        if (load_time->type != FLOAT) {
-            printf("OUOHO\n");
-        }
-        load->time = load_time->value.f;
-        load->spawn = spawn->value.i;
-        list_add_to_end(load_list, load);
     }
+    destroy_any(ennemy);
     return (load_time != NULL) ? RET_OK : RET_ERR_MALLOC;
 }
 
