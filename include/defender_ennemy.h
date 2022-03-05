@@ -37,4 +37,6 @@ void update_ennemy(object_t *obj, scene_t *scene, window_t *win, float dtime);
 
 int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn);
 
+ennemy_t *init_ennemy(any_t *json);
+
 #endif

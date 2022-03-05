@@ -7,7 +7,7 @@
 
 #include "my_bgs.h"
 #include "my_bgs_components.h"
-#include "../include/libbgs_private.h"
+#include "libbgs_private.h"
 
 int window_add_scene(window_t *win, scene_t *scene)
 {

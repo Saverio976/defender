@@ -36,6 +36,7 @@ SRCDIR			:=	src/
 SRC_INIT		:= 	init_defender.c		\
 					create_button.c		\
 					create_ennemy.c		\
+					ennemy_struct.c		\
 					init_menu.c
 SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
 

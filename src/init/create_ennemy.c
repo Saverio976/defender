@@ -5,11 +5,15 @@
 ** create ennemy form a json
 */
 
+#include <stdlib.h>
 #include "my_bgs.h"
+#include "my_bgs_components.h"
 #include "my_json.h"
 #include "my_strings.h"
 #include "defender.h"
 #include "defender_ennemy.h"
+
+int add_object_to_lists(scene_t *scene, object_t *object);
 
 static sfVector2f get_pos_map_ennemy(scene_t *scene, int nb_spawn)
 {
@@ -78,6 +82,7 @@ static int set_obj_ennemy(scene_t *scene, object_t *obj, any_t *json,
     }
     pos = get_pos_map_ennemy(scene, nb_spawn);
     ret_code = object_set_sprite(obj, path_sprite, rect, pos);
+    add_object_to_lists(scene, obj);
     return (ret_code);
 }
 
@@ -97,12 +102,8 @@ int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn)
     if (obj == NULL) {
         return (RET_ERR_MALLOC);
     }
-<<<<<<< Updated upstream
     set_obj_ennemy(scene, obj, json, nb_spawn);
-=======
-    ret_code = set_obj_ennemy(scene, obj, json, nb_spawn);
-    object_add_components(obj, data, OBJ_COMP_ENNSTRUCT);
->>>>>>> Stashed changes
+    object_add_components(obj, init_ennemy(json), OBJ_COMP_ENNSTRUCT, free);
     destroy_any(json);
     return (RET_OK);
 }
