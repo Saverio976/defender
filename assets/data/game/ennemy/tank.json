@@ -4,7 +4,7 @@
     "life": 20,
     "speed": 0.5,
     "is_fly": "false",
-    "load_time": 10.0,
+    "load_time": 10.25,
     "path": "./assets/image/ennemy/tank.png",
     "int_rect": [0, 0, 100, 100]
 }

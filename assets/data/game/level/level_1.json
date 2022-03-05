@@ -5,15 +5,16 @@
         "N": "./assets/image/map/castle_with_nico.png",
         "o": "./assets/image/map/square/bush.png",
         "#": "./assets/image/map/square/path.png",
+        "S": "./assets/image/map/square/path.png",
         "A": "./assets/image/map/square/three.png"
     },
     "ennemy file": {
-        ""
+        "minion": "./assets/data/game/ennemy/minion.json",
+        "fly": "./assets/data/game/ennemy/fly.json",
+        "tank": "./assets/data/game/ennemy/tank.json",
+        "kamikaze": "./assets/data/game/ennemy/kamikaze.json"
     },
     "life": 150,
-    "wave": [
-        [{"minion": 5}, {"kamikaze": 2}, {"fly": 4}],
-        [{"minion": 5}, {"kamikaze": 9}, {"fly": 4}]
-    ],
+    "wave": [["minion", 5, 1], ["fly", 2, 0], ["wave"], ["tank", 15, 0]],
     "cadence": 4
 }

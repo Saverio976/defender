@@ -41,6 +41,9 @@ static int get_out_of_sign(char const *str, int i, int *is_error)
         i++;
     }
     if (my_strcontainc("123456789", str[i]) == 0) {
+        if (str[i] == '0' && my_strcontainc("123456789", str[i]) == 0) {
+            return (i);
+        }
         *is_error = 1;
         return (84);
     }

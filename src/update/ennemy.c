@@ -35,7 +35,8 @@ static sfVector2f move_ennemy(char **map, sfVector2i pos, ennemy_t *enn)
     return (new);
 }
 
-void update_ennemy(object_t *obj, scene_t *scene, window_t *win, float dtime)
+void update_ennemy(object_t *obj, scene_t *scene,
+    __attribute__((unused)) window_t *win, __attribute__((unused)) float dtime)
 {
     char **map = NULL;
     ennemy_t *ennemy_me = NULL;

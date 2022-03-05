@@ -6,71 +6,44 @@
 */
 
 #include <stddef.h>
+#include "my_conversions.h"
 #include "my_strings.h"
 
-static int get_out_of_noise(char const *str, int *is_error)
+static int get_int_len(int nb)
 {
     int i = 0;
 
-    if (str == NULL) {
-        *is_error = 1;
-        return (84);
+    if (nb < 0) {
+        nb *= -1;
     }
-    while (str[i] != '\0' && my_strcontainc("\b\t\n\v\f\r ", str[i])) {
+    while (nb != 0) {
+        nb /= 10;
         i++;
     }
     return (i);
 }
 
-static int check_if_negativ_number(char const *str, int i)
+static int get_after_decimal(char const *str)
 {
-    int nb_minus = 0;
+    int i = 0;
 
-    while (str[i] != '\0' && my_strcontainc("+-", str[i])) {
-        if (str[i] == '-') {
-            nb_minus += 1;
-        }
-        i++;
-    }
-    return (nb_minus % 2 != 0);
-}
-
-static int get_out_of_sign(char const *str, int i, int *is_error)
-{
-    while (str[i] != '\0' && my_strcontainc("+-", str[i])) {
-        i++;
-    }
-    if (my_strcontainc("123456789", str[i]) == 0) {
-        *is_error = 1;
-        return (84);
-    }
+    for (; my_strcontainc("\b\t\n\v\f\r", str[i]); i++);
+    for (; my_strcontainc("+-", str[i]); i++);
+    for (; my_strcontainc("0123456789", str[i]); i++);
     return (i);
 }
 
-static float get_absol_neg_result(char const *str, int i)
+static int compute_power(int nb, int power)
 {
-    int result = 0;
-    int j = 0;
-    double f_part = 0.0;
+    int result = 1;
 
-    while (str[i] != '\0' && my_strcontainc("0123456789", str[i])) {
-        result *= 10;
-        result -= str[i] - '0';
-        i++;
+    for (int i = 0; i < power; i++) {
+        result *= nb;
     }
-    if (str[i] == '\0' && str[i] != '.') {
-        return (result * 1.0);
-    }
-    for (j = i + 1; str[j] != '\0' && my_strcontainc("0123456789", str[j]);
-            j++);
-    for (j = j - 1; str[j] != '.'; j--) {
-        f_part *= 0.1;
-        f_part -= (str[j] - '0') * 0.1;
-    }
-    return (result + f_part);
+    return (result);
 }
 
-/**
+/*
 ** @brief get the float number in str
 ** @param str
 ** @param is_error
@@ -79,21 +52,22 @@ static float get_absol_neg_result(char const *str, int i)
 float my_atof_err(char const *str, int *is_error)
 {
     int i = 0;
-    int nb_minus = 0;
-    float result = 0;
+    int nb_part = 0;
+    int float_part = 0;
+    float result = 0.0;
 
-    i = get_out_of_noise(str, is_error);
+    nb_part = my_atoi_err(str, is_error);
     if (*is_error) {
-        return (0);
+        return (0.0);
     }
-    nb_minus = check_if_negativ_number(str, i);
-    i = get_out_of_sign(str, i, is_error);
+    i = get_after_decimal(str);
+    if (str[i] != '.') {
+        return (nb_part);
+    }
+    float_part = my_atoi_err(str + i + 1, is_error);
     if (*is_error) {
-        return (0);
+        return (0.0);
     }
-    result = get_absol_neg_result(str, i);
-    if (nb_minus == 0) {
-        result *= -1;
-    }
-    return (result);
+    result = ((float_part * 1.0) / compute_power(10, get_int_len(float_part)));
+    return (nb_part + result);
 }
