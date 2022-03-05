@@ -79,7 +79,7 @@ ennemy_t *init_ennemy(any_t *json)
     if (set_ennemy_float(enn, json) != 1) {
         return (NULL);
     }
-    if (set_ennemy_str(enn, json)) {
+    if (set_ennemy_str(enn, json) != 1) {
         return (NULL);
     }
     return (enn);

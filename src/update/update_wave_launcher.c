@@ -28,7 +28,7 @@ void update_wave_launcher(object_t *obj, scene_t *scene,
     enn = list_enemy->start->var;
     if (enn != NULL && time > enn->time) {
         time = 0;
-        create_ennemy(scene, enn->ennemy_file, enn->spawn);
+        create_ennemy(scene, enn->ennemy_file, 1);
         rm_fst_elem(list_enemy);
     }
 }
