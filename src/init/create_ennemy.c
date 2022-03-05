@@ -17,6 +17,7 @@ static sfVector2f get_pos_map_ennemy(scene_t *scene, int nb_spawn)
     int nb_start = 0;
     int is_found = 0;
     sfVector2i pos = {0, 0};
+    int padding = MAP_SIZE_SQUARE_X;
 
     map = dico_t_get_value(scene->components, SCENE_COMP_MAP);
     if (map == NULL) {
@@ -25,13 +26,13 @@ static sfVector2f get_pos_map_ennemy(scene_t *scene, int nb_spawn)
     for (pos.y = 0; is_found == 0 && map[pos.y] != NULL; pos.y++) {
         for (pos.x = 0; is_found == 0 && map[pos.y][pos.x] != '\0'; pos.x++) {
             nb_start += (map[pos.y][pos.x] == MAP_SPAWN_CHAR) ? 1 : 0;
-            is_found = (nb_start == nb_spawn) ? 1 : 0;
+            is_found = (nb_start == nb_spawn + 1) ? 1 : 0;
         }
     }
     if (is_found == 0) {
         return ((sfVector2f) {0, 0});
     }
-    return ((sfVector2f) {pos.x, pos.y});
+    return ((sfVector2f) {pos.x * padding, pos.y * padding});
 }
 
 static int fill_vector2i(any_t *json, sfIntRect *rect)
@@ -96,7 +97,12 @@ int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn)
     if (obj == NULL) {
         return (RET_ERR_MALLOC);
     }
+<<<<<<< Updated upstream
     set_obj_ennemy(scene, obj, json, nb_spawn);
+=======
+    ret_code = set_obj_ennemy(scene, obj, json, nb_spawn);
+    object_add_components(obj, data, OBJ_COMP_ENNSTRUCT);
+>>>>>>> Stashed changes
     destroy_any(json);
     return (RET_OK);
 }
