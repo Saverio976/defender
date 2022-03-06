@@ -78,4 +78,10 @@ void destroy_pile(list_ptr_t *pile);
 
 void fill_data(char origin, char *end, any_t *any);
 
+char **get_any_string_array(any_t *array);
+
+int *get_any_int_array(any_t *array);
+
+float *get_any_float_array(any_t *array);
+
 #endif

@@ -32,7 +32,8 @@ GETDIR 		= 	get/
 
 # ----------------------------------------------------------------------------
 # SRC
-SRC_GET			:= 	get.c
+SRC_GET			:= 	get_from_array.c	\
+					get.c
 SRC_GET			:=	$(addprefix $(GETDIR),$(SRC_GET))
 
 SRC_PARSER		:=	any_dup.c		\

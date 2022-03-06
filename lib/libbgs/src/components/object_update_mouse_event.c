@@ -8,7 +8,8 @@
 #include <stdbool.h>
 #include "my_bgs_components.h"
 #include "my_bgs.h"
-
+// !!!
+// unused functions
 int check_hover(object_t *object, window_t *win)
 {
     sfFloatRect rect;

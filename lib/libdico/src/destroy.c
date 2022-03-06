@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #include "my_dico.h"
 
+void dico_t_destroy_void(void *data)
+{
+    dico_t_destroy((dico_t *) data);
+}
+
 void check_last(dico_t *cursor)
 {
     if (cursor != NULL) {

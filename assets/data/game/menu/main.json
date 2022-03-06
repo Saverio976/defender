@@ -1,25 +1,29 @@
 {
-    "sprite path": "./assets/image/menu/main/circle.png",
-    "font path": "assets/font/menlo.ttf",
     "buttons": [
         {
             "text": "play",
+            "font path": "assets/font/menlo.ttf",
             "text_pos": [490.0, 260.0],
             "pos": [500.0, 260.0],
+            "sprite path": "./assets/image/menu/main/circle.png",
             "size": 1.5,
             "id": 0
         },
         {
             "text": "settings",
+            "font path": "assets/font/menlo.ttf",
             "text_pos": [490.0, 935.0],
             "pos": [500.0, 935.0],
+            "sprite path": "./assets/image/menu/main/circle.png",
             "size": 1.5,
             "id": 1
         },
         {
             "text": "quit",
             "text_pos": [490.0, 1660.0],
+            "font path": "assets/font/menlo.ttf",
             "pos": [500.0, 1660.0],
+            "sprite path": "./assets/image/menu/main/circle.png",
             "size": 1.5,
             "id": 2
         }

@@ -1,0 +1,12 @@
+{
+    "font path": "assets/font/menlo.ttf",
+    "buttons": [
+        {
+            "text_pos": [300.0, 1690.0],
+            "text": "TOWER",
+            "sprite path": "./assets/image/menu/side/shop/back.png",
+            "pos": [560.0, 1690.0],
+            "size": 1.0
+        }
+    ]
+}

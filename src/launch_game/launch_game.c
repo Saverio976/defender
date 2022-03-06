@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "my_puts.h"
 #include "my_conversions.h"
+#include "defender_game_data.h"
 #include "my_wordarray.h"
 #include "my_strings.h"
 #include "my_json.h"
@@ -30,7 +31,8 @@ static int create_game(dico_t *level_data, __attribute__((unused))
     wave_launcher->components = dico_t_add_data(wave_launcher->components,
         "load list", load_list, destroy_load_list);
     if (wave_launcher == NULL || create_map(scene, map_path->value.str,
-        dico_t_get_any(level_data, "squares path")) != RET_OK) {
+        dico_t_get_any(level_data, "squares path")) != RET_OK ||
+        init_side_menu(win, scene) != RET_OK) {
         return RET_ERR_MALLOC;
     }
     return RET_OK;
@@ -48,9 +50,6 @@ int launch_game(object_t *obj, scene_t *scene,
         return RET_INVALID_INPUT;
     }
     level_path = dico_t_get_value(obj->components, "level path");
-    if (level_path == NULL) {
-        return RET_ERR_MALLOC;
-    }
     level_data = parse_json_file(level_path);
     if (level_data == NULL || create_game(level_data->value.dict, obj,
         new_scene, win) != RET_OK) {

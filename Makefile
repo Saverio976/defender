@@ -32,10 +32,19 @@ SRCMAP			:=	map/
 SRCUPDATEDIR	:=  update/
 SRCLAUNCHDIR	:=	launch_game/
 SRCDIR			:=	src/
+SRCBUTTON		:= create_button/
+SRCENNEMY		:= create_ennemy/
+
+SRC_BUTTON		:=	create_button.c		\
+					check_set_color.c
+SRC_BUTTON		:=	$(addprefix $(SRCBUTTON),$(SRC_BUTTON))
+
+SRC_ENNEMY		:=	create_ennemy.c
+SRC_ENNEMY		:=	$(addprefix $(SRCENNEMY),$(SRC_ENNEMY))
 
 SRC_INIT		:= 	init_defender.c		\
-					create_button.c		\
-					create_ennemy.c		\
+					init_side_menu.c	\
+					init_game_data.c	\
 					init_menu.c
 SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
 
@@ -44,7 +53,9 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
 SRC_UPDATE		:=	button_menu.c			\
 					ennemy.c				\
+					pause_button.c			\
 					update_wave_launcher.c	\
+					button_shop.c			\
 					button_level.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 
@@ -53,7 +64,8 @@ SRC_LAUNC		:=	launch_game.c		\
 					load_gestion.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
-SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)
+SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)	\
+				$(SRC_ENNEMY) $(SRC_BUTTON)
 SRC			:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ			:=	$(SRC:%.c=%.o)

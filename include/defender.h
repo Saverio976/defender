@@ -22,6 +22,8 @@
     #define SQUARE_START_POS 20
     #define SQUARE_POS_INCREMENTATION 40
 
+static const char SHOP_MENU[] = "./assets/data/game/menu/shop.json";
+static const char SIDE_MENU[] = "./assets/data/game/menu/side.json";
 static const char MAIN_MENU[] = "./assets/data/game/menu/main.json";
 static const char LEVEL_MENU[] = "./assets/data/game/menu/level.json";
 static const char LEVEL_DATA[] = "./assets/data/game/level/level_";
@@ -35,6 +37,9 @@ struct load_s {
 typedef struct load_s load_t;
 
 window_t *init_defender(int ac, char **av);
+
+void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
 
 int create_map(scene_t *scene, char const *path, any_t *squares_path);
 
@@ -71,5 +76,7 @@ void destroy_load_list(void *data);
 
 void update_wave_launcher(object_t *obj, scene_t *scene,
     window_t *win, float dtime);
+
+void check_set_color(object_t *object, dico_t *dico);
 
 #endif
