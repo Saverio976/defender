@@ -11,13 +11,14 @@
 #include "defender_game_data.h"
 #include "my_strings.h"
 
-static void (*button_event[5])(object_t *obj,
+static void (*button_event[6])(object_t *obj,
         scene_t *scene, window_t *win, set_event_t *evt) = {
     click_play_button,
     click_settings_button,
     click_quit_button,
     click_pause_button,
-    click_shop_button
+    click_shop_button,
+    click_resume_button
 };
 
 void init_button_event(object_t *object, dico_t *dico)
@@ -40,10 +41,20 @@ void init_button_event(object_t *object, dico_t *dico)
 int init_sprite(float *pos, char *path, scene_t *scene, dico_t *dico)
 {
     object_t *sprite = create_object(NULL, NULL, scene);
+    any_t *size = dico_t_get_any(dico, "size");
 
     if (sprite == NULL || object_set_sprite(sprite, path, (sfIntRect)
         {-1, -1, -1, -1}, (sfVector2f) {pos[1], pos[0]}) != BGS_OK) {
         return RET_INVALID_INPUT;
+    }
+    if (size != NULL && size->type == FLOAT) {
+        sprite->components = dico_t_add_data(sprite->components, SIZE,
+            any_dup(size), destroy_any);
+        if (sprite->components == NULL) {
+            return RET_ERR_MALLOC;
+        }
+        sfSprite_setScale(sprite->drawable.sprite, (sfVector2f) {size->value.f,
+            size->value.f});
     }
     init_button_event(sprite, dico);
     check_set_color(sprite, dico);

@@ -53,6 +53,7 @@ SRC_MAP			:= 	create_map.c
 SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
 SRC_UPDATE		:=	button_menu.c			\
+					button_resume.c			\
 					ennemy.c				\
 					pause_button.c			\
 					update_wave_launcher.c	\

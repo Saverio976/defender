@@ -11,6 +11,7 @@
     #include "my_dico.h"
     #include "defender.h"
 
+static const char SIZE[] = "size";
 static const char GAME_DATA[] = "game data";
 static const char PAUSE_OBJ[] = "pause obj";
 static const char SHOP_OBJ[] = "shop obj";
@@ -32,6 +33,9 @@ void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
 int init_side_menu(window_t *win, scene_t *scene);
 
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
+void click_resume_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 #endif /* !GAME_DATA_H_ */
