@@ -44,8 +44,10 @@ static void set_shop_back_event(list_t **elem, scene_t *scene)
     object_t *back = (*elem)->next->var;
 
     *elem = (*elem)->next;
-    event_add_node(create_event(shop_back_update, false, back, NULL),
-        (node_params_t) {sfMouseRight, sfKeyA, MOUSE});
+    if (event_add_node(create_event(shop_back_update, false, back, NULL),
+        (node_params_t) {sfMouseRight, sfKeyA, MOUSE}) != RET_OK) {
+            return;
+        }
     list_add_to_end(scene->updates, back);
 }
 
@@ -63,6 +65,6 @@ int init_side_menu(window_t *win, scene_t *scene)
         || add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    //set_shop_back_event(&elem, scene); mega bug qui a fait crash mon ordi
+    set_shop_back_event(&elem, scene);
     return RET_OK;
 }
