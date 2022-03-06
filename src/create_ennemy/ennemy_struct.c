@@ -84,5 +84,6 @@ ennemy_t *init_ennemy(any_t *json)
         return (NULL);
     }
     enn->last_pos = (sfVector2i) {-20, -20};
+    enn->time_last = 0;
     return (enn);
 }

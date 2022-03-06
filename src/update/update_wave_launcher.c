@@ -22,7 +22,7 @@ void update_wave_launcher(object_t *obj, scene_t *scene,
         return;
     }
     list_enemy = dico_t_get_value(obj->components, OBJ_COMP_MANAGEWAVE);
-    if (list_enemy == NULL) {
+    if (list_enemy == NULL || list_enemy->len > 0) {
         return;
     }
     enn = list_enemy->start->var;
