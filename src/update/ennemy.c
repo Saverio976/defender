@@ -69,10 +69,11 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
 
     pos_i.x = ((int) obj->bigdata.sprite_bigdata.pos.x) / MAP_SIZE_SQUARE_X;
     pos_i.y = ((int) obj->bigdata.sprite_bigdata.pos.y) / MAP_SIZE_SQUARE_Y;
-    enn->last_pos = pos_i;
     pos_f = get_right_pos(map, pos_i, enn);
     obj->bigdata.sprite_bigdata.pos.x = pos_f.x * MAP_SIZE_SQUARE_X;
     obj->bigdata.sprite_bigdata.pos.y = pos_f.y * MAP_SIZE_SQUARE_Y;
+    enn->last_pos.x = pos_i.x;
+    enn->last_pos.y = pos_i.y;
 }
 
 void update_ennemy(object_t *obj, scene_t *scene,
