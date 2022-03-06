@@ -1,0 +1,18 @@
+{
+    "buttons": [
+        {
+            "pos": [400.0, 910.0],
+            "sprite path": "./assets/image/menu/side/pause/back.png",
+            "color": [52, 59, 70, 230]
+        },
+        {
+            "text pos": [200.0, 910.0],
+            "font path": "assets/font/menlo.ttf",
+            "text": "resume",
+            "color": [127, 143, 167, 230],
+            "text color": [52, 59, 70, 230],
+            "sprite path": "./assets/image/menu/side/pause/button.png",
+            "pos": [200.0, 910.0]
+        }
+    ]
+}

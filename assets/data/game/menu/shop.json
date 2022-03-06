@@ -1,0 +1,14 @@
+{
+    "buttons": [
+        {
+            "text pos": [110.0, 1690.0],
+            "font path": "assets/font/menlo.ttf",
+            "text": "TOWER",
+            "text color": [127, 143, 167, 255],
+            "color": [52, 59, 70, 230],
+            "sprite path": "./assets/image/menu/side/shop/back.png",
+            "pos": [560.0, 1690.0],
+            "size": 1.0
+        }
+    ]
+}

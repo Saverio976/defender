@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.h>
 #include <stdlib.h>
+#include "defender_game_data.h"
 #include "defender.h"
 #include "my_bgs.h"
 #include "my_json.h"
@@ -20,7 +21,7 @@ window_t *init_defender(__attribute__((unused)) int ac,
     window_t *win = create_window(mode, title, style);
 
     if (win == NULL || init_main_menu(win) != RET_OK ||
-        init_level_menu(win) != RET_OK) {
+        init_level_menu(win) != RET_OK || init_game_data(win) != RET_OK) {
         return NULL;
     }
     return win;

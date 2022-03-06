@@ -93,10 +93,13 @@ void object_update_collision_event(object_t *this, scene_t *scene,
 void object_update(object_t *object, scene_t *scene,
     window_t *win, float seconds)
 {
+    if (object == NULL) {
+        return;
+    }
     if (object != NULL && object->update != NULL) {
         object->update(object, scene, win, seconds);
     }
-    if (object == NULL || object->components == NULL) {
+    if (object->components == NULL) {
         return;
     }
     object_check_health(object, scene, win);

@@ -1,0 +1,23 @@
+{
+    "font path": "assets/font/menlo.ttf",
+    "buttons": [
+        {
+            "sprite path": "./assets/image/menu/side/bar.png",
+            "pos": [540.0, 1880.0],
+            "color": [52, 59, 70, 255],
+            "size": 1.0
+        },
+        {
+            "color": [127, 143, 167, 255],
+            "sprite path": "./assets/image/menu/side/pause.png",
+            "pos": [36.0, 1879.0],
+            "id": 3
+        },
+        {
+            "color": [127, 143, 167, 255],
+            "sprite path": "./assets/image/menu/side/shop.png",
+            "pos": [105.0, 1879.0],
+            "id": 4
+        }
+    ]
+}

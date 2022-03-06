@@ -1,0 +1,13 @@
+{
+    "level progression": 0,
+    "com": 0,
+    "xp": 0,
+    "skill three": {
+        "springboard": {"state": 0, "cost": 25},
+        "poison": {"state": 0, "cost": 60},
+        "worker": {"state": 0, "cost": 1000},
+        "aerian tower": { "state": 0, "cost": 15},
+        "sniper": {"state": 0, "cost": 30},
+        "rafal": {"state": 0, "cost": 60}
+    }
+}

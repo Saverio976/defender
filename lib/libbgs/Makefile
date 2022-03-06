@@ -38,14 +38,15 @@ SRC_COMPONENTS	:= 	add_components.c					\
 					object_update_mouse_event.c
 SRC_COMPONENTS	:= $(addprefix components/,$(SRC_COMPONENTS))
 
-SRC_CORE		:=	add.c				\
-					create_object.c		\
-					create_scene.c		\
-					event.c				\
-					object_set_origin.c	\
-					loop.c				\
-					object_update.c		\
-					remove.c			\
+SRC_CORE		:=	add.c					\
+					create_object.c			\
+					create_scene.c			\
+					event.c					\
+					scene_reload_lists.c	\
+					object_set_origin.c		\
+					loop.c					\
+					object_update.c			\
+					remove.c				\
 					start.c
 SRC_CORE		:=	$(addprefix core/,$(SRC_CORE))
 

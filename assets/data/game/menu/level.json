@@ -1,26 +1,28 @@
 {
-    "sprite path": "./assets/image/menu/level/octo.png",
     "background path": "./assets/image/menu/level/background.png",
     "font path": "assets/font/menlo.ttf",
     "buttons": [
         {
             "text": "1",
-            "text_pos": [490.0, 260.0],
+            "text pos": [490.0, 260.0],
             "pos": [500.0, 260.0],
             "size": 1.0,
+            "sprite path": "./assets/image/menu/level/octo.png",
             "level path": "./assets/data/game/level/level_1.json"
         },
         {
             "text": "2",
-            "text_pos": [490.0, 935.0],
+            "text pos": [490.0, 935.0],
             "pos": [500.0, 935.0],
             "size": 1.0,
+            "sprite path": "./assets/image/menu/level/octo.png",
             "level path": "./assets/data/game/level/level_2.json"
         },
         {
             "text": "3",
-            "text_pos": [490.0, 1660.0],
+            "text pos": [490.0, 1660.0],
             "pos": [500.0, 1660.0],
+            "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
             "level path": "./assets/data/game/level/level_3.json"
         }

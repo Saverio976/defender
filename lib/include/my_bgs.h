@@ -283,4 +283,6 @@ void window_set_framerate_limit(window_t *win, unsigned int limit);
 **/
 window_t *create_window(sfVideoMode mode, const char *title, sfUint32 style);
 
+int scene_reload_lists(scene_t *scene);
+
 #endif /* !BGS_H_ */
