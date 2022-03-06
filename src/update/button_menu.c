@@ -5,9 +5,8 @@
 ** function for button hover
 */
 
-#include "my_bgs.h"
+#include "defender_game_data.h"
 #include "my_bgs_components.h"
-#include "my_puts.h"
 
 void click_play_button(__attribute((unused)) object_t *obj,
     __attribute((unused)) scene_t *scene, window_t *win,
@@ -35,8 +34,12 @@ void on_hover_menu_but(__attribute((unused)) object_t *obj,
     __attribute((unused)) window_t *win,
     __attribute((unused)) set_event_t *evt)
 {
-    if (obj->type == SPRITE) {
-        sfSprite_setScale(obj->drawable.sprite, (sfVector2f) {1.02, 1.02});
+    any_t *size = dico_t_get_any(obj->components, SIZE);
+    int scale = 0;
+
+    if (size != NULL && size->type == FLOAT && obj->type == SPRITE) {
+        scale = size->value.f + (size->value.f * 0.02);
+        sfSprite_setScale(obj->drawable.sprite, (sfVector2f) {scale, scale});
     }
 }
 
@@ -45,7 +48,11 @@ void off_hover_menu_but(object_t *obj,
     __attribute((unused)) window_t *win,
     __attribute((unused)) set_event_t *evt)
 {
-    if (obj->type == SPRITE) {
-        sfSprite_setScale(obj->drawable.sprite, (sfVector2f) {1.00, 1.00});
+    any_t *size = dico_t_get_any(obj->components, SIZE);
+    int scale = 0;
+
+    if (size != NULL && size->type == FLOAT && obj->type == SPRITE) {
+        scale = size->value.f;
+        sfSprite_setScale(obj->drawable.sprite, (sfVector2f) {scale, scale});
     }
 }

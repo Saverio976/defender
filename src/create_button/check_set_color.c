@@ -5,6 +5,7 @@
 ** check set color
 */
 
+#include <stdlib.h>
 #include "defender.h"
 
 void check_set_color(object_t *object, dico_t *dico)
@@ -25,5 +26,8 @@ void check_set_color(object_t *object, dico_t *dico)
         }
         sfText_setColor(object->drawable.text, sfColor_fromRGB(color[0],
             color[1], color[2]));
+    }
+    if (color != NULL) {
+        free(color);
     }
 }

@@ -36,7 +36,6 @@ static int add_hiden_list(scene_t *scene, list_t **elem, char const key[])
     if (scene->components == NULL) {
         return RET_ERR_MALLOC;
     }
-    printf("******************\n");
     return RET_OK;
 }
 
