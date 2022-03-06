@@ -91,7 +91,9 @@ void update_ennemy(object_t *obj, scene_t *scene,
         return;
     }
     ennemy_me->time_last += dtime;
-    if (ennemy_me->time_last > ennemy_me->load_time) {
+    if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
+
+    } else if (ennemy_me->time_last > ennemy_me->load_time) {
         move_ennemy(obj, ennemy_me, map);
         ennemy_me->time_last = 0;
     }
