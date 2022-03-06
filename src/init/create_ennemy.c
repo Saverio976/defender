@@ -36,7 +36,7 @@ static sfVector2f get_pos_map_ennemy(scene_t *scene, int nb_spawn)
     if (is_found == 0) {
         return ((sfVector2f) {0, 0});
     }
-    return ((sfVector2f) {pos.x * padding, pos.y * padding});
+    return ((sfVector2f) {--pos.x * padding, --pos.y * padding});
 }
 
 static int fill_vector2i(any_t *json, sfIntRect *rect)

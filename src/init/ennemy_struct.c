@@ -5,6 +5,7 @@
 ** ennemy structure fucntions
 */
 
+#include <SFML/System/Vector2.h>
 #include <stdlib.h>
 #include "my_strings.h"
 #include "my_json.h"
@@ -82,5 +83,6 @@ ennemy_t *init_ennemy(any_t *json)
     if (set_ennemy_str(enn, json) != 1) {
         return (NULL);
     }
+    enn->last_pos = (sfVector2i) {-20, -20};
     return (enn);
 }

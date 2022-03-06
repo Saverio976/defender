@@ -30,6 +30,7 @@ struct ennemy_s {
     bool is_fly;
     float load_time;
     sfVector2i last_pos;
+    float time_last;
 };
 typedef struct ennemy_s ennemy_t;
 
