@@ -66,7 +66,6 @@ static int set_obj_ennemy(scene_t *scene, object_t *obj, any_t *json,
         int nb_spawn)
 {
     any_t *any = NULL;
-    char *path_sprite = NULL;
     sfIntRect rect = {-1, -1, -1, -1};
     int ret_code = 0;
     sfVector2f pos = {0};
@@ -75,13 +74,12 @@ static int set_obj_ennemy(scene_t *scene, object_t *obj, any_t *json,
     if (any == NULL || any->type != STR) {
         return (RET_INVALID_INPUT);
     }
-    path_sprite = my_strdup(any->value.str);
     ret_code = fill_vector2i(json, &rect);
     if (ret_code != RET_OK) {
         return (ret_code);
     }
     pos = get_pos_map_ennemy(scene, nb_spawn);
-    ret_code = object_set_sprite(obj, path_sprite, rect, pos);
+    ret_code = object_set_sprite(obj, any->value.str, rect, pos);
     add_object_to_lists(scene, obj);
     return (ret_code);
 }
