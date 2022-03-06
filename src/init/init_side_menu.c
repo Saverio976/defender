@@ -18,6 +18,28 @@ static void free_list_void(void *data)
     free_list(list);
 }
 
+static int add_hiden_list(scene_t *scene, list_t **elem, char const key[])
+{
+    list_ptr_t *list = list_create();
+
+    if (list == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    (*elem) = (*elem)->next;
+    for (; (*elem) != scene->objects->start; (*elem) = (*elem)->next) {
+        ((object_t *) (*elem)->var)->is_visible = false;
+        list_add_to_end(list, (*elem)->var);
+    }
+    *elem = scene->objects->end;
+    scene->components = dico_t_add_data(scene->components, key, list,
+        free_list_void);
+    if (scene->components == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    printf("******************\n");
+    return RET_OK;
+}
+
 static void set_shop_back_event(list_t **elem, scene_t *scene)
 {
     object_t *back = (*elem)->next->var;
@@ -31,24 +53,17 @@ static void set_shop_back_event(list_t **elem, scene_t *scene)
 int init_side_menu(window_t *win, scene_t *scene)
 {
     list_t *elem = NULL;
-    list_ptr_t *shop_obj = list_create();
 
-    if (win == NULL || scene == NULL || shop_obj == NULL) {
+    if (win == NULL || scene == NULL ||
+        create_button(scene, SIDE_MENU) != RET_OK ) {
         return RET_INVALID_INPUT;
     }
-    create_button(scene, SIDE_MENU);
     elem = scene->objects->end;
-    create_button(scene, SHOP_MENU);
-    elem = elem->next;
-    //set_shop_back_event(&elem, scene);
-    for (; elem != scene->objects->start; elem = elem->next) {
-        ((object_t *) elem->var)->is_visible = false;
-        list_add_to_end(shop_obj, elem->var);
-    }
-    scene->components = dico_t_add_data(scene->components, SHOP_OBJ, shop_obj,
-        free_list_void);
-    if (scene->components == NULL) {
+    if (create_button(scene, SHOP_MENU) != RET_OK || add_hiden_list(scene,
+        &elem, SHOP_OBJ) != RET_OK || create_button(scene, PAUSE_MENU) != RET_OK
+        || add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
         return RET_ERR_MALLOC;
     }
+    //set_shop_back_event(&elem, scene); mega bug qui a fait crash mon ordi
     return RET_OK;
 }

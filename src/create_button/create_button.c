@@ -52,7 +52,7 @@ int init_sprite(float *pos, char *path, scene_t *scene, dico_t *dico)
 
 int init_text(float *pos, scene_t *scene, char *arg[2], dico_t *dico)
 {
-    any_t *size = dico_t_get_any(dico, "size");
+    any_t *size = dico_t_get_any(dico, "text size");
     object_t *text = create_object(NULL, NULL, scene);
 
     if (text == NULL || object_set_text(text, arg[0], arg[1],
@@ -71,7 +71,7 @@ int get_button_data(scene_t *scene, any_t *dico)
 {
     int ret = RET_OK;
     float *txt_pos = get_any_float_array(dico_t_get_any(dico->value.dict,
-        "text_pos"));
+        "text pos"));
     float *pos = get_any_float_array(dico_t_get_any(dico->value.dict, "pos"));
     any_t *text = dico_t_get_any(dico->value.dict, "text");
     any_t *sprite_path = dico_t_get_any(dico->value.dict, "sprite path");

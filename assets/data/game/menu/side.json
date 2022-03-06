@@ -2,24 +2,22 @@
     "font path": "assets/font/menlo.ttf",
     "buttons": [
         {
-            "text_pos": [490.0, 260.0],
             "sprite path": "./assets/image/menu/side/bar.png",
             "pos": [540.0, 1880.0],
+            "color": [52, 59, 70, 255],
             "size": 1.0
         },
         {
-            "text_pos": [15.0, 1879.0],
+            "color": [127, 143, 167, 255],
             "sprite path": "./assets/image/menu/side/pause.png",
             "pos": [36.0, 1879.0],
-            "id": 3,
-            "size": 1.0
+            "id": 3
         },
         {
-            "text_pos": [90.0, 1875.0],
+            "color": [127, 143, 167, 255],
             "sprite path": "./assets/image/menu/side/shop.png",
             "pos": [105.0, 1879.0],
-            "id": 4,
-            "size": 1.0
+            "id": 4
         }
     ]
 }

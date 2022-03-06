@@ -10,11 +10,9 @@
 #include "defender_game_data.h"
 #include "my_puts.h"
 
-
 void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
     __attribute__((unused)) set_event_t *evt)
 {
-    printf("aa\n");
     sfFloatRect rect;
     sfVector2i vector;
 

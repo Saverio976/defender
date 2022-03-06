@@ -4,7 +4,7 @@
     "buttons": [
         {
             "text": "1",
-            "text_pos": [490.0, 260.0],
+            "text pos": [490.0, 260.0],
             "pos": [500.0, 260.0],
             "size": 1.0,
             "sprite path": "./assets/image/menu/level/octo.png",
@@ -12,7 +12,7 @@
         },
         {
             "text": "2",
-            "text_pos": [490.0, 935.0],
+            "text pos": [490.0, 935.0],
             "pos": [500.0, 935.0],
             "size": 1.0,
             "sprite path": "./assets/image/menu/level/octo.png",
@@ -20,7 +20,7 @@
         },
         {
             "text": "3",
-            "text_pos": [490.0, 1660.0],
+            "text pos": [490.0, 1660.0],
             "pos": [500.0, 1660.0],
             "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
