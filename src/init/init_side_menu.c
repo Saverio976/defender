@@ -54,17 +54,22 @@ static void set_shop_back_event(list_t **elem, scene_t *scene)
 int init_side_menu(window_t *win, scene_t *scene)
 {
     list_t *elem = NULL;
+    list_t *back = NULL;
 
     if (win == NULL || scene == NULL ||
         create_button(scene, SIDE_MENU) != RET_OK ) {
         return RET_INVALID_INPUT;
     }
     elem = scene->objects->end;
+    back = scene->objects->end;
     if (create_button(scene, SHOP_MENU) != RET_OK || add_hiden_list(scene,
-        &elem, SHOP_OBJ) != RET_OK || create_button(scene, PAUSE_MENU) != RET_OK
-        || add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
+        &elem, SHOP_OBJ) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    set_shop_back_event(&elem, scene);
+    set_shop_back_event(&back, scene);
+    if (create_button(scene, PAUSE_MENU) != RET_OK ||
+        add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
+            return RET_ERR_MALLOC;
+        }
     return RET_OK;
 }

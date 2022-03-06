@@ -20,7 +20,6 @@ void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
     vector = sfMouse_getPositionRenderWindow(win->win);
     if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse &&
         obj->is_visible == true) {
-        printf("shop button\n");
         click_shop_button(obj, scene, win, evt);
     }
 }
