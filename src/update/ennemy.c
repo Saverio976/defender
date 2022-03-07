@@ -15,14 +15,16 @@
 static sfVector2f check_move_y(char **map, sfVector2i pos, ennemy_t *enn,
         int len)
 {
+    char tab[3] = {MAP_ROAD_CHAR, MAP_NEXT_NICO_CHAR, '\0'};
+
     if (pos.y + 1 < len && pos.x < my_strlen(map[pos.y + 1]) &&
             pos.y + 1 != enn->last_pos.y &&
-            map[pos.y + 1][pos.x] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y + 1][pos.x])) {
         return ((sfVector2f) {pos.x, pos.y + 1});
     }
     if (pos.y - 1 < len && pos.x < my_strlen(map[pos.y - 1]) &&
             pos.y - 1 != enn->last_pos.y &&
-            map[pos.y - 1][pos.x] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y - 1][pos.x])) {
         return ((sfVector2f) {pos.x, pos.y - 1});
     }
     return ((sfVector2f) {-1, -1});
@@ -31,14 +33,16 @@ static sfVector2f check_move_y(char **map, sfVector2i pos, ennemy_t *enn,
 static sfVector2f check_move_x(char **map, sfVector2i pos, ennemy_t *enn,
         int len)
 {
+    char tab[3] = {MAP_ROAD_CHAR, MAP_NEXT_NICO_CHAR, '\0'};
+
     if (pos.y < len && pos.x + 1 < my_strlen(map[pos.y]) &&
             pos.x + 1 != enn->last_pos.x &&
-            map[pos.y][pos.x + 1] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y][pos.x + 1])) {
         return ((sfVector2f) {pos.x + 1, pos.y});
     }
     if (pos.y < len && pos.x - 1 < my_strlen(map[pos.y]) &&
             pos.x - 1 != enn->last_pos.x &&
-            map[pos.y][pos.x - 1] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y][pos.x - 1])) {
         return ((sfVector2f) {pos.x - 1, pos.y});
     }
     return ((sfVector2f) {-1, -1});
@@ -93,7 +97,8 @@ void update_ennemy(object_t *obj, scene_t *scene,
     ennemy_me->time_last += dtime;
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
         update_obj_explosion(obj, dtime);
-    } else if (ennemy_me->time_last > ennemy_me->load_time) {
+    } else if (obj->is_visible &&
+            ennemy_me->time_last > ennemy_me->load_time) {
         move_ennemy(obj, ennemy_me, map);
         ennemy_me->time_last = 0;
     }

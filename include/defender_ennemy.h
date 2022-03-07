@@ -15,6 +15,7 @@
     #define MAP_ROAD_CHAR '#'
     #define MAP_SPAWN_CHAR 'S'
     #define MAP_NICO_CHAR 'N'
+    #define MAP_NEXT_NICO_CHAR 'I'
 
     #include <stdbool.h>
     #include "my_bgs.h"
