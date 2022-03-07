@@ -14,6 +14,7 @@
     #define MAP_SIZE_SQUARE_Y SQUARE_POS_INCREMENTATION
     #define MAP_ROAD_CHAR '#'
     #define MAP_SPAWN_CHAR 'S'
+    #define MAP_NICO_CHAR 'N'
 
     #include <stdbool.h>
     #include "my_bgs.h"
