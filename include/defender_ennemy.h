@@ -40,4 +40,8 @@ int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn);
 
 ennemy_t *init_ennemy(any_t *json);
 
+int is_obj_touch_nico(object_t *obj, char **map);
+
+void update_obj_explosion(object_t *obj, float dtime);
+
 #endif
