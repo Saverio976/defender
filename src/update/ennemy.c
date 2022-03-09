@@ -10,6 +10,7 @@
 #include "my_wordarray.h"
 #include "my_strings.h"
 #include "defender_ennemy.h"
+#include <SFML/Graphics/Texture.h>
 #include <SFML/System/Vector2.h>
 
 static sfVector2f check_move_y(char **map, sfVector2i pos, ennemy_t *enn,
@@ -70,7 +71,13 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
 {
     sfVector2f pos_f = {0};
     sfVector2i pos_i = {0};
+    int width = obj->bigdata.sprite_bigdata.rect.width;
 
+    obj->bigdata.sprite_bigdata.rect.left += width;
+    if (obj->bigdata.sprite_bigdata.rect.left + width >=
+            enn->max_texture_pixel_x) {
+        obj->bigdata.sprite_bigdata.rect.left = 0;
+    }
     pos_i.x = ((int) obj->bigdata.sprite_bigdata.pos.x) / MAP_SIZE_SQUARE_X;
     pos_i.y = ((int) obj->bigdata.sprite_bigdata.pos.y) / MAP_SIZE_SQUARE_Y;
     pos_f = get_right_pos(map, pos_i, enn);

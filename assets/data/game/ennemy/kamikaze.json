@@ -6,5 +6,6 @@
     "is_fly": "false",
     "load_time": 1.0,
     "path": "./assets/image/ennemy/kamikaze.png",
-    "int_rect": [0, 253, 93, 121]
+    "int_rect": [0, 253, 93, 121],
+    "max_ennemy_x": 900
 }

@@ -33,6 +33,7 @@ struct ennemy_s {
     float load_time;
     sfVector2i last_pos;
     float time_last;
+    int max_texture_pixel_x;
 };
 typedef struct ennemy_s ennemy_t;
 
