@@ -54,9 +54,14 @@ static void set_shop_back_event(list_t **elem, scene_t *scene)
 
 static void set_pause_back_event(list_t **elem, scene_t *scene)
 {
-    object_t *back = (*elem)->next->var;
+    object_t *back = NULL;
 
+    if (create_button(scene, PAUSE_MENU) != RET_OK ||
+        add_hiden_list(scene, elem, PAUSE_OBJ) != RET_OK) {
+            return;
+    }
     *elem = (*elem)->next;
+    back = (*elem)->var;
     if (event_add_node(create_event(pause_back_update, false, back, NULL),
         (node_params_t) {sfMouseRight, sfKeyA, MOUSE}) != RET_OK) {
         return;
@@ -68,11 +73,15 @@ int init_side_menu(window_t *win, scene_t *scene)
 {
     list_t *elem = NULL;
     list_t *back = NULL;
+    int ennemy_id = 0;
 
     if (win == NULL || scene == NULL ||
         create_button(scene, SIDE_MENU) != RET_OK ) {
         return RET_INVALID_INPUT;
     }
+    ennemy_id = scene->displayables->len - 1;
+    scene->components = dico_t_add_data(scene->components, ENNEMY_ID,
+        (void *) ennemy_id, NULL);
     elem = scene->objects->end;
     back = scene->objects->end;
     if (create_button(scene, SHOP_MENU) != RET_OK || add_hiden_list(scene,
@@ -80,10 +89,6 @@ int init_side_menu(window_t *win, scene_t *scene)
         return RET_ERR_MALLOC;
     }
     set_shop_back_event(&back, scene);
-    if (create_button(scene, PAUSE_MENU) != RET_OK ||
-        add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
-            return RET_ERR_MALLOC;
-    }
     set_pause_back_event(&back, scene);
-    return RET_OK;
+    return (scene->components != NULL) ? RET_OK : RET_ERR_MALLOC ;
 }

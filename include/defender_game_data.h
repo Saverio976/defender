@@ -15,6 +15,7 @@ static const char SIZE[] = "size";
 static const char GAME_DATA[] = "game data";
 static const char PAUSE_OBJ[] = "pause obj";
 static const char SHOP_OBJ[] = "shop obj";
+static const char ENNEMY_ID[] = "ennemy id";
 
 static const char GAME_DATA_PATH[] = "./assets/data/game/data.json";
 

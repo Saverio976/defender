@@ -12,8 +12,7 @@
 #include "my_strings.h"
 #include "defender.h"
 #include "defender_ennemy.h"
-
-int add_object_to_lists(scene_t *scene, object_t *object);
+#include "defender_game_data.h"
 
 static sfVector2f get_pos_map_ennemy(scene_t *scene, int nb_spawn)
 {
@@ -80,7 +79,9 @@ static int set_obj_ennemy(scene_t *scene, object_t *obj, any_t *json,
     }
     pos = get_pos_map_ennemy(scene, nb_spawn);
     ret_code = object_set_sprite(obj, any->value.str, rect, pos);
-    add_object_to_lists(scene, obj);
+    list_add_to_i(scene->displayables, obj,
+        (int) dico_t_get_value(scene->components, ENNEMY_ID));
+    list_add_to_end(scene->updates, obj);
     return (ret_code);
 }
 

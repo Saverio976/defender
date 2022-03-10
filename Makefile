@@ -97,7 +97,8 @@ TOBJ		:=	$(TSRC:%.c=%.o)
 
 # ----------------------------------------------------------------------------
 # FLAGS
-CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
+CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic	\
+				-Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
 
 TFLAGS		=	-fprofile-arcs -ftest-coverage -Ilib/libbgs/include/
 
