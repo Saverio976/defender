@@ -57,6 +57,7 @@ SRC_UPDATE		:=	button_menu.c			\
 					ennemy.c				\
 					pause_button.c			\
 					update_wave_launcher.c	\
+					ennemy_explosion_nico.c	\
 					button_shop.c			\
 					button_level.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))

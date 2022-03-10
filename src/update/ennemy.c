@@ -10,19 +10,22 @@
 #include "my_wordarray.h"
 #include "my_strings.h"
 #include "defender_ennemy.h"
+#include <SFML/Graphics/Texture.h>
 #include <SFML/System/Vector2.h>
 
 static sfVector2f check_move_y(char **map, sfVector2i pos, ennemy_t *enn,
         int len)
 {
+    char tab[3] = {MAP_ROAD_CHAR, MAP_NEXT_NICO_CHAR, '\0'};
+
     if (pos.y + 1 < len && pos.x < my_strlen(map[pos.y + 1]) &&
             pos.y + 1 != enn->last_pos.y &&
-            map[pos.y + 1][pos.x] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y + 1][pos.x])) {
         return ((sfVector2f) {pos.x, pos.y + 1});
     }
     if (pos.y - 1 < len && pos.x < my_strlen(map[pos.y - 1]) &&
             pos.y - 1 != enn->last_pos.y &&
-            map[pos.y - 1][pos.x] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y - 1][pos.x])) {
         return ((sfVector2f) {pos.x, pos.y - 1});
     }
     return ((sfVector2f) {-1, -1});
@@ -31,14 +34,16 @@ static sfVector2f check_move_y(char **map, sfVector2i pos, ennemy_t *enn,
 static sfVector2f check_move_x(char **map, sfVector2i pos, ennemy_t *enn,
         int len)
 {
+    char tab[3] = {MAP_ROAD_CHAR, MAP_NEXT_NICO_CHAR, '\0'};
+
     if (pos.y < len && pos.x + 1 < my_strlen(map[pos.y]) &&
             pos.x + 1 != enn->last_pos.x &&
-            map[pos.y][pos.x + 1] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y][pos.x + 1])) {
         return ((sfVector2f) {pos.x + 1, pos.y});
     }
     if (pos.y < len && pos.x - 1 < my_strlen(map[pos.y]) &&
             pos.x - 1 != enn->last_pos.x &&
-            map[pos.y][pos.x - 1] == MAP_ROAD_CHAR) {
+            my_strcontainc(tab, map[pos.y][pos.x - 1])) {
         return ((sfVector2f) {pos.x - 1, pos.y});
     }
     return ((sfVector2f) {-1, -1});
@@ -66,7 +71,13 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
 {
     sfVector2f pos_f = {0};
     sfVector2i pos_i = {0};
+    int width = obj->bigdata.sprite_bigdata.rect.width;
 
+    obj->bigdata.sprite_bigdata.rect.left += width;
+    if (obj->bigdata.sprite_bigdata.rect.left + width >=
+            enn->max_texture_pixel_x) {
+        obj->bigdata.sprite_bigdata.rect.left = 0;
+    }
     pos_i.x = ((int) obj->bigdata.sprite_bigdata.pos.x) / MAP_SIZE_SQUARE_X;
     pos_i.y = ((int) obj->bigdata.sprite_bigdata.pos.y) / MAP_SIZE_SQUARE_Y;
     pos_f = get_right_pos(map, pos_i, enn);
@@ -91,7 +102,10 @@ void update_ennemy(object_t *obj, scene_t *scene,
         return;
     }
     ennemy_me->time_last += dtime;
-    if (ennemy_me->time_last > ennemy_me->load_time) {
+    if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
+        update_obj_explosion(obj, dtime);
+    } else if (obj->is_visible &&
+            ennemy_me->time_last > ennemy_me->load_time) {
         move_ennemy(obj, ennemy_me, map);
         ennemy_me->time_last = 0;
     }

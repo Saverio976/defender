@@ -63,6 +63,11 @@ static int set_ennemy_str(ennemy_t *enn, any_t *json)
     } else {
         enn->is_fly = false;
     }
+    any = get_from_any(json, "d", "max_ennemy_x");
+    if (enn == NULL || any == NULL || any->type != INT) {
+        return (0);
+    }
+    enn->max_texture_pixel_x = any->value.i;
     return (1);
 }
 

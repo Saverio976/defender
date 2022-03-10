@@ -14,6 +14,8 @@
     #define MAP_SIZE_SQUARE_Y SQUARE_POS_INCREMENTATION
     #define MAP_ROAD_CHAR '#'
     #define MAP_SPAWN_CHAR 'S'
+    #define MAP_NICO_CHAR 'N'
+    #define MAP_NEXT_NICO_CHAR 'I'
 
     #include <stdbool.h>
     #include "my_bgs.h"
@@ -31,6 +33,7 @@ struct ennemy_s {
     float load_time;
     sfVector2i last_pos;
     float time_last;
+    int max_texture_pixel_x;
 };
 typedef struct ennemy_s ennemy_t;
 
@@ -39,5 +42,9 @@ void update_ennemy(object_t *obj, scene_t *scene, window_t *win, float dtime);
 int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn);
 
 ennemy_t *init_ennemy(any_t *json);
+
+int is_obj_touch_nico(object_t *obj, char **map);
+
+void update_obj_explosion(object_t *obj, float dtime);
 
 #endif

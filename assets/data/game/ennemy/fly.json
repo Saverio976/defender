@@ -6,5 +6,6 @@
     "is_fly": "true",
     "load_time": 3.0,
     "path": "./assets/image/ennemy/fly.png",
-    "int_rect": [0, 0, 100, 100]
+    "int_rect": [0, 0, 210, 177],
+    "max_ennemy_x": 2046
 }
