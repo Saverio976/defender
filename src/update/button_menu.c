@@ -35,10 +35,12 @@ void on_hover_menu_but(__attribute((unused)) object_t *obj,
     __attribute((unused)) set_event_t *evt)
 {
     any_t *size = dico_t_get_any(obj->components, SIZE);
-    int scale = 0;
+    float scale = 1.02;
 
-    if (size != NULL && size->type == FLOAT && obj->type == SPRITE) {
+    if (size != NULL && size->type == FLOAT) {
         scale = size->value.f + (size->value.f * 0.02);
+    }
+    if (obj->type == SPRITE) {
         sfSprite_setScale(obj->drawable.sprite, (sfVector2f) {scale, scale});
     }
 }
@@ -49,10 +51,12 @@ void off_hover_menu_but(object_t *obj,
     __attribute((unused)) set_event_t *evt)
 {
     any_t *size = dico_t_get_any(obj->components, SIZE);
-    int scale = 0;
+    float scale = 1.00;
 
-    if (size != NULL && size->type == FLOAT && obj->type == SPRITE) {
+    if (size != NULL && size->type == FLOAT) {
         scale = size->value.f;
+    }
+    if (obj->type == SPRITE) {
         sfSprite_setScale(obj->drawable.sprite, (sfVector2f) {scale, scale});
     }
 }
