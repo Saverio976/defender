@@ -1,0 +1,9 @@
+{
+    "size": [2, 2],
+    "cost": 4,
+    "cadence": 1,
+    "damage": 1,
+    "scope": 6,
+    "fly": 0,
+    "build couldown": 2
+}
