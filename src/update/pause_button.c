@@ -7,6 +7,20 @@
 
 #include "defender_game_data.h"
 
+void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt)
+{
+    sfFloatRect rect;
+    sfVector2i vector;
+
+    rect = sfSprite_getGlobalBounds(obj->drawable.sprite);
+    vector = sfMouse_getPositionRenderWindow(win->win);
+    if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse &&
+        obj->is_visible == true) {
+        click_pause_button(obj, scene, win, evt);
+    }
+}
+
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt)
 {

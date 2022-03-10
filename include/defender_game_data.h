@@ -32,6 +32,9 @@ void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
 
 int init_side_menu(window_t *win, scene_t *scene);
 
+void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
+
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 

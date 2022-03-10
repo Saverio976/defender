@@ -16,6 +16,18 @@
             "text color": [52, 59, 70, 230],
             "sprite path": "./assets/image/menu/side/pause/button.png",
             "pos": [240.0, 910.0]
+        },
+        {
+            "text pos": [305.0, 910.0],
+            "text size": 1.1,
+            "id": 5,
+            "size": 1.2,
+            "font path": "assets/font/menlo.ttf",
+            "text": "settings",
+            "color": [127, 143, 167, 230],
+            "text color": [52, 59, 70, 230],
+            "sprite path": "./assets/image/menu/side/pause/button.png",
+            "pos": [310.0, 910.0]           
         }
     ]
 }
