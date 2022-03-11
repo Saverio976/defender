@@ -7,6 +7,7 @@
 
 #include <SFML/System/Vector2.h>
 #include "my_bgs.h"
+#include "my_dico.h"
 #include "my_strings.h"
 #include "defender_ennemy.h"
 #include "my_wordarray.h"
@@ -51,7 +52,15 @@ int is_obj_touch_nico(object_t *obj, char **map)
     return (0);
 }
 
-void update_obj_explosion(object_t *obj, float dtime)
+void update_obj_explosion(object_t *obj, __attribute__((unused)) float dtime)
 {
-    return;
+    ennemy_t *enn = NULL;
+
+    enn = dico_t_get_value(obj->components, OBJ_COMP_ENNSTRUCT);
+    if (enn == NULL) {
+        return;
+    }
+    if (enn->time_last > 2.0) {
+        obj->is_visible = false;
+    }
 }
