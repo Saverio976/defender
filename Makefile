@@ -31,9 +31,14 @@ SRCINITDIR		:=  init/
 SRCMAP			:=	map/
 SRCUPDATEDIR	:=  update/
 SRCLAUNCHDIR	:=	launch_game/
+SRCTOWER		:= tower/
 SRCDIR			:=	src/
 SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
+
+SRC_TOWER		:=	place_tower.c	\
+					update_tower.c
+SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 
 SRC_BUTTON		:=	create_button.c		\
 					check_set_color.c
@@ -68,7 +73,7 @@ SRC_LAUNC		:=	launch_game.c		\
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
 SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)	\
-				$(SRC_ENNEMY) $(SRC_BUTTON)
+				$(SRC_ENNEMY) $(SRC_BUTTON) $(SRC_TOWER)
 SRC			:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ			:=	$(SRC:%.c=%.o)

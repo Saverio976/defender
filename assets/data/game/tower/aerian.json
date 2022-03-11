@@ -1,5 +1,5 @@
 {
-    "size": [2, 2],
+    "size": 2,
     "cost": 10,
     "cadence": 0.33,
     "damage": 2,
