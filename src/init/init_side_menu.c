@@ -8,7 +8,7 @@
 #include "defender.h"
 #include "defender_game_data.h"
 
-static void free_list_void(void *data)
+void free_list_void(void *data)
 {
     list_ptr_t *list = data;
 

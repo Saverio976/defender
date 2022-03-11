@@ -5,14 +5,19 @@
 ** create ennemy form a json
 */
 
+#include <SFML/Graphics/Color.h>
 #include <stdlib.h>
+#include "list.h"
 #include "my_bgs.h"
 #include "my_bgs_components.h"
+#include "my_dico.h"
 #include "my_json.h"
 #include "my_strings.h"
 #include "defender.h"
 #include "defender_ennemy.h"
 #include "defender_game_data.h"
+
+void free_list_void(void *data);
 
 static sfVector2f get_pos_map_ennemy(scene_t *scene, int nb_spawn)
 {
@@ -85,6 +90,21 @@ static int set_obj_ennemy(scene_t *scene, object_t *obj, any_t *json,
     return (ret_code);
 }
 
+void add_obj_to_scene_list(scene_t *scene, object_t *obj)
+{
+    list_ptr_t *list = NULL;
+
+    if (scene == NULL || obj == NULL) {
+        return;
+    }
+    list = dico_t_get_value(scene->components, LIST_ENNEMY);
+    if (list == NULL) {
+        list = list_create();
+        scene_add_components(scene, list, LIST_ENNEMY, free_list_void);
+    }
+    list_add_to_end(list, obj);
+}
+
 int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn)
 {
     any_t *json = NULL;
@@ -104,5 +124,6 @@ int create_ennemy(scene_t *scene, char const *path_json, int nb_spawn)
     set_obj_ennemy(scene, obj, json, nb_spawn);
     object_add_components(obj, init_ennemy(json), OBJ_COMP_ENNSTRUCT, free);
     destroy_any(json);
+    add_obj_to_scene_list(scene, obj);
     return (RET_OK);
 }
