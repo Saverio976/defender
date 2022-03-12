@@ -37,6 +37,7 @@ SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
 
 SRC_TOWER		:=	place_tower.c	\
+					set_scope.c		\
 					update_tower.c
 SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 

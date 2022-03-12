@@ -71,7 +71,8 @@ static object_t *set_data(object_t *object, dico_t *tower)
     return object;
 }
 
-static object_t *place_tower(dico_t *tower, scene_t *scene, sfVector2f pos, int *rect)
+static object_t *place_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
+    int *rect)
 {
     object_t *obj = NULL;
     any_t *path = NULL;
@@ -83,13 +84,14 @@ static object_t *place_tower(dico_t *tower, scene_t *scene, sfVector2f pos, int 
     obj = create_object(&update_tower, NULL, scene);
     if (path == NULL || obj == NULL ||
         object_set_sprite(obj, path->value.str, (sfIntRect) {rect[0], rect[1],
-        rect[2], rect[3]}, pos) != RET_OK || set_data(obj, tower) != RET_OK) {
+        rect[2], rect[3]}, pos) != RET_OK) {
         return NULL;
     }
     list_add_to_i(scene->displayables, obj, (int)
         dico_t_get_value(scene->components, ENNEMY_ID));
     list_add_to_end(scene->updates, obj);
     free(rect);
+    object_set_event()//event scope
     return set_data(obj, tower);
 }
 
