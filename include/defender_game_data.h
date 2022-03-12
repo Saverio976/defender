@@ -37,11 +37,14 @@ typedef struct tower_data_s {
     bool fly;
 } tower_data_t;
 
+object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
+
 int init_game_data(window_t *win);
 
-void display_scope(object_t *obj, scene_t *scene, window_t *win, float time);
+void display_scope(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
 
-void hide_scope(object_t *obj, scene_t *scene, window_t *win, float time);
+void hide_scope(object_t *obj, scene_t *scene, window_t *win, set_event_t *evt);
 
 void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
@@ -61,7 +64,7 @@ void update_tower(object_t *obj, scene_t *scene, window_t *win, float time);
 
 int create_tower(scene_t *scene, dico_t *tower, sfVector2f pos);
 
-int set_scope(dico_t *tower_dico, dico_t *tower_components, object_t *support,
+int set_scope(dico_t *tower_dico, dico_t *components[2], object_t *support,
     scene_t *scene);
 
 #endif /* !GAME_DATA_H_ */

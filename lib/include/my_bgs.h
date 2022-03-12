@@ -83,6 +83,7 @@ struct scene_s {
 };
 
 struct window_s {
+    bool click_prev_call;
     sfRenderWindow *win;
     int scene_index;
     list_ptr_t *scenes;

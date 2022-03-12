@@ -8,34 +8,6 @@
 #include <stdlib.h>
 #include "defender_game_data.h"
 
-static const char *path[3] = {"./assets/image/tower/support_2.png", "oui",
-    "non"};
-static const int size_arr[3] = {2, 3, 4};
-
-static object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos)
-{
-    int path_id = -1;
-    object_t *obj = NULL;
-
-    if (size == NULL || size->type != INT) {
-        return NULL;
-    }
-    for (int i = 0; i < 3; i++) {
-        if (size_arr[i] == size->value.i) {
-            path_id = i;
-        }
-    }
-    obj = create_object(NULL, NULL, scene);
-    if (path_id < 0 || obj == NULL || object_set_sprite(obj, path[path_id],
-        (sfIntRect) {-1, -1, -1, -1}, pos) != RET_OK) {
-        return NULL;
-    }
-    list_add_to_i(scene->displayables, obj,
-        (int) dico_t_get_value(scene->components, ENNEMY_ID));
-    list_add_to_end(scene->updates, obj);
-    return obj;
-}
-
 static void destroy_tower_data(void *data)
 {
     tower_data_t *tower_data = data;
@@ -91,7 +63,6 @@ static object_t *place_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
         dico_t_get_value(scene->components, ENNEMY_ID));
     list_add_to_end(scene->updates, obj);
     free(rect);
-    object_set_event()//event scope
     return set_data(obj, tower);
 }
 
@@ -99,6 +70,7 @@ int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
 {
     object_t *tower = NULL;
     object_t *support = NULL;
+    dico_t *components[2] = {NULL, NULL};
 
     if (scene == NULL || tower_dico == NULL) {
         return RET_ERR_MALLOC;
@@ -106,8 +78,12 @@ int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
     tower = place_tower(tower_dico, scene, pos, get_any_int_array(
         dico_t_get_any(tower_dico, "rect")));
     support = place_support(dico_t_get_any(tower_dico, "size"), scene, pos);
-    if (tower == NULL || support == NULL ||
-        set_scope(tower_dico, tower->components, support, scene) != RET_OK) {
+    if (tower == NULL || support == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    components[0] = tower->components;
+    components[1] = support->components;
+    if (set_scope(tower_dico, components, support, scene) != RET_OK) {
         return RET_ERR_MALLOC;
     }
     return RET_OK;

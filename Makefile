@@ -31,13 +31,15 @@ SRCINITDIR		:=  init/
 SRCMAP			:=	map/
 SRCUPDATEDIR	:=  update/
 SRCLAUNCHDIR	:=	launch_game/
-SRCTOWER		:= tower/
+SRCTOWER		:= 	tower/
 SRCDIR			:=	src/
 SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
 
-SRC_TOWER		:=	place_tower.c	\
-					set_scope.c		\
+SRC_TOWER		:=	place_tower.c		\
+					set_scope.c			\
+					scope_event.c		\
+					create_support.c	\
 					update_tower.c
 SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 

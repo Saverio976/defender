@@ -82,15 +82,16 @@ int fill_scope_list(sfFloatRect support_rect, scene_t *scene, int scope,
     return place_scope((sfVector2f) {scope, size}, current_rect, pos, scene);
 }
 
-int set_scope(dico_t *tower_dico, dico_t *tower_components, object_t *support,
+int set_scope(dico_t *tower_dico, dico_t *components[2], object_t *support,
     scene_t *scene)
 {
-    tower_data_t *tower_data = dico_t_get_value(tower_components, TOWER_DATA);
+    tower_data_t *tower_data = dico_t_get_value(components[0], TOWER_DATA);
     any_t *scope = dico_t_get_any(tower_dico, "scope");
     any_t *size = dico_t_get_any(tower_dico, "size");
     list_t *elem = scene->objects->end;
 
-    if (tower_data == NULL || scope == NULL || size == NULL) {
+    if (tower_data == NULL || scope == NULL || size == NULL ||
+        dico_t_add_data(components[1], TOWER_DATA, tower_data, NULL) == NULL) {
         return RET_INVALID_INPUT;
     }
     tower_data->scope = list_create();

@@ -71,4 +71,6 @@ int window_update_event(window_t *win, scene_t *scene);
 
 int scene_update_event(window_t *win, scene_t *scene);
 
+bool check_click_prev_call(bool check, window_t *win, set_event_t *set_event);
+
 #endif

@@ -7,7 +7,8 @@
 
 #include "defender_game_data.h"
 
-void display_scope(object_t *obj, scene_t *scene, window_t *win, float time)
+void display_scope(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt)
 {
     tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
     list_t *elem = NULL;
@@ -23,7 +24,7 @@ void display_scope(object_t *obj, scene_t *scene, window_t *win, float time)
     }
 }
 
-void hide_scope(object_t *obj, scene_t *scene, window_t *win, float time)
+void hide_scope(object_t *obj, scene_t *scene, window_t *win, set_event_t *evt)
 {
     tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
     list_t *elem = NULL;
