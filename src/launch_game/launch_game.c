@@ -7,7 +7,9 @@
 
 #include <SFML/System/Vector2.h>
 #include <stdlib.h>
+#include "list.h"
 #include "my_bgs.h"
+#include "my_bgs_components.h"
 #include "my_dico.h"
 #include "my_puts.h"
 #include "my_conversions.h"
@@ -41,7 +43,9 @@ static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
     scene_add_components(scene, lvl, "LEVEL DATA", destroy_lvl_data);
     obj_draw_life = create_object(update_draw_life, NULL, scene);
     object_set_text(obj_draw_life, "assets/font/menlo.ttf", "life",
-            (sfVector2f) {1850, 10});
+            (sfVector2f) {1500, 10});
+    list_add_to_end(scene->updates, obj_draw_life);
+    list_add_to_end(scene->displayables, obj_draw_life);
     return (RET_OK);
 }
 
