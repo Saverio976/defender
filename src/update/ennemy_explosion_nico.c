@@ -61,7 +61,7 @@ static void remove_life_to_tower(ennemy_t *enn, scene_t *scene)
         return;
     }
     lvl = dico_t_get_value(scene->components, "LEVEL DATA");
-    if (lvl ==  NULL) {
+    if (lvl == NULL) {
         return;
     }
     lvl->tower_nico_life -= enn->life;
