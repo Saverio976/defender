@@ -50,22 +50,22 @@ static time_clock_t *init_clock(void)
     return timer;
 }
 
-static int scene_handling(window_t *win, scene_t **scene, time_clock_t *timer)
+static int scene_handling(window_t **win, scene_t **scene, time_clock_t *timer)
 {
     static int last_index = -1;
 
-    if (last_index != win->scene_index) {
-        *scene = get_scene_i(win->scenes, win->scene_index);
-        last_index = win->scene_index;
+    if (last_index != (*win)->scene_index) {
+        *scene = get_scene_i((*win)->scenes, (*win)->scene_index);
+        last_index = (*win)->scene_index;
     }
     if (*scene == NULL) {
         return BGS_ERR_INPUT;
     }
-    sfRenderWindow_clear(win->win, (*scene)->bg_color);
+    sfRenderWindow_clear((*win)->win, (*scene)->bg_color);
     timer->time = sfClock_restart(timer->clock);
     timer->seconds = sfTime_asSeconds(timer->time);
-    window_update(*scene, win, timer->seconds);
-    window_display(*scene, win);
+    window_update(*scene, *win, timer->seconds);
+    window_display(*scene, *win);
     return BGS_OK;
 }
 
@@ -80,9 +80,9 @@ int loop(window_t *win)
     }
     window_setup_scene(win);
     while (sfRenderWindow_isOpen(win->win) && ret == BGS_OK) {
-        ret = scene_handling(win, &scene, timer);
+        ret = scene_handling(&win, &scene, timer);
         if (ret == BGS_OK) {
-            ret = event_handling(win->win);
+            ret = event_handling(win->win, win);
         }
     }
     if (ret != BGS_OK) {

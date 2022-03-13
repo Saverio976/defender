@@ -4,5 +4,3 @@
 ** File description:
 ** utility function for an ennemy
 */
-
-

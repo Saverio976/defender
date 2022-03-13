@@ -76,6 +76,7 @@ int launch_game(object_t *obj, scene_t *scene,
     any_t *level_data = NULL;
     scene_t *new_scene = create_scene(win, sfBlack);
     char *level_path = NULL;
+    any_t *tower = parse_json_file("./assets/data/game/tower/standart.json");
 
     if (obj == NULL || scene == NULL || win == NULL || evt == NULL ||
         new_scene == NULL) {
@@ -88,6 +89,9 @@ int launch_game(object_t *obj, scene_t *scene,
         return RET_ERR_MALLOC;
     }
     destroy_any(level_data);
+    create_tower(new_scene, tower->value.dict, (sfVector2f)
+        {40 + (25 * 40), 40 + (15 * 40)});
     win->scene_index = 2;
+    destroy_any(tower);
     return RET_OK;
 }

@@ -39,34 +39,33 @@ static int add_hiden_list(scene_t *scene, list_t **elem, char const key[])
     return RET_OK;
 }
 
-static void set_shop_back_event(list_t **elem, scene_t *scene)
+static void set_shop_back_event(list_t *elem, scene_t *scene)
 {
-    object_t *back = (*elem)->next->var;
+    object_t *back = elem->next->var;
 
-    *elem = (*elem)->next;
     if (event_add_node(create_event(shop_back_update, false, back, NULL),
-        (node_params_t) {sfMouseRight, sfKeyA, MOUSE}) != RET_OK) {
+        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
         return;
     }
     list_add_to_end(scene->updates, back);
-    *elem = scene->objects->end;
 }
 
-static void set_pause_back_event(list_t **elem, scene_t *scene)
+static void set_pause_back_event(scene_t *scene)
 {
-    object_t *back = NULL;
+    object_t *obj = NULL;
+    list_t *back = scene->objects->end;
+    list_t *elem = scene->objects->end;
 
     if (create_button(scene, PAUSE_MENU) != RET_OK ||
-        add_hiden_list(scene, elem, PAUSE_OBJ) != RET_OK) {
-            return;
-    }
-    *elem = (*elem)->next;
-    back = (*elem)->var;
-    if (event_add_node(create_event(pause_back_update, false, back, NULL),
-        (node_params_t) {sfMouseRight, sfKeyA, MOUSE}) != RET_OK) {
+        add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
         return;
     }
-    list_add_to_end(scene->updates, back);
+    obj = back->next->var;
+    if (event_add_node(create_event(pause_back_update, false, obj, NULL),
+        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
+        return;
+    }
+    list_add_to_end(scene->updates, obj);
 }
 
 int init_side_menu(window_t *win, scene_t *scene)
@@ -88,7 +87,7 @@ int init_side_menu(window_t *win, scene_t *scene)
         &elem, SHOP_OBJ) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    set_shop_back_event(&back, scene);
-    set_pause_back_event(&back, scene);
+    set_shop_back_event(back, scene);
+    set_pause_back_event(scene);
     return (scene->components != NULL) ? RET_OK : RET_ERR_MALLOC ;
 }

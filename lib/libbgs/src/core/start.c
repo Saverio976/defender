@@ -43,6 +43,7 @@ window_t *create_window(sfVideoMode mode, const char *title, sfUint32 style)
     if (win->scenes == NULL) {
         return NULL;
     }
+    win->click_prev_call = false;
     win->scene_index = 0;
     return win;
 }

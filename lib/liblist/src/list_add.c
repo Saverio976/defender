@@ -61,10 +61,10 @@ void *list_add_to_i(list_ptr_t *list_ptr, void *content, int i)
     id = list_ptr->start;
     for (int x = 0; x < i && id != list_ptr->end; x++)
         id = id->next;
-    newelem->next = id;
-    newelem->back = id->back;
-    id->back->next = newelem;
-    id->back = newelem;
+    newelem->back = id;
+    newelem->next = id->next;
+    id->next->back = newelem;
+    id->next = newelem;
     list_ptr->len += 1;
     return (newelem);
 }

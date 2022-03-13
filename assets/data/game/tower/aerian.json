@@ -1,0 +1,9 @@
+{
+    "size": 2,
+    "cost": 10,
+    "cadence": 0.33,
+    "damage": 2,
+    "scope": 13,
+    "fly": 1,
+    "build couldown": 5
+}

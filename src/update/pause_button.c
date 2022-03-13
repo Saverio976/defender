@@ -13,12 +13,17 @@ void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
     sfFloatRect rect;
     sfVector2i vector;
 
+    if (obj->type != SPRITE) {
+        return;
+    }
     rect = sfSprite_getGlobalBounds(obj->drawable.sprite);
     vector = sfMouse_getPositionRenderWindow(win->win);
+    sfSprite_setPosition(obj->drawable.sprite, (sfVector2f) {50, 50});
     if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse &&
         obj->is_visible == true) {
         click_pause_button(obj, scene, win, evt);
     }
+    win->click_prev_call = false;
 }
 
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
@@ -27,7 +32,7 @@ void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
     list_ptr_t *shop_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
     list_t *elem = NULL;
 
-    if (shop_obj == NULL) {
+    if (shop_obj == NULL || obj->type != SPRITE) {
         return;
     }
     elem = shop_obj->start;
