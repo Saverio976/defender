@@ -21,6 +21,8 @@ void display_scope(object_t *obj, scene_t *scene, window_t *win,
         for (int i = 0; i < tower_data->scope->len; i++, elem = elem->next) {
             ((object_t *) elem->var)->is_visible = true;
         }
+    } else {
+        hide_scope(obj, scene, win, evt);
     }
 }
 
@@ -38,4 +40,5 @@ void hide_scope(object_t *obj, scene_t *scene, window_t *win, set_event_t *evt)
             ((object_t *) elem->var)->is_visible = false;
         }
     }
+    win->click_prev_call = false;
 }

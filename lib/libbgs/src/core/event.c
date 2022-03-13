@@ -30,13 +30,16 @@ int window_update_event(window_t *win, scene_t *scene)
     return (BGS_OK);
 }
 
-int event_handling(sfRenderWindow *win)
+int event_handling(sfRenderWindow *win, window_t *window)
 {
     sfEvent event;
 
     while (sfRenderWindow_pollEvent(win, &event)) {
         if (event.type == sfEvtClosed) {
             sfRenderWindow_close(win);
+        } else if (event.type == sfEvtMouseButtonReleased &&
+            event.mouseButton.button == sfMouseLeft) {
+            window->click_prev_call = false;
         }
     }
     return BGS_OK;

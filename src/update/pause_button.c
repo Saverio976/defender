@@ -23,6 +23,7 @@ void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
         obj->is_visible == true) {
         click_pause_button(obj, scene, win, evt);
     }
+    win->click_prev_call = false;
 }
 
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,

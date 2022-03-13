@@ -44,7 +44,7 @@ static void set_shop_back_event(list_t *elem, scene_t *scene)
     object_t *back = elem->next->var;
 
     if (event_add_node(create_event(shop_back_update, false, back, NULL),
-        (node_params_t) {sfMouseRight, sfKeyA, MOUSE}) != RET_OK) {
+        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
         return;
     }
     list_add_to_end(scene->updates, back);
@@ -62,7 +62,7 @@ static void set_pause_back_event(scene_t *scene)
     }
     obj = back->next->var;
     if (event_add_node(create_event(pause_back_update, false, obj, NULL),
-        (node_params_t) {sfMouseRight, sfKeyA, MOUSE}) != RET_OK) {
+        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
         return;
     }
     list_add_to_end(scene->updates, obj);

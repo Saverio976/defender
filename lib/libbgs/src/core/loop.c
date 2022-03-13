@@ -54,7 +54,6 @@ static int scene_handling(window_t **win, scene_t **scene, time_clock_t *timer)
 {
     static int last_index = -1;
 
-    (*win)->click_prev_call = false;
     if (last_index != (*win)->scene_index) {
         *scene = get_scene_i((*win)->scenes, (*win)->scene_index);
         last_index = (*win)->scene_index;
@@ -83,7 +82,7 @@ int loop(window_t *win)
     while (sfRenderWindow_isOpen(win->win) && ret == BGS_OK) {
         ret = scene_handling(&win, &scene, timer);
         if (ret == BGS_OK) {
-            ret = event_handling(win->win);
+            ret = event_handling(win->win, win);
         }
     }
     if (ret != BGS_OK) {

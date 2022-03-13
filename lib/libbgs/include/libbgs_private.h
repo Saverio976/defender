@@ -21,7 +21,7 @@ struct square_s {
     int size;
 };
 
-int event_handling(sfRenderWindow *win);
+int event_handling(sfRenderWindow *win, window_t *window);
 
 scene_t *get_scene_i(list_ptr_t *list, int i);
 
