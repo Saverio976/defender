@@ -23,6 +23,7 @@
 static const char SCENE_COMP_MAP[] = "DEFENDER_MAP";
 static const char OBJ_COMP_ENNSTRUCT[] = "ME_STRUCT_ENNEMY";
 static const char OBJ_COMP_MANAGEWAVE[] = "load list";
+static const char LIST_ENNEMY[] = "list ennemy scene";
 
 struct ennemy_s {
     int xp;
