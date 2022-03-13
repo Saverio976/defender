@@ -23,11 +23,11 @@ bool check_click_prev_call(bool check, window_t *win, set_event_t *set_event)
     if (check == true && win->click_prev_call == true) {
         check = false;
     }
-    win->click_prev_call = check;
     if (check == true) {
-        printf("true\n");
+        win->click_prev_call = true;
+        //printf("true\n");
     } else {
-        printf("false\n");
+        //printf("false\n");
     }
     return check;
 }

@@ -59,5 +59,6 @@ int launch_game(object_t *obj, scene_t *scene,
     destroy_any(level_data);
     create_tower(new_scene, tower->value.dict, (sfVector2f) {40 + (25 * 40), 40 + (15 * 40)});
     win->scene_index = 2;
+    destroy_any(tower);
     return RET_OK;
 }
