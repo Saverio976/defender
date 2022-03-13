@@ -6,10 +6,11 @@
 */
 
 #include "defender_game_data.h"
+#include "defender_ennemy.h"
 
 void shot_ennemy(sfFloatRect intersection, object_t *tower)
 {
-    my_putstr("shot ennemy\n");
+    
 }
 
 sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
@@ -28,7 +29,7 @@ sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
         ennemy = elem->var;
         ennemy_rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
         if (sfFloatRect_intersects(&scope_rect, &ennemy_rect,
-            &intersection) == sfTrue) {
+            &intersection) == sfTrue && ennemy->is_visible == true) {
             return intersection;
         }
     }
@@ -63,7 +64,7 @@ void update_tower(object_t *obj, scene_t *scene, window_t *win, float time)
 {
     tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
     list_ptr_t *ennemy_list = dico_t_get_value(scene->components,
-        "ennemy list");
+        LIST_ENNEMY);
 
     if (tower_data == NULL || ennemy_list == NULL) {
         return;
