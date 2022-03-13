@@ -10,7 +10,7 @@
 
 void shot_ennemy(sfFloatRect intersection, object_t *tower)
 {
-    
+    return;
 }
 
 sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)

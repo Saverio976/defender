@@ -9,5 +9,5 @@
 
 char *str_from_list(list_t *elem)
 {
-    return ((char *)(elem->var));
+    return ((char *) (elem->var));
 }
