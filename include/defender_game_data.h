@@ -22,6 +22,7 @@ static const char GAME_DATA_PATH[] = "./assets/data/game/data.json";
 
 static const char SCOPE_PATH[] = "./assets/image/tower/scope.png";
 static const int SCOPE_RGBA[] = {255, 255, 255, 100};
+static const float TOWER_ROTATION = 0.5;
 
 typedef struct game_data_s {
     int level_progression;
