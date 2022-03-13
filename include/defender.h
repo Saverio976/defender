@@ -37,6 +37,11 @@ struct load_s {
 };
 typedef struct load_s load_t;
 
+struct level_data_s {
+    int tower_nico_life;
+};
+typedef struct level_data_s level_data_t;
+
 window_t *init_defender(int ac, char **av);
 
 void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
