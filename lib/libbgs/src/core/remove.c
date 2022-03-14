@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "list.h"
 #include "my_bgs.h"
 
 static void remove_object(object_t *object)
@@ -32,15 +33,13 @@ static void remove_object(object_t *object)
     free(object);
 }
 
-static void remove_scene(scene_t *scene)
+void remove_scene(window_t *win, scene_t *scene)
 {
     list_t *elem = scene->objects->start;
-    object_t *object = NULL;
+    list_t *tmp = win->scenes->start;
 
-    for (int i = 0; i < scene->objects->len; i++) {
-        object = ((object_t *) elem->var);
-        remove_object(object);
-        elem = elem->next;
+    for (int i = 0; i < scene->objects->len; i++, elem = elem->next) {
+        remove_object(((object_t *) elem->var));
     }
     if (scene->components != NULL) {
         dico_t_destroy(scene->components);
@@ -48,7 +47,13 @@ static void remove_scene(scene_t *scene)
     free_list(scene->displayables);
     free_list(scene->updates);
     free_list(scene->objects);
-    free(scene);
+    for (int i = 0; i < win->scenes->len; i++, tmp = tmp->next) {
+        if (tmp->next->var == scene) {
+            tmp->next = tmp->next->next;
+            free(scene);
+            win->scenes->len -= 1;
+        }
+    }
 }
 
 void remove_window(window_t *win)
@@ -58,7 +63,7 @@ void remove_window(window_t *win)
 
     for (int i = 0; i < win->scenes->len; i++) {
         scene = ((scene_t *) elem->var);
-        remove_scene(scene);
+        remove_scene(win, scene);
         elem = elem->next;
     }
     free_list(win->scenes);
