@@ -33,8 +33,7 @@ void update_draw_life(object_t *obj, scene_t *scene,
     my_strcat(to_print, value);
     sfText_setString(obj->drawable.text, to_print);
     free(value);
-    //if (lvl->tower_nico_life <= 0) {
-    //    remove_scene(win, scene);
-    //    win->scene_index = 1;
-    //}
+    if (lvl->tower_nico_life <= 0) {
+        win->scene_index = 1;
+    }
 }
