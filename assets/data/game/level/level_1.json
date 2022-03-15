@@ -15,6 +15,6 @@
         "kamikaze": "./assets/data/game/ennemy/kamikaze.json"
     },
     "life": 150,
-    "wave": [["minion", 5, 1], ["fly", 2, 0], ["wave"], ["tank", 15, 0]],
+    "wave": [["minion", 5, 1]],
     "cadence": 4
 }

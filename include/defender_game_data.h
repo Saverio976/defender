@@ -24,11 +24,23 @@ static const char SCOPE_PATH[] = "./assets/image/tower/scope.png";
 static const int SCOPE_RGBA[] = {255, 255, 255, 100};
 static const float TOWER_ROTATION = 0.5;
 
+static const char *SUPPORT_PATH[3] = {"./assets/image/tower/support_2.png",
+    "oui", "non"};
+static const int SIZE_ARR[3] = {2, 3, 4};
+
+typedef struct error_message_data_s {
+    int frame_counter;
+    int display_list_pos;
+    int update_list_pos;
+    int obj_list_pos;
+} error_message_data_t;
+
 typedef struct game_data_s {
     int level_progression;
     int com;
     int xp;
     dico_t *skill_three;
+    char *font;
 } game_data_t;
 
 typedef struct tower_data_s {
@@ -40,7 +52,15 @@ typedef struct tower_data_s {
 
 object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
 
+void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
+void place_tower(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
 int init_game_data(window_t *win);
+
+void shot_ennemy(sfFloatRect intersection, object_t *tower);
 
 void display_scope(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
@@ -67,5 +87,11 @@ int create_tower(scene_t *scene, dico_t *tower, sfVector2f pos);
 
 int set_scope(dico_t *tower_dico, dico_t *components[2], object_t *support,
     scene_t *scene);
+
+void update_shop_error_message(object_t *obj, scene_t *scene,
+        __attribute__((unused)) window_t *win, float dtime);
+
+void create_drag(scene_t *scene, window_t *win, dico_t *tower,
+    char *tower_path);
 
 #endif /* !GAME_DATA_H_ */

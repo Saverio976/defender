@@ -37,9 +37,12 @@ SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
 
 SRC_TOWER		:=	place_tower.c		\
+	 				create_tower.c		\
 					set_scope.c			\
+					create_drag.c		\
 					scope_event.c		\
 					create_support.c	\
+					shot_ennemy.c		\
 					update_tower.c
 SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 
@@ -63,6 +66,8 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 SRC_UPDATE		:=	button_menu.c			\
 					button_resume.c			\
 					ennemy.c				\
+					shop_error_message.c	\
+					buy_button.c			\
 					pause_button.c			\
 					update_wave_launcher.c	\
 					ennemy_explosion_nico.c	\
@@ -87,7 +92,7 @@ OBJ			:=	$(SRC:%.c=%.o)
 LIB_TARGET	=	lib/libmy.a
 
 LDFLAGS		=	-L$(dir $(LIB_TARGET)) -lmy -lcsfml-graphics -lcsfml-audio \
-				-lcsfml-system -lcsfml-window
+				-lcsfml-system -lcsfml-window -lm
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------

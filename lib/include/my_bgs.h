@@ -74,7 +74,9 @@ struct time_clock_s {
 };
 
 struct scene_s {
+    bool pause;
     sfColor bg_color;
+    list_ptr_t *to_remove;
     list_ptr_t *updates;
     list_ptr_t *objects;
     list_ptr_t *displayables;
@@ -285,5 +287,9 @@ void window_set_framerate_limit(window_t *win, unsigned int limit);
 window_t *create_window(sfVideoMode mode, const char *title, sfUint32 style);
 
 int scene_reload_lists(scene_t *scene);
+
+void remove_object(object_t *object);
+
+void remove_scene(scene_t *scene);
 
 #endif /* !BGS_H_ */

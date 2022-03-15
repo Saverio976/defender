@@ -11,30 +11,37 @@
 #include "defender_game_data.h"
 #include "my_strings.h"
 
-static void (*button_event[6])(object_t *obj,
+static void (*button_event[7])(object_t *obj,
         scene_t *scene, window_t *win, set_event_t *evt) = {
     click_play_button,
     click_settings_button,
     click_quit_button,
     click_pause_button,
     click_shop_button,
-    click_resume_button
+    click_resume_button,
+    click_buy_button
 };
 
 void init_button_event(object_t *object, dico_t *dico)
 {
     any_t *id = dico_t_get_any(dico, "id");
     any_t *level_path = dico_t_get_any(dico, "level path");
+    any_t *tower_path = dico_t_get_any(dico, "tower path");
 
     if (id != NULL && id->type == INT) {
         create_event(on_hover_menu_but, true, object, off_hover_menu_but);
         event_add_node(create_event(button_event[id->value.i], true, object,
             NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     } else if (level_path != NULL && level_path->type == STR) {
+        create_event(on_hover_menu_but, true, object, off_hover_menu_but);
         object->components = dico_t_add_data(object->components, "level path",
             my_strdup(level_path->value.str), free);
         event_add_node(create_event(click_level_button, true,
             object, NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
+    }
+    if (tower_path != NULL && tower_path->type == STR) {
+        object->components = dico_t_add_data(object->components, "tower path",
+            my_strdup(tower_path->value.str), free);
     }
 }
 
@@ -64,6 +71,7 @@ int init_sprite(float *pos, char *path, scene_t *scene, dico_t *dico)
 int init_text(float *pos, scene_t *scene, char *arg[2], dico_t *dico)
 {
     any_t *size = dico_t_get_any(dico, "text size");
+    any_t *char_size = dico_t_get_any(dico, "char size");
     object_t *text = create_object(NULL, NULL, scene);
 
     if (text == NULL || object_set_text(text, arg[0], arg[1],
@@ -73,6 +81,9 @@ int init_text(float *pos, scene_t *scene, char *arg[2], dico_t *dico)
     if (size != NULL && size->type == FLOAT) {
         sfText_setScale(text->drawable.text, (sfVector2f) {size->value.f,
             size->value.f});
+    }
+    if (char_size != NULL && char_size->type == INT) {
+        sfText_setCharacterSize(text->drawable.text, char_size->value.i);
     }
     check_set_color(text, dico);
     return RET_OK;

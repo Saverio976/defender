@@ -94,7 +94,7 @@ void update_ennemy(object_t *obj, scene_t *scene,
     ennemy_t *ennemy_me = NULL;
 
     map = dico_t_get_value(scene->components, SCENE_COMP_MAP);
-    if (map == NULL || obj->type != SPRITE) {
+    if (map == NULL || obj->type != SPRITE || scene->pause == true) {
         return;
     }
     ennemy_me = dico_t_get_value(obj->components, OBJ_COMP_ENNSTRUCT);

@@ -8,7 +8,38 @@
 #include <stdlib.h>
 #include "my_bgs.h"
 
-static void remove_object(object_t *object)
+bool check_list(list_ptr_t *list, object_t *obj)
+{
+    list_t *elem = list->start;
+
+    for (int i = 0; i < list->len; i++, elem = elem->next) {
+        if (elem->var == obj) {
+            rm_elem_i(list, i);
+            return true;
+        }
+    }
+    return false;
+}
+
+void window_remove(scene_t *scene)
+{
+    list_t *rm_elem = NULL;
+
+    if (scene == NULL || scene->to_remove->len == 0) {
+        return;
+    }
+    rm_elem = scene->to_remove->start;
+    for (int i = 0; i < scene->to_remove->len; i++, rm_elem = rm_elem->next) {
+        if (check_list(scene->objects, rm_elem->var) == false) {
+            return;
+        }
+        check_list(scene->displayables, rm_elem->var);
+        check_list(scene->updates, rm_elem->var);
+        remove_object(rm_elem->var);
+    }
+}
+
+void remove_object(object_t *object)
 {
     switch (object->type) {
         case SPRITE:
@@ -32,7 +63,7 @@ static void remove_object(object_t *object)
     free(object);
 }
 
-static void remove_scene(scene_t *scene)
+void remove_scene(scene_t *scene)
 {
     list_t *elem = scene->objects->start;
     object_t *object = NULL;
@@ -48,6 +79,7 @@ static void remove_scene(scene_t *scene)
     free_list(scene->displayables);
     free_list(scene->updates);
     free_list(scene->objects);
+    free_list(scene->to_remove);
     free(scene);
 }
 
