@@ -83,7 +83,7 @@ int launch_game(object_t *obj, scene_t *scene,
     any_t *tower = parse_json_file("./assets/data/game/tower/standart.json");
 
     if (obj == NULL || scene == NULL || win == NULL || evt == NULL ||
-        new_scene == NULL) {
+        new_scene == NULL || tower == NULL) {
         return RET_INVALID_INPUT;
     }
     level_path = dico_t_get_value(obj->components, "level path");
