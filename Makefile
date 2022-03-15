@@ -124,7 +124,7 @@ FN_TEST_LDFLAGS	=	-lgcov
 .PHONY: 	all
 all:		CURR_RULE = all
 all:		init $(LIB_TARGET)
-	@$(MAKE) $(NAME) -s
+	@$(MAKE) $(NAME) -s -j4
 	@echo -e $(GREEN)'-> [finished]: $(NAME): all'$(RESET)
 
 $(NAME):	CURR_RULE = $(NAME)
@@ -133,7 +133,7 @@ $(NAME): 	init $(OBJ)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(NAME)'$(RESET)
 
 $(LIB_TARGET):
-	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE)
+	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE) -j4
 
 debug: RULE = debug
 debug: CFLAGS += -g3
@@ -151,7 +151,7 @@ clean:
 .PHONY: 	fclean
 fclean:		CURR_RULE = fclean
 fclean:		init clean
-	@$(MAKE) -C $(dir $(LIB_TARGET)) fclean -s
+	@$(MAKE) -C $(dir $(LIB_TARGET)) fclean -s -j4
 	@$(RM) $(NAME) $(TNAME)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(CURR_RULE)'$(RESET)
 # ----------------------------------------------------------------------------
