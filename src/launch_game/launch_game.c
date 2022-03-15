@@ -20,11 +20,6 @@
 #include "my_json.h"
 #include "defender.h"
 
-static void destroy_lvl_data(void *data)
-{
-    free(data);
-}
-
 static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
 {
     level_data_t *lvl = NULL;
@@ -40,7 +35,7 @@ static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
         return (RET_ERR_MALLOC);
     }
     lvl->tower_nico_life = any->value.i;
-    scene_add_components(scene, lvl, "LEVEL DATA", destroy_lvl_data);
+    scene_add_components(scene, lvl, "LEVEL DATA", free);
     obj_draw_life = create_object(update_draw_life, NULL, scene);
     object_set_text(obj_draw_life, "assets/font/menlo.ttf", "life",
             (sfVector2f) {1500, 10});
