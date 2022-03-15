@@ -129,7 +129,7 @@ FN_TEST_LDFLAGS	=	-lgcov
 # Make the defender
 .PHONY: 	all
 all:		CURR_RULE = all
-all:		init $(LIB_TARGET)
+all:		init $(LIB_TARGET)_OPTI
 	@$(MAKE) $(NAME) -s -j4
 	@echo -e $(GREEN)'-> [finished]: $(NAME): all'$(RESET)
 
@@ -139,6 +139,9 @@ $(NAME): 	init $(OBJ)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(NAME)'$(RESET)
 
 $(LIB_TARGET):
+	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE) CURR_RULE=$(RULE)
+
+$(LIB_TARGET)_OPTI:
 	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE) -j4
 
 debug: RULE = debug
