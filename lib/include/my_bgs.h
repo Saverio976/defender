@@ -250,6 +250,13 @@ int scene_add_components(scene_t *scene, void *data, const char key[],
 // ----------------------------------------------------------------------------
 
 /**
+ * @brief remove scene from availible scene of window
+ * @param win
+ * @param scene
+ */
+void remove_scene(window_t *win, scene_t *scene);
+
+/**
 ** @brief destroy all scene attached to window, all object attached to scene,
 ** all components attached to an object
 ** @param win the window to destroy
