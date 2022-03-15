@@ -1,3 +1,4 @@
 {
+    "wave": [["minion", 5, 1], ["fly", 2, 0], ["wave"], ["tank", 15, 0]],
     "str": "scd button!"
 }

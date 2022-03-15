@@ -2,6 +2,7 @@
     "level progression": 0,
     "com": 0,
     "xp": 0,
+    "font": "assets/font/menlo.ttf",
     "skill three": {
         "springboard": {"state": 0, "cost": 25},
         "poison": {"state": 0, "cost": 60},

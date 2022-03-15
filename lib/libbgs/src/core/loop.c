@@ -27,15 +27,17 @@ static void window_update(scene_t *scene, window_t *win, float seconds)
 {
     object_t *obj = NULL;
     list_t *elem = scene->updates->start;
+    list_t *tmp;
 
     window_update_event(win, scene);
     scene_update_event(win, scene);
     for (int i = 0; i < scene->updates->len; i++) {
+        tmp = elem->next;
         obj = ((object_t *) elem->var);
         if (obj->components != NULL || obj->update != NULL) {
             object_update(obj, scene, win, seconds);
         }
-        elem = elem->next;
+        elem = tmp;
     }
 }
 
@@ -66,6 +68,7 @@ static int scene_handling(window_t **win, scene_t **scene, time_clock_t *timer)
     timer->seconds = sfTime_asSeconds(timer->time);
     window_update(*scene, *win, timer->seconds);
     window_display(*scene, *win);
+    window_remove(*scene);
     return BGS_OK;
 }
 

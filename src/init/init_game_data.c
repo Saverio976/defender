@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "my_strings.h"
 #include "defender_game_data.h"
 #include "defender.h"
 
@@ -17,6 +18,7 @@ static void destroy_game_data(void *data)
         return;
     }
     dico_t_destroy(game_data->skill_three);
+    free(game_data->font);
     free(game_data);
 }
 
@@ -86,11 +88,15 @@ int init_game_data(window_t *win)
 {
     game_data_t *game_data = malloc(sizeof(game_data_t));
     any_t *game_data_file = parse_json_file(GAME_DATA_PATH);
+    any_t *font = NULL;
 
     if (game_data == NULL || game_data_file == NULL ||
         fill_game_data(game_data, game_data_file->value.dict) != RET_OK) {
         return RET_ERR_MALLOC;
     }
+    font = dico_t_get_any(game_data_file->value.dict, "font");
+    game_data->font = (font != NULL && font->type == STR) ?
+        my_strdup(font->value.str) : NULL;
     win->components = dico_t_add_data(win->components, GAME_DATA, game_data,
         destroy_game_data);
     if (win->components == NULL) {

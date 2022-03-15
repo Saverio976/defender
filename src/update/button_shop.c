@@ -18,7 +18,7 @@ void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
 
     rect = sfSprite_getGlobalBounds(obj->drawable.sprite);
     vector = sfMouse_getPositionRenderWindow(win->win);
-    if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse &&
+    if ((sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse) &&
         obj->is_visible == true) {
         click_shop_button(obj, scene, win, evt);
     }
@@ -30,10 +30,14 @@ void click_shop_button(__attribute__((unused)) object_t *obj, scene_t *scene,
     __attribute__((unused)) set_event_t *evt)
 {
     list_ptr_t *shop_obj = dico_t_get_value(scene->components, SHOP_OBJ);
+    list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
     list_t *elem = NULL;
 
     if (shop_obj == NULL) {
         return;
+    } else if (pause_obj != NULL && ((object_t *) pause_obj->start->var)->
+        is_visible == true) {
+        click_pause_button(pause_obj->start->var, scene, win, evt);
     }
     elem = shop_obj->start;
     for (int i = 0; i < shop_obj->len; i++, elem = elem->next) {

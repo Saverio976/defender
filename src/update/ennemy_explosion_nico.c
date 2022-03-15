@@ -6,6 +6,7 @@
 */
 
 #include <SFML/System/Vector2.h>
+#include "defender.h"
 #include "my_bgs.h"
 #include "my_dico.h"
 #include "my_strings.h"
@@ -52,7 +53,21 @@ int is_obj_touch_nico(object_t *obj, char **map)
     return (0);
 }
 
-void update_obj_explosion(object_t *obj, __attribute__((unused)) float dtime)
+static void remove_life_to_tower(ennemy_t *enn, scene_t *scene)
+{
+    level_data_t *lvl = NULL;
+
+    if (enn == NULL || scene == NULL) {
+        return;
+    }
+    lvl = dico_t_get_value(scene->components, "LEVEL DATA");
+    if (lvl == NULL) {
+        return;
+    }
+    lvl->tower_nico_life -= enn->life;
+}
+
+void update_obj_explosion(object_t *obj, scene_t *scene)
 {
     ennemy_t *enn = NULL;
 
@@ -60,7 +75,8 @@ void update_obj_explosion(object_t *obj, __attribute__((unused)) float dtime)
     if (enn == NULL) {
         return;
     }
-    if (enn->time_last > 2.0) {
+    if (enn->time_last > 0.2) {
         obj->is_visible = false;
+        remove_life_to_tower(enn, scene);
     }
 }

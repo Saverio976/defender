@@ -5,86 +5,56 @@
 ** place tower
 */
 
-#include <stdlib.h>
+#include "my_puts.h"
 #include "defender_game_data.h"
+#include "defender_ennemy.h"
 
-static void destroy_tower_data(void *data)
+bool check_pos(int i, int pos_x, char **map, int size)
 {
-    tower_data_t *tower_data = data;
-
-    if (tower_data != NULL && tower_data->scope != NULL) {
-        free_list(tower_data->scope);
-        free(tower_data);
-    } else if (tower_data != NULL) {
-        free(tower_data);
+    for (int x = pos_x; x < pos_x + size; x += 40) {
+        if (map[i / 40][x / 40] != '.') {
+            return false;
+        }
     }
+    return true;
 }
 
-static object_t *set_data(object_t *object, dico_t *tower)
+bool check_place(int size, scene_t *scene, object_t *suppport)
 {
-    any_t *cadence = dico_t_get_any(tower, "cadence");
-    any_t *fly = dico_t_get_any(tower, "fly");
-    any_t *damage = dico_t_get_any(tower, "damage");
-    tower_data_t *tower_data = malloc(sizeof(tower_data_t));
+    char **map = dico_t_get_value(scene->components, SCENE_COMP_MAP);
+    sfVector2i pos;
 
-    if (tower_data == NULL || cadence == NULL || fly == NULL ||
-        damage == NULL) {
-        return NULL;
+    if (map == NULL) {
+        return false;
     }
-    tower_data->cadence = cadence->value.f;
-    tower_data->damage = damage->value.i;
-    tower_data->fly = (fly->value.i == 1) ? true : false;
-    tower_data->scope = NULL;
-    object->components = dico_t_add_data(object->components, TOWER_DATA,
-        tower_data, destroy_tower_data);
-    if (object->components == NULL) {
-        return NULL;
+    pos.x = ((int) suppport->bigdata.sprite_bigdata.pos.x) - ((int) size / 2);
+    pos.y = ((int) suppport->bigdata.sprite_bigdata.pos.y) - ((int) size / 2);
+    for (int i = pos.y; i < pos.y + (size * 40); i += 40) {
+        if (check_pos(i, pos.x, map, size) == false) {
+            return false;
+        }
     }
-    return object;
+    return true;
 }
 
-static object_t *place_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
-    int *rect)
+void place_tower(object_t *obj, scene_t *scene, window_t *win, set_event_t *evt)
 {
-    object_t *obj = NULL;
-    any_t *path = NULL;
+    int size = (int) dico_t_get_value(obj->components, "tower size");
+    object_t *drag_tower = dico_t_get_value(obj->components, "drag tower");
+    char *tower_path = dico_t_get_value(obj->components, "tower path");
+    any_t *tower = NULL;
 
-    if (tower == NULL || scene == NULL || rect == NULL) {
-        return NULL;
+    printf("pd\n");
+    if (tower_path == NULL || drag_tower == NULL) {
+        return;
     }
-    path = dico_t_get_any(tower, "path");
-    obj = create_object(&update_tower, NULL, scene);
-    if (path == NULL || obj == NULL ||
-        object_set_sprite(obj, path->value.str, (sfIntRect) {rect[0], rect[1],
-        rect[2], rect[3]}, pos) != RET_OK) {
-        return NULL;
+    printf("upd\n");
+    tower = parse_json_file(tower_path);
+    if (tower == NULL || tower->type != DICT ||
+        check_place(size, scene, obj) == false) {
+        return;
     }
-    list_add_to_i(scene->displayables, obj, (int)
-        dico_t_get_value(scene->components, ENNEMY_ID));
-    list_add_to_end(scene->updates, obj);
-    free(rect);
-    return set_data(obj, tower);
-}
-
-int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
-{
-    object_t *tower = NULL;
-    object_t *support = NULL;
-    dico_t *components[2] = {NULL, NULL};
-
-    if (scene == NULL || tower_dico == NULL) {
-        return RET_ERR_MALLOC;
-    }
-    tower = place_tower(tower_dico, scene, pos, get_any_int_array(
-        dico_t_get_any(tower_dico, "rect")));
-    support = place_support(dico_t_get_any(tower_dico, "size"), scene, pos);
-    if (tower == NULL || support == NULL) {
-        return RET_ERR_MALLOC;
-    }
-    components[0] = tower->components;
-    components[1] = support->components;
-    if (set_scope(tower_dico, components, support, scene) != RET_OK) {
-        return RET_ERR_MALLOC;
-    }
-    return RET_OK;
+    create_tower(scene, tower->value.dict, obj->bigdata.sprite_bigdata.pos);
+    obj->is_visible = false;
+    drag_tower->is_visible = false;
 }

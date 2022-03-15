@@ -9,6 +9,27 @@
             "sprite path": "./assets/image/menu/side/shop/back.png",
             "pos": [560.0, 1690.0],
             "size": 1.0
+        },
+        {
+            "pos": [220.0, 1625.0],
+            "sprite path": "./assets/image/menu/side/shop/button.png",
+            "tower path": "./assets/data/game/tower/standart.json",
+            "text pos": [300.0, 1625.0],
+            "font path": "assets/font/menlo.ttf",
+            "color": [52, 59, 70, 240],
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "id": 6,
+            "text": "cost: 4"
+        },
+        {
+            "pos": [220.0, 1625.0],
+            "sprite path": "./assets/image/tower/standart/standart.png",
+            "text pos": [285.0, 1625.0],
+            "font path": "assets/font/menlo.ttf",
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "text": "Standart"
         }
     ]
 }

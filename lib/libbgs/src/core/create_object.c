@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "my_bgs.h"
-#include "../include/libbgs_private.h"
+#include "libbgs_private.h"
 
 int object_set_audio(object_t *object, char const *path, bool play_now,
     bool loop_now)

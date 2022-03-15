@@ -51,6 +51,8 @@ int object_set_event(object_t *object, set_event_t *usr_event);
 void object_check_event(object_t *object, scene_t *scene,
         window_t *win);
 
+void window_remove(scene_t *scene);
+
 sfFloatRect find_higher_pixels_group(char **arr);
 
 char **check_image_pixel(sfImage *image);

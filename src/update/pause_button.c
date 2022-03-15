@@ -29,17 +29,23 @@ void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt)
 {
-    list_ptr_t *shop_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
+    list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
+    list_ptr_t *shop_obj = dico_t_get_value(scene->components, SHOP_OBJ);
     list_t *elem = NULL;
 
-    if (shop_obj == NULL || obj->type != SPRITE) {
+    if (pause_obj == NULL || obj->type != SPRITE) {
         return;
+    } else if (shop_obj != NULL && ((object_t *) shop_obj->start->var)->
+        is_visible == true) {
+        click_shop_button(shop_obj->start->var, scene, win, evt);
     }
-    elem = shop_obj->start;
-    for (int i = 0; i < shop_obj->len; i++, elem = elem->next) {
+    elem = pause_obj->start;
+    for (int i = 0; i < pause_obj->len; i++, elem = elem->next) {
         if (((object_t *) elem->var)->is_visible == true) {
             ((object_t *) elem->var)->is_visible = false;
+            scene->pause = false;
         } else {
+            scene->pause = true;;
             ((object_t *) elem->var)->is_visible = true;
         }
     }

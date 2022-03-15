@@ -8,11 +8,6 @@
 #include "defender_game_data.h"
 #include "defender_ennemy.h"
 
-void shot_ennemy(sfFloatRect intersection, object_t *tower)
-{
-    return;
-}
-
 sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
 {
     list_t *elem = NULL;
@@ -66,7 +61,7 @@ void update_tower(object_t *obj, scene_t *scene, window_t *win, float time)
     list_ptr_t *ennemy_list = dico_t_get_value(scene->components,
         LIST_ENNEMY);
 
-    if (tower_data == NULL || ennemy_list == NULL) {
+    if (tower_data == NULL || ennemy_list == NULL || scene->pause == true) {
         return;
     }
     if (detect_ennemy(tower_data, ennemy_list, obj) == false) {

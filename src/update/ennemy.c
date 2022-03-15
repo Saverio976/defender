@@ -94,7 +94,7 @@ void update_ennemy(object_t *obj, scene_t *scene,
     ennemy_t *ennemy_me = NULL;
 
     map = dico_t_get_value(scene->components, SCENE_COMP_MAP);
-    if (map == NULL || obj->type != SPRITE) {
+    if (map == NULL || obj->type != SPRITE || scene->pause == true) {
         return;
     }
     ennemy_me = dico_t_get_value(obj->components, OBJ_COMP_ENNSTRUCT);
@@ -103,7 +103,7 @@ void update_ennemy(object_t *obj, scene_t *scene,
     }
     ennemy_me->time_last += dtime;
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
-        update_obj_explosion(obj, dtime);
+        update_obj_explosion(obj, scene);
     } else if (obj->is_visible &&
             ennemy_me->time_last > ennemy_me->load_time) {
         move_ennemy(obj, ennemy_me, map);
