@@ -60,6 +60,7 @@ void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
     if (tower == NULL || tower->type != DICT ||
         check_money(game_data, tower->value.dict, (sfVector2f) {rect.left +
         (rect.width / 2), rect.top + (rect.height / 2)}, scene) == false) {
+        destroy_any(tower);
         return;
     }
     click_shop_button(NULL, scene, NULL, NULL);
