@@ -37,9 +37,12 @@ SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
 
 SRC_TOWER		:=	place_tower.c		\
+	 				create_tower.c		\
 					set_scope.c			\
+					create_drag.c		\
 					scope_event.c		\
 					create_support.c	\
+					shot_ennemy.c		\
 					update_tower.c
 SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 
@@ -63,6 +66,8 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 SRC_UPDATE		:=	button_menu.c			\
 					button_resume.c			\
 					ennemy.c				\
+					shop_error_message.c	\
+					buy_button.c			\
 					pause_button.c			\
 					update_wave_launcher.c	\
 					ennemy_explosion_nico.c	\
@@ -88,7 +93,7 @@ OBJ			:=	$(SRC:%.c=%.o)
 LIB_TARGET	=	lib/libmy.a
 
 LDFLAGS		=	-L$(dir $(LIB_TARGET)) -lmy -lcsfml-graphics -lcsfml-audio \
-				-lcsfml-system -lcsfml-window
+				-lcsfml-system -lcsfml-window -lm
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
@@ -125,7 +130,7 @@ FN_TEST_LDFLAGS	=	-lgcov
 .PHONY: 	all
 all:		CURR_RULE = all
 all:		init $(LIB_TARGET)
-	@$(MAKE) $(NAME) -s
+	@$(MAKE) $(NAME) -s -j4
 	@echo -e $(GREEN)'-> [finished]: $(NAME): all'$(RESET)
 
 $(NAME):	CURR_RULE = $(NAME)
@@ -134,7 +139,7 @@ $(NAME): 	init $(OBJ)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(NAME)'$(RESET)
 
 $(LIB_TARGET):
-	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE)
+	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE) -j4
 
 debug: RULE = debug
 debug: CFLAGS += -g3
@@ -152,7 +157,7 @@ clean:
 .PHONY: 	fclean
 fclean:		CURR_RULE = fclean
 fclean:		init clean
-	@$(MAKE) -C $(dir $(LIB_TARGET)) fclean -s
+	@$(MAKE) -C $(dir $(LIB_TARGET)) fclean -s -j4
 	@$(RM) $(NAME) $(TNAME)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(CURR_RULE)'$(RESET)
 # ----------------------------------------------------------------------------

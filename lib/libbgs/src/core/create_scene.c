@@ -42,6 +42,10 @@ static int init_list(scene_t *scene)
     if (scene->updates == NULL) {
         return BGS_ERR_MALLOC;
     }
+    scene->to_remove = list_create();
+    if (scene->to_remove == NULL) {
+        return BGS_ERR_MALLOC;
+    }
     return BGS_OK;
 }
 
@@ -54,6 +58,7 @@ scene_t *create_scene(window_t *win, sfColor bg_color)
     }
     scene->components = NULL;
     scene->bg_color = bg_color;
+    scene->pause = false;
     if (init_list(scene) != BGS_OK || window_add_scene(win, scene) != BGS_OK) {
         return NULL;
     }

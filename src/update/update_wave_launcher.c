@@ -24,7 +24,7 @@ void update_wave_launcher(object_t *obj, scene_t *scene,
     load_t *enn = NULL;
 
     time += dtime;
-    if (scene == NULL || obj == NULL) {
+    if (scene == NULL || obj == NULL || scene->pause == true) {
         return;
     }
     list_enemy = dico_t_get_value(obj->components, OBJ_COMP_MANAGEWAVE);

@@ -1,5 +1,4 @@
 {
-    "font path": "assets/font/menlo.ttf",
     "buttons": [
         {
             "sprite path": "./assets/image/menu/side/bar.png",

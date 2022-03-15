@@ -39,8 +39,7 @@ void rm_elem_i(list_ptr_t *list_ptr, int x)
     if (x == 0) {
         rm_fst_elem(list_ptr);
         return;
-    }
-    else if (x == list_ptr->len - 1) {
+    } else if (x == list_ptr->len - 1) {
         rm_last_elem(list_ptr);
         return;
     }
