@@ -8,7 +8,8 @@
 #ifndef GAME_DATA_H_
     #define GAME_DATA_H_
 
-    #include "my_dico.h"
+    #include "my_bgs.h"
+#include "my_dico.h"
     #include "defender.h"
 
 static const char TOWER_DATA[] = "tower data";
@@ -46,8 +47,9 @@ typedef struct game_data_s {
 typedef struct tower_data_s {
     list_ptr_t *scope;
     int damage;
-    int cadence;
+    float cadence;
     bool fly;
+    float dtime;
 } tower_data_t;
 
 object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
@@ -60,7 +62,8 @@ void place_tower(object_t *obj, scene_t *scene, window_t *win,
 
 int init_game_data(window_t *win);
 
-void shot_ennemy(sfFloatRect intersection, object_t *tower);
+void shot_ennemy(sfFloatRect intersection, object_t *tower,
+        tower_data_t *tower_data, scene_t *scene);
 
 void display_scope(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);

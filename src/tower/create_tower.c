@@ -35,6 +35,7 @@ static object_t *set_data(object_t *object, dico_t *tower)
     tower_data->damage = damage->value.i;
     tower_data->fly = (fly->value.i == 1) ? true : false;
     tower_data->scope = NULL;
+    tower_data->dtime = 0;
     object->components = dico_t_add_data(object->components, TOWER_DATA,
         tower_data, destroy_tower_data);
     if (object->components == NULL) {
