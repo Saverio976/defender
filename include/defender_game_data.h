@@ -17,6 +17,7 @@ static const char TOWER_DATA[] = "tower data";
 static const char SIZE[] = "size";
 static const char GAME_DATA[] = "game data";
 static const char PAUSE_OBJ[] = "pause obj";
+static const char TOWER_LIST[] = "tower list";
 static const char SHOP_OBJ[] = "shop obj";
 static const char ENNEMY_ID[] = "ennemy id";
 
@@ -25,10 +26,6 @@ static const char GAME_DATA_PATH[] = "./assets/data/game/data.json";
 static const char SCOPE_PATH[] = "./assets/image/tower/scope.png";
 static const int SCOPE_RGBA[] = {255, 255, 255, 100};
 static const float TOWER_ROTATION = 0.5;
-
-static const char *SUPPORT_PATH[3] = {"./assets/image/tower/support_2.png",
-    "oui", "non"};
-static const int SIZE_ARR[3] = {2, 3, 4};
 
 typedef struct error_message_data_s {
     int frame_counter;
@@ -60,10 +57,14 @@ object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
 void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
+void check_open_elem(scene_t *scene, window_t *win, object_t *obj);
+
 void place_tower(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 int init_game_data(window_t *win);
+
+bool check_drag_pos(window_t *win, int size);
 
 void shot_ennemy(sfFloatRect intersection, object_t *tower,
         tower_data_t *tower_data, scene_t *scene);

@@ -5,5 +5,7 @@
     "damage": 2,
     "scope": 13,
     "fly": 1,
-    "build couldown": 5
+    "build couldown": 5,
+    "rect": [-1, -1, -1, -1],
+    "path": "./assets/image/tower/aerian.png"
 }

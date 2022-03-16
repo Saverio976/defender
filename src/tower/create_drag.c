@@ -11,6 +11,10 @@
 #include "defender_ennemy.h"
 #include "defender_game_data.h"
 
+static const char *support_path[3] = {"./assets/image/tower/support_2.png",
+    "./assets/image/tower/support_3.png", "./assets/image/tower/support_4.png"};
+static const int size_arr[3] = {2, 3, 4};
+
 float get_drag_pos(float pos, int size)
 {
     int u = (pos / 40);
@@ -27,13 +31,13 @@ float get_drag_pos(float pos, int size)
 }
 
 void update_drag_support(object_t *obj, scene_t *scene, window_t *win,
-    float time)
+    __attribute__((unused)) float time)
 {
     sfVector2i pos = sfMouse_getPositionRenderWindow(win->win);
     int size = (int) dico_t_get_value(obj->components, "tower size");
     char **map = dico_t_get_value(scene->components, SCENE_COMP_MAP);
 
-    if (map == NULL) {
+    if (map == NULL || check_drag_pos(win, size) == false) {
         return;
     }
     if (pos.y / 40 >= 0 && pos.y / 40 < my_wordarray_len(map)) {
@@ -45,16 +49,21 @@ void update_drag_support(object_t *obj, scene_t *scene, window_t *win,
     }
 }
 
-void update_drag(object_t *obj, scene_t *scene, window_t *win, float time)
+void update_drag(object_t *obj, __attribute__((unused)) scene_t *scene,
+    window_t *win, __attribute__((unused)) float time)
 {
     sfVector2i posi = sfMouse_getPositionRenderWindow(win->win);
+    int size = (int) dico_t_get_value(obj->components, "tower size");
 
+    if (check_drag_pos(win, size) == false) {
+        return;
+    }
     obj->bigdata.sprite_bigdata.pos = (sfVector2f) {(float) posi.x,
         (float) posi.y};
 }
 
 int create_support_drag(scene_t *scene, object_t *drag, int size,
-    char *path[2])
+    const char *path[2])
 {
     object_t *drag_support = create_object(update_drag_support, NULL, scene);
 
@@ -82,16 +91,17 @@ void create_drag(scene_t *scene, window_t *win, dico_t *tower, char *tower_path)
     sfVector2i posi = sfMouse_getPositionRenderWindow(win->win);
     sfVector2f pos = {(float) posi.x, (float) posi.y};
     any_t *size = dico_t_get_any(tower, "size");
-    char *file_path[2] = {NULL, tower_path};
+    const char *file_path[2] = {NULL, tower_path};
 
     if (drag == NULL || path == NULL || size == NULL || object_set_sprite(drag,
         path->value.str, (sfIntRect) {-1, -1, -1, -1}, pos) != BGS_OK) {
         return;
     }
+    drag->components = dico_t_add_data(drag->components, "tower size",
+        (void *) size->value.i, NULL);
     for (int i = 0; i < 3; i++) {
-        if (SIZE_ARR[i] == size->value.i) {
-            file_path[0] = SUPPORT_PATH[i];
-        }
+        if (size_arr[i] == size->value.i)
+            file_path[0] = support_path[i];
     }
     create_support_drag(scene, drag, size->value.i, file_path);
     list_add_to_end(scene->displayables, drag);

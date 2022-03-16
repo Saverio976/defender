@@ -24,19 +24,20 @@ bool check_list(list_ptr_t *list, object_t *obj)
 
 void window_remove(scene_t *scene)
 {
-    list_t *rm_elem = NULL;
+    object_t *elem = NULL;
 
     if (scene == NULL || scene->to_remove->len == 0) {
         return;
     }
-    rm_elem = scene->to_remove->start;
-    for (int i = 0; i < scene->to_remove->len; i++, rm_elem = rm_elem->next) {
-        if (check_list(scene->objects, rm_elem->var) == false) {
-            return;
+    elem = scene->to_remove->start->var;
+    for (; scene->to_remove->len > 0; elem = (scene->to_remove->start != NULL)
+        ? scene->to_remove->start->var : NULL) {
+        if (check_list(scene->objects, elem) == true) {
+            check_list(scene->displayables, elem);
+            check_list(scene->updates, elem);
+            rm_fst_elem(scene->to_remove);
+            remove_object(elem);
         }
-        check_list(scene->displayables, rm_elem->var);
-        check_list(scene->updates, rm_elem->var);
-        remove_object(rm_elem->var);
     }
 }
 

@@ -26,18 +26,16 @@ void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
     win->click_prev_call = false;
 }
 
-void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
-    set_event_t *evt)
+void click_pause_button(__attribute__((unused)) object_t *obj, scene_t *scene,
+    window_t *win, __attribute__((unused)) set_event_t *evt)
 {
     list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
-    list_ptr_t *shop_obj = dico_t_get_value(scene->components, SHOP_OBJ);
     list_t *elem = NULL;
 
-    if (pause_obj == NULL || obj->type != SPRITE) {
+    if (pause_obj == NULL) {
         return;
-    } else if (shop_obj != NULL && ((object_t *) shop_obj->start->var)->
-        is_visible == true) {
-        click_shop_button(shop_obj->start->var, scene, win, evt);
+    } else if (((object_t *) pause_obj->start->var)->is_visible == false) {
+        check_open_elem(scene, win, NULL);
     }
     elem = pause_obj->start;
     for (int i = 0; i < pause_obj->len; i++, elem = elem->next) {
@@ -45,7 +43,7 @@ void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
             ((object_t *) elem->var)->is_visible = false;
             scene->pause = false;
         } else {
-            scene->pause = true;;
+            scene->pause = true;
             ((object_t *) elem->var)->is_visible = true;
         }
     }

@@ -8,7 +8,8 @@
 #include "defender_game_data.h"
 
 void update_shop_error_message(object_t *obj, scene_t *scene,
-        __attribute__((unused)) window_t *win, float dtime)
+    __attribute__((unused)) window_t *win,
+    __attribute__((unused)) float dtime)
 {
     error_message_data_t *error_message =
         dico_t_get_value(obj->components, "error message");
@@ -17,7 +18,7 @@ void update_shop_error_message(object_t *obj, scene_t *scene,
         return;
     }
     error_message->frame_counter += 1;
-    obj->bigdata.sprite_bigdata.pos.y -= 5;
+    obj->bigdata.text_bigdata.pos.y -= 0.5;
     if (error_message->frame_counter > 70) {
         list_add_to_end(scene->to_remove, obj);
     }

@@ -56,7 +56,8 @@ bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     return false;
 }
 
-void update_tower(object_t *obj, scene_t *scene, window_t *win, float time)
+void update_tower(object_t *obj, scene_t *scene,
+    __attribute__((unused)) window_t *win, __attribute__((unused)) float time)
 {
     tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
     list_ptr_t *ennemy_list = dico_t_get_value(scene->components,

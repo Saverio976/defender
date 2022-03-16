@@ -17,6 +17,7 @@ void display_scope(object_t *obj, scene_t *scene, window_t *win,
         return;
     }
     elem = tower_data->scope->start;
+    check_open_elem(scene, win, obj);
     if (((object_t *) elem->var)->is_visible == false) {
         for (int i = 0; i < tower_data->scope->len; i++, elem = elem->next) {
             ((object_t *) elem->var)->is_visible = true;
@@ -26,7 +27,8 @@ void display_scope(object_t *obj, scene_t *scene, window_t *win,
     }
 }
 
-void hide_scope(object_t *obj, scene_t *scene, window_t *win, set_event_t *evt)
+void hide_scope(object_t *obj, __attribute__((unused)) scene_t *scene,
+    window_t *win, __attribute__((unused)) set_event_t *evt)
 {
     tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
     list_t *elem = NULL;
