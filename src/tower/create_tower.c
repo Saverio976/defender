@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include "defender_game_data.h"
 
+void free_list_void(void *data);
+
 static void destroy_tower_data(void *data)
 {
     tower_data_t *tower_data = data;
@@ -59,11 +61,29 @@ static object_t *set_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
         rect[2], rect[3]}, pos) != RET_OK) {
         return NULL;
     }
-    list_add_to_i(scene->displayables, obj, (int)
-        dico_t_get_value(scene->components, ENNEMY_ID));
+    list_add_to_i(scene->displayables, obj,
+        (int) dico_t_get_value(scene->components, ENNEMY_ID));
     list_add_to_end(scene->updates, obj);
     free(rect);
     return set_data(obj, tower);
+}
+
+void add_to_support_list(scene_t *scene, object_t *support)
+{
+    list_ptr_t *list = dico_t_get_value(scene->components, TOWER_LIST);
+
+    if (list == NULL) {
+        list = list_create();
+        if (list == NULL) {
+            return;
+        }
+        scene->components = dico_t_add_data(scene->components, TOWER_LIST,
+            list, free_list_void);
+        if (scene->components == NULL) {
+            return;
+        }
+    }
+    list_add_to_end(list, support);
 }
 
 int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
@@ -78,6 +98,7 @@ int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
     tower = set_tower(tower_dico, scene, pos, get_any_int_array(
         dico_t_get_any(tower_dico, "rect")));
     support = place_support(dico_t_get_any(tower_dico, "size"), scene, pos);
+    add_to_support_list(scene, support);
     if (tower == NULL || support == NULL) {
         return RET_ERR_MALLOC;
     }

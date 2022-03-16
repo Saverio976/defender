@@ -66,6 +66,7 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 SRC_UPDATE		:=	button_menu.c			\
 					button_resume.c			\
 					ennemy.c				\
+					check_open_elem.c		\
 					shop_error_message.c	\
 					buy_button.c			\
 					pause_button.c			\

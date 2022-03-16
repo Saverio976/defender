@@ -15,6 +15,7 @@ static const char TOWER_DATA[] = "tower data";
 static const char SIZE[] = "size";
 static const char GAME_DATA[] = "game data";
 static const char PAUSE_OBJ[] = "pause obj";
+static const char TOWER_LIST[] = "tower list";
 static const char SHOP_OBJ[] = "shop obj";
 static const char ENNEMY_ID[] = "ennemy id";
 
@@ -50,6 +51,8 @@ object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
 
 void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
+
+void check_open_elem(scene_t *scene, window_t *win, object_t *obj);
 
 void place_tower(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
