@@ -34,53 +34,6 @@ static double get_coef(sfFloatRect intersection, sfSprite *tower)
     return (angle + 90);
 }
 
-void update_bullet(object_t *obj, scene_t *scene, window_t *win, float dtime)
-{
-    bullet_t *bullet = NULL;
-    float new_x =  0;
-    float new_y = 0;
-    float curr_x = 0;
-    float curr_y = 0;
-
-    if (obj == NULL) {
-        return;
-    }
-    bullet = dico_t_get_value(obj->components, "DIRECTION BULLET");
-    if (bullet == NULL) {
-        return;
-    }
-    curr_x = obj->bigdata.sprite_bigdata.pos.x;
-    curr_y = obj->bigdata.sprite_bigdata.pos.y;
-    new_x = curr_x + (dtime * (bullet->direction.x - curr_x));
-    new_y = curr_y + (dtime * (bullet->direction.y - curr_y));
-    obj->bigdata.sprite_bigdata.pos.x = new_x;
-    obj->bigdata.sprite_bigdata.pos.y = new_y;
-}
-
-void spawn_bullet(scene_t *scene, sfVector2f initial_position,
-        sfVector2f direction, bool is_fly)
-{
-    object_t *obj = NULL;
-    bullet_t *bullet = NULL;
-
-    bullet = malloc(sizeof(bullet_t));
-    if (bullet == NULL || scene == NULL) {
-        return;
-    }
-    bullet->direction = direction;
-    bullet->is_fly = is_fly;
-    obj = create_object(update_bullet, NULL, scene);
-    if (obj == NULL) {
-        free(bullet);
-        return;
-    }
-    object_set_sprite(obj, "assets/image/menu/level/octo.png",
-            (sfIntRect) {-1, -1, -1, -1}, initial_position);
-    object_add_components(obj, bullet, "DIRECTION BULLET", NULL);
-    list_add_to_end(scene->displayables, obj);
-    list_add_to_end(scene->updates, obj);
-}
-
 void shot_ennemy(sfFloatRect intersection, object_t *tower,
         tower_data_t *tower_data, scene_t *scene)
 {
