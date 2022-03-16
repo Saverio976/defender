@@ -20,6 +20,21 @@
 #include "my_json.h"
 #include "defender.h"
 
+int init_click_checker(scene_t *scene)
+{
+    object_t *obj = create_object(NULL, NULL, scene);
+
+    if (obj == NULL) {
+        return RET_ERR_MALLOC;
+    }
+    object_set_custom(obj);
+    if (event_add_node(create_event(check_open_elem, false, obj, NULL),
+        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
+        return RET_ERR_MALLOC;
+    }
+    return RET_OK;
+}
+
 static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
 {
     level_data_t *lvl = NULL;
@@ -78,7 +93,8 @@ int launch_game(object_t *obj, scene_t *scene,
     any_t *tower = parse_json_file("./assets/data/game/tower/standart.json");
 
     if (obj == NULL || scene == NULL || win == NULL || evt == NULL ||
-        new_scene == NULL || tower == NULL) {
+        new_scene == NULL || tower == NULL ||
+        init_click_checker(new_scene) != RET_OK) {
         return RET_INVALID_INPUT;
     }
     level_path = dico_t_get_value(obj->components, "level path");

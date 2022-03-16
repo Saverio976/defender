@@ -34,8 +34,6 @@ void click_shop_button(__attribute__((unused)) object_t *obj, scene_t *scene,
 
     if (shop_obj == NULL) {
         return;
-    } else if (((object_t *) shop_obj->start->var)->is_visible == false) {
-        check_open_elem(scene, win, NULL);
     }
     elem = shop_obj->start;
     for (int i = 0; i < shop_obj->len; i++, elem = elem->next) {

@@ -9,9 +9,9 @@
     #define GAME_DATA_H_
 
     #include "my_bgs.h"
-#include "my_dico.h"
+    #include "my_dico.h"
     #include "defender.h"
-#include <SFML/Graphics/Rect.h>
+    #include <SFML/Graphics/Rect.h>
 
 static const char TOWER_DATA[] = "tower data";
 static const char SIZE[] = "size";
@@ -57,7 +57,11 @@ object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
 void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
-void check_open_elem(scene_t *scene, window_t *win, object_t *obj);
+object_t *fill_data_bullet(object_t *obj, dico_t *dico,
+        tower_data_t *tower_data);
+
+void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
 
 void place_tower(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);

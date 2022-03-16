@@ -14,8 +14,6 @@ static const int size_arr[3] = {2, 3, 4};
 static object_t *support_set_event(scene_t *scene, object_t *obj)
 {
     if (event_add_node(create_event(display_scope, true, obj, NULL),
-        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK ||
-        event_add_node(create_event(hide_scope, false, obj, NULL),
         (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
         return NULL;
     }

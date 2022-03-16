@@ -27,15 +27,14 @@ void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
 }
 
 void click_pause_button(__attribute__((unused)) object_t *obj, scene_t *scene,
-    window_t *win, __attribute__((unused)) set_event_t *evt)
+    __attribute__((unused)) window_t *win,
+    __attribute__((unused)) set_event_t *evt)
 {
     list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
     list_t *elem = NULL;
 
     if (pause_obj == NULL) {
         return;
-    } else if (((object_t *) pause_obj->start->var)->is_visible == false) {
-        check_open_elem(scene, win, NULL);
     }
     elem = pause_obj->start;
     for (int i = 0; i < pause_obj->len; i++, elem = elem->next) {
