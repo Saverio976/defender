@@ -11,6 +11,7 @@
     #include "my_bgs.h"
 #include "my_dico.h"
     #include "defender.h"
+#include <SFML/Graphics/Rect.h>
 
 static const char TOWER_DATA[] = "tower data";
 static const char SIZE[] = "size";
@@ -50,6 +51,8 @@ typedef struct tower_data_s {
     float cadence;
     bool fly;
     float dtime;
+    char *sprite_bullet;
+    sfIntRect sprite_int_rect;
 } tower_data_t;
 
 object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);

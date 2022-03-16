@@ -6,7 +6,12 @@
 */
 
 #include <stdlib.h>
+#include "list.h"
+#include "my_strings.h"
 #include "defender_game_data.h"
+#include "my_bgs.h"
+#include "my_dico.h"
+#include "my_json.h"
 
 static void destroy_tower_data(void *data)
 {
@@ -20,7 +25,7 @@ static void destroy_tower_data(void *data)
     }
 }
 
-static object_t *set_data(object_t *object, dico_t *tower)
+static tower_data_t *set_data(object_t *object, dico_t *tower)
 {
     any_t *cadence = dico_t_get_any(tower, "cadence");
     any_t *fly = dico_t_get_any(tower, "fly");
@@ -41,7 +46,26 @@ static object_t *set_data(object_t *object, dico_t *tower)
     if (object->components == NULL) {
         return NULL;
     }
-    return object;
+    return tower_data;
+}
+
+static object_t *fill_data_bullet(object_t *obj, dico_t *dico,
+        tower_data_t *tower_data)
+{
+    any_t *rect = dico_t_get_any(dico, "rect sprite bullet");
+    any_t *rect_a = get_from_any(rect, "a", 0);
+    any_t *rect_b = get_from_any(rect, "a", 1);
+    any_t *rect_c = get_from_any(rect, "a", 2);
+    any_t *rect_d = get_from_any(rect, "a", 3);
+    any_t *sprite = dico_t_get_any(dico, "path sprite bullet");
+
+    if (tower_data == NULL || dico == NULL || rect == NULL) {
+        return (obj);
+    }
+    tower_data->sprite_int_rect = (sfIntRect) {rect_a->value.i,
+        rect_b->value.i, rect_c->value.i, rect_d->value.i};
+    tower_data->sprite_bullet = my_strdup(sprite->value.str);
+    return (obj);
 }
 
 static object_t *set_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
@@ -60,11 +84,12 @@ static object_t *set_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
         rect[2], rect[3]}, pos) != RET_OK) {
         return NULL;
     }
-    list_add_to_i(scene->displayables, obj, (int)
-        dico_t_get_value(scene->components, ENNEMY_ID));
+    list_add_to_i(scene->displayables, obj,
+            (int) dico_t_get_value(scene->components, ENNEMY_ID));
     list_add_to_end(scene->updates, obj);
     free(rect);
-    return set_data(obj, tower);
+    obj = fill_data_bullet(obj, tower, set_data(obj, tower));
+    return obj;
 }
 
 int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
