@@ -46,8 +46,8 @@ void shot_ennemy(sfFloatRect intersection, object_t *tower,
     sfSprite_setRotation(tower->drawable.sprite, angle);
     if (tower_data->dtime > tower_data->cadence) {
         spawn_bullet(scene, sfSprite_getPosition(tower->drawable.sprite),
-                (sfVector2f) {intersection.left + intersection.width / 2,
-                intersection.top + intersection.height / 2}, tower_data);
+            (sfVector2f) {intersection.left + intersection.width / 2,
+            intersection.top + intersection.height / 2}, tower_data);
         tower_data->dtime = 0;
     }
 }
