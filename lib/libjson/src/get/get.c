@@ -20,6 +20,9 @@ any_t *check_any(any_t *any, char const *format, int i, va_list ap)
     int arg = 0;
     char *str_arg = NULL;
 
+    if (any == NULL) {
+        return (NULL);
+    }
     if (any->type == DICT && format[i] == 'd') {
         str_arg = va_arg(ap, char *);
         ret_any = dico_t_get_any(any->value.dict, str_arg);
