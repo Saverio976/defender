@@ -5,11 +5,14 @@
 ** create bullet
 */
 
+#include <SFML/System/Vector2.h>
 #include <stdlib.h>
 #include "defender_bullet.h"
+#include "defender_game_data.h"
+#include "my_bgs.h"
 
 void spawn_bullet(scene_t *scene, sfVector2f initial_position,
-        sfVector2f direction, bool is_fly)
+        sfVector2f direction, tower_data_t *tower_data)
 {
     object_t *obj = NULL;
     bullet_t *bullet = NULL;
@@ -19,7 +22,8 @@ void spawn_bullet(scene_t *scene, sfVector2f initial_position,
         return;
     }
     bullet->direction = direction;
-    bullet->is_fly = is_fly;
+    bullet->is_fly = tower_data->fly;
+    bullet->dmg = tower_data->damage;
     obj = create_object(update_bullet, NULL, scene);
     if (obj == NULL) {
         free(bullet);
