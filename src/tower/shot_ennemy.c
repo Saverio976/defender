@@ -18,7 +18,7 @@
 
 static float pi = 3.1415926535;
 
-static float get_coef(sfFloatRect intersection, sfFloatRect tower)
+static double get_coef(sfFloatRect intersection, sfSprite *tower)
 {
     float y1 = 0;
     float y2 = 0;
@@ -26,12 +26,12 @@ static float get_coef(sfFloatRect intersection, sfFloatRect tower)
     float x2 = 0;
     double angle = 0;
 
-    x1 = tower.left + tower.width / 2;
-    y1 = tower.height + tower.height / 2;
+    x1 = sfSprite_getPosition(tower).x;
+    y1 = sfSprite_getPosition(tower).y;
     x2 = intersection.left + intersection.width / 2;
     y2 = intersection.top + intersection.height / 2;
     angle = atan2(y2 - y1, x2 - x1) * 180 / pi;
-    return (angle);
+    return (angle + 90);
 }
 
 void update_bullet(object_t *obj, scene_t *scene, window_t *win, float dtime)
@@ -84,18 +84,17 @@ void spawn_bullet(scene_t *scene, sfVector2f initial_position,
 void shot_ennemy(sfFloatRect intersection, object_t *tower,
         tower_data_t *tower_data, scene_t *scene)
 {
-    float angle = 0;
+    double angle = 0;
 
     if (tower == NULL) {
         return;
     }
-    angle = get_coef(intersection,
-            sfSprite_getGlobalBounds(tower->drawable.sprite));
-    sfSprite_setRotation(tower->drawable.sprite, angle + 90);
-    if (tower_data->dtime > tower_data->cadence) {
-        spawn_bullet(scene, sfSprite_getPosition(tower->drawable.sprite),
-                (sfVector2f) {intersection.left + intersection.width / 2,
-                intersection.top + intersection.height / 2}, tower_data->fly);
-        tower_data->dtime = 0;
-    }
+    angle = get_coef(intersection, tower->drawable.sprite);
+    sfSprite_setRotation(tower->drawable.sprite, angle);
+//    if (tower_data->dtime > tower_data->cadence) {
+//        spawn_bullet(scene, sfSprite_getPosition(tower->drawable.sprite),
+//                (sfVector2f) {intersection.left + intersection.width / 2,
+//                intersection.top + intersection.height / 2}, tower_data->fly);
+//        tower_data->dtime = 0;
+//    }
 }
