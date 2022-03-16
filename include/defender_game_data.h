@@ -25,7 +25,7 @@ static const int SCOPE_RGBA[] = {255, 255, 255, 100};
 static const float TOWER_ROTATION = 0.5;
 
 static const char *SUPPORT_PATH[3] = {"./assets/image/tower/support_2.png",
-    "oui", "non"};
+    "./assets/image/tower/support_3.png", "./assets/image/tower/support_4.png"};
 static const int SIZE_ARR[3] = {2, 3, 4};
 
 typedef struct error_message_data_s {

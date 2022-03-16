@@ -12,6 +12,13 @@ void rm_fst_elem(list_ptr_t *list_ptr)
 {
     list_t *cpy;
 
+    if (list_ptr->len == 1) {
+        free(list_ptr->start);
+        list_ptr->start = NULL;
+        list_ptr->len -= 1;
+        list_ptr->end = NULL;
+        return;
+    }
     cpy = list_ptr->start;
     list_ptr->start = list_ptr->start->next;
     list_ptr->start->back = list_ptr->end;
@@ -24,6 +31,13 @@ void rm_last_elem(list_ptr_t *list_ptr)
 {
     list_t *cpy;
 
+    if (list_ptr->len == 1) {
+        free(list_ptr->start);
+        list_ptr->start = NULL;
+        list_ptr->end = NULL;
+        list_ptr->len -= 1;
+        return;
+    }
     cpy = list_ptr->end;
     list_ptr->end = list_ptr->end->back;
     list_ptr->end->next = list_ptr->start;

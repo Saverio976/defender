@@ -48,9 +48,11 @@ int place_scope(sfVector2f size, sfIntRect current_rect, sfVector2f pos, scene_t
 int place_side_scope(scene_t *scene, int scope, int size,
     sfFloatRect support_rect)
 {
+    float scop_x = ((float) scope) / 2;
+    float y = ((float) size) / 2;
     sfVector2f pos = {support_rect.left -
-        (SQUARE_POS_INCREMENTATION * (scope / 2)), support_rect.top +
-        (SQUARE_POS_INCREMENTATION * (size / 2))};
+        (SQUARE_POS_INCREMENTATION * scop_x), support_rect.top +
+        (SQUARE_POS_INCREMENTATION * y)};
     sfIntRect rect = {0, 0, scope * SQUARE_POS_INCREMENTATION,
         SQUARE_POS_INCREMENTATION * size};
     sfColor color = sfColor_fromRGBA(SCOPE_RGBA[0], SCOPE_RGBA[1],
@@ -60,7 +62,7 @@ int place_side_scope(scene_t *scene, int scope, int size,
         return RET_ERR_MALLOC;
     }
     pos.x = support_rect.left + (size * SQUARE_POS_INCREMENTATION) +
-        (SQUARE_POS_INCREMENTATION * (scope / 2));
+        (SQUARE_POS_INCREMENTATION * scop_x);
     if (create_scope(scene, rect, pos, color) != RET_OK) {
         return RET_ERR_MALLOC;
     }

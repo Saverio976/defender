@@ -45,7 +45,7 @@ void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
             ((object_t *) elem->var)->is_visible = false;
             scene->pause = false;
         } else {
-            scene->pause = true;;
+            scene->pause = true;
             ((object_t *) elem->var)->is_visible = true;
         }
     }

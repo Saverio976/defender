@@ -5,5 +5,7 @@
     "damage": 5,
     "scope": 18,
     "fly": 2,
-    "build couldown": 30
+    "build couldown": 30,
+    "rect": [-1, -1, -1, -1],
+    "path": "./assets/image/tower/sniper.png"
 }

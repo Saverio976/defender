@@ -11,13 +11,25 @@
 object_t *create_error_message(game_data_t *game_data, scene_t *scene,
     sfVector2f pos)
 {
-    object_t *error_text = create_object(update_shop_error_message, NULL, scene);
+    object_t *error_text =
+        create_object(update_shop_error_message, NULL, scene);
 
     pos.x += 60;
     pos.y += 15;
     object_set_text(error_text, game_data->font, "not enough com", pos);
     sfText_setCharacterSize(error_text->drawable.text, 15);
+    sfText_setColor(error_text->drawable.text,
+        sfColor_fromRGBA(190, 43, 53, 180));
     return error_text;
+}
+
+static void fill_error_message_data(error_message_data_t *error_message,
+    scene_t *scene)
+{
+    error_message->obj_list_pos = scene->objects->len;
+    error_message->frame_counter = 0;
+    error_message->update_list_pos = scene->updates->len;
+    error_message->display_list_pos = scene->displayables->len;
 }
 
 bool check_money(game_data_t *game_data, dico_t *tower, sfVector2f pos,
@@ -28,16 +40,15 @@ bool check_money(game_data_t *game_data, dico_t *tower, sfVector2f pos,
     error_message_data_t *error_message = malloc(sizeof(error_message_data_t));
 
     if (error_message == NULL || cost == NULL || game_data->font == NULL) {
+        free(error_message);
         return false;
     } else if (cost->value.i <= game_data->com) {
         game_data->com -= cost->value.i;
+        free(error_message);
         return true;
     }
     error_text = create_error_message(game_data, scene, pos);
-    error_message->obj_list_pos = scene->objects->len;
-    error_message->frame_counter = 0;
-    error_message->update_list_pos = scene->updates->len;
-    error_message->display_list_pos = scene->displayables->len;
+    fill_error_message_data(error_message, scene);
     list_add_to_end(scene->displayables, error_text);
     list_add_to_end(scene->updates, error_text);
     error_text->components = dico_t_add_data(error_text->components,

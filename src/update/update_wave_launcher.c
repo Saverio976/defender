@@ -31,7 +31,9 @@ void update_wave_launcher(object_t *obj, scene_t *scene,
     if (list_enemy == NULL || list_enemy->len <= 0) {
         return;
     }
-    enn = list_enemy->start->var;
+    if (list_enemy->start != NULL) {
+        enn = list_enemy->start->var;
+    }
     if (enn != NULL && time > enn->time) {
         time = 0;
         create_ennemy(scene, enn->ennemy_file, 1);

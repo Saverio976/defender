@@ -30,6 +30,69 @@
             "text color": [127, 143, 167, 255],
             "text size": 0.65,
             "text": "Standart"
+        },
+        {
+            "pos": [380.0, 1625.0],
+            "sprite path": "./assets/image/menu/side/shop/button.png",
+            "tower path": "./assets/data/game/tower/raffal.json",
+            "text pos": [460.0, 1625.0],
+            "font path": "assets/font/menlo.ttf",
+            "color": [52, 59, 70, 240],
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "id": 6,
+            "text": "cost: 40"
+        },
+        {
+            "pos": [380.0, 1625.0],
+            "sprite path": "./assets/image/menu/side/shop/raffle.png",
+            "text pos": [445.0, 1625.0],
+            "font path": "assets/font/menlo.ttf",
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "text": "Raffle"
+        },
+        {
+            "pos": [220.0, 1775.0],
+            "sprite path": "./assets/image/menu/side/shop/button.png",
+            "tower path": "./assets/data/game/tower/aerian.json",
+            "text pos": [300.0, 1775.0],
+            "font path": "assets/font/menlo.ttf",
+            "color": [52, 59, 70, 240],
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "id": 6,
+            "text": "cost: 40"
+        },
+        {
+            "pos": [220.0, 1775.0],
+            "sprite path": "./assets/image/tower/aerian.png",
+            "text pos": [285.0, 1775.0],
+            "font path": "assets/font/menlo.ttf",
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "text": "Aerian"
+        },
+        {
+            "pos": [380.0, 1775.0],
+            "sprite path": "./assets/image/menu/side/shop/button.png",
+            "tower path": "./assets/data/game/tower/snipe.json",
+            "text pos": [460.0, 1775.0],
+            "font path": "assets/font/menlo.ttf",
+            "color": [52, 59, 70, 240],
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "id": 6,
+            "text": "cost: 50"
+        },
+        {
+            "pos": [380.0, 1775.0],
+            "sprite path": "./assets/image/tower/sniper.png",
+            "text pos": [445.0, 1775.0],
+            "font path": "assets/font/menlo.ttf",
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "text": "Raffle"
         }
     ]
 }
