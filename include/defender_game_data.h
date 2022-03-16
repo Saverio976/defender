@@ -24,10 +24,6 @@ static const char SCOPE_PATH[] = "./assets/image/tower/scope.png";
 static const int SCOPE_RGBA[] = {255, 255, 255, 100};
 static const float TOWER_ROTATION = 0.5;
 
-static const char *SUPPORT_PATH[3] = {"./assets/image/tower/support_2.png",
-    "./assets/image/tower/support_3.png", "./assets/image/tower/support_4.png"};
-static const int SIZE_ARR[3] = {2, 3, 4};
-
 typedef struct error_message_data_s {
     int frame_counter;
     int display_list_pos;
@@ -59,6 +55,8 @@ void place_tower(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 int init_game_data(window_t *win);
+
+bool check_drag_pos(window_t *win, int size);
 
 void shot_ennemy(sfFloatRect intersection, object_t *tower);
 

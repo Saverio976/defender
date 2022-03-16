@@ -7,6 +7,10 @@
 
 #include "defender_game_data.h"
 
+static const char *support_path[3] = {"./assets/image/tower/support_2.png",
+    "./assets/image/tower/support_3.png", "./assets/image/tower/support_4.png"};
+static const int size_arr[3] = {2, 3, 4};
+
 static object_t *support_set_event(scene_t *scene, object_t *obj)
 {
     if (event_add_node(create_event(display_scope, true, obj, NULL),
@@ -30,13 +34,13 @@ object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos)
         return NULL;
     }
     for (int i = 0; i < 3; i++) {
-        if (SIZE_ARR[i] == size->value.i) {
+        if (size_arr[i] == size->value.i) {
             path_id = i;
         }
     }
     obj = create_object(NULL, NULL, scene);
     if (path_id < 0 || obj == NULL || object_set_sprite(obj,
-        SUPPORT_PATH[path_id], (sfIntRect) {-1, -1, -1, -1}, pos) != RET_OK) {
+        support_path[path_id], (sfIntRect) {-1, -1, -1, -1}, pos) != RET_OK) {
         return NULL;
     }
     return support_set_event(scene, obj);

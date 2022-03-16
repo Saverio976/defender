@@ -57,7 +57,7 @@ bool check_money(game_data_t *game_data, dico_t *tower, sfVector2f pos,
 }
 
 void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
-    set_event_t *evt)
+    __attribute__((unused)) set_event_t *evt)
 {
     game_data_t *game_data = dico_t_get_value(win->components, GAME_DATA);
     char *tower_path = dico_t_get_value(obj->components, "tower path");

@@ -8,7 +8,8 @@
 #include "defender_game_data.h"
 
 void update_shop_error_message(object_t *obj, scene_t *scene,
-        __attribute__((unused)) window_t *win, float dtime)
+    __attribute__((unused)) window_t *win,
+    __attribute__((unused)) float dtime)
 {
     error_message_data_t *error_message =
         dico_t_get_value(obj->components, "error message");
