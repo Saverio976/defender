@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "list.h"
 #include "my_bgs.h"
 
 bool check_list(list_ptr_t *list, object_t *obj)
@@ -67,12 +68,9 @@ void remove_object(object_t *object)
 void remove_scene(scene_t *scene)
 {
     list_t *elem = scene->objects->start;
-    object_t *object = NULL;
 
-    for (int i = 0; i < scene->objects->len; i++) {
-        object = ((object_t *) elem->var);
-        remove_object(object);
-        elem = elem->next;
+    for (int i = 0; i < scene->objects->len; i++, elem = elem->next) {
+        remove_object(((object_t *) elem->var));
     }
     if (scene->components != NULL) {
         dico_t_destroy(scene->components);

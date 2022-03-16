@@ -35,6 +35,11 @@ SRCTOWER		:= 	tower/
 SRCDIR			:=	src/
 SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
+SRCBULLET		:=	bullet/
+
+SRC_BULLET		:=	create_bullet.c		\
+					update_bullet.c
+SRC_BULLET		:=	$(addprefix $(SRCBULLET),$(SRC_BULLET))
 
 SRC_TOWER		:=	place_tower.c		\
 	 				create_tower.c		\
@@ -73,7 +78,8 @@ SRC_UPDATE		:=	button_menu.c			\
 					update_wave_launcher.c	\
 					ennemy_explosion_nico.c	\
 					button_shop.c			\
-					button_level.c
+					button_level.c			\
+					update_draw_life.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 
 SRC_LAUNC		:=	launch_game.c		\
@@ -81,8 +87,9 @@ SRC_LAUNC		:=	launch_game.c		\
 					load_gestion.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
-SRC			:=	main.c $(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)	\
-				$(SRC_ENNEMY) $(SRC_BUTTON) $(SRC_TOWER)
+SRC			:=	main.c													\
+				$(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)		\
+				$(SRC_ENNEMY) $(SRC_BUTTON) $(SRC_TOWER) $(SRC_BULLET)
 SRC			:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ			:=	$(SRC:%.c=%.o)
@@ -129,8 +136,8 @@ FN_TEST_LDFLAGS	=	-lgcov
 # Make the defender
 .PHONY: 	all
 all:		CURR_RULE = all
-all:		init $(LIB_TARGET)
-	@$(MAKE) $(NAME) -s
+all:		init $(LIB_TARGET)_OPTI
+	@$(MAKE) $(NAME) -s -j4
 	@echo -e $(GREEN)'-> [finished]: $(NAME): all'$(RESET)
 
 $(NAME):	CURR_RULE = $(NAME)
@@ -139,7 +146,10 @@ $(NAME): 	init $(OBJ)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(NAME)'$(RESET)
 
 $(LIB_TARGET):
-	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE)
+	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE) CURR_RULE=$(RULE)
+
+$(LIB_TARGET)_OPTI:
+	@$(MAKE) -s -C $(dir $(LIB_TARGET)) $(RULE) -j4
 
 debug: RULE = debug
 debug: CFLAGS += -g3
@@ -157,7 +167,7 @@ clean:
 .PHONY: 	fclean
 fclean:		CURR_RULE = fclean
 fclean:		init clean
-	@$(MAKE) -C $(dir $(LIB_TARGET)) fclean -s
+	@$(MAKE) -C $(dir $(LIB_TARGET)) fclean -s -j4
 	@$(RM) $(NAME) $(TNAME)
 	@echo -e $(GREEN)'-> [finished]: $(NAME): $(CURR_RULE)'$(RESET)
 # ----------------------------------------------------------------------------

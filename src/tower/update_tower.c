@@ -7,6 +7,7 @@
 
 #include "defender_game_data.h"
 #include "defender_ennemy.h"
+#include "my_bgs.h"
 
 sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
 {
@@ -32,7 +33,7 @@ sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
 }
 
 bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
-    object_t *tower)
+    object_t *tower, scene_t *scene)
 {
     list_t *elem = NULL;
     sfFloatRect intersection;
@@ -48,7 +49,7 @@ bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
         intersection = check_scope_col(
             sfSprite_getGlobalBounds(obj->drawable.sprite), ennemy_list);
         if (intersection.left != -1) {
-            shot_ennemy(intersection, tower);
+            shot_ennemy(intersection, tower, tower_data, scene);
             return true;
         }
     }
@@ -65,7 +66,8 @@ void update_tower(object_t *obj, scene_t *scene,
     if (tower_data == NULL || ennemy_list == NULL || scene->pause == true) {
         return;
     }
-    if (detect_ennemy(tower_data, ennemy_list, obj) == false) {
+    tower_data->dtime += time;
+    if (detect_ennemy(tower_data, ennemy_list, obj, scene) == false) {
         sfSprite_rotate(obj->drawable.sprite, TOWER_ROTATION);
     }
     return;
