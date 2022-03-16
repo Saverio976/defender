@@ -101,6 +101,7 @@ void update_ennemy(object_t *obj, scene_t *scene,
     if (ennemy_me == NULL) {
         return;
     }
+    printf("%d\n", ennemy_me->life);
     ennemy_me->time_last += dtime;
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
         update_obj_explosion(obj, scene);

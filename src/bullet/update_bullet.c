@@ -110,4 +110,5 @@ void update_bullet(object_t *obj, scene_t *scene,
     }
     do_dmg_bully(bullet, enn_to_bully);
     free_list(enn_to_bully);
+    list_add_to_start(scene->to_remove, obj);
 }
