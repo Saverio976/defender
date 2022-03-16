@@ -19,7 +19,7 @@ static object_t *support_set_event(scene_t *scene, object_t *obj)
     }
     list_add_to_i(scene->displayables, obj,
         (int) dico_t_get_value(scene->components, ENNEMY_ID));
-    list_add_to_end(scene->updates, obj);
+    list_add_to_i(scene->updates, obj, 1);
     return obj;
 }
 
