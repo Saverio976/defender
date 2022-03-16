@@ -5,6 +5,8 @@
 ** place tower
 */
 
+#include <SFML/Config.h>
+#include <SFML/Graphics/Rect.h>
 #include <stdlib.h>
 #include "list.h"
 #include "my_strings.h"
@@ -17,12 +19,13 @@ static void destroy_tower_data(void *data)
 {
     tower_data_t *tower_data = data;
 
-    if (tower_data != NULL && tower_data->scope != NULL) {
-        free_list(tower_data->scope);
-        free(tower_data);
-    } else if (tower_data != NULL) {
-        free(tower_data);
+    if (data == NULL) {
+        return;
     }
+    if (tower_data->scope != NULL) {
+        free_list(tower_data->scope);
+    }
+    free(tower_data->sprite_bullet);
 }
 
 static tower_data_t *set_data(object_t *object, dico_t *tower)
@@ -59,7 +62,11 @@ static object_t *fill_data_bullet(object_t *obj, dico_t *dico,
     any_t *rect_d = get_from_any(rect, "a", 3);
     any_t *sprite = dico_t_get_any(dico, "path sprite bullet");
 
-    if (tower_data == NULL || dico == NULL || rect == NULL) {
+    tower_data->sprite_int_rect = (sfIntRect) {0, 0, 100, 100};
+    tower_data->sprite_bullet = my_strdup("assets/image/bullet/fireshot.png");
+    if (tower_data == NULL || dico == NULL || rect == NULL || rect_a == NULL ||
+            rect_b == NULL || rect_c == NULL || rect_d == NULL ||
+            sprite == NULL) {
         return (obj);
     }
     tower_data->sprite_int_rect = (sfIntRect) {rect_a->value.i,
