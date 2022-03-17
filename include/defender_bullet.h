@@ -15,6 +15,7 @@
 
 struct bullet_s {
     sfVector2f direction;
+    sfVector2f initial_position;
     bool is_fly;
     int dmg;
 };

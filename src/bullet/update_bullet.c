@@ -84,8 +84,10 @@ static void move_bullet(object_t *obj, float dtime, bullet_t *bullet)
     }
     curr_x = obj->bigdata.sprite_bigdata.pos.x;
     curr_y = obj->bigdata.sprite_bigdata.pos.y;
-    new_x = curr_x + (dtime * (bullet->direction.x - curr_x));
-    new_y = curr_y + (dtime * (bullet->direction.y - curr_y));
+    new_x = curr_x + (dtime * (bullet->direction.x -
+                bullet->initial_position.x));
+    new_y = curr_y + (dtime * (bullet->direction.y -
+                bullet->initial_position.y));
     obj->bigdata.sprite_bigdata.pos.x = new_x;
     obj->bigdata.sprite_bigdata.pos.y = new_y;
 }

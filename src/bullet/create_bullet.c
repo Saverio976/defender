@@ -52,6 +52,7 @@ void spawn_bullet(scene_t *scene, sfVector2f initial_position,
         free(bullet);
         return;
     }
+    bullet->initial_position = initial_position;
     object_add_components(obj, bullet, "DIRECTION BULLET", free);
     set_sprite_bullet(obj, tower_data, initial_position, scene);
 }
