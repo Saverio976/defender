@@ -6,6 +6,7 @@
 */
 
 #include "defender.h"
+#include "my_bgs.h"
 
 int main(int ac, char **av)
 {
@@ -14,6 +15,7 @@ int main(int ac, char **av)
     if (win == NULL) {
         return (84);
     }
+    window_set_framerate_limit(win, 60);
     loop(win);
     remove_window(win);
     return 0;

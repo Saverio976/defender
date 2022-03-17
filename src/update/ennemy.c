@@ -75,8 +75,11 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
 
     obj->bigdata.sprite_bigdata.rect.left += width;
     if (obj->bigdata.sprite_bigdata.rect.left + width >=
-            enn->max_texture_pixel_x) {
+        enn->max_texture_pixel_x) {
         obj->bigdata.sprite_bigdata.rect.left = 0;
+    }
+    if (enn->time_last < (enn->speed / 60.0)) {
+        return;
     }
     pos_i.x = ((int) obj->bigdata.sprite_bigdata.pos.x) / MAP_SIZE_SQUARE_X;
     pos_i.y = ((int) obj->bigdata.sprite_bigdata.pos.y) / MAP_SIZE_SQUARE_Y;
@@ -85,6 +88,7 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
     obj->bigdata.sprite_bigdata.pos.y = pos_f.y * MAP_SIZE_SQUARE_Y;
     enn->last_pos.x = pos_i.x;
     enn->last_pos.y = pos_i.y;
+    enn->time_last -= enn->speed;
 }
 
 void update_ennemy(object_t *obj, scene_t *scene,
@@ -102,11 +106,11 @@ void update_ennemy(object_t *obj, scene_t *scene,
         return;
     }
     ennemy_me->time_last += dtime;
+    ennemy_me->time_last_update += dtime;
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
         update_obj_explosion(obj, scene);
-    } else if (obj->is_visible &&
-            ennemy_me->time_last > ennemy_me->load_time) {
+    } else if (obj->is_visible  && ennemy_me->time_last_update > 0.1) {
         move_ennemy(obj, ennemy_me, map);
-        ennemy_me->time_last = 0;
+        ennemy_me->time_last_update -= 0.1;
     }
 }
