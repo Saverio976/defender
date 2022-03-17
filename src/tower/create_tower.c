@@ -47,7 +47,7 @@ static tower_data_t *set_data(object_t *object, dico_t *tower)
     }
     tower_data->cadence = cadence->value.f;
     tower_data->damage = damage->value.i;
-    tower_data->fly = (fly->value.i == 1) ? true : false;
+    tower_data->fly = fly->value.i;
     tower_data->scope = NULL;
     tower_data->dtime = 0;
     tower_data->scope_rad = scope->value.i * 40;

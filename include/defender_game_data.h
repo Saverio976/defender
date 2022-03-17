@@ -48,7 +48,7 @@ typedef struct tower_data_s {
     bool scope_display;
     int damage;
     float cadence;
-    bool fly;
+    int fly;
     float dtime;
     char *sprite_bullet;
     sfIntRect sprite_int_rect;

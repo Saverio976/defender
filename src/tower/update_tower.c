@@ -35,8 +35,22 @@ static bool check_col(object_t *ennemy, sfFloatRect *intersection,
     return false;
 }
 
-sfFloatRect check_scope_col(sfVector2f circle, list_ptr_t *ennemy_list,
-    float rad)
+static bool check_type(object_t *ennemy, int tower_type)
+{
+    ennemy_t *data = dico_t_get_value(ennemy->components, OBJ_COMP_ENNSTRUCT);
+    int var;
+
+    if (data == NULL) {
+        return false;
+    } else if (tower_type == 2) {
+        return true;
+    }
+    var = (data->is_fly == true) ? 1 : 0;
+    return (tower_type == var) ? true : false;
+}
+
+static sfFloatRect check_scope_col(sfVector2f circle, list_ptr_t *ennemy_list,
+    float rad, int tower_type)
 {
     list_t *elem = NULL;
     sfFloatRect intersection;
@@ -47,14 +61,15 @@ sfFloatRect check_scope_col(sfVector2f circle, list_ptr_t *ennemy_list,
     }
     elem = ennemy_list->start;
     for (int i = 0; i < ennemy_list->len; i++, elem = elem->next) {
-        if (check_col(elem->var, &intersection, circle, rad) == true) {
+        if (check_type(elem->var, tower_type) == true &&
+            check_col(elem->var, &intersection, circle, rad) == true) {
             return intersection;
         }
     }
     return (sfFloatRect) {-1, -1, -1, -1};
 }
 
-bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
+static bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     object_t *tower, scene_t *scene)
 {
     sfFloatRect intersection;
@@ -63,7 +78,8 @@ bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     if (tower_data->scope == NULL) {
         return false;
     }
-    intersection = check_scope_col(pos, ennemy_list, tower_data->scope_rad);
+    intersection = check_scope_col(pos, ennemy_list, tower_data->scope_rad,
+        tower_data->fly);
     if (intersection.left != -1) {
         shot_ennemy(intersection, tower, tower_data, scene);
         return true;
