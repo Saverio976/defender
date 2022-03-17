@@ -11,6 +11,7 @@
     #include "my_bgs.h"
     #include "my_dico.h"
     #include "defender.h"
+#include <SFML/Audio/Types.h>
     #include <SFML/Graphics/Rect.h>
 
 static const char TOWER_DATA[] = "tower data";
@@ -52,6 +53,8 @@ typedef struct tower_data_s {
     float dtime;
     char *sprite_bullet;
     sfIntRect sprite_int_rect;
+    sfSoundBuffer *sound_buffer;
+    sfSound *sound;
 } tower_data_t;
 
 object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);

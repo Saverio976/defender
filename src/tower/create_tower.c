@@ -5,6 +5,8 @@
 ** place tower
 */
 
+#include <SFML/Audio/Sound.h>
+#include <SFML/Audio/SoundBuffer.h>
 #include <SFML/Config.h>
 #include <SFML/Graphics/Rect.h>
 #include <stdlib.h>
@@ -23,6 +25,11 @@ static void destroy_tower_data(void *data)
 
     if (data == NULL) {
         return;
+    }
+    if (tower_data->sound != NULL && tower_data->sound_buffer != NULL) {
+        sfSound_stop(tower_data->sound);
+        sfSound_destroy(tower_data->sound);
+        sfSoundBuffer_destroy(tower_data->sound_buffer);
     }
     if (tower_data->scope != NULL) {
         sfCircleShape_destroy(tower_data->scope);

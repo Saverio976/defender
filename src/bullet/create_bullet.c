@@ -5,6 +5,7 @@
 ** create bullet
 */
 
+#include <SFML/Audio/Sound.h>
 #include <SFML/System/Vector2.h>
 #include <stdlib.h>
 #include "defender_bullet.h"
@@ -37,6 +38,14 @@ static void set_sprite_bullet(object_t *obj, tower_data_t *tower_data,
     list_add_to_end(scene->updates, obj);
 }
 
+static void play_sound(tower_data_t *tower)
+{
+    if (tower == NULL || tower->sound == NULL) {
+        return;
+    }
+    sfSound_play(tower->sound);
+}
+
 void spawn_bullet(scene_t *scene, sfVector2f initial_position,
         sfVector2f direction, tower_data_t *tower_data)
 {
@@ -55,4 +64,5 @@ void spawn_bullet(scene_t *scene, sfVector2f initial_position,
     bullet->initial_position = initial_position;
     object_add_components(obj, bullet, "DIRECTION BULLET", free);
     set_sprite_bullet(obj, tower_data, initial_position, scene);
+    play_sound(tower_data);
 }
