@@ -43,7 +43,9 @@ typedef struct game_data_s {
 } game_data_t;
 
 typedef struct tower_data_s {
-    list_ptr_t *scope;
+    sfCircleShape *scope;
+    float scope_rad;
+    bool scope_display;
     int damage;
     float cadence;
     bool fly;
@@ -96,8 +98,7 @@ void update_tower(object_t *obj, scene_t *scene, window_t *win, float time);
 
 int create_tower(scene_t *scene, dico_t *tower, sfVector2f pos);
 
-int set_scope(dico_t *tower_dico, dico_t *components[2], object_t *support,
-    scene_t *scene);
+int set_scope(dico_t *components[2], object_t *support);
 
 void update_shop_error_message(object_t *obj, scene_t *scene,
         __attribute__((unused)) window_t *win, float dtime);

@@ -15,17 +15,15 @@ static void check_scope(__attribute__((unused)) object_t *obj,
     sfVector2i mouse = sfMouse_getPositionRenderWindow(win->win);
     const sfFloatRect rect =
         sfSprite_getGlobalBounds(cur_tower->drawable.sprite);
-    object_t *scope = NULL;
 
     if (tower_data == NULL || tower_data->scope == NULL) {
         return;
     }
-    scope = tower_data->scope->start->var;
     if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfTrue &&
-        scope->is_visible == true) {
+        tower_data->scope_display == true) {
         win->click_prev_call = true;
     }
-    if (scope->is_visible == true) {
+    if (tower_data->scope_display == true) {
         hide_scope(cur_tower, scene, win, NULL);
     }
 }

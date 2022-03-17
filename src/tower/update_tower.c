@@ -5,15 +5,40 @@
 ** update tower
 */
 
+#include "stdlib.h"
 #include "defender_game_data.h"
 #include "defender_ennemy.h"
 #include "my_bgs.h"
 
-sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
+static bool check_col(object_t *ennemy, sfFloatRect *intersection,
+    sfVector2f circle, float rad)
+{
+    sfFloatRect rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
+    sfVector2f distance = {abs(circle.x - rect.left), abs(circle.y - rect.top)};
+    sfVector2f corner = {distance.x - rect.width / 2,
+        distance.y - rect.height / 2};
+    float corner_distance_sq = 0;
+
+    if ((distance.x > (rect.width / 2 + rad)) ||
+        (distance.y > (rect.height / 2 + rad))) {
+        return false;
+    } else if ((distance.x <= rect.width / 2) ||
+        (distance.x <= rect.height / 2)) {
+        *intersection = rect;
+        return true;
+    }
+    corner_distance_sq = ((corner.x * corner.x) + (corner.y * corner.y));
+    if (corner_distance_sq <= (rad * rad)) {
+        *intersection = rect;
+        return true;
+    }
+    return false;
+}
+
+sfFloatRect check_scope_col(sfVector2f circle, list_ptr_t *ennemy_list,
+    float rad)
 {
     list_t *elem = NULL;
-    object_t *ennemy = NULL;
-    sfFloatRect ennemy_rect;
     sfFloatRect intersection;
 
     if (ennemy_list == NULL || ennemy_list->len == 0 ||
@@ -22,10 +47,7 @@ sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
     }
     elem = ennemy_list->start;
     for (int i = 0; i < ennemy_list->len; i++, elem = elem->next) {
-        ennemy = elem->var;
-        ennemy_rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
-        if (sfFloatRect_intersects(&scope_rect, &ennemy_rect,
-            &intersection) == sfTrue && ennemy->is_visible == true) {
+        if (check_col(elem->var, &intersection, circle, rad) == true) {
             return intersection;
         }
     }
@@ -35,23 +57,16 @@ sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
 bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     object_t *tower, scene_t *scene)
 {
-    list_t *elem = NULL;
     sfFloatRect intersection;
-    object_t *obj = NULL;
+    sfVector2f pos = sfCircleShape_getPosition(tower_data->scope);
 
-    if (tower_data->scope == NULL || tower_data->scope->len == 0 ||
-        tower_data->scope->start == NULL) {
+    if (tower_data->scope == NULL) {
         return false;
     }
-    elem = tower_data->scope->start;
-    for (int i = 0; i < tower_data->scope->len; i++, elem = elem->next) {
-        obj = elem->var;
-        intersection = check_scope_col(
-            sfSprite_getGlobalBounds(obj->drawable.sprite), ennemy_list);
-        if (intersection.left != -1) {
-            shot_ennemy(intersection, tower, tower_data, scene);
-            return true;
-        }
+    intersection = check_scope_col(pos, ennemy_list, tower_data->scope_rad);
+    if (intersection.left != -1) {
+        shot_ennemy(intersection, tower, tower_data, scene);
+        return true;
     }
     return false;
 }

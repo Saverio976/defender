@@ -11,6 +11,20 @@ static const char *support_path[3] = {"./assets/image/tower/support_2.png",
     "./assets/image/tower/support_3.png", "./assets/image/tower/support_4.png"};
 static const int size_arr[3] = {2, 3, 4};
 
+static void display_support(object_t *obj, __attribute__((unused)) dico_t
+    *scene_comp, __attribute__((unused)) dico_t *win_com, sfRenderWindow *win)
+{
+    tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
+
+    sfRenderWindow_drawSprite(win, obj->drawable.sprite, NULL);
+    if (tower_data == NULL) {
+        return;
+    }
+    if (tower_data->scope_display == true) {
+        sfRenderWindow_drawCircleShape(win, tower_data->scope, NULL);
+    }
+}
+
 static object_t *support_set_event(scene_t *scene, object_t *obj)
 {
     if (event_add_node(create_event(display_scope, true, obj, NULL),
@@ -36,7 +50,7 @@ object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos)
             path_id = i;
         }
     }
-    obj = create_object(NULL, NULL, scene);
+    obj = create_object(NULL, display_support, scene);
     if (path_id < 0 || obj == NULL || object_set_sprite(obj,
         support_path[path_id], (sfIntRect) {-1, -1, -1, -1}, pos) != RET_OK) {
         return NULL;

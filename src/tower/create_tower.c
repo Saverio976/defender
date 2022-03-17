@@ -25,7 +25,7 @@ static void destroy_tower_data(void *data)
         return;
     }
     if (tower_data->scope != NULL) {
-        free_list(tower_data->scope);
+        sfCircleShape_destroy(tower_data->scope);
     }
     if (tower_data->sprite_bullet != NULL) {
         free(tower_data->sprite_bullet);
@@ -38,10 +38,11 @@ static tower_data_t *set_data(object_t *object, dico_t *tower)
     any_t *cadence = dico_t_get_any(tower, "cadence");
     any_t *fly = dico_t_get_any(tower, "fly");
     any_t *damage = dico_t_get_any(tower, "damage");
+    any_t *scope = dico_t_get_any(tower, "scope");
     tower_data_t *tower_data = malloc(sizeof(tower_data_t));
 
     if (tower_data == NULL || cadence == NULL || fly == NULL ||
-        damage == NULL) {
+        damage == NULL || scope == NULL) {
         return NULL;
     }
     tower_data->cadence = cadence->value.f;
@@ -49,12 +50,10 @@ static tower_data_t *set_data(object_t *object, dico_t *tower)
     tower_data->fly = (fly->value.i == 1) ? true : false;
     tower_data->scope = NULL;
     tower_data->dtime = 0;
+    tower_data->scope_rad = scope->value.i * 40;
     object->components = dico_t_add_data(object->components, TOWER_DATA,
         tower_data, destroy_tower_data);
-    if (object->components == NULL) {
-        return NULL;
-    }
-    return tower_data;
+    return (object->components == NULL) ? NULL : tower_data;
 }
 
 static object_t *set_tower(dico_t *tower, scene_t *scene, sfVector2f pos,
@@ -117,7 +116,7 @@ int create_tower(scene_t *scene, dico_t *tower_dico, sfVector2f pos)
     }
     components[0] = tower->components;
     components[1] = support->components;
-    if (set_scope(tower_dico, components, support, scene) != RET_OK) {
+    if (set_scope(components, support) != RET_OK) {
         return RET_ERR_MALLOC;
     }
     return RET_OK;
