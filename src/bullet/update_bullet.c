@@ -98,7 +98,7 @@ void update_bullet(object_t *obj, scene_t *scene,
     bullet_t *bullet = NULL;
     list_ptr_t *enn_to_bully = NULL;
 
-    if (obj == NULL) {
+    if (obj == NULL || scene == NULL || scene->pause == true) {
         return;
     }
     bullet = dico_t_get_value(obj->components, "DIRECTION BULLET");
