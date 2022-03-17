@@ -79,6 +79,5 @@ void update_obj_explosion(object_t *obj, scene_t *scene)
     if (enn->time_last > 0.2) {
         obj->is_visible = false;
         remove_life_to_tower(enn, scene);
-        list_add_to_start(scene->to_remove, obj);
     }
 }

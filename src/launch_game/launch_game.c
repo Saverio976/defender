@@ -104,7 +104,7 @@ int launch_game(object_t *obj, scene_t *scene,
         return RET_ERR_MALLOC;
     }
     destroy_any(level_data);
-    win->scene_index = 2;
+    win->scene_index = win->scenes->len - 1;
     destroy_any(tower);
     return RET_OK;
 }
