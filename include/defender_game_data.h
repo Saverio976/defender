@@ -72,7 +72,7 @@ int init_game_data(window_t *win);
 
 bool check_drag_pos(window_t *win, int size);
 
-void shot_ennemy(sfFloatRect intersection, object_t *tower,
+void shot_ennemy(object_t *ennemy_obj, object_t *tower,
         tower_data_t *tower_data, scene_t *scene);
 
 void display_scope(object_t *obj, scene_t *scene, window_t *win,
