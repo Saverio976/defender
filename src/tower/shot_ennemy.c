@@ -7,10 +7,12 @@
 
 #include <SFML/Graphics/Rect.h>
 #include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Text.h>
 #include <SFML/System/Vector2.h>
 #include <stdlib.h>
 #include <math.h>
 #include "defender_bullet.h"
+#include "defender_ennemy.h"
 #include "defender_game_data.h"
 #include "list.h"
 #include "my_bgs.h"
@@ -34,20 +36,33 @@ static double get_coef(sfFloatRect intersection, sfSprite *tower)
     return (angle + 90);
 }
 
-void shot_ennemy(sfFloatRect intersection, object_t *tower,
-        tower_data_t *tower_data, scene_t *scene)
+static void set_rotation(object_t *obj_enn, object_t *obj_tower)
 {
     double angle = 0;
 
-    if (tower == NULL) {
+    angle = get_coef(sfSprite_getGlobalBounds(obj_enn->drawable.sprite),
+            obj_tower->drawable.sprite);
+    sfSprite_setRotation(obj_tower->drawable.sprite, angle);
+}
+
+void shot_ennemy(object_t *ennemy_obj, object_t *tower,
+        tower_data_t *tower_data, scene_t *scene)
+{
+    ennemy_t *enemy = NULL;
+
+    if (tower == NULL || tower_data == NULL || scene == NULL ||
+            ennemy_obj == NULL) {
         return;
     }
-    angle = get_coef(intersection, tower->drawable.sprite);
-    sfSprite_setRotation(tower->drawable.sprite, angle);
-    if (tower_data->dtime > tower_data->cadence) {
+    enemy = dico_t_get_value(ennemy_obj->components, OBJ_COMP_ENNSTRUCT);
+    if (enemy == NULL) {
+        return;
+    }
+    set_rotation(ennemy_obj, tower);
+    if (tower_data->dtime > tower_data->cadence &&
+            enemy->is_fly == tower_data->fly) {
         spawn_bullet(scene, sfSprite_getPosition(tower->drawable.sprite),
-            (sfVector2f) {intersection.left + intersection.width / 2,
-            intersection.top + intersection.height / 2}, tower_data);
+            sfSprite_getPosition(ennemy_obj->drawable.sprite), tower_data);
         tower_data->dtime = 0;
     }
 }

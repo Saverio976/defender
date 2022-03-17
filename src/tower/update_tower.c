@@ -9,7 +9,7 @@
 #include "defender_ennemy.h"
 #include "my_bgs.h"
 
-sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
+object_t *check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
 {
     list_t *elem = NULL;
     object_t *ennemy = NULL;
@@ -18,7 +18,7 @@ sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
 
     if (ennemy_list == NULL || ennemy_list->len == 0 ||
         ennemy_list->start == NULL) {
-        return (sfFloatRect) {-1, -1, -1, -1};
+        return NULL;
     }
     elem = ennemy_list->start;
     for (int i = 0; i < ennemy_list->len; i++, elem = elem->next) {
@@ -26,18 +26,18 @@ sfFloatRect check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
         ennemy_rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
         if (sfFloatRect_intersects(&scope_rect, &ennemy_rect,
             &intersection) == sfTrue && ennemy->is_visible == true) {
-            return intersection;
+            return ennemy;
         }
     }
-    return (sfFloatRect) {-1, -1, -1, -1};
+    return (NULL);
 }
 
 bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     object_t *tower, scene_t *scene)
 {
     list_t *elem = NULL;
-    sfFloatRect intersection;
     object_t *obj = NULL;
+    object_t *obj_enn = NULL;
 
     if (tower_data->scope == NULL || tower_data->scope->len == 0 ||
         tower_data->scope->start == NULL) {
@@ -46,10 +46,10 @@ bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     elem = tower_data->scope->start;
     for (int i = 0; i < tower_data->scope->len; i++, elem = elem->next) {
         obj = elem->var;
-        intersection = check_scope_col(
+        obj_enn = check_scope_col(
             sfSprite_getGlobalBounds(obj->drawable.sprite), ennemy_list);
-        if (intersection.left != -1) {
-            shot_ennemy(intersection, tower, tower_data, scene);
+        if (obj_enn != NULL) {
+            shot_ennemy(obj_enn, tower, tower_data, scene);
             return true;
         }
     }
