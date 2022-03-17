@@ -30,14 +30,14 @@ void init_button_event(object_t *object, dico_t *dico)
 
     if (id != NULL && id->type == INT) {
         create_event(on_hover_menu_but, true, object, off_hover_menu_but);
-        event_add_node(create_event(button_event[id->value.i], true, object,
-            NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
+        event_add_node(create_event(NULL, true, object, button_event[
+            id->value.i]), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     } else if (level_path != NULL && level_path->type == STR) {
         create_event(on_hover_menu_but, true, object, off_hover_menu_but);
         object->components = dico_t_add_data(object->components, "level path",
             my_strdup(level_path->value.str), free);
-        event_add_node(create_event(click_level_button, true,
-            object, NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
+        event_add_node(create_event(NULL, true, object, click_level_button),
+            (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     }
     if (tower_path != NULL && tower_path->type == STR) {
         object->components = dico_t_add_data(object->components, "tower path",
