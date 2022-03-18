@@ -8,6 +8,7 @@
     "build couldown": 2,
     "rect": [-1, -1, -1, -1],
     "path": "./assets/image/tower/standart/standart.png",
-    "rect sprite bullet": [0, 0, 100, 100],
-    "path sprite bullet": "./assets/image/bullet/fireshot.png"
+    "rect sprite bullet": [0, 0, 162, 169],
+    "path sprite bullet": "./assets/image/bullet/fireshot.png",
+    "sound effect": "assets/sound/pistol-sound-effect.ogg"
 }

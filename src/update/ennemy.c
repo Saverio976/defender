@@ -92,7 +92,7 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
 }
 
 void update_ennemy(object_t *obj, scene_t *scene,
-    __attribute__((unused)) window_t *win, float dtime)
+    window_t *win, float dtime)
 {
     char **map = NULL;
     ennemy_t *ennemy_me = NULL;
@@ -105,12 +105,11 @@ void update_ennemy(object_t *obj, scene_t *scene,
     if (ennemy_me == NULL) {
         return;
     }
-    ennemy_me->time_last += dtime;
-    ennemy_me->time_last_update += dtime;
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
         update_obj_explosion(obj, scene);
     } else if (obj->is_visible  && ennemy_me->time_last_update > 0.1) {
         move_ennemy(obj, ennemy_me, map);
         ennemy_me->time_last_update -= 0.1;
     }
+    check_ennemy_alive(obj, dtime, win, scene);
 }

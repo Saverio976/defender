@@ -50,7 +50,9 @@ int is_obj_touch_nico(object_t *obj, char **map);
 void update_obj_explosion(object_t *obj, scene_t *scene);
 
 void update_draw_life(object_t *obj, scene_t *scene,
-        __attribute__((unused)) window_t *win,
-        __attribute__((unused)) float dtime);
+        window_t *win, float dtime);
+
+void check_ennemy_alive(object_t *obj, float dtime, window_t *win,
+        scene_t *scene);
 
 #endif

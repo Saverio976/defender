@@ -36,8 +36,10 @@ SRCDIR			:=	src/
 SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
 SRCBULLET		:=	bullet/
+SRCUTILS		:=	utils/
 
 SRC_BULLET		:=	create_bullet.c		\
+					fill_data_bullet.c	\
 					update_bullet.c
 SRC_BULLET		:=	$(addprefix $(SRCBULLET),$(SRC_BULLET))
 
@@ -46,7 +48,6 @@ SRC_TOWER		:=	place_tower.c		\
 					set_scope.c			\
 					create_drag.c		\
 					scope_event.c		\
-					fill_data_bullet.c	\
 					create_support.c	\
 					shot_ennemy.c		\
 					update_tower.c
@@ -88,9 +89,13 @@ SRC_LAUNC		:=	launch_game.c		\
 					load_gestion.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
+SRC_UTILS		:=	ennemy.c
+SRC_UTILS		:=	$(addprefix $(SRCUTILS),$(SRC_UTILS))
+
 SRC			:=	main.c													\
 				$(SRC_INIT) $(SRC_UPDATE) $(SRC_LAUNC) $(SRC_MAP)		\
-				$(SRC_ENNEMY) $(SRC_BUTTON) $(SRC_TOWER) $(SRC_BULLET)
+				$(SRC_ENNEMY) $(SRC_BUTTON) $(SRC_TOWER) $(SRC_BULLET)	\
+				$(SRC_UTILS)
 SRC			:=	$(addprefix $(SRCDIR),$(SRC))
 
 OBJ			:=	$(SRC:%.c=%.o)

@@ -15,6 +15,7 @@
 
 struct bullet_s {
     sfVector2f direction;
+    sfVector2f initial_position;
     bool is_fly;
     int dmg;
 };
@@ -24,5 +25,7 @@ void update_bullet(object_t *obj, scene_t *scene, window_t *win, float dtime);
 
 void spawn_bullet(scene_t *scene, sfVector2f initial_position,
         sfVector2f direction, tower_data_t *tower_data);
+
+double get_coef(sfFloatRect intersection, sfSprite *tower);
 
 #endif

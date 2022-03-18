@@ -5,7 +5,8 @@
 ** return the nbyte of a file
 */
 
-#include <sys/stat.h>
+#include "my_fs.h"
+#include <unistd.h>
 
 /**
 ** @brief get size of the content of filepath (if stat can)
@@ -14,11 +15,20 @@
 **/
 int fs_get_size(char const *path)
 {
-    struct stat info;
-    int ret;
+    int fd = 0;
+    int ret = 0;
+    int buf_ret = 0;
+    char buffer[512];
 
-    ret = stat(path, &info);
-    if (ret == -1)
+    fd = fs_open_ronly(path);
+    if (fd <= 0) {
         return (-1);
-    return ((int) info.st_size);
+    }
+    buf_ret = read(fd, buffer, 512);
+    while (buf_ret > 0) {
+        ret += buf_ret;
+        buf_ret = read(fd, buffer, 512);
+    }
+    ret += buf_ret;
+    return (ret);
 }

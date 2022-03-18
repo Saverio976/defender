@@ -5,7 +5,8 @@
 ** update tower
 */
 
-#include "stdlib.h"
+#include <stdlib.h>
+#include "my_macro.h"
 #include "defender_game_data.h"
 #include "defender_ennemy.h"
 #include "my_bgs.h"
@@ -13,7 +14,8 @@
 static bool check_col(object_t *ennemy, sfVector2f circle, float rad)
 {
     sfFloatRect rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
-    sfVector2f distance = {abs(circle.x - rect.left), abs(circle.y - rect.top)};
+    sfVector2f distance = {ABSOL(circle.x - rect.left),
+        ABSOL(circle.y - rect.top)};
     sfVector2f corner = {distance.x - rect.width / 2,
         distance.y - rect.height / 2};
     float corner_distance_sq = 0;
@@ -37,6 +39,9 @@ static bool check_type(object_t *ennemy, int tower_type)
     ennemy_t *data = dico_t_get_value(ennemy->components, OBJ_COMP_ENNSTRUCT);
     int var;
 
+    if (ennemy->is_visible == false) {
+        return (false);
+    }
     if (data == NULL) {
         return false;
     } else if (tower_type == 2) {
