@@ -27,9 +27,15 @@ static int get_after_decimal(char const *str)
 {
     int i = 0;
 
-    for (; my_strcontainc("\b\t\n\v\f\r", str[i]); i++);
-    for (; my_strcontainc("+-", str[i]); i++);
-    for (; my_strcontainc("0123456789", str[i]); i++);
+    while (my_strcontainc("\b\t\n\v\f\r", str[i])) {
+        i += 1;
+    }
+    while (my_strcontainc("+-", str[i])) {
+        i += 1;
+    }
+    while (my_strcontainc("0123456789", str[i])) {
+        i += 1;
+    }
     return (i);
 }
 
