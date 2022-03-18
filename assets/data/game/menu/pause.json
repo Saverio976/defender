@@ -18,16 +18,36 @@
             "pos": [240.0, 910.0]
         },
         {
-            "text pos": [305.0, 910.0],
-            "text size": 1.1,
-            "id": 5,
-            "size": 1.2,
-            "font path": "assets/font/menlo.ttf",
-            "text": "settings",
+            "text pos": [495.0, 910.0],
             "color": [127, 143, 167, 230],
             "text color": [52, 59, 70, 230],
             "sprite path": "./assets/image/menu/side/pause/button.png",
-            "pos": [310.0, 910.0]           
+            "pos": [500.0, 910.0],
+            "id": 10,
+            "font path": "assets/font/menlo.ttf",
+            "text": "quit level"
+        },
+        {
+            "text pos": [300.0, 760.0],
+            "text color": [127, 143, 167, 255],
+            "color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "music",
+            "id": 8,
+            "sprite path": "./assets/image/menu/setting/sound_on.png",
+            "pos": [380.0, 760.0],
+            "size": 1.0
+        },
+        {
+            "pos": [380.0, 1030.0],
+            "id": 9,
+            "text pos": [300.0, 1020.0],
+            "text color": [127, 143, 167, 255],
+            "color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "sound effect",
+            "sprite path": "./assets/image/menu/setting/sound_on.png",
+            "size": 1.0
         }
     ]
 }

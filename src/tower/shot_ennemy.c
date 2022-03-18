@@ -49,6 +49,8 @@ void shot_ennemy(object_t *ennemy_obj, object_t *tower,
         tower_data_t *tower_data, scene_t *scene)
 {
     ennemy_t *enemy = NULL;
+    sfVector2f vector[2] = {sfSprite_getPosition(tower->drawable.sprite),
+        sfSprite_getPosition(ennemy_obj->drawable.sprite)};
 
     if (tower == NULL || tower_data == NULL || scene == NULL ||
             ennemy_obj == NULL) {
@@ -60,9 +62,9 @@ void shot_ennemy(object_t *ennemy_obj, object_t *tower,
     }
     set_rotation(ennemy_obj, tower);
     if (tower_data->dtime > tower_data->cadence &&
-            enemy->is_fly == tower_data->fly) {
-        spawn_bullet(scene, sfSprite_getPosition(tower->drawable.sprite),
-            sfSprite_getPosition(ennemy_obj->drawable.sprite), tower_data);
+        enemy->is_fly == tower_data->fly) {
+        spawn_bullet(scene, vector, tower_data,
+            dico_t_get_value(scene->components, "window"));
         tower_data->dtime = 0;
     }
 }

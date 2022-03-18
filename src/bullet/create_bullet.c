@@ -54,27 +54,28 @@ static void set_sprite_bullet(object_t *obj, tower_data_t *tower_data,
     list_add_to_end(scene->updates, obj);
 }
 
-static void play_sound(tower_data_t *tower)
+static void play_sound(tower_data_t *tower, game_data_t *game_data)
 {
     sfSoundStatus status = {0};
 
-    if (tower == NULL || tower->sound == NULL) {
+    if (tower == NULL || tower->sound == NULL || game_data == NULL ||
+        game_data->sound_effect == false) {
         return;
     }
     status = sfSound_getStatus(tower->sound);
     if (status == sfPlaying) {
-        return;
+        sfSound_stop(tower->sound);
     }
     sfSound_play(tower->sound);
 }
 
-void spawn_bullet(scene_t *scene, sfVector2f initial_position,
-        sfVector2f direction, tower_data_t *tower_data)
+void spawn_bullet(scene_t *scene, sfVector2f vector[2],
+    tower_data_t *tower_data, window_t *win)
 {
     object_t *obj = NULL;
     bullet_t *bullet = NULL;
 
-    bullet = create_bullet(direction, tower_data);
+    bullet = create_bullet(vector[1], tower_data);
     if (bullet == NULL) {
         return;
     }
@@ -83,9 +84,9 @@ void spawn_bullet(scene_t *scene, sfVector2f initial_position,
         free(bullet);
         return;
     }
-    bullet->initial_position = initial_position;
+    bullet->initial_position = vector[0];
     object_add_components(obj, bullet, "DIRECTION BULLET", free);
-    set_sprite_bullet(obj, tower_data, initial_position, scene);
-    play_sound(tower_data);
-    set_rotation_sprite_bullet(obj, direction);
+    set_sprite_bullet(obj, tower_data, vector[0], scene);
+    play_sound(tower_data, dico_t_get_value(win->components, GAME_DATA));
+    set_rotation_sprite_bullet(obj, vector[1]);
 }

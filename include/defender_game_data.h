@@ -11,7 +11,7 @@
     #include "my_bgs.h"
     #include "my_dico.h"
     #include "defender.h"
-#include <SFML/Audio/Types.h>
+    #include <SFML/Audio/Types.h>
     #include <SFML/Graphics/Rect.h>
 
 static const char TOWER_DATA[] = "tower data";
@@ -21,6 +21,9 @@ static const char PAUSE_OBJ[] = "pause obj";
 static const char TOWER_LIST[] = "tower list";
 static const char SHOP_OBJ[] = "shop obj";
 static const char ENNEMY_ID[] = "ennemy id";
+
+static const char MUSIC_OBJ[] = "music obj";
+static const char SOUND_OBJ[] = "sound obj";
 
 static const char GAME_DATA_PATH[] = "./assets/data/game/data.json";
 
@@ -39,6 +42,8 @@ typedef struct game_data_s {
     int level_progression;
     int com;
     int xp;
+    bool music;
+    bool sound_effect;
     dico_t *skill_three;
     char *font;
 } game_data_t;
@@ -75,6 +80,8 @@ int init_game_data(window_t *win);
 
 bool check_drag_pos(window_t *win, int size);
 
+int init_setting_menu(window_t *win);
+
 void shot_ennemy(object_t *ennemy_obj, object_t *tower,
         tower_data_t *tower_data, scene_t *scene);
 
@@ -88,7 +95,20 @@ void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
 
 int init_side_menu(window_t *win, scene_t *scene);
 
+void click_quit_level_button(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
+
 void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
+
+void click_sound_button(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
+void click_music_button(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
+void click_back_button(__attribute__((unused)) object_t *obj,
+    __attribute__((unused)) scene_t *scene, window_t *win,
     __attribute__((unused)) set_event_t *evt);
 
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,

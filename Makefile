@@ -63,6 +63,7 @@ SRC_ENNEMY		:=	$(addprefix $(SRCENNEMY),$(SRC_ENNEMY))
 
 SRC_INIT		:= 	init_defender.c		\
 					init_side_menu.c	\
+					init_setting_menu.c	\
 					init_game_data.c	\
 					init_menu.c
 SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
@@ -72,6 +73,8 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
 SRC_UPDATE		:=	button_menu.c			\
 					button_resume.c			\
+					update_setting.c		\
+					quit_button.c			\
 					ennemy.c				\
 					check_open_elem.c		\
 					shop_error_message.c	\

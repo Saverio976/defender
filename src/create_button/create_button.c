@@ -11,7 +11,7 @@
 #include "defender_game_data.h"
 #include "my_strings.h"
 
-static void (*button_event[7])(object_t *obj,
+static void (*button_event[11])(object_t *obj,
         scene_t *scene, window_t *win, set_event_t *evt) = {
     click_play_button,
     click_settings_button,
@@ -19,7 +19,11 @@ static void (*button_event[7])(object_t *obj,
     click_pause_button,
     click_shop_button,
     click_resume_button,
-    click_buy_button
+    click_buy_button,
+    click_back_button,
+    click_music_button,
+    click_sound_button,
+    click_quit_level_button
 };
 
 void init_button_event(object_t *object, dico_t *dico)

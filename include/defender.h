@@ -22,6 +22,7 @@
     #define SQUARE_START_POS 20
     #define SQUARE_POS_INCREMENTATION 40
 
+static const char SETTING_MENU[] = "./assets/data/game/menu/setting.json";
 static const char PAUSE_MENU[] = "./assets/data/game/menu/pause.json";
 static const char SHOP_MENU[] = "./assets/data/game/menu/shop.json";
 static const char SIDE_MENU[] = "./assets/data/game/menu/side.json";

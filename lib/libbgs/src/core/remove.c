@@ -9,12 +9,12 @@
 #include "list.h"
 #include "my_bgs.h"
 
-bool check_list(list_ptr_t *list, object_t *obj)
+bool check_list(list_ptr_t *list, void *data)
 {
     list_t *elem = list->start;
 
     for (int i = 0; i < list->len; i++, elem = elem->next) {
-        if (elem->var == obj) {
+        if (elem->var == data) {
             rm_elem_i(list, i);
             return true;
         }
@@ -22,10 +22,15 @@ bool check_list(list_ptr_t *list, object_t *obj)
     return false;
 }
 
-void window_remove(scene_t *scene)
+void window_remove(scene_t *scene, window_t *win)
 {
     object_t *elem = NULL;
 
+    if (scene->to_remove == NULL) {
+        check_list(win->scenes, scene);
+        remove_scene(scene);
+        return;
+    }
     if (scene == NULL || scene->to_remove->len == 0) {
         return;
     }
@@ -78,7 +83,9 @@ void remove_scene(scene_t *scene)
     free_list(scene->displayables);
     free_list(scene->updates);
     free_list(scene->objects);
-    free_list(scene->to_remove);
+    if (scene->to_remove != NULL) {
+        free_list(scene->to_remove);
+    }
     free(scene);
 }
 
