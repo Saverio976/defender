@@ -1,0 +1,50 @@
+{
+    "on path": "./assets/image/menu/setting/sound_on.png",
+    "off path": "./assets/image/menu/setting/sound_off.png",
+    "buttons": [
+        {
+            "text pos": [330.0, 1000.0],
+            "char size": 40,
+            "font path": "assets/font/menlo.ttf",
+            "text": "SETTINGS",
+            "text color": [127, 143, 167, 255],
+            "color": [52, 59, 70, 230],
+            "sprite path": "./assets/image/menu/side/pause/back.png",
+            "pos": [480.0, 960.0],
+            "size": 1.0
+        },
+        {
+            "text pos": [334.0, 770.0],
+            "id": 7,
+            "text color": [52, 59, 70, 230],
+            "color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "back",
+            "sprite path": "./assets/image/menu/setting/back_button.png",
+            "pos": [340.0, 770.0],
+            "size": 1.0
+        },
+        {
+            "text pos": [450.0, 760.0],
+            "text color": [127, 143, 167, 255],
+            "color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "music",
+            "id": 8,
+            "sprite path": "./assets/image/menu/setting/sound_on.png",
+            "pos": [460.0, 900.0],
+            "size": 1.0
+        },
+        {
+            "pos": [570.0, 1030.0],
+            "id": 9,
+            "text pos": [560.0, 820.0],
+            "text color": [127, 143, 167, 255],
+            "color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "sound effect",
+            "sprite path": "./assets/image/menu/setting/sound_on.png",
+            "size": 1.0
+        }
+    ]
+}

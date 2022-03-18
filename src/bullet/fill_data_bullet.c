@@ -5,8 +5,37 @@
 ** fill  data bullet
 */
 
+#include <stdlib.h>
+#include <SFML/Audio/Sound.h>
+#include <SFML/Audio/SoundBuffer.h>
+#include "defender_bullet.h"
 #include "defender_game_data.h"
+#include "my_dico.h"
+#include "my_json.h"
 #include "my_strings.h"
+
+static void set_sound(tower_data_t *tower, dico_t *dico)
+{
+    any_t *sound_effect = dico_t_get_any(dico, "sound effect");
+
+    tower->sound_buffer = NULL;
+    tower->sound = NULL;
+    if (sound_effect == NULL || sound_effect->type != STR) {
+        return;
+    }
+    tower->sound_buffer = sfSoundBuffer_createFromFile(
+            sound_effect->value.str);
+    if (tower->sound_buffer == NULL) {
+        return;
+    }
+    tower->sound = sfSound_create();
+    if (tower->sound == NULL) {
+        sfSoundBuffer_destroy(tower->sound_buffer);
+        return;
+    }
+    sfSound_setBuffer(tower->sound, tower->sound_buffer);
+    return;
+}
 
 object_t *fill_data_bullet(object_t *obj, dico_t *dico,
         tower_data_t *tower_data)
@@ -27,6 +56,8 @@ object_t *fill_data_bullet(object_t *obj, dico_t *dico,
     }
     tower_data->sprite_int_rect = (sfIntRect) {rect_a->value.i,
         rect_b->value.i, rect_c->value.i, rect_d->value.i};
+    free(tower_data->sprite_bullet);
     tower_data->sprite_bullet = my_strdup(sprite->value.str);
+    set_sound(tower_data, dico);
     return (obj);
 }

@@ -68,7 +68,7 @@ static int scene_handling(window_t **win, scene_t **scene, time_clock_t *timer)
     timer->seconds = sfTime_asSeconds(timer->time);
     window_update(*scene, *win, timer->seconds);
     window_display(*scene, *win);
-    window_remove(*scene);
+    window_remove(*scene, *win);
     return BGS_OK;
 }
 

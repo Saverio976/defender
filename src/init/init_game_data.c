@@ -94,6 +94,8 @@ int init_game_data(window_t *win)
         fill_game_data(game_data, game_data_file->value.dict) != RET_OK) {
         return RET_ERR_MALLOC;
     }
+    game_data->sound_effect = true;
+    game_data->music = true;
     font = dico_t_get_any(game_data_file->value.dict, "font");
     game_data->font = (font != NULL && font->type == STR) ?
         my_strdup(font->value.str) : NULL;

@@ -15,8 +15,7 @@
 #include "my_strings.h"
 
 void update_draw_life(object_t *obj, scene_t *scene,
-        __attribute__((unused)) window_t *win,
-        __attribute__((unused)) float dtime)
+        window_t *win, __attribute__((unused)) float dtime)
 {
     level_data_t *lvl = NULL;
     char *value = NULL;

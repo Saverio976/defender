@@ -5,7 +5,7 @@
     "speed": 0.5,
     "is_fly": "false",
     "load_time": 10.25,
-    "path": "./assets/image/ennemy/tank.png",
-    "int_rect": [0, 0, 118, 106],
-    "max_ennemy_x": 1245
+    "path": "./assets/image/ennemy/golem.png",
+    "int_rect": [0, 0, 116, 122],
+    "max_ennemy_x": 1150
 }

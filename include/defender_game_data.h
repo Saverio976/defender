@@ -11,6 +11,7 @@
     #include "my_bgs.h"
     #include "my_dico.h"
     #include "defender.h"
+    #include <SFML/Audio/Types.h>
     #include <SFML/Graphics/Rect.h>
 
 static const char TOWER_DATA[] = "tower data";
@@ -20,6 +21,9 @@ static const char PAUSE_OBJ[] = "pause obj";
 static const char TOWER_LIST[] = "tower list";
 static const char SHOP_OBJ[] = "shop obj";
 static const char ENNEMY_ID[] = "ennemy id";
+
+static const char MUSIC_OBJ[] = "music obj";
+static const char SOUND_OBJ[] = "sound obj";
 
 static const char GAME_DATA_PATH[] = "./assets/data/game/data.json";
 
@@ -38,18 +42,24 @@ typedef struct game_data_s {
     int level_progression;
     int com;
     int xp;
+    bool music;
+    bool sound_effect;
     dico_t *skill_three;
     char *font;
 } game_data_t;
 
 typedef struct tower_data_s {
-    list_ptr_t *scope;
+    sfCircleShape *scope;
+    float scope_rad;
+    bool scope_display;
     int damage;
     float cadence;
-    bool fly;
+    int fly;
     float dtime;
     char *sprite_bullet;
     sfIntRect sprite_int_rect;
+    sfSoundBuffer *sound_buffer;
+    sfSound *sound;
 } tower_data_t;
 
 object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
@@ -70,6 +80,8 @@ int init_game_data(window_t *win);
 
 bool check_drag_pos(window_t *win, int size);
 
+int init_setting_menu(window_t *win);
+
 void shot_ennemy(object_t *ennemy_obj, object_t *tower,
         tower_data_t *tower_data, scene_t *scene);
 
@@ -83,7 +95,20 @@ void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
 
 int init_side_menu(window_t *win, scene_t *scene);
 
+void click_quit_level_button(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
+
 void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
+    __attribute__((unused)) set_event_t *evt);
+
+void click_sound_button(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
+void click_music_button(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
+void click_back_button(__attribute__((unused)) object_t *obj,
+    __attribute__((unused)) scene_t *scene, window_t *win,
     __attribute__((unused)) set_event_t *evt);
 
 void click_pause_button(object_t *obj, scene_t *scene, window_t *win,
@@ -96,8 +121,7 @@ void update_tower(object_t *obj, scene_t *scene, window_t *win, float time);
 
 int create_tower(scene_t *scene, dico_t *tower, sfVector2f pos);
 
-int set_scope(dico_t *tower_dico, dico_t *components[2], object_t *support,
-    scene_t *scene);
+int set_scope(dico_t *components[2], object_t *support);
 
 void update_shop_error_message(object_t *obj, scene_t *scene,
         __attribute__((unused)) window_t *win, float dtime);

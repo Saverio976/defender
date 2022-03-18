@@ -11,7 +11,7 @@
 #include "defender_game_data.h"
 #include "my_strings.h"
 
-static void (*button_event[7])(object_t *obj,
+static void (*button_event[11])(object_t *obj,
         scene_t *scene, window_t *win, set_event_t *evt) = {
     click_play_button,
     click_settings_button,
@@ -19,7 +19,11 @@ static void (*button_event[7])(object_t *obj,
     click_pause_button,
     click_shop_button,
     click_resume_button,
-    click_buy_button
+    click_buy_button,
+    click_back_button,
+    click_music_button,
+    click_sound_button,
+    click_quit_level_button
 };
 
 void init_button_event(object_t *object, dico_t *dico)
@@ -30,14 +34,14 @@ void init_button_event(object_t *object, dico_t *dico)
 
     if (id != NULL && id->type == INT) {
         create_event(on_hover_menu_but, true, object, off_hover_menu_but);
-        event_add_node(create_event(button_event[id->value.i], true, object,
-            NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
+        event_add_node(create_event(NULL, true, object, button_event[
+            id->value.i]), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     } else if (level_path != NULL && level_path->type == STR) {
         create_event(on_hover_menu_but, true, object, off_hover_menu_but);
         object->components = dico_t_add_data(object->components, "level path",
             my_strdup(level_path->value.str), free);
-        event_add_node(create_event(click_level_button, true,
-            object, NULL), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
+        event_add_node(create_event(NULL, true, object, click_level_button),
+            (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
     }
     if (tower_path != NULL && tower_path->type == STR) {
         object->components = dico_t_add_data(object->components, "tower path",

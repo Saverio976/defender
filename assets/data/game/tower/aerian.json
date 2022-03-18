@@ -7,5 +7,8 @@
     "fly": 1,
     "build couldown": 5,
     "rect": [-1, -1, -1, -1],
-    "path": "./assets/image/tower/aerian.png"
+    "path": "./assets/image/tower/aerian.png",
+    "rect sprite bullet": [0, 0, 162, 169],
+    "path sprite bullet": "./assets/image/bullet/fireshot.png",
+    "sound effect": "assets/sound/pistol-sound-effect.ogg"
 }

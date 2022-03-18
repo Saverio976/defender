@@ -50,22 +50,28 @@ static void set_shop_back_event(list_t *elem, scene_t *scene)
     list_add_to_end(scene->updates, back);
 }
 
-static void set_pause_back_event(scene_t *scene)
+static void set_pause_back_event(scene_t *scene, window_t *win)
 {
-    object_t *obj = NULL;
     list_t *back = scene->objects->end;
     list_t *elem = scene->objects->end;
+    game_data_t *game_data = dico_t_get_value(win->components, GAME_DATA);
 
-    if (create_button(scene, PAUSE_MENU) != RET_OK ||
+    if (create_button(scene, PAUSE_MENU) != RET_OK || game_data == NULL ||
         add_hiden_list(scene, &elem, PAUSE_OBJ) != RET_OK) {
         return;
+    } else if (game_data->sound_effect == false) {
+        game_data->sound_effect = true;
+        click_sound_button(elem->back->var, scene, win, NULL);
     }
-    obj = back->next->var;
-    if (event_add_node(create_event(pause_back_update, false, obj, NULL),
-        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
+    if (game_data->music == false) {
+        game_data->music = true;
+        click_music_button(elem->back->back->back->var, scene, win, NULL);
+    }
+    if (event_add_node(create_event(pause_back_update, false, back->next->var,
+        NULL), (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
         return;
     }
-    list_add_to_end(scene->updates, obj);
+    list_add_to_end(scene->updates, back->next->var);
 }
 
 int init_side_menu(window_t *win, scene_t *scene)
@@ -88,6 +94,6 @@ int init_side_menu(window_t *win, scene_t *scene)
         return RET_ERR_MALLOC;
     }
     set_shop_back_event(back, scene);
-    set_pause_back_event(scene);
+    set_pause_back_event(scene, win);
     return (scene->components != NULL) ? RET_OK : RET_ERR_MALLOC ;
 }

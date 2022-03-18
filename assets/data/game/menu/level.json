@@ -2,6 +2,18 @@
     "background path": "./assets/image/menu/level/background.png",
     "buttons": [
         {
+            "text pos": [60.0, 120.0],
+            "id": 7,
+            "color": [52, 59, 70, 230],
+            "text color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "back",
+            "char size": 90,
+            "sprite path": "./assets/image/menu/level/back_button.png",
+            "pos": [110.0, 200.0],
+            "size": 1.0
+        },
+        {
             "font path": "assets/font/menlo.ttf",
             "text": "1",
             "text pos": [380.0, 210.0],

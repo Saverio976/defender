@@ -7,6 +7,7 @@
 
 #include <SFML/System/Vector2.h>
 #include "defender.h"
+#include "list.h"
 #include "my_bgs.h"
 #include "my_dico.h"
 #include "my_strings.h"

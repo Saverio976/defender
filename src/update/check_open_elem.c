@@ -15,17 +15,15 @@ static void check_scope(__attribute__((unused)) object_t *obj,
     sfVector2i mouse = sfMouse_getPositionRenderWindow(win->win);
     const sfFloatRect rect =
         sfSprite_getGlobalBounds(cur_tower->drawable.sprite);
-    object_t *scope = NULL;
 
     if (tower_data == NULL || tower_data->scope == NULL) {
         return;
     }
-    scope = tower_data->scope->start->var;
     if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfTrue &&
-        scope->is_visible == true) {
+        tower_data->scope_display == true) {
         win->click_prev_call = true;
     }
-    if (scope->is_visible == true) {
+    if (tower_data->scope_display == true) {
         hide_scope(cur_tower, scene, win, NULL);
     }
 }
@@ -44,6 +42,20 @@ static bool check_shop(list_ptr_t *shop_obj, window_t *win)
     return false;
 }
 
+static bool check_pause(list_ptr_t *pause_obj, window_t *win)
+{
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(win->win);
+    const sfFloatRect rect = sfSprite_getGlobalBounds(
+        ((object_t *) pause_obj->start->var)->drawable.sprite);
+
+    if (pause_obj != NULL &&
+        ((object_t *) pause_obj->start->var)->is_visible == true &&
+        sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfFalse) {
+        return true;
+    }
+    return false;
+}
+
 void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
     __attribute__((unused)) set_event_t *evt)
 {
@@ -53,8 +65,7 @@ void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
     list_t *elem = NULL;
 
     win->click_prev_call = false;
-    if (pause_obj != NULL && ((object_t *) pause_obj->start->var)->
-        is_visible == true) {
+    if (check_pause(pause_obj, win) == true) {
         click_pause_button(NULL, scene, win, NULL);
     } else if (check_shop(shop_obj, win) == true) {
         click_shop_button(NULL, scene, win, NULL);

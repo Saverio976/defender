@@ -6,6 +6,6 @@
     "is_fly": "false",
     "load_time": 0.25,
     "path": "./assets/image/ennemy/minion.png",
-    "int_rect": [0, 0, 58, 83],
+    "int_rect": [10, 0, 60, 83],
     "max_ennemy_x": 306
 }

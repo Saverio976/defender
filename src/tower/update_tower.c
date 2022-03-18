@@ -5,16 +5,56 @@
 ** update tower
 */
 
+#include <stdlib.h>
+#include "my_macro.h"
 #include "defender_game_data.h"
 #include "defender_ennemy.h"
 #include "my_bgs.h"
 
-object_t *check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
+static bool check_col(object_t *ennemy, sfVector2f circle, float rad)
+{
+    sfFloatRect rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
+    sfVector2f distance = {ABSOL(circle.x - rect.left),
+        ABSOL(circle.y - rect.top)};
+    sfVector2f corner = {distance.x - rect.width / 2,
+        distance.y - rect.height / 2};
+    float corner_distance_sq = 0;
+
+    if ((distance.x > (rect.width / 2 + rad)) ||
+        (distance.y > (rect.height / 2 + rad))) {
+        return false;
+    } else if ((distance.x <= rect.width / 2) ||
+        (distance.x <= rect.height / 2)) {
+        return true;
+    }
+    corner_distance_sq = ((corner.x * corner.x) + (corner.y * corner.y));
+    if (corner_distance_sq <= (rad * rad)) {
+        return true;
+    }
+    return false;
+}
+
+static bool check_type(object_t *ennemy, int tower_type)
+{
+    ennemy_t *data = dico_t_get_value(ennemy->components, OBJ_COMP_ENNSTRUCT);
+    int var;
+
+    if (ennemy->is_visible == false) {
+        return (false);
+    }
+    if (data == NULL) {
+        return false;
+    } else if (tower_type == 2) {
+        return true;
+    }
+    var = (data->is_fly == true) ? 1 : 0;
+    return (tower_type == var) ? true : false;
+}
+
+static object_t *check_scope_col(sfVector2f circle, list_ptr_t *ennemy_list,
+    float rad, int tower_type)
 {
     list_t *elem = NULL;
-    object_t *ennemy = NULL;
-    sfFloatRect ennemy_rect;
-    sfFloatRect intersection;
 
     if (ennemy_list == NULL || ennemy_list->len == 0 ||
         ennemy_list->start == NULL) {
@@ -22,36 +62,28 @@ object_t *check_scope_col(sfFloatRect scope_rect, list_ptr_t *ennemy_list)
     }
     elem = ennemy_list->start;
     for (int i = 0; i < ennemy_list->len; i++, elem = elem->next) {
-        ennemy = elem->var;
-        ennemy_rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
-        if (sfFloatRect_intersects(&scope_rect, &ennemy_rect,
-            &intersection) == sfTrue && ennemy->is_visible == true) {
-            return ennemy;
+        if (check_type(elem->var, tower_type) == true &&
+            check_col(elem->var, circle, rad) == true) {
+            return elem->var;
         }
     }
-    return (NULL);
+    return NULL;
 }
 
-bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
+static bool detect_ennemy(tower_data_t *tower_data, list_ptr_t *ennemy_list,
     object_t *tower, scene_t *scene)
 {
-    list_t *elem = NULL;
-    object_t *obj = NULL;
-    object_t *obj_enn = NULL;
+    object_t *ennemy = NULL;
+    sfVector2f pos = sfCircleShape_getPosition(tower_data->scope);
 
-    if (tower_data->scope == NULL || tower_data->scope->len == 0 ||
-        tower_data->scope->start == NULL) {
+    if (tower_data->scope == NULL) {
         return false;
     }
-    elem = tower_data->scope->start;
-    for (int i = 0; i < tower_data->scope->len; i++, elem = elem->next) {
-        obj = elem->var;
-        obj_enn = check_scope_col(
-            sfSprite_getGlobalBounds(obj->drawable.sprite), ennemy_list);
-        if (obj_enn != NULL) {
-            shot_ennemy(obj_enn, tower, tower_data, scene);
-            return true;
-        }
+    ennemy = check_scope_col(pos, ennemy_list, tower_data->scope_rad,
+        tower_data->fly);
+    if (ennemy != NULL) {
+        shot_ennemy(ennemy, tower, tower_data, scene);
+        return true;
     }
     return false;
 }
