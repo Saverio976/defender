@@ -59,8 +59,7 @@ void shot_ennemy(object_t *ennemy_obj, object_t *tower,
         return;
     }
     set_rotation(ennemy_obj, tower);
-    if (tower_data->dtime > tower_data->cadence &&
-            enemy->is_fly == tower_data->fly) {
+    if (tower_data->dtime > tower_data->cadence) {
         spawn_bullet(scene, sfSprite_getPosition(tower->drawable.sprite),
             sfSprite_getPosition(ennemy_obj->drawable.sprite), tower_data);
         tower_data->dtime = 0;
