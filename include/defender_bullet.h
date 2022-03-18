@@ -16,7 +16,7 @@
 struct bullet_s {
     sfVector2f direction;
     sfVector2f initial_position;
-    bool is_fly;
+    int is_fly;
     int dmg;
 };
 typedef struct bullet_s bullet_t;
@@ -27,5 +27,7 @@ void spawn_bullet(scene_t *scene, sfVector2f vector[2],
     tower_data_t *tower_data, window_t *win);
 
 double get_coef(sfFloatRect intersection, sfSprite *tower);
+
+int check_if_need_remove(bullet_t *bullet, object_t *obj);
 
 #endif
