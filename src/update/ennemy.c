@@ -107,7 +107,7 @@ void update_ennemy(object_t *obj, scene_t *scene,
     }
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
         update_obj_explosion(obj, scene);
-    } else if (obj->is_visible  && ennemy_me->time_last_update > 0.1) {
+    } else if (obj->is_visible && ennemy_me->time_last_update > 0.1) {
         move_ennemy(obj, ennemy_me, map);
         ennemy_me->time_last_update -= 0.1;
     }

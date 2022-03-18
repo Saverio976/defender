@@ -11,7 +11,7 @@
     #include "my_bgs.h"
     #include "my_dico.h"
     #include "defender.h"
-#include <SFML/Audio/Types.h>
+    #include <SFML/Audio/Types.h>
     #include <SFML/Graphics/Rect.h>
 
 static const char TOWER_DATA[] = "tower data";
