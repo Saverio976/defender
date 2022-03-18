@@ -20,7 +20,7 @@
 
 static float pi = 3.1415926535;
 
-static double get_coef(sfFloatRect intersection, sfSprite *tower)
+double get_coef(sfFloatRect intersection, sfSprite *tower)
 {
     float y1 = 0;
     float y2 = 0;
