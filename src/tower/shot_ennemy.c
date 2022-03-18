@@ -18,7 +18,7 @@
 #include "my_bgs.h"
 #include "my_dico.h"
 
-static float pi = 3.1415926535;
+static double pi = 3.1415926535;
 
 double get_coef(sfFloatRect intersection, sfSprite *tower)
 {
