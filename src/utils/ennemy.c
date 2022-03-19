@@ -16,7 +16,8 @@
 #include "defender_ennemy.h"
 #include "my_dico.h"
 
-void update_score_text(object_t *obj, scene_t *scene, window_t *win,
+void update_score_text(object_t *obj, scene_t *scene,
+        __attribute__((unused)) window_t *win,
         float dtime)
 {
     static float time_free = 0;
