@@ -19,7 +19,7 @@ bool check_pos(int i, int pos_x, char **map, int size)
     return true;
 }
 
-bool check_place(int size, scene_t *scene, object_t *suppport)
+bool check_place(int size, scene_t *scene, object_t *suppport, window_t *win)
 {
     char **map = dico_t_get_value(scene->components, SCENE_COMP_MAP);
     sfVector2i pos;
@@ -32,7 +32,7 @@ bool check_place(int size, scene_t *scene, object_t *suppport)
     pos.y = ((int) suppport->bigdata.sprite_bigdata.pos.y) - px_size;
     for (int i = pos.y; i < pos.y + (size * 40); i += 40) {
         if (check_pos(i, pos.x, map, size) == false) {
-            return false;
+            return create_txt_place_err(suppport, scene, win);
         }
     }
     for (int i = pos.y; i < pos.y + (size * 40); i += 40) {
@@ -71,7 +71,7 @@ void place_tower(object_t *obj, scene_t *scene, window_t *win,
     if (tower == NULL) {
         return;
     }
-    if (tower->type == DICT && check_place(size, scene, obj) == true) {
+    if (tower->type == DICT && check_place(size, scene, obj, win) == true) {
         create_tower(scene, tower->value.dict, obj->bigdata.sprite_bigdata.pos);
         list_add_to_end(scene->to_remove, obj);
         list_add_to_end(scene->to_remove, drag_tower);

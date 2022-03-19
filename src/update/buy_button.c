@@ -23,15 +23,6 @@ object_t *create_error_message(game_data_t *game_data, scene_t *scene,
     return error_text;
 }
 
-static void fill_error_message_data(error_message_data_t *error_message,
-    scene_t *scene)
-{
-    error_message->obj_list_pos = scene->objects->len;
-    error_message->frame_counter = 0;
-    error_message->update_list_pos = scene->updates->len;
-    error_message->display_list_pos = scene->displayables->len;
-}
-
 bool check_money(game_data_t *game_data, dico_t *tower, sfVector2f pos,
     scene_t *scene)
 {
@@ -48,7 +39,7 @@ bool check_money(game_data_t *game_data, dico_t *tower, sfVector2f pos,
         return true;
     }
     error_text = create_error_message(game_data, scene, pos);
-    fill_error_message_data(error_message, scene);
+    error_message->frame_counter = 0;
     list_add_to_end(scene->displayables, error_text);
     list_add_to_end(scene->updates, error_text);
     error_text->components = dico_t_add_data(error_text->components,

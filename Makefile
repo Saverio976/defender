@@ -43,13 +43,14 @@ SRC_BULLET		:=	create_bullet.c		\
 					update_bullet.c
 SRC_BULLET		:=	$(addprefix $(SRCBULLET),$(SRC_BULLET))
 
-SRC_TOWER		:=	place_tower.c		\
-	 				create_tower.c		\
-					set_scope.c			\
-					create_drag.c		\
-					scope_event.c		\
-					create_support.c	\
-					shot_ennemy.c		\
+SRC_TOWER		:=	place_tower.c			\
+	 				create_tower.c			\
+					set_scope.c				\
+					create_drag.c			\
+					create_txt_place_err.c	\
+					scope_event.c			\
+					create_support.c		\
+					shot_ennemy.c			\
 					update_tower.c
 SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 

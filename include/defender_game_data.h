@@ -35,9 +35,6 @@ static const float TOWER_ROTATION = 0.5;
 
 typedef struct error_message_data_s {
     int frame_counter;
-    int display_list_pos;
-    int update_list_pos;
-    int obj_list_pos;
 } error_message_data_t;
 
 typedef struct game_data_s {
@@ -97,6 +94,8 @@ void display_scope(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 void hide_scope(object_t *obj, scene_t *scene, window_t *win, set_event_t *evt);
+
+bool create_txt_place_err(object_t *support, scene_t *scene, window_t *win);
 
 void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
