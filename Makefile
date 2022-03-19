@@ -62,6 +62,7 @@ SRC_ENNEMY		:=	create_ennemy.c		\
 SRC_ENNEMY		:=	$(addprefix $(SRCENNEMY),$(SRC_ENNEMY))
 
 SRC_INIT		:= 	init_defender.c		\
+					how_to_play.c		\
 					init_side_menu.c	\
 					init_music.c		\
 					init_setting_menu.c	\

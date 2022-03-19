@@ -11,7 +11,7 @@
 #include "defender_game_data.h"
 #include "my_strings.h"
 
-static void (*button_event[11])(object_t *obj,
+static void (*button_event[13])(object_t *obj,
         scene_t *scene, window_t *win, set_event_t *evt) = {
     click_play_button,
     click_settings_button,
@@ -23,7 +23,9 @@ static void (*button_event[11])(object_t *obj,
     click_back_button,
     click_music_button,
     click_sound_button,
-    click_quit_level_button
+    click_quit_level_button,
+    click_show_how2,
+    show_next_how2
 };
 
 void init_button_event(object_t *object, dico_t *dico)
@@ -32,7 +34,7 @@ void init_button_event(object_t *object, dico_t *dico)
     any_t *level_path = dico_t_get_any(dico, "level path");
     any_t *tower_path = dico_t_get_any(dico, "tower path");
 
-    if (id != NULL && id->type == INT) {
+    if (id != NULL && id->type == INT && id->value.i < 13 && id->value.i >= 0) {
         create_event(on_hover_menu_but, true, object, off_hover_menu_but);
         event_add_node(create_event(NULL, true, object, button_event[
             id->value.i]), (node_params_t) {sfMouseLeft , sfKeyA, MOUSE});
