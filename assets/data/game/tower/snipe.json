@@ -1,7 +1,7 @@
 {
     "size": 3,
     "cost": 50,
-    "cadence": 0.2,
+    "cadence": 6.0,
     "damage": 5,
     "scope": 18,
     "fly": 2,

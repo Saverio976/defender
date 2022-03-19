@@ -27,11 +27,11 @@ CURR_RULE	=	all
 
 # ----------------------------------------------------------------------------
 # SRC
-SRCINITDIR		:=  init/
+SRCINITDIR		:=	init/
 SRCMAP			:=	map/
-SRCUPDATEDIR	:=  update/
+SRCUPDATEDIR	:=	update/
 SRCLAUNCHDIR	:=	launch_game/
-SRCTOWER		:= 	tower/
+SRCTOWER		:=	tower/
 SRCDIR			:=	src/
 SRCBUTTON		:=	create_button/
 SRCENNEMY		:=	create_ennemy/
