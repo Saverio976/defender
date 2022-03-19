@@ -33,6 +33,7 @@ int init_level_menu(window_t *win)
         return RET_INVALID_INPUT;
     }
     destroy_any(any);
+    create_texts_score(scene);
     return create_button(scene, LEVEL_MENU);
 }
 
@@ -43,5 +44,6 @@ int init_main_menu(window_t *win)
     if (scene == NULL) {
         return RET_ERR_MALLOC;
     }
+    create_texts_score(scene);
     return create_button(scene, MAIN_MENU);
 }

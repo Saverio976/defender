@@ -96,4 +96,6 @@ void check_set_color(object_t *object, dico_t *dico);
 
 int init_how2play(window_t *win);
 
+int create_texts_score(scene_t *scene);
+
 #endif
