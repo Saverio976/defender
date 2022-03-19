@@ -7,23 +7,21 @@
 
 #include "defender_game_data.h"
 
-void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
+void click_escape_button(__attribute__((unused)) object_t *obj, scene_t *scene,
+    __attribute__((unused)) window_t *win,
     __attribute__((unused)) set_event_t *evt)
 {
-    sfFloatRect rect;
-    sfVector2i vector;
+    list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
 
-    if (obj->type != SPRITE) {
+    if (pause_obj == NULL) {
         return;
     }
-    rect = sfSprite_getGlobalBounds(obj->drawable.sprite);
-    vector = sfMouse_getPositionRenderWindow(win->win);
-    sfSprite_setPosition(obj->drawable.sprite, (sfVector2f) {50, 50});
-    if (sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse &&
-        obj->is_visible == true) {
-        click_pause_button(obj, scene, win, evt);
+    if (((object_t *) pause_obj->start->var)->is_visible == false) {
+        check_open_elem(NULL, scene, win, NULL);
+        click_pause_button(NULL, scene, NULL, NULL);
+    } else {
+        check_open_elem(NULL, scene, win, NULL);
     }
-    win->click_prev_call = false;
 }
 
 void click_pause_button(__attribute__((unused)) object_t *obj, scene_t *scene,
@@ -42,8 +40,8 @@ void click_pause_button(__attribute__((unused)) object_t *obj, scene_t *scene,
             ((object_t *) elem->var)->is_visible = false;
             scene->pause = false;
         } else {
-            scene->pause = true;
             ((object_t *) elem->var)->is_visible = true;
+            scene->pause = true;
         }
     }
 }

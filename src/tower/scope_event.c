@@ -7,13 +7,14 @@
 
 #include "defender_game_data.h"
 
-void display_scope(object_t *obj, __attribute__((unused)) scene_t *scene,
+void display_scope(object_t *obj, scene_t *scene,
     __attribute__((unused)) window_t *win,
     __attribute__((unused)) set_event_t *evt)
 {
     tower_data_t *tower_data = dico_t_get_value(obj->components, TOWER_DATA);
+    list_ptr_t *shop_obj = dico_t_get_value(scene->components, SHOP_OBJ);
 
-    if (tower_data == NULL || tower_data->scope == NULL) {
+    if (tower_data == NULL || tower_data->scope == NULL || shop_obj == NULL) {
         return;
     }
     if (tower_data->scope_display == false) {

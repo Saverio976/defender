@@ -7,8 +7,7 @@
 
 #include "defender_game_data.h"
 
-static void check_scope(__attribute__((unused)) object_t *obj,
-    object_t *cur_tower, scene_t *scene, window_t *win)
+static void check_scope(object_t *cur_tower, scene_t *scene, window_t *win)
 {
     tower_data_t *tower_data =
         dico_t_get_value(cur_tower->components, TOWER_DATA);
@@ -28,36 +27,58 @@ static void check_scope(__attribute__((unused)) object_t *obj,
     }
 }
 
-static bool check_shop(list_ptr_t *shop_obj, window_t *win)
+static bool chk_shp(list_ptr_t *shop_obj, window_t *win, scene_t *scene,
+    set_event_t *evt)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(win->win);
     const sfFloatRect rect = sfSprite_getGlobalBounds(
         ((object_t *) shop_obj->start->var)->drawable.sprite);
+    object_t *button = dico_t_get_value(scene->components, "shop button");
+    sfFloatRect rct;
+    bool ret = ((object_t *) shop_obj->start->var)->is_visible;
 
-    if (shop_obj != NULL &&
-        ((object_t *) shop_obj->start->var)->is_visible == true &&
-        sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfFalse) {
-        return true;
+    if (button == NULL) {
+        return false;
     }
-    return false;
+    rct = sfSprite_getGlobalBounds(button->drawable.sprite);
+    if (evt != NULL && ret == true) {
+        if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfFalse &&
+            sfFloatRect_contains(&rct, mouse.x, mouse.y) == sfFalse) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return ret;
 }
 
-static bool check_pause(list_ptr_t *pause_obj, window_t *win)
+static bool check_pause(list_ptr_t *pause_obj, window_t *win, scene_t *scene,
+    set_event_t *evt)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(win->win);
     const sfFloatRect rect = sfSprite_getGlobalBounds(
         ((object_t *) pause_obj->start->var)->drawable.sprite);
+    object_t *button = dico_t_get_value(scene->components, "pause button");
+    sfFloatRect rct;
+    bool ret = ((object_t *) pause_obj->start->var)->is_visible;
 
-    if (pause_obj != NULL &&
-        ((object_t *) pause_obj->start->var)->is_visible == true &&
-        sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfFalse) {
-        return true;
+    if (button == NULL) {
+        return false;
     }
-    return false;
+    rct = sfSprite_getGlobalBounds(button->drawable.sprite);
+    if (evt != NULL && ret == true) {
+        if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == sfFalse &&
+            sfFloatRect_contains(&rct, mouse.x, mouse.y) == sfFalse) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return ret;
 }
 
-void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
-    __attribute__((unused)) set_event_t *evt)
+void check_open_elem(__attribute__((unused)) object_t *obj, scene_t *scene,
+    window_t *win, __attribute__((unused)) set_event_t *evt)
 {
     list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
     list_ptr_t *shop_obj = dico_t_get_value(scene->components, SHOP_OBJ);
@@ -65,9 +86,9 @@ void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
     list_t *elem = NULL;
 
     win->click_prev_call = false;
-    if (check_pause(pause_obj, win) == true) {
+    if (pause_obj != NULL && check_pause(pause_obj, win, scene, evt) == true) {
         click_pause_button(NULL, scene, win, NULL);
-    } else if (check_shop(shop_obj, win) == true) {
+    } else if (shop_obj != NULL && chk_shp(shop_obj, win, scene, evt) == true) {
         click_shop_button(NULL, scene, win, NULL);
     }
     if (support == NULL || support->len == 0 || support->start == NULL) {
@@ -76,7 +97,7 @@ void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
     elem = support->start;
     for (int i = 0; i < support->len; i++, elem = elem->next) {
         if (elem->var != NULL) {
-            check_scope(obj, elem->var, scene, win);
+            check_scope(elem->var, scene, win);
         }
     }
 }

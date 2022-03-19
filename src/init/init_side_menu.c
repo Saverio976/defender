@@ -21,6 +21,7 @@ void free_list_void(void *data)
 static int add_hiden_list(scene_t *scene, list_t **elem, char const key[])
 {
     list_ptr_t *list = list_create();
+    list_t *tmp = *elem;
 
     if (list == NULL) {
         return RET_ERR_MALLOC;
@@ -36,23 +37,12 @@ static int add_hiden_list(scene_t *scene, list_t **elem, char const key[])
     if (scene->components == NULL) {
         return RET_ERR_MALLOC;
     }
+    *elem = tmp;
     return RET_OK;
 }
 
-static void set_shop_back_event(list_t *elem, scene_t *scene)
+static void set_pause(scene_t *scene, window_t *win)
 {
-    object_t *back = elem->next->var;
-
-    if (event_add_node(create_event(shop_back_update, false, back, NULL),
-        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
-        return;
-    }
-    list_add_to_end(scene->updates, back);
-}
-
-static void set_pause_back_event(scene_t *scene, window_t *win)
-{
-    list_t *back = scene->objects->end;
     list_t *elem = scene->objects->end;
     game_data_t *game_data = dico_t_get_value(win->components, GAME_DATA);
 
@@ -67,33 +57,34 @@ static void set_pause_back_event(scene_t *scene, window_t *win)
         game_data->music = true;
         click_music_button(elem->back->back->back->var, scene, win, NULL);
     }
-    if (event_add_node(create_event(pause_back_update, false, back->next->var,
-        NULL), (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
-        return;
-    }
-    list_add_to_end(scene->updates, back->next->var);
+}
+
+void add_button_to_scene(dico_t *dico, list_t *elem)
+{
+    dico = dico_t_add_data(dico, "pause button", elem->var, NULL);
+    dico = dico_t_add_data(dico, "shop button", elem->next->var, NULL);
 }
 
 int init_side_menu(window_t *win, scene_t *scene)
 {
-    list_t *elem = NULL;
-    list_t *back = NULL;
+    list_t *elem = scene->objects->end;
     int ennemy_id = 0;
 
-    if (win == NULL || scene == NULL ||
-        create_button(scene, SIDE_MENU) != RET_OK ) {
+    if (create_button(scene, SIDE_MENU) != RET_OK ) {
         return RET_INVALID_INPUT;
     }
+    elem = elem->next->next;
+    add_button_to_scene(scene->components, elem);
+    event_add_node(create_event(click_escape_button, false, elem->var, NULL),
+        (node_params_t) {sfMouseLeft, sfKeyEscape, KEY});
     ennemy_id = scene->displayables->len - 1;
     scene->components = dico_t_add_data(scene->components, ENNEMY_ID,
         (void *) ennemy_id, NULL);
     elem = scene->objects->end;
-    back = scene->objects->end;
     if (create_button(scene, SHOP_MENU) != RET_OK || add_hiden_list(scene,
         &elem, SHOP_OBJ) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    set_shop_back_event(back, scene);
-    set_pause_back_event(scene, win);
+    set_pause(scene, win);
     return (scene->components != NULL) ? RET_OK : RET_ERR_MALLOC ;
 }
