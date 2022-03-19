@@ -8,7 +8,7 @@
 #include <stdarg.h>
 #include "my_puts.h"
 
-int print_o(va_list ap)
+int print_o(int fd, va_list ap)
 {
-    return (my_putunbr_base(va_arg(ap, unsigned int), "01234567"));
+    return (my_putunbr_base(fd, va_arg(ap, unsigned int), "01234567"));
 }

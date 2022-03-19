@@ -12,7 +12,7 @@
 ** @param c
 ** @return number of char wrote
 **/
-int my_putchar(char c)
+int my_putchar(int fd, char c)
 {
-    return (write(1, &c, 1));
+    return (write(fd, &c, 1));
 }

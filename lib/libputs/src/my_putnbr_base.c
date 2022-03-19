@@ -15,7 +15,7 @@
 ** @param base
 ** @return number of char wrote
 **/
-int my_putnbr_base(int nb, char const *base)
+int my_putnbr_base(int fd, int nb, char const *base)
 {
     int i = 0;
     char *result = NULL;
@@ -24,7 +24,7 @@ int my_putnbr_base(int nb, char const *base)
         return (0);
     }
     result = my_itoa_base(nb, base);
-    i = my_putstr(result);
+    i = my_putstr(fd, result);
     free(result);
     return (i);
 }

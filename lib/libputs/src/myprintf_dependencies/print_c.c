@@ -8,7 +8,7 @@
 #include <stdarg.h>
 #include "my_puts.h"
 
-int print_c(va_list ap)
+int print_c(int fd, va_list ap)
 {
-    return (my_putchar(va_arg(ap, int)));
+    return (my_putchar(fd, va_arg(ap, int)));
 }

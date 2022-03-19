@@ -20,8 +20,8 @@ void my_wordarray_showln(char *const *array)
         return;
     }
     for (int i = 0; array[i] != NULL; i++) {
-        my_putstr(array[i]);
-        my_putchar('\n');
+        my_putstr(1, array[i]);
+        my_putchar(1, '\n');
     }
 }
 
@@ -35,7 +35,7 @@ void my_wordarray_show(char *const *array)
         return;
     }
     for (int i = 0; array[i] != NULL; i++) {
-        my_putstr(array[i]);
+        my_putstr(1, array[i]);
     }
 }
 
