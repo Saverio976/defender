@@ -68,12 +68,13 @@ void place_tower(object_t *obj, scene_t *scene, window_t *win,
         return;
     }
     tower = parse_json_file(tower_path);
-    if (tower == NULL || tower->type != DICT ||
-        check_place(size, scene, obj) == false) {
+    if (tower == NULL) {
         return;
     }
-    create_tower(scene, tower->value.dict, obj->bigdata.sprite_bigdata.pos);
-    list_add_to_end(scene->to_remove, obj);
-    list_add_to_end(scene->to_remove, drag_tower);
+    if (tower->type == DICT && check_place(size, scene, obj) == true) {
+        create_tower(scene, tower->value.dict, obj->bigdata.sprite_bigdata.pos);
+        list_add_to_end(scene->to_remove, obj);
+        list_add_to_end(scene->to_remove, drag_tower);
+    }
     destroy_any(tower);
 }
