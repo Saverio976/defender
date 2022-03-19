@@ -36,7 +36,6 @@ void add_score_game(scene_t *scene, game_data_t *game, ennemy_t *enn,
         object_t *enn_obj)
 {
     object_t *object = NULL;
-    sfVector2f pos = {0};
     char buff[256] = {"+"};
     char *tmp = NULL;
 
@@ -48,12 +47,12 @@ void add_score_game(scene_t *scene, game_data_t *game, ennemy_t *enn,
     }
     my_strcat(buff, tmp);
     free(tmp);
-    pos = sfSprite_getPosition(enn_obj->drawable.sprite);
     object = create_object(update_score_text, NULL, scene);
     if (object == NULL) {
         return;
     }
-    object_set_text(object, "./assets/font/menlo.ttf", buff, pos);
+    object_set_text(object, "./assets/font/menlo.ttf", buff,
+            sfSprite_getPosition(enn_obj->drawable.sprite));
     list_add_to_end(scene->displayables, object);
     list_add_to_end(scene->updates, object);
 }
