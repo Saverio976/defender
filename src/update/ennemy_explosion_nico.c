@@ -20,7 +20,7 @@ static int check_nico_y(char **map, sfVector2i pos, int len)
             map[pos.y + 1][pos.x] == MAP_NICO_CHAR) {
         return (1);
     }
-    if (pos.y - 1 < len && pos.x < my_strlen(map[pos.y - 1]) &&
+    if (pos.y - 1 > 0 && pos.x < my_strlen(map[pos.y - 1]) &&
             map[pos.y - 1][pos.x] == MAP_NICO_CHAR) {
         return (1);
     }
@@ -33,7 +33,7 @@ static int check_nico_x(char **map, sfVector2i pos, int len)
             map[pos.y][pos.x + 1] == MAP_NICO_CHAR) {
         return (1);
     }
-    if (pos.y < len && pos.x - 1 < my_strlen(map[pos.y]) &&
+    if (pos.y < len && pos.x - 1 > 0 &&
             map[pos.y][pos.x - 1] == MAP_NICO_CHAR) {
         return (1);
     }
