@@ -45,9 +45,6 @@ typedef struct level_data_s level_data_t;
 
 window_t *init_defender(int ac, char **av);
 
-void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
-    __attribute__((unused)) set_event_t *evt);
-
 int create_map(scene_t *scene, char const *path, any_t *squares_path);
 
 int init_main_menu(window_t *win);

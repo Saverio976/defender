@@ -10,21 +10,6 @@
 #include "defender_game_data.h"
 #include "my_puts.h"
 
-void shop_back_update(object_t *obj, scene_t *scene, window_t *win,
-    __attribute__((unused)) set_event_t *evt)
-{
-    sfFloatRect rect;
-    sfVector2i vector;
-
-    rect = sfSprite_getGlobalBounds(obj->drawable.sprite);
-    vector = sfMouse_getPositionRenderWindow(win->win);
-    if ((sfFloatRect_contains(&rect, vector.x, vector.y) == sfFalse) &&
-        obj->is_visible == true) {
-        click_shop_button(obj, scene, win, evt);
-    }
-    win->click_prev_call = false;
-}
-
 void click_shop_button(__attribute__((unused)) object_t *obj, scene_t *scene,
     __attribute__((unused)) window_t *win,
     __attribute__((unused)) set_event_t *evt)

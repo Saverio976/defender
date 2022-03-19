@@ -64,7 +64,8 @@ void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
     any_t *tower = NULL;
     sfFloatRect rect = sfSprite_getGlobalBounds(obj->drawable.sprite);
 
-    if (game_data == NULL || tower_path == NULL || obj->is_visible == false) {
+    if (scene->pause == true || game_data == NULL || tower_path == NULL ||
+        obj->is_visible == false) {
         return;
     }
     tower = parse_json_file(tower_path);

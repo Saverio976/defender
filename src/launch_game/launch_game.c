@@ -7,29 +7,25 @@
 
 #include <SFML/System/Vector2.h>
 #include <stdlib.h>
-#include "list.h"
-#include "my_bgs.h"
-#include "my_bgs_components.h"
-#include "my_dico.h"
 #include "my_puts.h"
 #include "my_conversions.h"
 #include "defender_game_data.h"
 #include "defender_ennemy.h"
 #include "my_wordarray.h"
 #include "my_strings.h"
-#include "my_json.h"
-#include "defender.h"
 
 int init_click_checker(scene_t *scene, window_t *win)
 {
     object_t *obj = create_object(NULL, NULL, scene);
+    set_event_t *evt = NULL;
+    node_params_t node = {sfMouseLeft, sfKeyA, MOUSE};
 
     if (obj == NULL) {
         return RET_ERR_MALLOC;
     }
     object_set_custom(obj);
-    if (event_add_node(create_event(check_open_elem, false, obj, NULL),
-        (node_params_t) {sfMouseLeft, sfKeyA, MOUSE}) != RET_OK) {
+    evt = create_event(check_open_elem, false, obj, NULL);
+    if (event_add_node(evt, node) != RET_OK) {
         return RET_ERR_MALLOC;
     }
     scene->components = dico_t_add_data(scene->components, "window", win, NULL);
@@ -78,7 +74,7 @@ static int create_game(dico_t *level_data, __attribute__((unused))
         "load list", load_list, destroy_load_list);
     if (wave_launcher == NULL || create_map(scene, map_path->value.str,
         dico_t_get_any(level_data, "squares path")) != RET_OK ||
-        init_side_menu(win, scene) != RET_OK) {
+        init_side_menu(win, scene) != RET_OK || set_aud(scene, win) != RET_OK) {
         return RET_ERR_MALLOC;
     }
     create_level_data_scene(scene, level_data);

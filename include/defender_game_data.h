@@ -22,6 +22,8 @@ static const char TOWER_LIST[] = "tower list";
 static const char SHOP_OBJ[] = "shop obj";
 static const char ENNEMY_ID[] = "ennemy id";
 
+static const char AUDIO_PATH[] = "./assets/sound/audio.ogg";
+
 static const char MUSIC_OBJ[] = "music obj";
 static const char SOUND_OBJ[] = "sound obj";
 
@@ -64,6 +66,8 @@ typedef struct tower_data_s {
 
 object_t *place_support(any_t *size, scene_t *scene, sfVector2f pos);
 
+int set_aud(scene_t *scene, window_t *win);
+
 void click_buy_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
@@ -75,6 +79,10 @@ void check_open_elem(object_t *obj, scene_t *scene, window_t *win,
 
 void place_tower(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
+
+void click_escape_button(__attribute__((unused)) object_t *obj, scene_t *scene,
+    __attribute__((unused)) window_t *win,
+    __attribute__((unused)) set_event_t *evt);
 
 int init_game_data(window_t *win);
 
@@ -96,9 +104,6 @@ void click_shop_button(object_t *obj, scene_t *scene, window_t *win,
 int init_side_menu(window_t *win, scene_t *scene);
 
 void click_quit_level_button(object_t *obj, scene_t *scene, window_t *win,
-    __attribute__((unused)) set_event_t *evt);
-
-void pause_back_update(object_t *obj, scene_t *scene, window_t *win,
     __attribute__((unused)) set_event_t *evt);
 
 void click_sound_button(object_t *obj, scene_t *scene, window_t *win,
