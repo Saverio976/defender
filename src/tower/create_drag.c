@@ -11,8 +11,12 @@
 #include "defender_ennemy.h"
 #include "defender_game_data.h"
 
-static const char *support_path[3] = {"./assets/image/tower/support_2.png",
-    "./assets/image/tower/support_3.png", "./assets/image/tower/support_4.png"};
+static const char *support_path[3] = {
+    "./assets/image/tower/support_2.png",
+    "./assets/image/tower/support_3.png",
+    "./assets/image/tower/support_4.png"
+};
+
 static const int size_arr[3] = {2, 3, 4};
 
 float get_drag_pos(float pos, int size)

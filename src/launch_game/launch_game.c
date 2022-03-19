@@ -7,6 +7,8 @@
 
 #include <SFML/System/Vector2.h>
 #include <stdlib.h>
+#include "defender.h"
+#include "my_bgs.h"
 #include "my_puts.h"
 #include "my_conversions.h"
 #include "defender_game_data.h"
@@ -36,7 +38,6 @@ static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
 {
     level_data_t *lvl = NULL;
     any_t *any = NULL;
-    object_t *obj_draw_life = NULL;
 
     lvl = malloc(sizeof(level_data_t));
     if (lvl == NULL) {
@@ -48,12 +49,7 @@ static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
     }
     lvl->tower_nico_life = any->value.i;
     scene_add_components(scene, lvl, "LEVEL DATA", free);
-    obj_draw_life = create_object(update_draw_life, NULL, scene);
-    object_set_text(obj_draw_life, "assets/font/menlo.ttf", "life",
-            (sfVector2f) {1500, 10});
-    list_add_to_end(scene->updates, obj_draw_life);
-    list_add_to_end(scene->displayables, obj_draw_life);
-    return (RET_OK);
+    return (create_texts(scene));
 }
 
 static int create_game(dico_t *level_data, __attribute__((unused))

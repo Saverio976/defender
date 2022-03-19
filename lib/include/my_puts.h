@@ -16,21 +16,21 @@
 ** @param ...
 ** @return number of char wrote
 **/
-int my_printf(char const *format, ...);
+int my_printf(int fd, char const *format, ...);
 
 /**
 ** @brief write c on stdout
 ** @param c
 ** @return number of char wrote
 **/
-int my_putchar(char c);
+int my_putchar(int fd, char c);
 
 /**
 ** @brief write nb on stdout
 ** @param nb
 ** @return number of char wrote
 **/
-int my_putnbr(int nb);
+int my_putnbr(int fd, int nb);
 
 /**
 ** @brief write nb on base base in stdout if base is not null
@@ -38,14 +38,14 @@ int my_putnbr(int nb);
 ** @param base
 ** @return number of char wrote
 **/
-int my_putnbr_base(int nb, char const *base);
+int my_putnbr_base(int fd, int nb, char const *base);
 
 /**
 ** @brief write the \0 terminated str if str is not null
 ** @param str
 ** @return the number of char wrote
 **/
-int my_putstr(char const *str);
+int my_putstr(int fd, char const *str);
 
 /**
 ** @brief write the unsigned nb on stdout if base is not null
@@ -53,6 +53,6 @@ int my_putstr(char const *str);
 ** @param base
 ** @return the number of char wrote
 **/
-int my_putunbr_base(unsigned int nb, char const *base);
+int my_putunbr_base(int fd, unsigned int nb, char const *base);
 
 #endif

@@ -12,11 +12,20 @@
         {
             "text": "settings",
             "font path": "assets/font/menlo.ttf",
-            "text pos": [490.0, 935.0],
-            "pos": [500.0, 935.0],
+            "text pos": [250.0, 935.0],
+            "pos": [260.0, 935.0],
             "sprite path": "./assets/image/menu/main/circle.png",
             "text size": 1.2,
             "id": 1
+        },
+        {
+            "text": "how 2 play",
+            "font path": "assets/font/menlo.ttf",
+            "text pos": [750.0, 935.0],
+            "pos": [760.0, 935.0],
+            "sprite path": "./assets/image/menu/main/circle.png",
+            "text size": 1.2,
+            "id": 11
         },
         {
             "text": "quit",

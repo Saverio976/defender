@@ -38,7 +38,6 @@ int squares_handling(char **arr, list_ptr_t *solid_squares)
     }
     rect = find_higher_pixels_group(arr);
     while (rect.height != -1 && rect.height != 0) {
-        //my_wordarray_showln(arr);
         add_float_rect_to_list(&rect, solid_squares);
         rect = find_higher_pixels_group(arr);
     }

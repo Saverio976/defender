@@ -1,0 +1,22 @@
+{
+    "buttons": [
+        {
+            "text pos": [60.0, 120.0],
+            "id": 7,
+            "color": [52, 59, 70, 230],
+            "text color": [127, 143, 167, 255],
+            "font path": "assets/font/menlo.ttf",
+            "text": "back",
+            "char size": 90,
+            "sprite path": "./assets/image/menu/level/back_button.png",
+            "pos": [110.0, 200.0],
+            "size": 1.0
+        },
+        {
+            "id": 12,
+            "sprite path": "./assets/image/how2play/arrow-right.png",
+            "pos": [110.0, 1800.0],
+            "size": 0.5
+        }
+    ]
+}

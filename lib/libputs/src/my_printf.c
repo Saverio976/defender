@@ -24,7 +24,7 @@ static const specifier_t SPECIFIERS[] = {
     {'\0', NULL}
 };
 
-static int print_specifier(va_list ap, char const *c)
+static int print_specifier(int fd, va_list ap, char const *c)
 {
     int ret = 0;
 
@@ -33,7 +33,7 @@ static int print_specifier(va_list ap, char const *c)
     }
     for (int i = 0; ret == 0 && SPECIFIERS[i].fptr != NULL; i++) {
         if (SPECIFIERS[i].prefix == c[1]) {
-            ret += SPECIFIERS[i].fptr(ap);
+            ret += SPECIFIERS[i].fptr(fd, ap);
         }
     }
     return (ret);
@@ -45,7 +45,7 @@ static int print_specifier(va_list ap, char const *c)
 ** @param ...
 ** @return number of char wrote
 **/
-int my_printf(char const *format, ...)
+int my_printf(int fd, char const *format, ...)
 {
     va_list ap;
     int ret = 0;
@@ -53,12 +53,12 @@ int my_printf(char const *format, ...)
 
     va_start(ap, format);
     for (int i = 0; format != NULL && format[i] != '\0'; i++) {
-        tmp = print_specifier(ap, format + i);
+        tmp = print_specifier(fd, ap, format + i);
         if (tmp != 0) {
             ret += tmp;
             i++;
         } else {
-            ret += my_putchar(format[i]);
+            ret += my_putchar(fd, format[i]);
         }
     }
     va_end(ap);

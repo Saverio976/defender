@@ -12,9 +12,9 @@
 ** @param nb
 ** @return number of char wrote
 **/
-int my_putnbr(int nb)
+int my_putnbr(int fd, int nb)
 {
     char const base[] = "0123456789";
 
-    return (my_putnbr_base(nb, base));
+    return (my_putnbr_base(fd, nb, base));
 }

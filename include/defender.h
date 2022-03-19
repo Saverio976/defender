@@ -62,14 +62,22 @@ list_ptr_t *create_load_list(any_t *wave, any_t *ennemy_file);
 void off_hover_menu_but(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
+int create_texts(scene_t *scene);
+
 void click_play_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
 void click_settings_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
 
+void show_next_how2(object_t *obj, scene_t *scene, window_t *win,
+    set_event_t *evt);
+
 void click_quit_button(object_t *obj, scene_t *scene, window_t *win,
     set_event_t *evt);
+
+void click_show_how2(object_t *obj, scene_t *scene, window_t *win,
+        set_event_t *evt);
 
 int init_level_menu(window_t *win);
 
@@ -78,9 +86,14 @@ void click_level_button(object_t *obj, scene_t *scene, window_t *win,
 
 void destroy_load_list(void *data);
 
+void update_score_total_text(object_t *obj, scene_t *scene, window_t *win,
+        float dtime);
+
 void update_wave_launcher(object_t *obj, scene_t *scene,
     window_t *win, float dtime);
 
 void check_set_color(object_t *object, dico_t *dico);
+
+int init_how2play(window_t *win);
 
 #endif

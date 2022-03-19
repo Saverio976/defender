@@ -63,6 +63,7 @@ SRC_ENNEMY		:=	create_ennemy.c		\
 SRC_ENNEMY		:=	$(addprefix $(SRCENNEMY),$(SRC_ENNEMY))
 
 SRC_INIT		:= 	init_defender.c		\
+					how_to_play.c		\
 					init_side_menu.c	\
 					init_music.c		\
 					init_setting_menu.c	\
@@ -73,23 +74,25 @@ SRC_INIT		:=	$(addprefix $(SRCINITDIR),$(SRC_INIT))
 SRC_MAP			:= 	create_map.c
 SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
-SRC_UPDATE		:=	button_menu.c			\
-					button_resume.c			\
-					update_setting.c		\
-					quit_button.c			\
-					ennemy.c				\
-					check_open_elem.c		\
-					shop_error_message.c	\
-					buy_button.c			\
-					pause_button.c			\
-					update_wave_launcher.c	\
-					ennemy_explosion_nico.c	\
-					button_shop.c			\
-					button_level.c			\
+SRC_UPDATE		:=	button_menu.c				\
+					button_resume.c				\
+					update_score_total_text.c	\
+					update_setting.c			\
+					quit_button.c				\
+					ennemy.c					\
+					check_open_elem.c			\
+					shop_error_message.c		\
+					buy_button.c				\
+					pause_button.c				\
+					update_wave_launcher.c		\
+					ennemy_explosion_nico.c		\
+					button_shop.c				\
+					button_level.c				\
 					update_draw_life.c
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 
 SRC_LAUNC		:=	launch_game.c		\
+					create_texts.c		\
 					destroy_load_list.c	\
 					load_gestion.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
