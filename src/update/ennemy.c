@@ -49,7 +49,8 @@ static sfVector2f check_move_x(char **map, sfVector2i pos, ennemy_t *enn,
     return ((sfVector2f) {-1, -1});
 }
 
-static sfVector2f get_right_pos(char **map, sfVector2i pos, ennemy_t *enn)
+static void get_right_pos(char **map, sfVector2i pos, ennemy_t *enn,
+        object_t *obj)
 {
     sfVector2f new = {pos.x, pos.y};
     sfVector2f move = {0};
@@ -57,20 +58,20 @@ static sfVector2f get_right_pos(char **map, sfVector2i pos, ennemy_t *enn)
 
     len = my_wordarray_len(map);
     move = check_move_y(map, pos, enn, len);
-    if (move.x != -1 && move.y != -1) {
-        return (move);
+    if (move.x == -1 && move.y == -1) {
+        move = check_move_x(map, pos, enn, len);
+        if (move.x == -1 && move.y == -1) {
+            move = new;
+        }
     }
-    move = check_move_x(map, pos, enn, len);
-    if (move.x != -1 && move.y != -1) {
-        return (move);
-    }
-    return (new);
+    obj->bigdata.sprite_bigdata.pos.x = move.x * MAP_SIZE_SQUARE_X;
+    obj->bigdata.sprite_bigdata.pos.y = move.y * MAP_SIZE_SQUARE_Y;
+    enn->time_last -= enn->speed;
 }
 
 static void move_ennemy(object_t *obj, ennemy_t *enn, char **map,
     scene_t *scene)
 {
-    sfVector2f pos_f = {0};
     sfVector2i pos_i = {0};
     int width = obj->bigdata.sprite_bigdata.rect.width;
     int slow = check_poison(obj, scene, enn);
@@ -83,14 +84,14 @@ static void move_ennemy(object_t *obj, ennemy_t *enn, char **map,
     if (enn->time_last < (enn->speed / 60.0)) {
         return;
     }
+    if (slow != 0) {
+        enn->speed += slow;
+    }
     pos_i.x = ((int) obj->bigdata.sprite_bigdata.pos.x) / MAP_SIZE_SQUARE_X;
     pos_i.y = ((int) obj->bigdata.sprite_bigdata.pos.y) / MAP_SIZE_SQUARE_Y;
-    pos_f = get_right_pos(map, pos_i, enn);
-    obj->bigdata.sprite_bigdata.pos.x = pos_f.x * MAP_SIZE_SQUARE_X;
-    obj->bigdata.sprite_bigdata.pos.y = pos_f.y * MAP_SIZE_SQUARE_Y;
+    get_right_pos(map, pos_i, enn, obj);
     enn->last_pos.x = pos_i.x;
     enn->last_pos.y = pos_i.y;
-    enn->time_last -= enn->speed;
 }
 
 void update_ennemy(object_t *obj, scene_t *scene,
