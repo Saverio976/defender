@@ -11,7 +11,7 @@
 #include "defender_ennemy.h"
 #include "my_bgs.h"
 
-static bool check_col(object_t *ennemy, sfVector2f circle, float rad)
+bool check_circle_col(object_t *ennemy, sfVector2f circle, float rad)
 {
     sfFloatRect rect = sfSprite_getGlobalBounds(ennemy->drawable.sprite);
     sfVector2f distance = {ABSOL(circle.x - rect.left),
@@ -63,7 +63,7 @@ static object_t *check_scope_col(sfVector2f circle, list_ptr_t *ennemy_list,
     elem = ennemy_list->start;
     for (int i = 0; i < ennemy_list->len; i++, elem = elem->next) {
         if (check_type(elem->var, tower_type) == true &&
-            check_col(elem->var, circle, rad) == true) {
+            check_circle_col(elem->var, circle, rad) == true) {
             return elem->var;
         }
     }

@@ -67,11 +67,13 @@ static sfVector2f get_right_pos(char **map, sfVector2i pos, ennemy_t *enn)
     return (new);
 }
 
-static void move_ennemy(object_t *obj, ennemy_t *enn, char **map)
+static void move_ennemy(object_t *obj, ennemy_t *enn, char **map,
+    scene_t *scene)
 {
     sfVector2f pos_f = {0};
     sfVector2i pos_i = {0};
     int width = obj->bigdata.sprite_bigdata.rect.width;
+    int slow = check_poison(obj, scene, enn);
 
     obj->bigdata.sprite_bigdata.rect.left += width;
     if (obj->bigdata.sprite_bigdata.rect.left + width >=
@@ -108,7 +110,7 @@ void update_ennemy(object_t *obj, scene_t *scene,
     if (obj->is_visible == true && is_obj_touch_nico(obj, map) == 1) {
         update_obj_explosion(obj, scene);
     } else if (obj->is_visible && ennemy_me->time_last_update > 0.1) {
-        move_ennemy(obj, ennemy_me, map);
+        move_ennemy(obj, ennemy_me, map, scene);
         ennemy_me->time_last_update -= 0.1;
     }
     check_ennemy_alive(obj, dtime, win, scene);

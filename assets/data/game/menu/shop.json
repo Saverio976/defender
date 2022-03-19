@@ -93,6 +93,27 @@
             "text color": [127, 143, 167, 255],
             "text size": 0.65,
             "text": "Raffle"
+        },
+        {
+            "pos": [540.0, 1625.0],
+            "sprite path": "./assets/image/menu/side/shop/button.png",
+            "tower path": "./assets/data/game/tower/poison.json",
+            "text pos": [623.0, 1625.0],
+            "font path": "assets/font/menlo.ttf",
+            "color": [52, 59, 70, 240],
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "id": 11,
+            "text": "cost: 25"
+        },
+        {
+            "pos": [540.0, 1625.0],
+            "sprite path": "./assets/image/tower/poison.png",
+            "text pos": [605.0, 1625.0],
+            "font path": "assets/font/menlo.ttf",
+            "text color": [127, 143, 167, 255],
+            "text size": 0.65,
+            "text": "Le Covid"
         }
     ]
 }
