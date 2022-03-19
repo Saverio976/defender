@@ -50,7 +50,7 @@ static int check_left_click(object_t *object, window_t *win)
     on_left_click_t *left = NULL;
 
     left = dico_t_get_value(object->components, ON_LEFT_KEY);
-    if (check_hover(object, win) == false) {
+    if (left == NULL || check_hover(object, win) == false) {
         return false;
     }
     if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
