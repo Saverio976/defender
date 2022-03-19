@@ -9,12 +9,12 @@
 #include <stdarg.h>
 #include "my_puts.h"
 
-int print_x_low(va_list ap)
+int print_x_low(int fd, va_list ap)
 {
-    return (my_putunbr_base(va_arg(ap, unsigned int), "0123456789abcdef"));
+    return (my_putunbr_base(fd, va_arg(ap, unsigned int), "0123456789abcdef"));
 }
 
-int print_x_up(va_list ap)
+int print_x_up(int fd, va_list ap)
 {
-    return (my_putunbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF"));
+    return (my_putunbr_base(fd, va_arg(ap, unsigned int), "0123456789ABCDEF"));
 }

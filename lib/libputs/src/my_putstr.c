@@ -13,12 +13,12 @@
 ** @param str
 ** @return the number of char wrote
 **/
-int my_putstr(char const *str)
+int my_putstr(int fd, char const *str)
 {
     int size = my_strlen(str);
 
     if (size == -1) {
         return (0);
     }
-    return (write(1, str, size));
+    return (write(fd, str, size));
 }

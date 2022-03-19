@@ -34,7 +34,7 @@ static char *dup_and_cat(char *dest, char c, int *cap)
 ** @param base
 ** @return the number of char wrote
 **/
-int my_putunbr_base(unsigned int nb, char const *base)
+int my_putunbr_base(int fd, unsigned int nb, char const *base)
 {
     int i = 0;
     int max_cap = 12;
@@ -52,7 +52,7 @@ int my_putunbr_base(unsigned int nb, char const *base)
         nb /= my_strlen(base);
     }
     result = my_revstr(result);
-    i = my_putstr(result);
+    i = my_putstr(fd, result);
     free(result);
     return (i);
 }

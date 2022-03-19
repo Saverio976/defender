@@ -12,35 +12,35 @@
 
 struct specifier_struct {
     char prefix;
-    int (*fptr)(va_list);
+    int (*fptr)(int fd, va_list);
 };
 typedef struct specifier_struct specifier_t;
 
 // print char
-int print_c(va_list);
+int print_c(int fd, va_list);
 
 // print int
-int print_d(va_list);
+int print_d(int fd, va_list);
 
 // print uint
-int print_u(va_list);
+int print_u(int fd, va_list);
 
 // print uint in octal
-int print_o(va_list);
+int print_o(int fd, va_list);
 
 // print uint in binary
-int print_b(va_list);
+int print_b(int fd, va_list);
 
 // print uint in hexa low
-int print_x_low(va_list);
+int print_x_low(int fd, va_list);
 
 // print uint in hexa up
-int print_x_up(va_list);
+int print_x_up(int fd, va_list);
 
 // print str
-int print_s(va_list);
+int print_s(int fd, va_list);
 
 // print %
-int print_mod(va_list);
+int print_mod(int fd, va_list);
 
 #endif
