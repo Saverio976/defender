@@ -10,6 +10,7 @@
 #include "libbgs_private.h"
 #include "my_bgs_components.h"
 
+//sa rentre pas la ca marche pas
 static list_ptr_t *check_pixels_in_rect(list_ptr_t *list,
     sfFloatRect object_bounce)
 {
@@ -22,7 +23,6 @@ static list_ptr_t *check_pixels_in_rect(list_ptr_t *list,
     for (int i = 0; i < list->len; i++, elem = elem->next) {
         if (sfFloatRect_intersects(&object_bounce, elem->var, NULL) == sfTrue) {
             list_add_to_end(ret, elem->var);
-            //sa rentre pas la ca marche pas
         }
     }
     return ret;
