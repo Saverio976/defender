@@ -92,6 +92,8 @@ SRC_UPDATE		:=	button_menu.c				\
 SRC_UPDATE		:=	$(addprefix $(SRCUPDATEDIR),$(SRC_UPDATE))
 
 SRC_LAUNC		:=	launch_game.c		\
+					end_game.c			\
+					destroy_elem.c		\
 					create_texts.c		\
 					destroy_load_list.c	\
 					load_gestion.c

@@ -17,5 +17,5 @@
     "life": 150,
     "wave": [["minion", 5, 1], ["fly", 2, 0], ["wave"], ["tank", 15, 0]],
     "cadence": 4,
-    "tower nico life": 10000
+    "tower nico life": 1
 }

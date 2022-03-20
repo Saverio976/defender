@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include "defender_game_data.h"
 
-
 void update_place_error_message(object_t *obj, scene_t *scene,
     __attribute__((unused)) window_t *win,
     __attribute__((unused)) float dtime)

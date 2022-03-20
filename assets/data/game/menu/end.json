@@ -1,0 +1,13 @@
+{
+    "font path": "assets/font/menlo.ttf",
+    "color": [127, 143, 167, 230],
+    "text pos": [910.0, 228.0],
+    "size": 40,
+    "back pos": [910.0, 400.0],
+    "back path": "./assets/image/menu/side/pause/back.png",
+    "back color": [52, 59, 70, 230],
+    "button path": "./assets/image/menu/side/pause/button.png",
+    "button pos": [910.0, 500.0],
+    "button text": "quit level",
+    "button text pos": [910.0, 495.0]
+}

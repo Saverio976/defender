@@ -29,9 +29,10 @@ void click_pause_button(__attribute__((unused)) object_t *obj, scene_t *scene,
     __attribute__((unused)) set_event_t *evt)
 {
     list_ptr_t *pause_obj = dico_t_get_value(scene->components, PAUSE_OBJ);
+    void *end_game = dico_t_get_value(scene->components, END_GAME);
     list_t *elem = NULL;
 
-    if (pause_obj == NULL) {
+    if (pause_obj == NULL || end_game != NULL) {
         return;
     }
     elem = pause_obj->start;

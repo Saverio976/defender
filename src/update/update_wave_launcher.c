@@ -6,13 +6,12 @@
 */
 
 #include <stdlib.h>
-#include "list.h"
-#include "my_bgs.h"
-#include "defender.h"
+#include "defender_game_data.h"
 #include "defender_ennemy.h"
 
-static void free_ennemy_load(load_t *enn, list_ptr_t *list_enemy)
+static void free_ennemy_load(load_t *enn, list_ptr_t *list_enemy, float *time)
 {
+    *time -= enn->time;
     free(enn->ennemy_file);
     free(enn);
     rm_fst_elem(list_enemy);
@@ -31,14 +30,14 @@ void update_wave_launcher(object_t *obj, scene_t *scene,
     list_enemy = dico_t_get_value(obj->components, OBJ_COMP_MANAGEWAVE);
     if (list_enemy == NULL || list_enemy->len <= 0) {
         return;
-    }
-    if (list_enemy->start != NULL) {
+    } else if (list_enemy->start != NULL) {
         enn = list_enemy->start->var;
     }
     time += dtime;
     if (list_enemy->start != NULL && time > enn->time) {
-        time -= enn->time;
         create_ennemy(scene, enn->ennemy_file, enn->spawn);
-        free_ennemy_load(enn, list_enemy);
+        free_ennemy_load(enn, list_enemy, &time);
+    } else if (list_enemy->start == NULL) {
+        set_end_game(scene, win, true);
     }
 }

@@ -22,6 +22,8 @@ static const char TOWER_LIST[] = "tower list";
 static const char SHOP_OBJ[] = "shop obj";
 static const char ENNEMY_ID[] = "ennemy id";
 
+static const char END_GAME[] = "end game";
+
 static const char AUDIO_PATH[] = "./assets/sound/audio.ogg";
 
 static const char MUSIC_OBJ[] = "music obj";
@@ -85,7 +87,11 @@ int init_game_data(window_t *win);
 
 bool check_drag_pos(window_t *win, int size);
 
+int destroy_elem(float *pos, int *clr, float *scd_pos, int *scdclr);
+
 int init_setting_menu(window_t *win);
+
+void end_game(scene_t *scene, bool win);
 
 void shot_ennemy(object_t *ennemy_obj, object_t *tower,
         tower_data_t *tower_data, scene_t *scene);
@@ -129,6 +135,8 @@ int set_scope(dico_t *components[2], object_t *support);
 
 void update_shop_error_message(object_t *obj, scene_t *scene,
         __attribute__((unused)) window_t *win, float dtime);
+
+void set_end_game(scene_t *scene, window_t *win, bool state);
 
 void create_drag(scene_t *scene, window_t *win, dico_t *tower,
     char *tower_path);

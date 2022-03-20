@@ -15,9 +15,10 @@ void click_shop_button(__attribute__((unused)) object_t *obj, scene_t *scene,
     __attribute__((unused)) set_event_t *evt)
 {
     list_ptr_t *shop_obj = dico_t_get_value(scene->components, SHOP_OBJ);
+    void *end_game = dico_t_get_value(scene->components, END_GAME);
     list_t *elem = NULL;
 
-    if (shop_obj == NULL) {
+    if (shop_obj == NULL || end_game != NULL) {
         return;
     }
     elem = shop_obj->start;
