@@ -1,5 +1,5 @@
 {
-    "map path": "./assets/data/game/level/map/map_3.txt",
+    "map path": "./assets/data/game/level/map/map_6.txt",
     "squares path": {
         ".": "./assets/image/map/square/dirt.png",
         "N": "./assets/image/map/castle_with_nico.png",
@@ -14,8 +14,9 @@
         "tank": "./assets/data/game/ennemy/tank.json",
         "kamikaze": "./assets/data/game/ennemy/kamikaze.json"
     },
-    "com": 18,
-    "wave": [["minion", 3, 0], ["fly", 1, 1], ["fly", 1, 1], ["minion", 3, 1],
-        ["wave"], ["fly", 2, 0], ["minion", 6, 1]],
+    "com": 28,
+    "wave": [["minion", 3, 0], ["fly", 3, 0], ["minion", 7, 0], ["tank", 1, 0],
+         ["fly", 5, 0], ["minion", 15, 0], ["tank", 2, 0],
+        ["fly", 5, 0], ["tank", 1, 0], ["tank", 1, 0]],
     "tower nico life": 20
 }

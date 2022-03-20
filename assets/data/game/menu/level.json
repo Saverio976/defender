@@ -55,7 +55,7 @@
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
-            "level path": "./assets/data/game/level/level_3.json"
+            "level path": "./assets/data/game/level/level_4.json"
         },
         {
             "text": "5",
@@ -66,7 +66,7 @@
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
-            "level path": "./assets/data/game/level/level_3.json"
+            "level path": "./assets/data/game/level/level_5.json"
         },
         {
             "font path": "assets/font/menlo.ttf",
@@ -77,7 +77,7 @@
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
             "text color": [52, 59, 70, 255],
-            "level path": "./assets/data/game/level/level_1.json"
+            "level path": "./assets/data/game/level/level_6.json"
         },
         {
             "text": "7",
@@ -88,7 +88,7 @@
             "size": 1.0,
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
-            "level path": "./assets/data/game/level/level_2.json"
+            "level path": "./assets/data/game/level/level_7.json"
         },
         {
             "text": "8",
@@ -99,7 +99,7 @@
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
-            "level path": "./assets/data/game/level/level_3.json"
+            "level path": "./assets/data/game/level/level_8.json"
         },
         {
             "text": "9",
@@ -110,7 +110,7 @@
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
-            "level path": "./assets/data/game/level/level_3.json"
+            "level path": "./assets/data/game/level/level_9.json"
         },
         {
             "text": "10",
@@ -121,7 +121,7 @@
             "char size": 200,
             "sprite path": "./assets/image/menu/level/octo.png",
             "size": 1.0,
-            "level path": "./assets/data/game/level/level_3.json"
+            "level path": "./assets/data/game/level/level_10.json"
         }
     ]
 }
