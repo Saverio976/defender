@@ -41,7 +41,7 @@ static sfVector2f check_move_x(char **map, sfVector2i pos, ennemy_t *enn,
             my_strcontainc(tab, map[pos.y][pos.x + 1])) {
         return ((sfVector2f) {pos.x + 1, pos.y});
     }
-    if (pos.y < len && pos.x - 1 < 0 &&
+    if (pos.y < len && pos.x - 1 > 0 &&
             pos.x - 1 != enn->last_pos.x &&
             my_strcontainc(tab, map[pos.y][pos.x - 1])) {
         return ((sfVector2f) {pos.x - 1, pos.y});
