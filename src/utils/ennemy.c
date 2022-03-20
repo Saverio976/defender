@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Text.h>
 #include <SFML/System/Vector2.h>
 #include <stdlib.h>
 #include "defender_game_data.h"
@@ -27,8 +28,9 @@ void update_score_text(object_t *obj, scene_t *scene,
         list_add_to_start(scene->to_remove, obj);
         time_free -= 5;
     } else {
-        sfText_scale(obj->drawable.text, (sfVector2f) {1.01, 1.01});
-        sfText_move(obj->drawable.text, (sfVector2f) {0, -0.5});
+        sfText_setFillColor(obj->drawable.text, sfColor_fromRGBA(190, 43,
+                    53, 180));
+        obj->bigdata.text_bigdata.pos.y -= 0.05;
     }
 }
 
