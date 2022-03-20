@@ -59,6 +59,7 @@ static int create_texts_com(scene_t *scene)
     }
     list_add_to_end(scene->updates, obj);
     list_add_to_end(scene->displayables, obj);
+    return (RET_OK);
 }
 
 int create_texts(scene_t *scene)
