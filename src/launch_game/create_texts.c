@@ -5,11 +5,14 @@
 ** create all texts drawable in game
 */
 
+#include <SFML/Audio/SoundStatus.h>
 #include "list.h"
 #include "my_bgs.h"
 #include "defender.h"
 #include "defender_ennemy.h"
 #include "defender_game_data.h"
+#include "my_bgs_components.h"
+#include "my_dico.h"
 
 static int create_texts_life(scene_t *scene)
 {
@@ -38,6 +41,9 @@ int create_texts_score(scene_t *scene)
     }
     if (object_set_text(obj, "./assets/font/menlo.ttf", "",
                 (sfVector2f) {10, 10}) != BGS_OK) {
+        return (RET_ERR_MALLOC);
+    }
+    if (init_events_scoe(obj) != RET_OK) {
         return (RET_ERR_MALLOC);
     }
     list_add_to_end(scene->updates, obj);

@@ -104,7 +104,9 @@ SRC_LAUNC		:=	launch_game.c		\
 					load_gestion.c
 SRC_LAUNC		:=	$(addprefix $(SRCLAUNCHDIR),$(SRC_LAUNC))
 
-SRC_UTILS		:=	ennemy.c
+SRC_UTILS		:=	ennemy.c				\
+					init_events_score.c		\
+					print_damage.c
 SRC_UTILS		:=	$(addprefix $(SRCUTILS),$(SRC_UTILS))
 
 SRC			:=	main.c													\
