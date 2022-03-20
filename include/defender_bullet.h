@@ -30,4 +30,6 @@ double get_coef(sfFloatRect intersection, sfSprite *tower);
 
 int check_if_need_remove(bullet_t *bullet, object_t *obj);
 
+void create_damage_enn_info(scene_t *scene, sfVector2f pos, int nb_dmg);
+
 #endif

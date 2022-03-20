@@ -28,9 +28,10 @@ void update_score_text(object_t *obj, scene_t *scene,
         list_add_to_start(scene->to_remove, obj);
         time_free -= 5;
     } else {
-        sfText_setFillColor(obj->drawable.text, sfColor_fromRGBA(190, 43,
-                    53, 180));
-        obj->bigdata.text_bigdata.pos.y -= 0.05;
+        sfText_setFillColor(obj->drawable.text, sfRed);
+        sfText_setCharacterSize(obj->drawable.text, 28);
+        obj->bigdata.text_bigdata.pos.y -= 0.1;
+        sfText_scale(obj->drawable.text, (sfVector2f) {1.005, 1.005});
     }
 }
 

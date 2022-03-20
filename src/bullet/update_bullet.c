@@ -13,7 +13,8 @@
 #include "defender_bullet.h"
 #include "my_dico.h"
 
-static int do_dmg_bully(bullet_t *bullet, list_ptr_t *list_bully)
+static int do_dmg_bully(bullet_t *bullet, list_ptr_t *list_bully,
+        scene_t *scene)
 {
     list_t *elem = NULL;
     object_t *obj = NULL;
@@ -23,13 +24,11 @@ static int do_dmg_bully(bullet_t *bullet, list_ptr_t *list_bully)
     for (int i = 0; i < list_bully->len; i++, elem = elem->next) {
         obj = elem->var;
         ennemy = dico_t_get_value(obj->components, OBJ_COMP_ENNSTRUCT);
-        if ((ennemy == NULL || ennemy->is_fly != bullet->is_fly) &&
-                bullet->is_fly != 2) {
+        if (((ennemy == NULL || ennemy->is_fly != bullet->is_fly) &&
+                bullet->is_fly != 2) || ennemy->life <= 0) {
             continue;
         }
-        if (ennemy->life <= 0) {
-            continue;
-        }
+        create_damage_enn_info(scene, bullet->direction, bullet->dmg);
         ennemy->life -= bullet->dmg;
         break;
     }
@@ -116,7 +115,7 @@ void update_bullet(object_t *obj, scene_t *scene,
     if (enn_to_bully == NULL) {
         return;
     }
-    do_dmg_bully(bullet, enn_to_bully);
+    do_dmg_bully(bullet, enn_to_bully, scene);
     free_list(enn_to_bully);
     list_add_to_start(scene->to_remove, obj);
 }
