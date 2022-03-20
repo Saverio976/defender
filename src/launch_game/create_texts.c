@@ -27,7 +27,7 @@ static int create_texts_life(scene_t *scene)
     return (RET_OK);
 }
 
-static int create_texts_score(scene_t *scene)
+int create_texts_score(scene_t *scene)
 {
     object_t *obj = NULL;
 
