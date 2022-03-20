@@ -22,9 +22,6 @@ void check_set_end_game(scene_t *scene, window_t *win)
     list_ptr_t *ennemy_list = dico_t_get_value(scene->components,
         LIST_ENNEMY);
 
-    if (ennemy_list != NULL) {
-        printf("ennemy list len: %d\n", ennemy_list->len);
-    }
     if (ennemy_list != NULL && ennemy_list->len == 0) {
         set_end_game(scene, win, true);
     }
