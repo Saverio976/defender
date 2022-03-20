@@ -15,7 +15,7 @@ void display_sprite(object_t *object,
         object->is_visible == false) {
         return;
     }
-    if (object->bigdata.sprite_bigdata.pos.x > -1) {
+    if (object->bigdata.sprite_bigdata.pos.x != -1) {
         sfSprite_setPosition(object->drawable.sprite,
             object->bigdata.sprite_bigdata.pos);
     }
