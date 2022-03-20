@@ -16,6 +16,6 @@
         "kamikaze": "./assets/data/game/ennemy/kamikaze.json"
     },
     "com": 4,
-    "wave": [["minion", 5, 0]],
+    "wave": [["minion", 4, 0]],
     "tower nico life": 10
 }

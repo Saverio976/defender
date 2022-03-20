@@ -6,7 +6,7 @@
         "o": "./assets/image/map/square/bush.png",
         "#": "./assets/image/map/square/path.png",
         "S": "./assets/image/map/square/path.png",
-        "A": "./assets/image/map/square/three.png"
+        "T": "./assets/image/map/square/three.png"
     },
     "ennemy file": {
         "minion": "./assets/data/game/ennemy/minion.json",
@@ -14,8 +14,7 @@
         "tank": "./assets/data/game/ennemy/tank.json",
         "kamikaze": "./assets/data/game/ennemy/kamikaze.json"
     },
-    "life": 150,
-    "wave": [["minion", 10, 0], ["tank", 10, 0]],
-    "cadence": 4,
-    "tower nico life": 1000
+    "com": 8,
+    "wave": [["minion", 10, 0], ["tank", 5, 0]],
+    "tower nico life": 20
 }
