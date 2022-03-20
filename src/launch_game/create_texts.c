@@ -5,6 +5,7 @@
 ** create all texts drawable in game
 */
 
+#include "list.h"
 #include "my_bgs.h"
 #include "defender.h"
 #include "defender_ennemy.h"
@@ -44,6 +45,23 @@ int create_texts_score(scene_t *scene)
     return (RET_OK);
 }
 
+static int create_texts_com(scene_t *scene)
+{
+    object_t *obj = NULL;
+
+    obj = create_object(update_com_total_text, NULL, scene);
+    if (obj == NULL) {
+        return (RET_ERR_MALLOC);
+    }
+    if (object_set_text(obj, "./assets/font/menlo.ttf", "",
+                (sfVector2f) {960, 10}) != BGS_OK) {
+        return (RET_ERR_MALLOC);
+    }
+    list_add_to_end(scene->updates, obj);
+    list_add_to_end(scene->displayables, obj);
+    return (RET_OK);
+}
+
 int create_texts(scene_t *scene)
 {
     int ret_code = 0;
@@ -53,6 +71,10 @@ int create_texts(scene_t *scene)
         return (RET_ERR_MALLOC);
     }
     ret_code = create_texts_score(scene);
+    if (ret_code != RET_OK) {
+        return (RET_ERR_MALLOC);
+    }
+    ret_code = create_texts_com(scene);
     if (ret_code != RET_OK) {
         return (RET_ERR_MALLOC);
     }

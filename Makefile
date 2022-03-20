@@ -66,6 +66,7 @@ SRC_ENNEMY		:=	create_ennemy.c		\
 SRC_ENNEMY		:=	$(addprefix $(SRCENNEMY),$(SRC_ENNEMY))
 
 SRC_INIT		:= 	init_defender.c		\
+					background_menu.c	\
 					how_to_play.c		\
 					init_side_menu.c	\
 					init_music.c		\
@@ -79,6 +80,7 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
 SRC_UPDATE		:=	button_menu.c				\
 					button_resume.c				\
+					update_com_total_text.c		\
 					update_score_total_text.c	\
 					update_setting.c			\
 					quit_button.c				\

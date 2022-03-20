@@ -42,7 +42,8 @@ static list_ptr_t *get_do_dmg_enn(object_t *obj, list_ptr_t *list_enn)
     to_attack = list_create();
     buf[0] = sfSprite_getGlobalBounds(obj->drawable.sprite);
     elem = list_enn->start;
-    for (int i = 0; i < list_enn->len; i++, elem = elem->next) {
+    for (int i = 0; i < list_enn->len && to_attack->len == 0;
+            i++, elem = elem->next) {
         target = elem->var;
         buf[1] = sfSprite_getGlobalBounds(target->drawable.sprite);
         if (sfFloatRect_intersects(&(buf[1]), &(buf[0]), NULL)) {
