@@ -44,6 +44,9 @@ int init_main_menu(window_t *win)
     if (scene == NULL) {
         return RET_ERR_MALLOC;
     }
-    create_texts_score(scene);
+    if (init_background_menu(scene) != RET_OK ||
+            create_texts_score(scene) != RET_OK) {
+        return (RET_ERR_MALLOC);
+    }
     return create_button(scene, MAIN_MENU);
 }

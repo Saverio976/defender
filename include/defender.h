@@ -99,4 +99,6 @@ int init_how2play(window_t *win);
 
 int create_texts_score(scene_t *scene);
 
+int init_background_menu(scene_t *scene);
+
 #endif
