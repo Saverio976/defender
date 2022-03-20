@@ -27,7 +27,7 @@ static int do_dmg_bully(bullet_t *bullet, list_ptr_t *list_bully)
                 bullet->is_fly != 2) {
             continue;
         }
-        if (ennemy->life < 0) {
+        if (ennemy->life <= 0) {
             continue;
         }
         ennemy->life -= bullet->dmg;
