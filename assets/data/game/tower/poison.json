@@ -1,0 +1,8 @@
+{
+    "cost": 25,
+    "scope": 5,
+    "fly": 0,
+    "build couldown": 15,
+    "time": 15,
+    "path": "./assets/image/tower/poison.png"
+}

@@ -47,10 +47,12 @@ SRC_TOWER		:=	place_tower.c			\
 	 				create_tower.c			\
 					set_scope.c				\
 					create_drag.c			\
+					poison_gestion.c		\
 					create_txt_place_err.c	\
 					scope_event.c			\
 					create_support.c		\
 					shot_ennemy.c			\
+					buy_poison.c			\
 					update_tower.c
 SRC_TOWER		:=	$(addprefix $(SRCTOWER),$(SRC_TOWER))
 
@@ -59,6 +61,7 @@ SRC_BUTTON		:=	create_button.c		\
 SRC_BUTTON		:=	$(addprefix $(SRCBUTTON),$(SRC_BUTTON))
 
 SRC_ENNEMY		:=	create_ennemy.c		\
+	 				check_poison.c		\
 					ennemy_struct.c
 SRC_ENNEMY		:=	$(addprefix $(SRCENNEMY),$(SRC_ENNEMY))
 

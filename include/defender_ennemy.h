@@ -52,6 +52,8 @@ void update_obj_explosion(object_t *obj, scene_t *scene);
 void update_draw_life(object_t *obj, scene_t *scene,
         window_t *win, float dtime);
 
+int check_poison(object_t *ennemy, scene_t *scene, ennemy_t *enn);
+
 void check_ennemy_alive(object_t *obj, float dtime, window_t *win,
         scene_t *scene);
 
