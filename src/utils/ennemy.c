@@ -81,5 +81,6 @@ void check_ennemy_alive(object_t *obj, float dtime, window_t *win,
         check_list(ennemy_list, obj);
         list_add_to_end(scene->to_remove, obj);
         add_score_game(scene, game, enn, obj);
+
     }
 }

@@ -76,8 +76,8 @@ void update_obj_explosion(object_t *obj, scene_t *scene)
     if (enn == NULL) {
         return;
     }
-    if (enn->time_last > 0.2) {
-        enn->life = -1;
-        remove_life_to_tower(enn, scene);
+    if (enn->life < 0) {
+        enn->life *= -1;
     }
+    remove_life_to_tower(enn, scene);
 }
