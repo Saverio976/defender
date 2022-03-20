@@ -11,6 +11,7 @@
     #include "my_bgs.h"
     #include "my_json.h"
     #include "my_bgs_components.h"
+#include <SFML/Audio/Types.h>
 
     #define RET_OK 0
     #define RET_INVALID_INPUT 1
@@ -43,6 +44,12 @@ struct level_data_s {
     int tower_nico_life;
 };
 typedef struct level_data_s level_data_t;
+
+struct sound_buffer_s {
+    sfSound *sound;
+    sfSoundBuffer *buffer;
+};
+typedef struct sound_buffer_s sound_buffer_t;
 
 window_t *init_defender(int ac, char **av);
 
@@ -103,5 +110,7 @@ int init_how2play(window_t *win);
 int create_texts_score(scene_t *scene);
 
 int init_background_menu(scene_t *scene);
+
+int init_events_scoe(object_t *obj);
 
 #endif
