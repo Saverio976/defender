@@ -11,7 +11,7 @@
     #include "my_bgs.h"
     #include "my_json.h"
     #include "my_bgs_components.h"
-#include <SFML/Audio/Types.h>
+    #include <SFML/Audio/Types.h>
 
     #define RET_OK 0
     #define RET_INVALID_INPUT 1
