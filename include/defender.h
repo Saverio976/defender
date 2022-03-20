@@ -90,6 +90,9 @@ void destroy_load_list(void *data);
 void update_score_total_text(object_t *obj, scene_t *scene, window_t *win,
         float dtime);
 
+void update_com_total_text(object_t *obj, scene_t *scene, window_t *win,
+        float dtime);
+
 void update_wave_launcher(object_t *obj, scene_t *scene,
     window_t *win, float dtime);
 
@@ -98,5 +101,7 @@ void check_set_color(object_t *object, dico_t *dico);
 int init_how2play(window_t *win);
 
 int create_texts_score(scene_t *scene);
+
+int init_background_menu(scene_t *scene);
 
 #endif
