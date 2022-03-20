@@ -21,7 +21,9 @@ static int detect_square_type(char c, scene_t *scene, sfVector2f current_pos,
     any_t *square_path = dico_t_get_any(squares_path, type);
     object_t *square = NULL;
 
-    if (square_path == NULL|| square_path->type != STR) {
+    if ((square_path == NULL|| square_path->type != STR) && c != 'I') {
+        return RET_ERR_MALLOC;
+    } else if (c == 'I') {
         return RET_OK;
     }
     square = create_object(NULL, NULL, scene);

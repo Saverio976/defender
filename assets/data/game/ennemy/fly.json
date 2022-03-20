@@ -2,7 +2,7 @@
     "xp": 3,
     "com": 4,
     "life": 3,
-    "speed": 3.0,
+    "speed": 1.0,
     "is_fly": "true",
     "load_time": 3.0,
     "path": "./assets/image/ennemy/fly.png",

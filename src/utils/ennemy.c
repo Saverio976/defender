@@ -62,8 +62,9 @@ void check_ennemy_alive(object_t *obj, float dtime, window_t *win,
 {
     ennemy_t *enn = NULL;
     game_data_t *game = NULL;
+    list_ptr_t *ennemy_list = dico_t_get_value(scene->components, LIST_ENNEMY);
 
-    if (obj == NULL || win == NULL || scene == NULL) {
+    if (obj == NULL || win == NULL || scene == NULL || ennemy_list == NULL) {
         return;
     }
     enn = dico_t_get_value(obj->components, OBJ_COMP_ENNSTRUCT);
@@ -74,7 +75,8 @@ void check_ennemy_alive(object_t *obj, float dtime, window_t *win,
     enn->time_last += dtime;
     enn->time_last_update += dtime;
     if (obj->is_visible == true && enn->life <= 0) {
-        obj->is_visible = false;
+        check_list(ennemy_list, obj);
+        list_add_to_end(scene->to_remove, obj);
         add_score_game(scene, game, enn, obj);
     }
 }
