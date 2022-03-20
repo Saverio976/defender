@@ -34,15 +34,18 @@ int init_click_checker(scene_t *scene, window_t *win)
     return (scene->components != NULL) ? RET_OK : RET_ERR_MALLOC;
 }
 
-static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json)
+static int create_level_data_scene(scene_t *scene, dico_t *lvl_data_json,
+    window_t *win, any_t *com)
 {
     level_data_t *lvl = NULL;
     any_t *any = NULL;
+    game_data_t *game_data = dico_t_get_value(win->components, GAME_DATA);
 
     lvl = malloc(sizeof(level_data_t));
-    if (lvl == NULL) {
+    if (lvl == NULL || game_data == NULL || com == NULL) {
         return (RET_ERR_MALLOC);
     }
+    game_data->com = com->value.i;
     any = dico_t_get_value(lvl_data_json, "tower nico life");
     if (any == NULL || any->type != INT) {
         return (RET_ERR_MALLOC);
@@ -73,8 +76,8 @@ static int create_game(dico_t *level_data, __attribute__((unused))
         init_side_menu(win, scene) != RET_OK || set_aud(scene, win) != RET_OK) {
         return RET_ERR_MALLOC;
     }
-    create_level_data_scene(scene, level_data);
-    return RET_OK;
+    return create_level_data_scene(scene, level_data, win,
+        dico_t_get_any(level_data, "com"));
 }
 
 int launch_game(object_t *obj, scene_t *scene,

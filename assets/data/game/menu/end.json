@@ -1,7 +1,7 @@
 {
     "font path": "assets/font/menlo.ttf",
     "color": [127, 143, 167, 230],
-    "text pos": [910.0, 228.0],
+    "text pos": [905.0, 228.0],
     "size": 40,
     "back pos": [910.0, 400.0],
     "back path": "./assets/image/menu/side/pause/back.png",

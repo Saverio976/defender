@@ -3,6 +3,10 @@
     "off path": "./assets/image/menu/setting/sound_off.png",
     "buttons": [
         {
+            "pos": [540.0, 960.0],
+            "sprite path": "./assets/image/menu/setting/back.png"
+        },
+        {
             "text pos": [330.0, 1000.0],
             "char size": 40,
             "font path": "assets/font/menlo.ttf",
