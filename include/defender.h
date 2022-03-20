@@ -90,6 +90,9 @@ void destroy_load_list(void *data);
 void update_score_total_text(object_t *obj, scene_t *scene, window_t *win,
         float dtime);
 
+void update_com_total_text(object_t *obj, scene_t *scene, window_t *win,
+        float dtime);
+
 void update_wave_launcher(object_t *obj, scene_t *scene,
     window_t *win, float dtime);
 

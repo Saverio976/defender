@@ -80,6 +80,7 @@ SRC_MAP			:=	$(addprefix $(SRCMAP),$(SRC_MAP))
 
 SRC_UPDATE		:=	button_menu.c				\
 					button_resume.c				\
+					update_com_total_text.c		\
 					update_score_total_text.c	\
 					update_setting.c			\
 					quit_button.c				\
